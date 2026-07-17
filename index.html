@@ -24,7 +24,7 @@
             --border-color: #475569;
             --table-bg: #1e293b;
         }
-        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg-body); padding: 10px 10px 80px 10px; color: var(--text-main); margin: 0; user-select: auto; transition: background 0.3s, color 0.3s; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg-body); padding: 10px 10px 80px 10px; color: var(--text-main); margin: 0; user-select: none; -webkit-user-select: none; transition: background 0.3s, color 0.3s; }
         .container { background: var(--bg-container); padding: 15px; border-radius: 12px; box-shadow: 10px 10px 20px rgba(0,0,0,0.05); max-width: 1000px; margin: 0 auto; box-sizing: border-box; }
         
         .header-section { background: linear-gradient(145deg, #1e293b, #0f172a); color: #ffffff; padding: 16px; border-radius: 8px; margin-bottom: 15px; box-shadow: 5px 5px 15px rgba(0,0,0,0.2); display: flex; justify-content: space-between; align-items: center; position: relative; gap: 10px; flex-wrap: wrap; }
@@ -34,7 +34,7 @@
         .header-controls { display: flex; align-items: center; gap: 10px; }
         .theme-toggle-btn { background: #3b82f6; border: none; color: white; padding: 6px 12px; border-radius: 20px; font-weight: bold; cursor: pointer; font-size: 12px; white-space: nowrap; }
         
-        /* GOOGLE TRANSLATE CUSTOM STYLING TO MATCH YOUR THEME */
+        /* GOOGLE TRANSLATE CUSTOM STYLING */
         #google_translate_element select {
             background: #2563eb !important;
             border: 2px solid #3b82f6 !important;
@@ -64,7 +64,7 @@
         
         .menu-header-label { background: linear-gradient(145deg, #0f172a, #1e293b); color: #38bdf8; padding: 10px 14px; font-size: 13px; font-weight: 800; text-transform: uppercase; border-radius: 6px; margin-bottom: 10px; letter-spacing: 0.5px; text-align: center; box-shadow: inset 0 1px 1px rgba(255,255,255,0.1); }
         
-        /* 3D UI MODERN BUTTON STYLING FOR MENU */
+        /* 3D UI MODERN BUTTON STYLING */
         .dropdown-menu-box button.menu-premium-btn { 
             width: 100%; padding: 12px 16px; border: none; text-align: left; font-size: 14px; font-weight: 700; 
             cursor: pointer; border-radius: 8px; margin-bottom: 8px; transition: all 0.2s ease; 
@@ -76,23 +76,17 @@
             box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
         }
 
-        /* BUTTON VARIANT COLOURS & GRADIENTS */
         .btn-gradient-blue { background: linear-gradient(145deg, #2563eb, #1d4ed8); color: #ffffff !important; }
         .btn-gradient-blue:hover { background: linear-gradient(145deg, #1d4ed8, #1e40af); }
-
         .btn-gradient-orange { background: linear-gradient(145deg, #f97316, #ea580c); color: #ffffff !important; }
         .btn-gradient-orange:hover { background: linear-gradient(145deg, #ea580c, #c2410c); }
-
         .btn-gradient-green { background: linear-gradient(145deg, #10b981, #059669); color: #ffffff !important; }
         .btn-gradient-green:hover { background: linear-gradient(145deg, #059669, #047857); }
-
         .btn-gradient-gray { background: linear-gradient(145deg, #64748b, #475569); color: #ffffff !important; }
         .btn-gradient-gray:hover { background: linear-gradient(145deg, #475569, #334155); }
-
         .btn-gradient-disabled { background: linear-gradient(145deg, #cbd5e1, #94a3b8); color: #64748b !important; opacity: 0.7; cursor: not-allowed !important; }
         [data-theme="dark"] .btn-gradient-disabled { background: linear-gradient(145deg, #475569, #334155); color: #94a3b8 !important; }
 
-        /* MATERIAL CALCULATOR SUB-FOLDER */
         .menu-folder-container { display: none; background: rgba(0,0,0,0.04); border-radius: 8px; padding: 6px; margin-bottom: 8px; border: 1px inset rgba(0,0,0,0.1); }
         [data-theme="dark"] .menu-folder-container { background: rgba(0,0,0,0.2); }
         .menu-folder-container button { 
@@ -196,8 +190,9 @@
             margin-bottom: 12px;
         }
 
-        /* FIRE TV REMOTE SUPPORT CSS */
-        input:focus, button:focus, select:focus, .tab-btn:focus {
+        /* FIRE TV REMOTE SUPPORT STYLING */
+        /* Amazon Remote Focus highlight layer accent[span_5](start_span)[span_5](end_span) */
+        input:focus, button:focus, select:focus, .tab-btn:focus, .modal-tab-btn:focus {
             border: 4px solid #ff9900 !important;
             background-color: #fff3e0 !important;
             color: #000000 !important;
@@ -212,7 +207,7 @@
             @page { size: landscape; margin: 8mm; }
             html, body { width: 100%; background: #fff !important; padding: 0; margin: 0; font-size: 10pt; color: #000 !important; }
             .container { box-shadow: none !important; padding: 0 !important; max-width: 100% !important; background: transparent !important; }
-            .header-section, .tabs-nav, #tab1, #tab2, .admob-banner-placeholder, .bottom-nav-bar, .grid-actions-panel, .del-btn, th:last-child, td:last-child, .stats-dashboard, div[style*="grid-template-columns"], #liveProjectHeaderName { display: none !important; }
+            .header-section, .tabs-nav, #tab1, #tab2, .admob-banner-placeholder, .grid-actions-panel, .del-btn, th:last-child, td:last-child, .stats-dashboard, div[style*="grid-template-columns"], #liveProjectHeaderName { display: none !important; }
             .tab-content { display: none !important; }
             #tab3 { display: block !important; border: none !important; box-shadow: none !important; padding: 0 !important; background: transparent !important; }
             #printHeaderContainer { display: block !important; margin-bottom: 15px; border: 2px solid #000 !important; padding: 10px !important; background: #f1f5f9 !important; }
@@ -248,6 +243,9 @@
         var currentLang = "en";
         var searchFilterText = "";
 
+        // SECURITY IMPLEMENTATION: Safe Local Content Disabler[span_6](start_span)[span_6](end_span)[span_7](start_span)[span_7](end_span)
+        document.addEventListener('contextmenu', event => event.preventDefault());
+
         function toggleCalcFolder(e) {
             if(e) e.stopPropagation();
             var folder = document.getElementById('calculatorsMenuFolder');
@@ -275,10 +273,12 @@
                 if (menu && btn && !menu.contains(e.target) && e.target !== btn) menu.style.display = 'none';
             });
 
+            // AMAZON FIRE TV/D-PAD KEYBOARD SIMULATION ENGINE MAP[span_8](start_span)[span_8](end_span)
             document.addEventListener('keydown', function(event) {
-                if (event.key === 'Enter') {
+                // Mapping standard remote keys for clean view navigation[span_9](start_span)[span_9](end_span)
+                if (event.key === 'Enter' || event.keyCode === 13) {
                     var activeElement = document.activeElement;
-                    if (activeElement && (activeElement.tagName === 'BUTTON' || activeElement.classList.contains('tab-btn'))) {
+                    if (activeElement && (activeElement.tagName === 'BUTTON' || activeElement.classList.contains('tab-btn') || activeElement.classList.contains('modal-tab-btn'))) {
                         event.preventDefault();
                         activeElement.click();
                     }
@@ -612,7 +612,6 @@
             executeSilentAutoSave(); renderTable();
         }
 
-        /* MISSING FUNCTION 1 ADDED: Renders the active layout steel data grid tracker */
         function renderTable() {
             var tbody = document.getElementById('bbsTableBody'); if(!tbody) return; tbody.innerHTML = "";
             var slNo = 1; var diaTotals = {8:0, 10:0, 12:0, 16:0, 20:0, 25:0, 32:0, 40:0}; var containsData = false; var finalHTML = ""; var dataCount = 0;
@@ -650,7 +649,6 @@
             var base64 = btoa(unescape(encodeURIComponent(htmlData))), a = document.createElement("a"); a.href = "data:application/vnd.ms-excel;base64," + base64; a.download = projName.replace(/\s+/g, '_') + "_Report.xls"; document.body.appendChild(a); a.click(); document.body.removeChild(a);
         }
 
-        /* MASTER MEASUREMENT EXCEL EXPORT FIXED LOGIC */
         function exportMasterMeasExcel() {
             var title = document.getElementById('mmSheetTitle').value || "MEASUREMENT SHEET";
             var pName = document.getElementById('mmProjectName').value || "NEW_SITE";
@@ -819,9 +817,6 @@
             document.getElementById('qualityResultBox').style.display = "block"; 
         }
 
-        // ==========================================
-        // MASTER MEASUREMENT TAB CONTROLS & AUTO RESET
-        // ==========================================
         function switchMasterMeasTab(tabId) {
             var contents = document.getElementsByClassName('modal-tab-content');
             var buttons = document.getElementsByClassName('modal-tab-btn');
@@ -942,7 +937,6 @@
             executeMasterMeasAutoSave();
         }
 
-        /* MISSING FUNCTION 2 ADDED: Renders the premium preview tracking grid for measurements modal */
         function renderMasterMeasTable() {
             var tbody = document.getElementById('mmTableBody'); if(!tbody) return;
             tbody.innerHTML = "";
@@ -1173,7 +1167,6 @@
             <h2 id="appMainHeadingTitle">BBS Pro Engine Premium</h2>
         </div>
         <div class="header-controls">
-            <!-- REPLACED DROPDOWN WITH GOOGLE TRANSLATE WIDGET NODE -->
             <div id="google_translate_element"></div>
             <button class="theme-toggle-btn" id="themeTogglerNode" tabindex="2" onclick="toggleTheme()"><span id="themeBtnText">🌙 Dark</span></button>
         </div>
@@ -1181,26 +1174,26 @@
         <div id="mainMenuDropdown" class="dropdown-menu-box">
             <div class="menu-header-label">📊 Dashboard Menu</div>
             
-            <button id="menuBtnMasterMeasText" class="menu-premium-btn btn-gradient-blue" tabindex="2.5" onclick="openModal('masterMeasurementModal')">
+            <button id="menuBtnMasterMeasText" class="menu-premium-btn btn-gradient-blue" tabindex="3" onclick="openModal('masterMeasurementModal')">
                 ## 1. 📏 Master Measurement
             </button>
             
-            <button id="menuBtnCalcFolderText" class="menu-premium-btn btn-gradient-orange" tabindex="2.6" onclick="toggleCalcFolder(event)">
+            <button id="menuBtnCalcFolderText" class="menu-premium-btn btn-gradient-orange" tabindex="4" onclick="toggleCalcFolder(event)">
                 🧮 Material Calculator Folder 🔽
             </button>
             
             <div id="calculatorsMenuFolder" class="menu-folder-container">
-                <button id="menuBtnSteelUnitText" tabindex="3" onclick="openModal('civilCalcModal')">🎨 Steel Unit Calculator</button>
-                <button id="menuBtnConcreteText" tabindex="4" onclick="openModal('concreteCalcModal')">🧱 Concrete Layout Engine</button>
-                <button id="menuBtnBrickText" tabindex="5" onclick="openModal('brickCalcModal')">🔴 Brickwork Material Model</button>
-                <button id="menuBtnBlockText" tabindex="6" onclick="openModal('blockCalcModal')">🔲 AAC Blockwork Custom Solver</button>
-                <button id="menuBtnPlasterText" tabindex="7" onclick="openModal('plasterCalcModal')">⏳ Plaster Estimator</button>
-                <button id="menuBtnTileText" tabindex="8" onclick="openModal('tileCalcModal')">🧱 Tile & Flooring Dock</button>
-                <button id="menuBtnShutterText" tabindex="9" onclick="openModal('shutteringCalcModal')">🪵 Shuttering Frame Solver</button>
-                <button id="menuBtnQcText" tabindex="10" onclick="openModal('qualityCalcModal')">🏆 Quality Control Expert Mode</button>
+                <button id="menuBtnSteelUnitText" tabindex="5" onclick="openModal('civilCalcModal')">🎨 Steel Unit Calculator</button>
+                <button id="menuBtnConcreteText" tabindex="6" onclick="openModal('concreteCalcModal')">🧱 Concrete Layout Engine</button>
+                <button id="menuBtnBrickText" tabindex="7" onclick="openModal('brickCalcModal')">🔴 Brickwork Material Model</button>
+                <button id="menuBtnBlockText" tabindex="8" onclick="openModal('blockCalcModal')">🔲 AAC Blockwork Custom Solver</button>
+                <button id="menuBtnPlasterText" tabindex="9" onclick="openModal('plasterCalcModal')">⏳ Plaster Estimator</button>
+                <button id="menuBtnTileText" tabindex="10" onclick="openModal('tileCalcModal')">🧱 Tile & Flooring Dock</button>
+                <button id="menuBtnShutterText" tabindex="11" onclick="openModal('shutteringCalcModal')">🪵 Shuttering Frame Solver</button>
+                <button id="menuBtnQcText" tabindex="12" onclick="openModal('qualityCalcModal')">🏆 Quality Control Expert Mode</button>
             </div>
 
-            <button id="menuBtnShareText" class="menu-premium-btn btn-gradient-green" tabindex="12" onclick="triggerApkShare()">
+            <button id="menuBtnShareText" class="menu-premium-btn btn-gradient-green" tabindex="13" onclick="triggerApkShare()">
                 🤝 Share a Friend
             </button>
             
@@ -1208,16 +1201,16 @@
                 🚀 New Feature Coming Soon
             </button>
             
-            <button id="menuBtnInfoText" class="menu-premium-btn btn-gradient-gray" tabindex="11" onclick="openModal('infoModal')">
+            <button id="menuBtnInfoText" class="menu-premium-btn btn-gradient-gray" tabindex="14" onclick="openModal('infoModal')">
                 👑 About App Info
             </button>
         </div>
     </div>
 
     <div class="tabs-nav">
-        <div id="btn-tab1" class="tab-btn active" tabindex="13" onclick="switchTab('tab1')">1. PROJECT INIT</div>
-        <div id="btn-tab2" class="tab-btn" tabindex="14" onclick="switchTab('tab2')">2. INPUT BAR DATA</div>
-        <div id="btn-tab3" class="tab-btn" tabindex="15" onclick="switchTab('tab3')">3. EXCEL/PDF GRID</div>
+        <div id="btn-tab1" class="tab-btn active" tabindex="15" onclick="switchTab('tab1')">1. PROJECT INIT</div>
+        <div id="btn-tab2" class="tab-btn" tabindex="16" onclick="switchTab('tab2')">2. INPUT BAR DATA</div>
+        <div id="btn-tab3" class="tab-btn" tabindex="17" onclick="switchTab('tab3')">3. EXCEL/PDF GRID</div>
     </div>
 
     <!-- TAB 1 -->
@@ -1225,11 +1218,11 @@
         <div class="form-row" style="margin-bottom: 15px; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));">
             <div class="form-group">
                 <label data-lang-key="lbl_proj_name">Project Name / Site Reference</label>
-                <input type="text" id="projectName" tabindex="16" placeholder=".e.g. Metro Bridge Sector 4" oninput="checkAndResetForNewProject()">
+                <input type="text" id="projectName" tabindex="18" placeholder=".e.g. Metro Bridge Sector 4" oninput="checkAndResetForNewProject()">
             </div>
             <div class="form-group">
                 <label data-lang-key="lbl_ops_mode">Sheet Operations Mode</label>
-                <select id="projectSheetModeSelect" tabindex="17" onchange="handleSheetModeChange()" style="border-color:#2563eb; color:#2563eb;">
+                <select id="projectSheetModeSelect" tabindex="19" onchange="handleSheetModeChange()" style="border-color:#2563eb; color:#2563eb;">
                     <option value="NEW" id="optNewCanvasSelect" selected>🆕 Create New Sheet Canvas</option>
                     <option value="OLD" id="optOldBackupSelect">📂 Load Old Session Backup</option>
                 </select>
@@ -1239,16 +1232,16 @@
         <div class="form-row">
             <div class="form-group">
                 <label data-lang-key="lbl_record_date">Billing Record Date</label>
-                <input type="date" id="reportDate" tabindex="18">
+                <input type="date" id="reportDate" tabindex="20">
             </div>
             <div class="form-group">
                 <label data-lang-key="lbl_sec_heading">Create Section Heading</label>
-                <input type="text" id="compTitle" tabindex="19" placeholder=".e.g. BEAM PIER 12">
+                <input type="text" id="compTitle" tabindex="21" placeholder=".e.g. BEAM PIER 12">
             </div>
             <div class="form-group">
                 <div class="action-inline-group">
-                    <button class="action-btn sec-btn" tabindex="20" onclick="addComponentHeading()"><span id="addHeadingBtnText">Add Heading</span></button>
-                    <button class="action-btn reset-inline-btn" tabindex="21" onclick="clearAllWithAutoSave()"><span id="clearAllBtnText">Clear All</span></button>
+                    <button class="action-btn sec-btn" tabindex="22" onclick="addComponentHeading()"><span id="addHeadingBtnText">Add Heading</span></button>
+                    <button class="action-btn reset-inline-btn" tabindex="23" onclick="clearAllWithAutoSave()"><span id="clearAllBtnText">Clear All</span></button>
                 </div>
             </div>
         </div>
@@ -1257,7 +1250,7 @@
     <!-- TAB 2 -->
     <div id="tab2" class="tab-content">
         <div style="margin-bottom: 15px;">
-            <button type="button" class="launcher-arrow-btn" id="launcherAutoSolverBtnText" tabindex="22" onclick="openModal('bbsAutoCalcModal')">
+            <button type="button" class="launcher-arrow-btn" id="launcherAutoSolverBtnText" tabindex="24" onclick="openModal('bbsAutoCalcModal')">
                 📐 Input Clear Span or Spacing 🔽
             </button>
         </div>
@@ -1265,20 +1258,20 @@
         <div class="custom-dim-panel" style="background:#f8fafc; border-left:4px solid #2563eb; margin-bottom:15px; padding:10px;">
             <label data-lang-key="lbl_shape_gen" style="color:#2563eb; font-weight:bold; font-size:11px;">🏢 Column / Footing Shape Generator</label>
             <div class="form-row-three-boxes" style="margin-top:5px;">
-                <div class="form-group"><label data-lang-key="lbl_straight_len" style="color:#1e293b;">Straight Length (m)</label><input type="number" tabindex="23" id="colMainLength" placeholder=".e.g. 3.25" step="any" oninput="triggerColumnFootingMath()"></div>
-                <div class="form-group"><label data-lang-key="lbl_left_hook" style="color:#1e293b;">Left L-Hook (mm)</label><input type="number" tabindex="23a" id="colLeftHook" placeholder=".e.g. 300" step="any" oninput="triggerColumnFootingMath()"></div>
-                <div class="form-group"><label data-lang-key="lbl_right_hook" style="color:#1e293b;">Right L-Hook (mm)</label><input type="number" tabindex="24" id="colRightHook" placeholder=".e.g. 300" step="any" oninput="triggerColumnFootingMath()"></div>
+                <div class="form-group"><label data-lang-key="lbl_straight_len" style="color:#1e293b;">Straight Length (m)</label><input type="number" tabindex="25" id="colMainLength" placeholder=".e.g. 3.25" step="any" oninput="triggerColumnFootingMath()"></div>
+                <div class="form-group"><label data-lang-key="lbl_left_hook" style="color:#1e293b;">Left L-Hook (mm)</label><input type="number" tabindex="26" id="colLeftHook" placeholder=".e.g. 300" step="any" oninput="triggerColumnFootingMath()"></div>
+                <div class="form-group"><label data-lang-key="lbl_right_hook" style="color:#1e293b;">Right L-Hook (mm)</label><input type="number" tabindex="27" id="colRightHook" placeholder=".e.g. 300" step="any" oninput="triggerColumnFootingMath()"></div>
             </div>
         </div>
 
         <div class="form-row">
             <div class="form-group">
                 <label data-lang-key="lbl_bar_name">Bar Name</label>
-                <input type="text" id="desc" tabindex="25" placeholder=".e.g. Main Bottom bar">
+                <input type="text" id="desc" tabindex="28" placeholder=".e.g. Main Bottom bar">
             </div>
             <div class="form-group">
                 <label data-lang-key="lbl_dia">Diameter (mm)</label>
-                <select id="dia" tabindex="26">
+                <select id="dia" tabindex="29">
                     <option value="8">8 mm</option><option value="10">10 mm</option>
                     <option value="12">12 mm</option><option value="16" selected>16 mm</option>
                     <option value="20">20 mm</option><option value="25">25 mm</option>
@@ -1295,18 +1288,18 @@
             </div>
             <div class="form-group">
                 <label data-lang-key="lbl_members_cnt">Members Count</label>
-                <input type="number" id="noMembers" tabindex="27" placeholder=".e.g. 2" step="any">
+                <input type="number" id="noMembers" tabindex="30" placeholder=".e.g. 2" step="any">
             </div>
             <div class="form-group">
                 <label data-lang-key="lbl_bars_member">Bars per Member (Nos)</label>
-                <input type="number" id="noBars" tabindex="28" placeholder=".e.g. 12" step="any">
+                <input type="number" id="noBars" tabindex="31" placeholder=".e.g. 12" step="any">
             </div>
             <div class="form-group">
                 <label data-lang-key="lbl_total_cut">Total Cut Length (m)</label>
-                <input type="number" id="cutLength" tabindex="29" placeholder=".e.g. 6.25" step="any">
+                <input type="number" id="cutLength" tabindex="32" placeholder=".e.g. 6.25" step="any">
             </div>
             <div class="form-group">
-                <button class="action-btn" id="insertBarBtnNode" tabindex="30" onclick="addBarEntry()">Insert Bar</button>
+                <button class="action-btn" id="insertBarBtnNode" tabindex="33" onclick="addBarEntry()">Insert Bar</button>
             </div>
         </div>
     </div>
@@ -1319,8 +1312,8 @@
         </div>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:10px; margin-bottom: 12px;">
-            <div class="form-group" style="margin-bottom:0;"><label data-lang-key="lbl_search_filter">🔍 Live Grid Search Filter</label><input type="text" tabindex="31" id="gridSearchBox" placeholder="Search..." oninput="filterBbsGrid()"></div>
-            <div class="form-group" style="margin-bottom:0;"><label data-lang-key="lbl_steel_rate">💰 Steel Rate (Per Kg)</label><input type="number" tabindex="32" id="steelRatePerKg" placeholder=".e.g. 65" oninput="renderTable()"></div>
+            <div class="form-group" style="margin-bottom:0;"><label data-lang-key="lbl_search_filter">🔍 Live Grid Search Filter</label><input type="text" tabindex="34" id="gridSearchBox" placeholder="Search..." oninput="filterBbsGrid()"></div>
+            <div class="form-group" style="margin-bottom:0;"><label data-lang-key="lbl_steel_rate">💰 Steel Rate (Per Kg)</label><input type="number" tabindex="35" id="steelRatePerKg" placeholder=".e.g. 65" oninput="renderTable()"></div>
         </div>
 
         <h3 id="liveProjectHeaderName" style="margin: 15px 0 5px 0; font-size:14px; font-weight:bold; color:#2563eb; text-transform:uppercase;">📁 CURRENT SHEET LOG: NEW PROJECT</h3>
@@ -1347,10 +1340,10 @@
         </div>
         
         <div class="grid-actions-panel">
-            <button class="download-btn" id="btnExportExcelNode" tabindex="33" onclick="exportToCleanFormatedExcel()">📥 Export Excel</button>
-            <button class="share-pdf-btn" id="btnPrintPdfNode" tabindex="34" onclick="shareAsProfessionalPDF()">📄 Print PDF</button>
-            <button class="copy-btn" id="btnCopyWaNode" tabindex="35" onclick="copyTableToClipboardText()">📋 Copy Text for WA</button>
-            <button class="manual-save-sheet-btn" id="btnSaveSheetNode" tabindex="35a" onclick="manualSaveStateToHistory()">💾 Save Sheet Data</button>
+            <button class="download-btn" id="btnExportExcelNode" tabindex="36" onclick="exportToCleanFormatedExcel()">📥 Export Excel</button>
+            <button class="share-pdf-btn" id="btnPrintPdfNode" tabindex="37" onclick="shareAsProfessionalPDF()">📄 Print PDF</button>
+            <button class="copy-btn" id="btnCopyWaNode" tabindex="38" onclick="copyTableToClipboardText()">📋 Copy Text for WA</button>
+            <button class="manual-save-sheet-btn" id="btnSaveSheetNode" tabindex="39" onclick="manualSaveStateToHistory()">💾 Save Sheet Data</button>
         </div>
     </div>
 </div>
@@ -1459,7 +1452,7 @@
                     <thead>
                         <tr style="background: linear-gradient(145deg, #1e293b, #0f172a);">
                             <th style="width: 50px;">Sr.No.</th>
-                            <th>Description [Click cell text values to live Edit formulas]</th>
+                            <th>Description</th>
                             <th style="width: 70px;">Unit</th>
                             <th style="width: 65px;">NOS</th>
                             <th style="width: 65px;">NOS</th>
@@ -1484,7 +1477,6 @@
                 <button class="action-btn" style="background: #ef4444;" onclick="clearMasterMeasAll()">Wipe Table</button>
                 <button class="action-btn" style="background: #6366f1;" onclick="copyMasterMeasClipboard()">📋 Copy Raw Text</button>
                 <button class="action-btn" style="background: #eab308; color:#000;" onclick="saveMasterMeasLocalStorage()">💾 Save To History</button>
-                <!-- CORRECTED EXCEL DOWNLOAD METHOD CALL FOR MODAL GRID -->
                 <button class="action-btn" style="background: linear-gradient(145deg, #22c55e, #15803d);" onclick="exportMasterMeasExcel()">📥 Download Excel Layout</button>
             </div>
         </div>
@@ -1540,10 +1532,9 @@
         <div id="blockCustomSizeWrapper" class="modal-inner-group-box" style="display:none;">
             <label>Custom Size (mm) [L : W : H]</label>
             <div style="display:flex; gap:8px;">
-                <input type="number" id="blockCustL" placeholder="Length (.e.g. 600)" value="600">
-                <input type="number" id="blockCustW" placeholder="Width (.e.g. 200)" value="200">
-                <input type="number" id="blockCustW" placeholder="Width (.e.g. 200)" value="200">
-                <input type="number" id="blockCustH" placeholder="Height (.e.g. 200)" value="200">
+                <input type="number" id="blockCustL" placeholder="Length" value="600">
+                <input type="number" id="blockCustW" placeholder="Width" value="200">
+                <input type="number" id="blockCustH" placeholder="Height" value="200">
             </div>
         </div>
 
@@ -1609,13 +1600,13 @@
 
 <div id="bbsAutoCalcModal" class="modal-overlay" onclick="if(event.target == this) closeAllModals()">
     <div class="modal-box">
-        <button class="modal-close-btn" tabindex="36" onclick="closeAllModals()">X</button>
+        <button class="modal-close-btn" tabindex="40" onclick="closeAllModals()">X</button>
         <h3>📐 Advanced Spacing Auto Solver</h3>
         <div style="display: flex; gap: 8px; margin-bottom: 10px;">
-            <div style="flex: 2;"><label>Total Span (Meters)</label><input type="number" tabindex="37" id="hlSpan" placeholder=".e.g. 4.5" step="any"></div>
+            <div style="flex: 2;"><label>Total Span (Meters)</label><input type="number" tabindex="41" id="hlSpan" placeholder=".e.g. 4.5" step="any"></div>
             <div style="flex: 1;">
                 <label>Divide Mode</label>
-                <select id="modalSpacingSelectMode" tabindex="38" onchange="toggleModalSpacingMode()">
+                <select id="modalSpacingSelectMode" tabindex="42" onchange="toggleModalSpacingMode()">
                     <option value="L1" selected>L/1</option>
                     <option value="L3">L/3</option>
                     <option value="L4">L/4</option>
@@ -1624,7 +1615,7 @@
         </div>
         <div id="modalSingleBoxWrapper" class="form-group">
             <label>Center-to-Center Spacing (mm)</label>
-            <input type="number" id="hlSpacingSingleInput" tabindex="39" placeholder=".e.g. 150" step="any">
+            <input type="number" id="hlSpacingSingleInput" tabindex="43" placeholder=".e.g. 150" step="any">
         </div>
         <div id="modalTripleBoxWrapper" style="display: none; background: rgba(37, 99, 235, 0.03); border: 1px solid var(--border-color); border-radius: 8px; padding: 12px; margin-bottom: 12px;">
             <label style="color: #2563eb; font-weight: bold; font-size: 11px; display: block; margin-bottom: 8px;">Zone-Wise Split Spacing (mm)</label>
@@ -1634,26 +1625,26 @@
                 <div style="flex: 1;"><label style="font-size: 10px;">Zone 3</label><input type="number" id="z3Spacing" placeholder=".e.g. 100" step="any"></div>
             </div>
         </div>
-        <button type="button" class="action-btn" tabindex="40" onclick="calculateAutoBarSpacingAndLength()">Compute & Apply Data</button>
+        <button type="button" class="action-btn" tabindex="44" onclick="calculateAutoBarSpacingAndLength()">Compute & Apply Data</button>
     </div>
 </div>
 
 <div id="civilCalcModal" class="modal-overlay" onclick="if(event.target == this) closeAllModals()">
     <div class="modal-box">
-        <button class="modal-close-btn" tabindex="41" onclick="closeAllModals()">X</button>
+        <button class="modal-close-btn" tabindex="45" onclick="closeAllModals()">X</button>
         <h3>🧮 Steel Unit Weight Solver</h3>
         <div class="form-group">
             <label>Rebar Diameter (mm)</label>
-            <input type="number" tabindex="42" id="calcSteelDia" placeholder="Diameter .e.g. 16">
+            <input type="number" tabindex="46" id="calcSteelDia" placeholder="Diameter .e.g. 16">
         </div>
-        <button class="action-btn" id="btnSteelComputeNode" tabindex="43" onclick="calculateSteelWeight()">Calculate Weight</button>
+        <button class="action-btn" id="btnSteelComputeNode" tabindex="47" onclick="calculateSteelWeight()">Calculate Weight</button>
         <div id="steelResultBox" class="calc-result-box" style="display:none;"></div>
     </div>
 </div>
 
 <div id="concreteCalcModal" class="modal-overlay" onclick="if(event.target == this) closeAllModals()">
     <div class="modal-box">
-        <button class="modal-close-btn" tabindex="44" onclick="closeAllModals()">X</button>
+        <button class="modal-close-btn" tabindex="48" onclick="closeAllModals()">X</button>
         <h3>🧱 Concrete Layout Estimator</h3>
         <div class="form-group">
             <label>Concrete Input Method Mode</label>
@@ -1700,14 +1691,14 @@
             </div>
         </div>
 
-        <button class="action-btn" id="btnConcComputeNode" tabindex="46" onclick="calculateConcrete()">Calculate Material</button>
+        <button class="action-btn" id="btnConcComputeNode" tabindex="49" onclick="calculateConcrete()">Calculate Material</button>
         <div id="concreteResultBox" class="calc-result-box" style="display:none;"></div>
     </div>
 </div>
 
 <div id="brickCalcModal" class="modal-overlay" onclick="if(event.target == this) closeAllModals()">
     <div class="modal-box">
-        <button class="modal-close-btn" tabindex="47" onclick="closeAllModals()">X</button>
+        <button class="modal-close-btn" tabindex="50" onclick="closeAllModals()">X</button>
         <h3>🔴 Brickwork Structural Solver</h3>
         <div class="form-group">
             <label>Brickwork Method Mode</label>
@@ -1749,14 +1740,14 @@
             </select>
         </div>
 
-        <button class="action-btn" id="btnBrickComputeNode" tabindex="48" onclick="calculateBrickWork()">Calculate Bricks</button>
+        <button class="action-btn" id="btnBrickComputeNode" tabindex="51" onclick="calculateBrickWork()">Calculate Bricks</button>
         <div id="brickResultBox" class="calc-result-box" style="display:none;"></div>
     </div>
 </div>
 
 <div id="plasterCalcModal" class="modal-overlay" onclick="if(event.target == this) closeAllModals()">
     <div class="modal-box">
-        <button class="modal-close-btn" tabindex="50" onclick="closeAllModals()">X</button>
+        <button class="modal-close-btn" tabindex="52" onclick="closeAllModals()">X</button>
         <h3>⏳ Plaster Material Model</h3>
         <div class="form-group">
             <label>Plaster Calculation Mode</label>
@@ -1811,7 +1802,7 @@
 
 <div id="tileCalcModal" class="modal-overlay" onclick="if(event.target == this) closeAllModals()">
     <div class="modal-box">
-        <button class="modal-close-btn" tabindex="51" onclick="closeAllModals()">X</button>
+        <button class="modal-close-btn" tabindex="53" onclick="closeAllModals()">X</button>
         <h3>🧱 Tile & Flooring Solver</h3>
         <div class="form-group">
             <label>Tile Input Mode Option</label>
@@ -1858,7 +1849,7 @@
 
 <div id="shutteringCalcModal" class="modal-overlay" onclick="if(event.target == this) closeAllModals()">
     <div class="modal-box">
-        <button class="modal-close-btn" tabindex="52" onclick="closeAllModals()">X</button>
+        <button class="modal-close-btn" tabindex="54" onclick="closeAllModals()">X</button>
         <h3>🪵 Formwork Area Solver</h3>
         <div class="form-group">
             <label>Formwork Target Area</label>
@@ -1879,7 +1870,7 @@
 <!-- UPGRADED QUALITY CONTROL SYSTEM -->
 <div id="qualityCalcModal" class="modal-overlay" onclick="if(event.target == this) closeAllModals()">
     <div class="modal-box">
-        <button class="modal-close-btn" tabindex="53" onclick="closeAllModals()">X</button>
+        <button class="modal-close-btn" tabindex="55" onclick="closeAllModals()">X</button>
         <h3>🏆 Quality Control Expert Mode</h3>
         
         <div class="form-group">
@@ -1918,7 +1909,7 @@
 
 <div id="infoModal" class="modal-overlay" onclick="if(event.target == this) closeAllModals()">
     <div class="modal-box">
-        <button class="modal-close-btn" tabindex="54" onclick="closeAllModals()">X</button>
+        <button class="modal-close-btn" tabindex="56" onclick="closeAllModals()">X</button>
         <h3>👑 App Info & About</h3>
         <p>BBS Structural Engine - v2.0 Premium License Registered.</p>
     </div>
