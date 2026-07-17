@@ -650,6 +650,22 @@
             var base64 = btoa(unescape(encodeURIComponent(htmlData))), a = document.createElement("a"); a.href = "data:application/vnd.ms-excel;base64," + base64; a.download = projName.replace(/\s+/g, '_') + "_Report.xls"; document.body.appendChild(a); a.click(); document.body.removeChild(a);
         }
 
+        /* MASTER MEASUREMENT EXCEL EXPORT FIXED LOGIC */
+        function exportMasterMeasExcel() {
+            var title = document.getElementById('mmSheetTitle').value || "MEASUREMENT SHEET";
+            var pName = document.getElementById('mmProjectName').value || "NEW_SITE";
+            var htmlData = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><meta charset="UTF-8"></head><body><table border="1"><thead><tr><th colspan="9" style="font-size:14pt;font-weight:bold;">' + pName.toUpperCase() + ' - ' + title.toUpperCase() + '</th></tr><tr><th>Sr.No.</th><th>Description</th><th>Unit</th><th>NOS 1</th><th>NOS 2</th><th>L</th><th>B</th><th>D</th><th>QTY</th></tr></thead><tbody>';
+            var totalQty = 0;
+            for (var i = 0; i < masterMeasData.length; i++) {
+                var m = masterMeasData[i];
+                totalQty += parseFloat(m.qty);
+                var rowLabel = m.type === 'DEDUCTION' ? '[Ded] ' : '';
+                htmlData += '<tr><td>' + (i+1) + '</td><td>' + rowLabel + m.desc + '</td><td>' + m.unit + '</td><td>' + m.nos1 + '</td><td>' + m.nos2 + '</td><td>' + m.l + '</td><td>' + m.b + '</td><td>' + m.d + '</td><td>' + m.qty + '</td></tr>';
+            }
+            htmlData += '<tr><td colspan="8" style="font-weight:bold; text-align:right;">Total =</td><td style="font-weight:bold; background:#dcfce7;">' + totalQty.toFixed(3) + '</td></tr></tbody></table></body></html>';
+            var base64 = btoa(unescape(encodeURIComponent(htmlData))), a = document.createElement("a"); a.href = "data:application/vnd.ms-excel;base64," + base64; a.download = pName.replace(/\s+/g, '_') + "_Measurement.xls"; document.body.appendChild(a); a.click(); document.body.removeChild(a);
+        }
+
         function toggleConcreteInputMode() { var mode = document.getElementById('concInputMode').value; document.getElementById('concDirectWrapper').style.display = (mode === 'DIRECT' ? 'block' : 'none'); document.getElementById('concDimWrapper').style.display = (mode === 'DIMENSION' ? 'block' : 'none'); }
         function toggleConcreteMixMode() { var grade = document.getElementById('concMixGrade').value; document.getElementById('concCustomRatioWrapper').style.display = (grade === 'CUSTOM' ? 'block' : 'none'); }
         function toggleBrickInputMode() { var mode = document.getElementById('brickInputMode').value; document.getElementById('brickDirectWrapper').style.display = (mode === 'DIRECT' ? 'block' : 'none'); document.getElementById('brickDimWrapper').style.display = (mode === 'DIMENSION' ? 'block' : 'none'); }
@@ -1468,7 +1484,8 @@
                 <button class="action-btn" style="background: #ef4444;" onclick="clearMasterMeasAll()">Wipe Table</button>
                 <button class="action-btn" style="background: #6366f1;" onclick="copyMasterMeasClipboard()">📋 Copy Raw Text</button>
                 <button class="action-btn" style="background: #eab308; color:#000;" onclick="saveMasterMeasLocalStorage()">💾 Save To History</button>
-                <button class="action-btn" style="background: linear-gradient(145deg, #22c55e, #15803d);" onclick="exportToCleanFormatedExcel()">📥 Download Excel Layout</button>
+                <!-- CORRECTED EXCEL DOWNLOAD METHOD CALL FOR MODAL GRID -->
+                <button class="action-btn" style="background: linear-gradient(145deg, #22c55e, #15803d);" onclick="exportMasterMeasExcel()">📥 Download Excel Layout</button>
             </div>
         </div>
     </div>
@@ -1524,6 +1541,7 @@
             <label>Custom Size (mm) [L : W : H]</label>
             <div style="display:flex; gap:8px;">
                 <input type="number" id="blockCustL" placeholder="Length (.e.g. 600)" value="600">
+                <input type="number" id="blockCustW" placeholder="Width (.e.g. 200)" value="200">
                 <input type="number" id="blockCustW" placeholder="Width (.e.g. 200)" value="200">
                 <input type="number" id="blockCustH" placeholder="Height (.e.g. 200)" value="200">
             </div>
