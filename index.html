@@ -1,15 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-LXVZ3MXG4Q"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-LXVZ3MXG4Q');
-</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="BBS Pro Engine - Premium Civil Engineering Structural Calculator.">
@@ -33,97 +24,264 @@
             --border-color: #475569;
             --table-bg: #1e293b;
         }
-        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg-body); padding: 10px 10px 80px 10px; color: var(--text-main); margin: 0; user-select: none; transition: background 0.3s, color 0.3s; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg-body); padding: 10px 10px 80px 10px; color: var(--text-main); margin: 0; user-select: auto; transition: background 0.3s, color 0.3s; }
         .container { background: var(--bg-container); padding: 15px; border-radius: 12px; box-shadow: 10px 10px 20px rgba(0,0,0,0.05); max-width: 1000px; margin: 0 auto; box-sizing: border-box; }
-        .header-section { background: linear-gradient(145deg, #1e293b, #0f172a); color: #ffffff; padding: 16px; border-radius: 8px; margin-bottom: 15px; box-shadow: 5px 5px 15px rgba(0,0,0,0.2); display: flex; justify-content: space-between; align-items: center; position: relative; }
+        
+        .header-section { background: linear-gradient(145deg, #1e293b, #0f172a); color: #ffffff; padding: 16px; border-radius: 8px; margin-bottom: 15px; box-shadow: 5px 5px 15px rgba(0,0,0,0.2); display: flex; justify-content: space-between; align-items: center; position: relative; gap: 10px; flex-wrap: wrap; }
         .header-section h2 { margin: 0; font-size: 18px; font-weight: 700; letter-spacing: 0.5px; }
-        .menu-hamburger-btn { font-size: 24px; background: none; border: none; color: white; cursor: pointer; padding: 5px 10px; order: -1; margin-right: 10px; }
+        .menu-hamburger-btn { font-size: 24px; background: none; border: none; color: white; cursor: pointer; padding: 5px 10px; order: -1; margin-right: 10px; outline: none; }
         .header-title-container { display: flex; align-items: center; flex-grow: 1; }
-        .theme-toggle-btn { background: #3b82f6; border: none; color: white; padding: 6px 12px; border-radius: 20px; font-weight: bold; cursor: pointer; font-size: 12px; }
+        .header-controls { display: flex; align-items: center; gap: 10px; }
+        .theme-toggle-btn { background: #3b82f6; border: none; color: white; padding: 6px 12px; border-radius: 20px; font-weight: bold; cursor: pointer; font-size: 12px; white-space: nowrap; }
+        
+        /* GOOGLE TRANSLATE CUSTOM STYLING TO MATCH YOUR THEME */
+        #google_translate_element select {
+            background: #2563eb !important;
+            border: 2px solid #3b82f6 !important;
+            color: white !important;
+            padding: 6px 10px !important;
+            border-radius: 20px !important;
+            font-weight: bold !important;
+            font-size: 12px !important;
+            outline: none !important;
+            cursor: pointer !important;
+            width: auto !important;
+        }
+        .goog-te-gadget { color: transparent !important; font-size: 0 !important; }
+        .goog-te-gadget span { display: none !important; }
+        .goog-te-banner-frame.skiptranslate { display: none !important; }
+        body { top: 0px !important; }
+        
+        /* PREMIUM MENU CONTAINER */
+        .dropdown-menu-box { 
+            display: none; 
+            position: absolute; top: 60px; left: 16px; 
+            background: #ffffff; border: 1px solid #cbd5e1; border-radius: 12px; 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.25); z-index: 999999; 
+            min-width: 290px; padding: 12px; box-sizing: border-box;
+        }
+        [data-theme="dark"] .dropdown-menu-box { background: #1e293b; border-color: #334155; }
+        
+        .menu-header-label { background: linear-gradient(145deg, #0f172a, #1e293b); color: #38bdf8; padding: 10px 14px; font-size: 13px; font-weight: 800; text-transform: uppercase; border-radius: 6px; margin-bottom: 10px; letter-spacing: 0.5px; text-align: center; box-shadow: inset 0 1px 1px rgba(255,255,255,0.1); }
+        
+        /* 3D UI MODERN BUTTON STYLING FOR MENU */
+        .dropdown-menu-box button.menu-premium-btn { 
+            width: 100%; padding: 12px 16px; border: none; text-align: left; font-size: 14px; font-weight: 700; 
+            cursor: pointer; border-radius: 8px; margin-bottom: 8px; transition: all 0.2s ease; 
+            display: flex; align-items: center; gap: 10px; box-sizing: border-box;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+        }
+        .dropdown-menu-box button.menu-premium-btn:active {
+            transform: translateY(2px);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+        }
+
+        /* BUTTON VARIANT COLOURS & GRADIENTS */
+        .btn-gradient-blue { background: linear-gradient(145deg, #2563eb, #1d4ed8); color: #ffffff !important; }
+        .btn-gradient-blue:hover { background: linear-gradient(145deg, #1d4ed8, #1e40af); }
+
+        .btn-gradient-orange { background: linear-gradient(145deg, #f97316, #ea580c); color: #ffffff !important; }
+        .btn-gradient-orange:hover { background: linear-gradient(145deg, #ea580c, #c2410c); }
+
+        .btn-gradient-green { background: linear-gradient(145deg, #10b981, #059669); color: #ffffff !important; }
+        .btn-gradient-green:hover { background: linear-gradient(145deg, #059669, #047857); }
+
+        .btn-gradient-gray { background: linear-gradient(145deg, #64748b, #475569); color: #ffffff !important; }
+        .btn-gradient-gray:hover { background: linear-gradient(145deg, #475569, #334155); }
+
+        .btn-gradient-disabled { background: linear-gradient(145deg, #cbd5e1, #94a3b8); color: #64748b !important; opacity: 0.7; cursor: not-allowed !important; }
+        [data-theme="dark"] .btn-gradient-disabled { background: linear-gradient(145deg, #475569, #334155); color: #94a3b8 !important; }
+
+        /* MATERIAL CALCULATOR SUB-FOLDER */
+        .menu-folder-container { display: none; background: rgba(0,0,0,0.04); border-radius: 8px; padding: 6px; margin-bottom: 8px; border: 1px inset rgba(0,0,0,0.1); }
+        [data-theme="dark"] .menu-folder-container { background: rgba(0,0,0,0.2); }
+        .menu-folder-container button { 
+            width: 100%; padding: 10px 14px; border: none; background: var(--bg-card); text-align: left; 
+            font-size: 13px; font-weight: 600; color: var(--text-main); cursor: pointer; border-radius: 6px; 
+            margin-bottom: 4px; display: flex; align-items: center; gap: 8px; transition: all 0.15s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .menu-folder-container button:last-child { margin-bottom: 0; }
+        .menu-folder-container button:hover { background: #3b82f6; color: #ffffff; transform: translateX(3px); }
+        .menu-folder-container button:active { transform: scale(0.98); }
+        
+        .toast-notification-box {
+            display: none; position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+            background: linear-gradient(145deg, #1e293b, #0f172a); color: #ffffff;
+            padding: 12px 24px; border-radius: 30px; font-weight: bold; font-size: 13px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3); z-index: 9999999; border-left: 4px solid #2563eb;
+        }
+        
         .admob-banner-placeholder { background: #cbd5e1; border: 2px dashed #94a3b8; border-radius: 6px; padding: 10px; margin: 10px 0; text-align: center; font-size: 11px; font-weight: bold; color: #475569; letter-spacing: 1px; }
-        .dropdown-menu-box { display: none; position: absolute; top: 55px; left: 15px; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 9999; min-width: 260px; overflow: hidden; }
-        [data-theme="dark"] .dropdown-menu-box { background: #334155; border-color: #475569; }
-        .dropdown-menu-box button { width: 100%; padding: 12px 16px; border: none; background: none; text-align: left; font-size: 13px; font-weight: 600; color: var(--text-main); cursor: pointer; border-bottom: 1px solid var(--border-color); transition: background 0.2s; display: flex; align-items: center; gap: 10px; }
-        .dropdown-menu-box button:hover { background: rgba(37, 99, 235, 0.1); color: #2563eb; }
         .tabs-nav { display: flex; gap: 8px; margin-bottom: 15px; background: var(--border-color); padding: 6px; border-radius: 8px; }
         .tab-btn { background: var(--bg-container); border: 1px solid var(--border-color); padding: 12px 6px; font-weight: 700; font-size: 11px; color: var(--text-muted); cursor: pointer; border-radius: 6px; flex: 1; text-align: center; }
         .tab-btn.active { background: #2563eb; color: #ffffff; border-color: #1d4ed8; }
         .tab-content { display: none; background: var(--bg-card); padding: 15px; border-radius: 8px; border: 1px solid var(--border-color); box-shadow: 4px 4px 10px rgba(0,0,0,0.05); }
         .tab-content.active { display: block; }
+        
+        .modal-tabs-nav { display: flex; gap: 6px; margin-bottom: 15px; background: rgba(0,0,0,0.05); padding: 4px; border-radius: 6px; }
+        .modal-tab-btn { background: transparent; border: none; padding: 10px 4px; font-weight: 700; font-size: 12px; color: var(--text-muted); cursor: pointer; border-radius: 4px; flex: 1; text-align: center; outline: none; }
+        .modal-tab-btn.active { background: #2563eb; color: #ffffff; }
+        .modal-tab-content { display: none; }
+        .modal-tab-content.active { display: block; }
+
         .form-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; align-items: end; }
+        .form-row-three-boxes { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; width: 100%; box-sizing: border-box; }
         .form-group { display: flex; flex-direction: column; width: 100%; box-sizing: border-box; margin-bottom: 10px; }
-        .form-row-nested { display: grid; grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); gap: 8px; width: 100%; box-sizing: border-box; }
-        .form-row-nested-two { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 8px; width: 100%; box-sizing: border-box; }
         label { font-weight: 700; font-size: 11px; margin-bottom: 6px; color: var(--text-muted); text-transform: uppercase; }
-        input, select { padding: 12px; border: 1px solid var(--border-color); border-radius: 6px; font-size: 14px; box-sizing: border-box; background: var(--bg-card); color: var(--text-main); font-weight: 600; outline: none; width: 100%; }
+        
+        input:placeholder-shown { border-color: #ef4444 !important; background: rgba(239, 68, 68, 0.01); }
+        input, select { padding: 12px; border: 1px solid var(--border-color); border-radius: 6px; font-size: 14px; box-sizing: border-box; background: var(--bg-card); color: var(--text-main); font-weight: 600; outline: none; width: 100%; transition: all 0.15s ease-in-out; }
+        
         .action-inline-group { display: flex; gap: 8px; width: 100%; }
         button.action-btn { border: 1px solid #1d4ed8; padding: 14px; font-weight: 700; border-radius: 6px; cursor: pointer; font-size: 14px; width: 100%; background: linear-gradient(145deg, #3b82f6, #1d4ed8); color: #ffffff; text-transform: uppercase; box-shadow: 3px 3px 6px rgba(0,0,0,0.1); border: none; transition: transform 0.1s; }
         button.action-btn:active { transform: scale(0.98); }
+        
+        button.launcher-arrow-btn { 
+            background: linear-gradient(145deg, #2563eb, #1d4ed8) !important; 
+            color: #ffffff !important; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px;
+            padding: 14px; font-size: 13px; border: none; border-radius: 8px; 
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2); cursor: pointer; width: 100%; 
+            display: flex; justify-content: center; align-items: center; gap: 10px; transition: all 0.15s ease-in-out;
+        }
+        
+        button.manual-save-sheet-btn { background: linear-gradient(145deg, #2563eb, #1e40af) !important; color: #ffffff !important; padding: 15px; font-size: 13px; text-transform: uppercase; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 10px rgba(37, 99, 235, 0.25); width: 100%; transition: all 0.15s ease-in-out; }
         .sec-btn { background: linear-gradient(145deg, #64748b, #334155) !important; flex: 2; }
         .reset-inline-btn { background: linear-gradient(145deg, #ef4444, #b91c1c) !important; flex: 1; }
         .grid-actions-panel { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-top: 20px; }
-        .download-btn { background: linear-gradient(145deg, #22c55e, #15803d); color: #ffffff; padding: 15px; font-size: 13px; text-transform: uppercase; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; }
-        .share-pdf-btn { background: linear-gradient(145deg, #ea580c, #c2410c); color: #ffffff; padding: 15px; font-size: 13px; text-transform: uppercase; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; }
-        .copy-btn { background: linear-gradient(145deg, #6366f1, #4338ca); color: #ffffff; padding: 15px; font-size: 13px; text-transform: uppercase; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; }
-        .del-btn { background: #ef4444; color: #ffffff; padding: 6px 10px; font-size: 12px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; }
-        .table-responsive { overflow-x: auto; margin-top: 15px; border: 1px solid var(--border-color); border-radius: 6px; }
-        table { width: 100%; border-collapse: collapse; min-width: 1050px; font-size: 13px; background: var(--table-bg); color: var(--text-main); }
-        th, td { border: 1px solid var(--border-color); padding: 10px 6px; text-align: center; }
-        th { background: linear-gradient(145deg, #1e293b, #0f172a); color: #ffffff; font-weight: 600; }
-        .heading-row td { text-align: left; padding-left: 12px; background-color: #cbd5e1; font-weight: 700; text-transform: uppercase; color: #0f172a; border: 1px solid #7f7f7f; }
-        .bottom-nav-bar { position: fixed; bottom: 0; left: 0; right: 0; height: 65px; background: #1e293b; display: flex; justify-content: space-around; align-items: center; box-shadow: 0 -4px 15px rgba(0,0,0,0.2); z-index: 999; }
-        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 99999; align-items: center; justify-content: center; padding: 15px; box-sizing: border-box; }
-        .modal-box { background: var(--table-bg); padding: 20px; border-radius: 12px; max-width: 480px; width: 100%; box-shadow: 0 10px 30px rgba(0,0,0,0.4); position: relative; color: var(--text-main); max-height: 90vh; overflow-y: auto; box-sizing: border-box; }
-        .modal-close-btn { position: absolute; right: 15px; top: 15px; background: #ef4444; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-weight: bold; z-index: 10; }
-        .history-list { display: flex; flex-direction: column; gap: 8px; margin-top: 15px; max-height: 250px; overflow-y: auto; }
-        .history-item { background: var(--bg-card); border: 1px solid var(--border-color); padding: 12px; border-radius: 6px; font-size: 13px; cursor: pointer; font-weight: 600; }
-        .calc-result-box { background: #dcfce7; color: #166434; border: 1px solid #166434; padding: 15px; border-radius: 6px; margin-top: 15px; font-weight: bold; text-align: center; font-size: 14px; line-height: 1.6; }
-        .about-card { background: var(--bg-card); border-left: 4px solid #1e293b; padding: 12px; border-radius: 4px; margin-bottom: 12px; font-size: 13px; line-height: 1.5; }
-        .custom-dim-panel { background: var(--bg-container); padding: 12px; border-radius: 8px; margin-top: 8px; border: 1px solid var(--border-color); box-sizing: border-box; width: 100%; }
+        .download-btn { background: linear-gradient(145deg, #22c55e, #15803d); color: #ffffff; padding: 15px; font-size: 13px; text-transform: uppercase; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; transition: all 0.15s ease-in-out; }
+        .share-pdf-btn { background: linear-gradient(145deg, #ea580c, #c2410c); color: #ffffff; padding: 15px; font-size: 13px; text-transform: uppercase; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; transition: all 0.15s ease-in-out; }
+        .copy-btn { background: linear-gradient(145deg, #6366f1, #4338ca); color: #ffffff; padding: 15px; font-size: 13px; text-transform: uppercase; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; transition: all 0.15s ease-in-out; }
+        .del-btn { background: #ef4444; color: #ffffff; padding: 6px 10px; font-size: 12px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; transition: all 0.15s ease-in-out; }
         
-        /* 📈 INSIGHTS CARDS STYLE */
+        .table-responsive { overflow-x: auto; margin-top: 15px; border: 1px solid var(--border-color); border-radius: 6px; max-height: 55vh; position: relative; }
+        table { width: 100%; border-collapse: collapse; min-width: 1150px; font-size: 13px; background: var(--table-bg); color: var(--text-main); }
+        
+        thead tr:first-child th { position: sticky; top: 0; z-index: 102; background: linear-gradient(145deg, #1e293b, #0f172a); box-shadow: 0 2px 2px rgba(0,0,0,0.1); }
+        thead tr:nth-child(2) th { position: sticky; top: 38px; z-index: 101; background: linear-gradient(145deg, #1e293b, #0f172a); box-shadow: 0 2px 2px rgba(0,0,0,0.1); }
+        
+        th, td { border: 1px solid var(--border-color); padding: 10px 6px; text-align: center; }
+        th { color: #ffffff; font-weight: 600; }
+        
+        .heading-row td { text-align: left; padding: 10px 12px; background-color: #cbd5e1; font-weight: 700; text-transform: uppercase; color: #0f172a; border: 1px solid #7f7f7f; outline: none; }
+        .heading-flex-layout { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+        .section-editable-text { flex-grow: 1; outline: none; cursor: text; }
+        .section-exit-btn { background: #b91c1c; color: #ffffff; border: none; border-radius: 4px; padding: 4px 10px; font-size: 11px; font-weight: bold; cursor: pointer; text-transform: uppercase; margin-left: 15px; }
+        
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 999999; align-items: center; justify-content: center; padding: 15px; box-sizing: border-box; }
+        .modal-box { background: var(--table-bg); padding: 20px; border-radius: 12px; max-width: 520px; width: 100%; box-shadow: 0 10px 30px rgba(0,0,0,0.4); position: relative; color: var(--text-main); max-height: 90vh; overflow-y: auto; box-sizing: border-box; }
+        .modal-close-btn { position: absolute; right: 15px; top: 15px; background: #ef4444; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-weight: bold; z-index: 10; }
+
+        .history-row-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 6px; border-bottom: 1px solid var(--border-color); gap: 10px; }
+        .history-file-meta { display: flex; align-items: center; gap: 8px; flex: 1; font-size: 13px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .history-actions-wrap { display: flex; gap: 5px; }
+        .h-btn { padding: 6px 10px; font-size: 11px; font-weight: bold; border: none; border-radius: 4px; cursor: pointer; text-transform: uppercase; }
+        .h-open { background: #2563eb; color: #fff; }
+        .h-edit { background: #eab308; color: #000; }
+        .h-delete { background: #ef4444; color: #fff; }
+
+        .calc-result-box { background: #dcfce7; color: #166434; border: 1px solid #166434; padding: 15px; border-radius: 12px; margin-top: 15px; font-weight: bold; text-align: left; font-size: 14px; line-height: 1.6; }
+        [data-theme="dark"] .calc-result-box { background: #1e293b; color: #2dd4bf; border-color: #374151; }
+        .editable-cell { cursor: pointer; background: rgba(234, 179, 8, 0.05); transition: background 0.2s; }
+        .editable-cell:hover { background: rgba(234, 179, 8, 0.15); }
         .stats-dashboard { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; margin-bottom: 15px; }
         .stat-card { background: var(--bg-card); border: 1px solid var(--border-color); padding: 10px; border-radius: 8px; text-align: center; box-shadow: 2px 2px 5px rgba(0,0,0,0.02); }
         .stat-card div:first-child { font-size: 10px; font-weight: bold; color: var(--text-muted); text-transform: uppercase; }
         .stat-card div:last-child { font-size: 16px; font-weight: bold; color: #2563eb; margin-top: 4px; }
 
+        .modal-inner-group-box {
+            background: rgba(37, 99, 235, 0.03); 
+            border: 1px solid var(--border-color); 
+            border-radius: 8px; padding: 12px; 
+            margin-bottom: 12px;
+        }
+
+        /* FIRE TV REMOTE SUPPORT CSS */
+        input:focus, button:focus, select:focus, .tab-btn:focus {
+            border: 4px solid #ff9900 !important;
+            background-color: #fff3e0 !important;
+            color: #000000 !important;
+            outline: none !important;
+            transform: scale(1.03);
+            box-shadow: 0 0 15px rgba(255, 153, 0, 0.8) !important;
+            z-index: 99999;
+        }
+        
+        #printHeaderContainer { display: none; }
         @media print {
             @page { size: landscape; margin: 8mm; }
             html, body { width: 100%; background: #fff !important; padding: 0; margin: 0; font-size: 10pt; color: #000 !important; }
             .container { box-shadow: none !important; padding: 0 !important; max-width: 100% !important; background: transparent !important; }
-            .header-section, .tabs-nav, #tab1, #tab2, .admob-banner-placeholder, 
-            .bottom-nav-bar, .grid-actions-panel, .del-btn, th:last-child, td:last-child,
-            .stats-dashboard, div[style*="grid-template-columns"] { 
-                display: none !important; 
-            }
+            .header-section, .tabs-nav, #tab1, #tab2, .admob-banner-placeholder, .bottom-nav-bar, .grid-actions-panel, .del-btn, th:last-child, td:last-child, .stats-dashboard, div[style*="grid-template-columns"], #liveProjectHeaderName { display: none !important; }
             .tab-content { display: none !important; }
             #tab3 { display: block !important; border: none !important; box-shadow: none !important; padding: 0 !important; background: transparent !important; }
-            .table-responsive { overflow: visible !important; border: none !important; margin: 0 !important; }
+            #printHeaderContainer { display: block !important; margin-bottom: 15px; border: 2px solid #000 !important; padding: 10px !important; background: #f1f5f9 !important; }
+            .print-header-row { display: flex; justify-content: space-between; font-weight: bold; font-size: 12pt; font-family: 'Segoe UI', sans-serif; }
+            .table-responsive { overflow: visible !important; border: none !important; margin: 0 !important; max-height: none !important; }
             table { width: 100% !important; min-width: 100% !important; border-collapse: collapse !important; background: #fff !important; }
+            thead tr:first-child th, thead tr:nth-child(2) th { position: relative !important; top: auto !important; background: #cbd5e1 !important; color: #000 !important; box-shadow: none !important; }
             th, td { border: 1px solid #000 !important; padding: 6px 4px !important; font-size: 9pt !important; color: #000 !important; background: transparent !important; }
-            th { background: #e2e8f0 !important; font-weight: bold !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-            .heading-row td { background-color: #cbd5e1 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; font-weight: bold !important; color: #000 !important; }
+            .heading-row td { background-color: #cbd5e1 !important; font-weight: bold !important; color: #000 !important; }
+            .section-exit-btn { display: none !important; }
         }
     </style>
+    <!-- GOOGLE TRANSLATE INTEGRATION SCRIPT -->
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
     <script>
         var bbsData = [];
-        var activeDias = [8, 10, 12, 16, 20, 25, 32, 40];
+        var masterMeasData = []; 
+        var activeDias = [8, 10, 12, 16, 20, 25, 32, 40]; 
         var currentActiveProject = "NEW PROJECT";
+        var logSearchQuery = "";
+        var renameTargetEncoded = "";
+        var mmRenameTargetEncoded = "";
+        var mmSearchQuery = "";
+        var currentLang = "en";
         var searchFilterText = "";
 
-        function safeModalToggle(id, displayState) {
-            var modal = document.getElementById(id);
-            if (modal) modal.style.display = displayState;
+        function toggleCalcFolder(e) {
+            if(e) e.stopPropagation();
+            var folder = document.getElementById('calculatorsMenuFolder');
+            if(folder.style.display === 'block') {
+                folder.style.display = 'none';
+            } else {
+                folder.style.display = 'block';
+            }
         }
 
+        function triggerToastNotification(msg) {
+            var el = document.getElementById('toastNoticeDock');
+            if(el) { el.innerText = msg; el.style.display = 'block'; setTimeout(function(){ el.style.display = 'none'; }, 2000); }
+        }
+
+        safeModalToggle = (id, state) => { var m = document.getElementById(id); if(m) m.style.display = state; };
+
         window.onload = function() {
-            loadHistoryList();
             renderTable();
+            renderMasterMeasTable();
+            updateHistoryDropdownOptions();
             document.addEventListener('click', function(e) {
                 var menu = document.getElementById('mainMenuDropdown');
                 var btn = document.getElementById('hamburgerTrigger');
-                if (menu && btn && !menu.contains(e.target) && e.target !== btn) {
-                    menu.style.display = 'none';
+                if (menu && btn && !menu.contains(e.target) && e.target !== btn) menu.style.display = 'none';
+            });
+
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Enter') {
+                    var activeElement = document.activeElement;
+                    if (activeElement && (activeElement.tagName === 'BUTTON' || activeElement.classList.contains('tab-btn'))) {
+                        event.preventDefault();
+                        activeElement.click();
+                    }
                 }
             });
         };
@@ -139,678 +297,942 @@
             }
         }
 
-        function filterBbsGrid() {
-            searchFilterText = document.getElementById('gridSearchBox').value.toLowerCase().trim();
-            renderTable();
-        }
+        function filterBbsGrid() { searchFilterText = document.getElementById('gridSearchBox').value.toLowerCase().trim(); renderTable(); }
 
-        /* 🤝 NATIVE SHARING MODULE FOR APP PROMOTION */
-        function shareNativeApkFile() {
-            if (navigator.share) {
-                navigator.share({
-                    title: 'BBS Pro Engine',
-                    text: 'Civil Engineering ke liye sabse behtareen Bar Bending Schedule aur Material Calculator App. Abhi download karein!',
-                    url: window.location.href
-                }).then(function() { console.log('Shared successfully'); })
-                  .catch(function(err) { console.log('Error sharing:', err); });
-            } else {
-                // Fallback for browsers that don't support native web sharing
-                var dummyInput = document.createElement('input');
-                document.body.appendChild(dummyInput);
-                dummyInput.value = window.location.href;
-                dummyInput.select();
-                document.execCommand('copy');
-                document.body.removeChild(dummyInput);
-                alert("App link copied to clipboard! WhatsApp par doston ko paste karke bhejein.");
-            }
-        }
-
-        /* 📋 COPY TABLE SUMMARY TO TEXT FOR WHATSAPP */
         function copyTableToClipboardText() {
-            var textSummary = "📊 BBS STRUCTURAL ENGINE REPORT 📊\nProject: " + currentActiveProject + "\n\n";
-            var validEntriesFound = false;
+            var textSummary = "📊 BBS STRUCTURAL ENGINE REPORT 📊\nProject: " + currentActiveProject + "\n";
+            var dVal = document.getElementById('reportDate').value;
+            if(dVal) textSummary += "Date: " + dVal + "\n";
+            textSummary += "--------------------------------\n";
             
+            var validEntriesFound = false;
+            var weights = {8:0.395, 10:0.617, 12:0.890, 16:1.580, 20:2.470, 25:3.850, 32:6.310, 40:9.860};
+            var grandTotalKg = 0;
+
             for (var i = 0; i < bbsData.length; i++) {
                 var item = bbsData[i];
                 if(item.type === 'HEADING') {
-                    textSummary += "\n🔹 SECTION: " + item.text + "\n";
+                    textSummary += "\n🔹 " + item.text + "\n";
                 } else if(item.type === 'DATA') {
                     validEntriesFound = true;
-                    textSummary += "• " + item.desc + " | Dia: " + item.dia + "mm | Total Len: " + item.totalLength + "m\n";
+                    var itemWeight = (item.totalLength * (weights[item.dia] || 0)).toFixed(2);
+                    grandTotalKg += parseFloat(itemWeight);
+                    textSummary += "• " + item.desc + " | Dia: " + item.dia + "mm | Total Bars: " + Math.ceil(item.noBars) + " | Total Len: " + item.totalLength + "m | Weight: " + itemWeight + " Kg\n";
                 }
             }
+            if(!validEntriesFound) return triggerToastNotification("The layout table is currently empty.");
             
-            if(!validEntriesFound) return alert("Table khali hai! Pehle data add karein.");
+            textSummary += "\n--------------------------------\n";
+            textSummary += "Net Project Summary: " + grandTotalKg.toFixed(2) + " Kg (" + (grandTotalKg/1000).toFixed(4) + " M.T.)\n";
             
-            var dummyTextArea = document.createElement('textarea');
-            document.body.appendChild(dummyTextArea);
-            dummyTextArea.value = textSummary;
-            dummyTextArea.select();
-            document.execCommand('copy');
-            document.body.removeChild(dummyTextArea);
-            alert("Report Text format mein copy ho gayi hai! Kisi ko bhi WhatsApp par seedhe paste karke bhej sakte hain.");
-        }
-
-        function toggleMainMenu(e) {
-            if(e) e.stopPropagation();
-            var menu = document.getElementById('mainMenuDropdown');
-            if (menu) menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
-        }
-
-        function toggleDimInputBlock(modeId, blockId) {
-            var mode = document.getElementById(modeId).value;
-            safeModalToggle(blockId, (mode === 'DIM' ? 'block' : 'none'));
-        }
-
-        function toggleConcreteCustomOption() {
-            var grade = document.getElementById('calcGrade').value;
-            safeModalToggle('concreteCustomRatioBlock', (grade === 'CUSTOM' ? 'block' : 'none'));
-        }
-
-        function toggleBlockSizeOption() {
-            var size = document.getElementById('blockSize').value;
-            safeModalToggle('blockSizeCustomBlock', (size === 'CUSTOM' ? 'block' : 'none'));
-        }
-
-        function toggleBlockCustomOption() {
-            var ratio = document.getElementById('blockRatio').value;
-            safeModalToggle('blockCustomRatioBlock', (ratio === 'CUSTOM' ? 'block' : 'none'));
-        }
-
-        function shareAsProfessionalPDF() {
-            window.print();
-        }
-
-        function resetAllEngineData() {
-            if(confirm("Are you sure you want to reset all data?")) {
-                bbsData = [];
-                renderTable();
-                saveStateToHistory();
+            var steelRate = parseFloat(document.getElementById('steelRatePerKg').value) || 0;
+            if(steelRate > 0) {
+                var totalCost = grandTotalKg * steelRate;
+                textSummary += "Rate per Kg: ₹" + steelRate + "\n";
+                textSummary += "Estimated Cost: ₹" + totalCost.toLocaleString('en-IN', {maximumFractionDigits: 2}) + "\n";
             }
+            
+            var dummyTextArea = document.createElement('textarea'); document.body.appendChild(dummyTextArea);
+            dummyTextArea.value = textSummary; dummyTextArea.select(); document.execCommand('copy'); document.body.removeChild(dummyTextArea);
+            triggerToastNotification("Report copied with weights and prices successfully!");
+        }
+
+        function toggleMainMenu(e) { if(e) e.stopPropagation(); var menu = document.getElementById('mainMenuDropdown'); if (menu) menu.style.display = (menu.style.display === 'block') ? 'none' : 'block'; }
+        function toggleDimInputBlock(mId, bId) { safeModalToggle(bId, (document.getElementById(mId).value === 'DIM' ? 'block' : 'none')); }
+        function shareAsProfessionalPDF() { document.getElementById('printProjName').innerText = document.getElementById('projectName').value.toUpperCase(); var dVal = document.getElementById('reportDate').value; document.getElementById('printProjDate').innerText = dVal ? dVal : "N/A"; window.print(); }
+
+        function resetModeToNewCanvas() {
+            if(document.getElementById('projectSheetModeSelect')) {
+                document.getElementById('projectSheetModeSelect').value = "NEW";
+            }
+        }
+
+        function clearAllWithAutoSave() {
+            if (bbsData.length > 0) { executeSilentAutoSave(); }
+            if(document.getElementById('projectName')) document.getElementById('projectName').value = "";
+            if(document.getElementById('reportDate')) document.getElementById('reportDate').value = "";
+            if(document.getElementById('desc')) document.getElementById('desc').value = "";
+            if(document.getElementById('clearSpanInput')) document.getElementById('clearSpanInput').value = "";
+            if(document.getElementById('spacingInput')) document.getElementById('spacingInput').value = "";
+            if(document.getElementById('noMembers')) document.getElementById('noMembers').value = "";
+            if(document.getElementById('noBars')) document.getElementById('noBars').value = "";
+            if(document.getElementById('cutLength')) document.getElementById('cutLength').value = "";
+            if(document.getElementById('compTitle')) document.getElementById('compTitle').value = "";
+            if(document.getElementById('colMainLength')) document.getElementById('colMainLength').value = "";
+            if(document.getElementById('colLeftHook')) document.getElementById('colLeftHook').value = "";
+            if(document.getElementById('colRightHook')) document.getElementById('colRightHook').value = "";
+            if(document.getElementById('hlSpan')) document.getElementById('hlSpan').value = "";
+            if(document.getElementById('hlSpacingSingleInput')) document.getElementById('hlSpacingSingleInput').value = "";
+            if(document.getElementById('z1Spacing')) document.getElementById('z1Spacing').value = "";
+            if(document.getElementById('z2Spacing')) document.getElementById('z2Spacing').value = "";
+            if(document.getElementById('z3Spacing')) document.getElementById('z3Spacing').value = "";
+            
+            currentActiveProject = "NEW PROJECT";
+            var screenHeader = document.getElementById('liveProjectHeaderName');
+            if(screenHeader) screenHeader.innerText = "📁 CURRENT SHEET LOG: NEW PROJECT";
+            
+            resetModeToNewCanvas();
+            bbsData = []; renderTable();
+            switchTab('tab1'); 
+            triggerToastNotification("All form data fields wiped successfully!"); 
         }
 
         function checkAndResetForNewProject() {
-            var pInput = document.getElementById('projectName');
-            var dInput = document.getElementById('reportDate');
-            var inputName = pInput ? pInput.value.trim().toUpperCase() : "NEW PROJECT";
-            
-            if (inputName !== currentActiveProject) {
-                currentActiveProject = inputName;
-                var historyData = localStorage.getItem('bbs_app_history');
-                var foundExisting = false;
-                if (historyData) {
-                    try {
-                        var historyArr = JSON.parse(atob(historyData));
-                        var matchedItem = historyArr.find(function(item) { return item.name === inputName; });
-                        if (matchedItem) {
-                            bbsData = JSON.parse(JSON.stringify(matchedItem.data));
-                            if(matchedItem.date && dInput) dInput.value = matchedItem.date;
-                            foundExisting = true;
-                        }
-                    } catch(e) { console.error("Decryption failed", e); }
-                }
-                if (!foundExisting) {
-                    bbsData = [];
-                    if(dInput) dInput.value = "";
-                }
-                renderTable();
-            }
+            var pInput = document.getElementById('projectName'); var inputName = pInput ? pInput.value.trim().toUpperCase() : "NEW PROJECT";
+            var screenHeader = document.getElementById('liveProjectHeaderName'); if(screenHeader) screenHeader.innerText = "📁 CURRENT SHEET LOG: " + (inputName === "" ? "NEW PROJECT" : inputName);
+            if (inputName !== currentActiveProject && inputName !== "") { currentActiveProject = inputName; if(document.getElementById('projectSheetModeSelect').value === "NEW") { bbsData = []; renderTable(); } }
         }
 
-        function switchTab(tabId) {
-            var contents = document.getElementsByClassName('tab-content');
-            var buttons = document.getElementsByClassName('tab-btn');
-            for (var i = 0; i < contents.length; i++) {
-                contents[i].classList.remove('active');
-                buttons[i].classList.remove('active');
-            }
-            var activeContent = document.getElementById(tabId);
-            var activeBtn = document.getElementById('btn-' + tabId);
-            if(activeContent) activeContent.classList.add('active');
-            if(activeBtn) activeBtn.classList.add('active');
-        }
-
-        function openModal(modalId) {
-            var menu = document.getElementById('mainMenuDropdown');
-            if (menu) menu.style.display = 'none';
-            closeAllModals();
-            safeModalToggle(modalId, 'flex');
-            if(modalId === 'historyModal') loadHistoryList();
-        }
-
-        function closeAllModals() {
-            safeModalToggle('historyModal', 'none');
-            safeModalToggle('civilCalcModal', 'none');
-            safeModalToggle('concreteCalcModal', 'none');
-            safeModalToggle('brickCalcModal', 'none');
-            safeModalToggle('blockCalcModal', 'none');
-            safeModalToggle('plasterCalcModal', 'none');
-            safeModalToggle('tileCalcModal', 'none');
-            safeModalToggle('shutteringCalcModal', 'none');
-            safeModalToggle('aboutModal', 'none');
-            safeModalToggle('bbsAutoCalcModal', 'none');
-        }
-
-        function addComponentHeading() {
-            var comp = document.getElementById('compTitle');
-            var title = comp ? comp.value.trim() : "";
-            if(title === "") return alert("Please enter a Section Name.");
-            bbsData.push({ type: 'HEADING', text: title.toUpperCase() });
-            if(comp) comp.value = "";
-            saveStateToHistory();
-            renderTable();
-            switchTab('tab2');
-        }
-
-        function triggerColumnFootingMath() {
-            var mainLen = parseFloat(document.getElementById('colMainLength').value) || 0;
-            var lHook = parseFloat(document.getElementById('colLHook').value) || 0;
-            var cutLenInput = document.getElementById('cutLength');
-            if (cutLenInput) {
-                var netCutLen = mainLen + lHook;
-                cutLenInput.value = netCutLen.toFixed(3);
-            }
+        function handleSheetModeChange() { if(document.getElementById('projectSheetModeSelect').value === "OLD") { openModal('historyModal'); } else { bbsData = []; renderTable(); } }
+        function switchTab(tId) { var cs = document.getElementsByClassName('tab-content'), bs = document.getElementsByClassName('tab-btn'); for (var i = 0; i < cs.length; i++) { cs[i].classList.remove('active'); bs[i].classList.remove('active'); } document.getElementById(tId).classList.add('active'); document.getElementById('btn-' + tId).classList.add('active'); }
+        
+        function toggleModalSpacingMode() { 
+            var mode = document.getElementById('modalSpacingSelectMode').value; 
+            document.getElementById('modalSingleBoxWrapper').style.display = (mode === "L1" ? "block" : "none"); 
+            document.getElementById('modalTripleBoxWrapper').style.display = (mode === "L3" || mode === "L4" ? 'block' : 'none'); 
         }
 
         function calculateAutoBarSpacingAndLength() {
-            var spanRaw = document.getElementById('hlSpan').value.trim();
-            var spacingRaw = document.getElementById('hlSpacing').value.trim();
-            var sUnit = document.getElementById('hlSpanUnit').value;
-            var spUnit = document.getElementById('hlSpacingUnit').value;
-            var noBarsInput = document.getElementById('noBars');
-            var cSpanInput = document.getElementById('clearSpanInput');
-            var spacInput = document.getElementById('spacingInput');
-
-            if (spanRaw === "" || spacingRaw === "") {
-                if(noBarsInput) noBarsInput.value = "";
-                if(cSpanInput) cSpanInput.value = "";
-                if(spacInput) spacInput.value = "";
-                closeAllModals();
-                return alert("Values configured as BLANK. Data fields cleared.");
-            }
-
-            var span = parseFloat(spanRaw) || 0;
-            var spacing = parseFloat(spacingRaw) || 0;
-            var spanMM = (sUnit === "METER") ? (span * 1000) : ((sUnit === "INCH") ? (span * 25.4) : (span * 304.8));
-            var spacingMM = (spUnit === "MM") ? spacing : (spacing * 25.4);
-            var calculatedNos = Math.floor(spanMM / spacingMM) + 1;
+            var spanRaw = document.getElementById('hlSpan').value.trim(); var mode = document.getElementById('modalSpacingSelectMode').value;
+            var noBarsInput = document.getElementById('noBars'), cSpanInput = document.getElementById('clearSpanInput'), spacInput = document.getElementById('spacingInput');
+            if (spanRaw === "") { if(noBarsInput) noBarsInput.value = ""; if(cSpanInput) cSpanInput.value = ""; if(spacInput) spacInput.value = ""; closeAllModals(); return; }
+            var totalSpanMeter = parseFloat(spanRaw) || 0, totalSpanMM = totalSpanMeter * 1000;
             
-            if(noBarsInput) noBarsInput.value = calculatedNos;
-            if(cSpanInput) cSpanInput.value = spanMM.toFixed(1);
-            if(spacInput) spacInput.value = spacingMM.toFixed(1);
+            if(mode === "L1") {
+                var singleSpacRaw = document.getElementById('hlSpacingSingleInput').value.trim(); if(singleSpacRaw === "") { if(spacInput) Math.ceil(""); return closeAllModals(); }
+                var sSpacMM = parseFloat(singleSpacRaw) || 150; 
+                if(noBarsInput) noBarsInput.value = Math.ceil((totalSpanMM / sSpacMM) + 1); 
+                if(cSpanInput) cSpanInput.value = totalSpanMeter.toFixed(3); 
+                if(spacInput) spacInput.value = sSpacMM.toFixed(0);
+            } else if(mode === "L3") {
+                var z1 = document.getElementById('z1Spacing').value.trim(), z2 = document.getElementById('z2Spacing').value.trim(), z3 = document.getElementById('z3Spacing').value.trim();
+                if(z1 === "" && z2 === "" && z3 === "") { if(spacInput) spacInput.value = ""; return closeAllModals(); }
+                var z1V = parseFloat(z1) || 100, z2V = parseFloat(z2) || 150, z3V = parseFloat(z3) || 100;
+                var equalSplitMM = totalSpanMM / 3; 
+                if(noBarsInput) noBarsInput.value = Math.ceil((equalSplitMM / z1V) + (equalSplitMM / z2V) + (equalSplitMM / z3V) + 1); 
+                if(cSpanInput) cSpanInput.value = totalSpanMeter.toFixed(3);
+                spacInput.value = z1V.toFixed(0) + "/" + z2V.toFixed(0) + "/" + z3V.toFixed(0);
+            } else if(mode === "L4") {
+                var z1 = document.getElementById('z1Spacing').value.trim(), z2 = document.getElementById('z2Spacing').value.trim(), z3 = document.getElementById('z3Spacing').value.trim();
+                if(z1 === "" && z2 === "" && z3 === "") { if(spacInput) spacInput.value = ""; return closeAllModals(); }
+                var z1V = parseFloat(z1) || 100, z2V = parseFloat(z2) || 150, z3V = parseFloat(z3) || 100;
+                
+                var zone1SpanMM = totalSpanMM / 4;
+                var zone2SpanMM = totalSpanMM / 2;
+                var zone3SpanMM = totalSpanMM / 4;
+                
+                if(noBarsInput) noBarsInput.value = Math.ceil((zone1SpanMM / z1V) + (zone2SpanMM / z2V) + (zone3SpanMM / z3V) + 1); 
+                if(cSpanInput) cSpanInput.value = totalSpanMeter.toFixed(3);
+                spacInput.value = z1V.toFixed(0) + "/" + z2V.toFixed(0) + "/" + z3V.toFixed(0);
+            }
             closeAllModals();
         }
 
-        function addBarEntry() {
-            var descEl = document.getElementById('desc');
-            var diaEl = document.getElementById('dia');
-            var memEl = document.getElementById('noMembers');
-            var barEl = document.getElementById('noBars');
-            var lenEl = document.getElementById('cutLength');
-            var cSpanEl = document.getElementById('clearSpanInput');
-            var spacEl = document.getElementById('spacingInput');
+        function triggerApkShare() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'BBS Structural Pro Engine',
+                    text: 'Check out this Premium Civil Engineering Structural Calculator!',
+                    url: window.location.href
+                }).then(() => {
+                    triggerToastNotification("Shared successfully!");
+                }).catch((err) => {
+                    triggerToastNotification("Share cancelled or failed.");
+                });
+            } else {
+                triggerToastNotification("Web Share not supported. Copy link instead!");
+            }
+        }
 
-            var desc = descEl ? descEl.value.trim() : "Rebar";
-            var dia = diaEl ? parseInt(diaEl.value) : 16;
-            var noMembers = memEl ? parseFloat(memEl.value) : 0;
-            var noBars = barEl ? parseFloat(barEl.value) : 0;
-            var cutLen = lenEl ? parseFloat(lenEl.value) : 0;
+        function openModal(mId) { document.getElementById('mainMenuDropdown').style.display = 'none'; closeAllModals(); safeModalToggle(mId, 'flex'); if(mId === 'historyModal') loadHistoryList(); if(mId === 'masterMeasurementModal') { document.getElementById('mmOperationsModeSelect').value = "NEW"; toggleMmHistoryPanel("NEW"); loadMasterMeasHistoryList(); } }
+        
+        function closeAllModals() { 
+            safeModalToggle('civilCalcModal', 'none'); safeModalToggle('masterMeasurementModal', 'none'); safeModalToggle('concreteCalcModal', 'none'); safeModalToggle('brickCalcModal', 'none'); safeModalToggle('blockCalcModal', 'none'); safeModalToggle('plasterCalcModal', 'none'); safeModalToggle('tileCalcModal', 'none'); safeModalToggle('shutteringCalcModal', 'none'); safeModalToggle('infoModal', 'none'); safeModalToggle('qualityCalcModal', 'none'); safeModalToggle('bbsAutoCalcModal', 'none'); safeModalToggle('historyModal', 'none'); safeModalToggle('renameModal', 'none'); safeModalToggle('mmRenameModal', 'none');
+            resetModeToNewCanvas();
+        }
+
+        function addComponentHeading() { var comp = document.getElementById('compTitle'), title = comp ? comp.value.trim() : ""; if(title === "") return alert("Please enter a Section Name."); bbsData.push({ type: 'HEADING', text: title.toUpperCase(), dateAdded: new Date().toISOString() }); comp.value = ""; executeSilentAutoSave(); renderTable(); switchTab('tab2'); }
+        
+        function triggerColumnFootingMath() { 
+            var mainLen = parseFloat(document.getElementById('colMainLength').value) || 0;
+            var leftHookMM = parseFloat(document.getElementById('colLeftHook').value) || 0;
+            var rightHookMM = parseFloat(document.getElementById('colRightHook').value) || 0;
             
-            var clearSpan = (cSpanEl && cSpanEl.value.trim() !== "") ? parseFloat(cSpanEl.value) : "";
-            var spacing = (spacEl && spacEl.value.trim() !== "") ? parseFloat(spacEl.value) : "";
+            var netCutLen = mainLen + (leftHookMM / 1000) + (rightHookMM / 1000);
+            document.getElementById('cutLength').value = netCutLen.toFixed(3); 
+        }
+        
+        function addBarEntry() { 
+            var desc = document.getElementById('desc').value.trim() || "Main Bar";
+            var dia = parseInt(document.getElementById('dia').value) || 16;
+            var noMembers = parseFloat(document.getElementById('noMembers').value) || 0;
+            var noBars = parseFloat(document.getElementById('noBars').value) || 0;
+            var cutLen = parseFloat(document.getElementById('cutLength').value) || 0;
+            var clearSpan = document.getElementById('clearSpanInput').value || "";
+            var spacing = document.getElementById('spacingInput').value || "";
+            
+            noBars = Math.ceil(noBars);
             var totalLength = noMembers * noBars * cutLen;
 
-            bbsData.push({
-                type: 'DATA', desc: desc, dia: dia, noMembers: noMembers,
-                noBars: noBars, cutLength: cutLen, clearSpan: clearSpan, spacing: spacing,
-                totalLength: Math.round(totalLength * 100) / 100
+            bbsData.push({ type: 'DATA', desc: desc, dia: dia, noMembers: noMembers, noBars: noBars, cutLength: cutLen, clearSpan: clearSpan, spacing: spacing, totalLength: Math.round(totalLength * 100) / 100, dateAdded: new Date().toISOString() }); 
+            executeSilentAutoSave(); renderTable(); switchTab('tab3'); 
+        }
+
+        function deleteEntry(index) { bbsData.splice(index, 1); executeSilentAutoSave(); renderTable(); }
+        function deleteWholeSectionBlock(index) { if(confirm("Are you sure you want to delete this heading block along with all its rebar entries?")) { var targetIndex = index; bbsData.splice(targetIndex, 1); while(targetIndex < bbsData.length && bbsData[targetIndex].type !== 'HEADING') { bbsData.splice(targetIndex, 1); } executeSilentAutoSave(); renderTable(); } }
+
+        function executeSilentAutoSave() {
+            var stateObj = { projectName: currentActiveProject, date: document.getElementById('reportDate').value, timestamp: new Date().toISOString(), data: bbsData };
+            var existingHistory = []; var raw = localStorage.getItem('bbs_master_history_log'); if(raw) { try { existingHistory = JSON.parse(atob(raw)); } catch(e){} }
+            existingHistory = existingHistory.filter(function(x) { return x.projectName !== currentActiveProject; }); existingHistory.unshift(stateObj);
+            localStorage.setItem('bbs_master_history_log', btoa(JSON.stringify(existingHistory)));
+        }
+
+        function manualSaveStateToHistory() { executeSilentAutoSave(); triggerToastNotification("Data saved successfully to BBS History sandbox backup!"); }
+
+        function triggerHistoryOpen(projNameEncoded) {
+            var raw = localStorage.getItem('bbs_master_history_log');
+            var arr = []; if(raw) { try { arr = JSON.parse(atob(raw)); } catch(e){} }
+            var item = arr.find(x => btoa(x.projectName) === projNameEncoded);
+            if(item) {
+                document.getElementById('projectName').value = item.projectName;
+                document.getElementById('reportDate').value = item.date || "";
+                currentActiveProject = item.projectName; bbsData = JSON.parse(JSON.stringify(item.data));
+                renderTable(); closeAllModals(); switchTab('tab3');
+                var screenHeader = document.getElementById('liveProjectHeaderName');
+                if(screenHeader) screenHeader.innerText = "📁 CURRENT SHEET LOG: " + item.projectName;
+                triggerToastNotification("Sheet Loaded Successfully!");
+            }
+        }
+
+        function triggerHistoryRename(projNameEncoded) {
+            closeAllModals();
+            renameTargetEncoded = projNameEncoded;
+            var oldName = atob(projNameEncoded);
+            document.getElementById('newProjectNameInput').value = oldName;
+            safeModalToggle('renameModal', 'flex');
+            setTimeout(function() { document.getElementById('newProjectNameInput').focus(); }, 150);
+        }
+
+        function submitProjectRename() {
+            var newName = document.getElementById('newProjectNameInput').value;
+            if(!newName || newName.trim() === "") return alert("Please enter a valid project sheet reference name.");
+            newName = newName.trim().toUpperCase();
+            var oldName = atob(renameTargetEncoded);
+            if(newName === oldName) { closeAllModals(); openModal('historyModal'); return; }
+            var raw = localStorage.getItem('bbs_master_history_log');
+            var arr = []; if(raw) { try { arr = JSON.parse(atob(raw)); } catch(e){} }
+            var index = arr.findIndex(x => btoa(x.projectName) === renameTargetEncoded);
+            if(index !== -1) {
+                arr[index].projectName = newName;
+                localStorage.setItem('bbs_master_history_log', btoa(JSON.stringify(arr)));
+                if(currentActiveProject === oldName) {
+                    currentActiveProject = newName;
+                    document.getElementById('projectName').value = newName;
+                    var screenHeader = document.getElementById('liveProjectHeaderName');
+                    if(screenHeader) screenHeader.innerText = "📁 CURRENT SHEET LOG: " + newName;
+                }
+                closeAllModals(); openModal('historyModal'); triggerToastNotification("Project Renamed Successfully!");
+            }
+        }
+
+        function triggerHistoryDelete(projNameEncoded) {
+            if(!confirm("Are you sure you want to delete this backup project sheet permanently?")) return;
+            var raw = localStorage.getItem('bbs_master_history_log');
+            var arr = []; if(raw) { try { arr = JSON.parse(atob(raw)); } catch(e){} }
+            arr = arr.filter(x => btoa(x.projectName) !== projNameEncoded);
+            localStorage.setItem('bbs_master_history_log', btoa(JSON.stringify(arr)));
+            if(currentActiveProject === atob(projNameEncoded)) {
+                bbsData = []; renderTable(); currentActiveProject = "NEW PROJECT";
+                document.getElementById('projectName').value = "";
+                var screenHeader = document.getElementById('liveProjectHeaderName');
+                if(screenHeader) screenHeader.innerText = "📁 CURRENT SHEET LOG: NEW PROJECT";
+            }
+            loadHistoryList(); triggerToastNotification("Project Sheet Deleted Permanently!");
+        }
+
+        function handleHistorySearch(val) { logSearchQuery = val.toLowerCase().trim(); loadHistoryList(); }
+
+        function loadHistoryList() {
+            var listContainer = document.getElementById('historyList'); if(!listContainer) return;
+            var raw = localStorage.getItem('bbs_master_history_log'); listContainer.innerHTML = "";
+            var historyArr = []; if(raw) { try { historyArr = JSON.parse(atob(raw)); } catch(e){} }
+            var matchCount = 0;
+            historyArr.forEach(function(item) {
+                if(logSearchQuery !== "" && !item.projectName.toLowerCase().includes(logSearchQuery)) return;
+                matchCount++;
+                var encName = btoa(item.projectName);
+                var row = document.createElement('div');
+                row.className = 'history-row-item';
+                row.innerHTML = '<div class="history-file-meta">📁 ' + item.projectName + '</div>' +
+                                '<div class="history-actions-wrap">' +
+                                    '<button class="h-btn h-open" onclick="triggerHistoryOpen(\''+encName+'\')">Open</button>' +
+                                    '<button class="h-btn h-edit" onclick="triggerHistoryRename(\''+encName+'\')">Edit</button>' +
+                                    '<button class="h-btn h-delete" onclick="triggerHistoryDelete(\''+encName+'\')">Delete</button>' +
+                                '</div>';
+                listContainer.appendChild(row);
             });
-            saveStateToHistory();
-            renderTable();
-            
-            if(cSpanEl) cSpanEl.value = "";
-            if(spacEl) spacEl.value = "";
-            if(document.getElementById('colMainLength')) document.getElementById('colMainLength').value = "";
-            if(document.getElementById('colLHook')) document.getElementById('colLHook').value = "";
-            switchTab('tab3');
+            if(matchCount === 0) { listContainer.innerHTML = "<div style='padding:15px; font-size:12px; color:var(--text-muted); text-align:center;'>No matching backup records found.</div>"; }
         }
 
-        function deleteEntry(index) {
-            bbsData.splice(index, 1);
-            saveStateToHistory();
-            renderTable();
+        function updateInlineValue(index, field, valueText) {
+            if(!bbsData[index]) return; var text = valueText.trim();
+            if(field === 'dia' || field === 'noMembers' || field === 'noBars' || field === 'cutLength' || field === 'clearSpan' || field === 'spacing' || field === 'text') {
+                if (field === 'clearSpan' || field === 'spacing' || field === 'noBars' || field === 'text') bbsData[index][field] = text; else { var numericVal = parseFloat(text.replace(/[^\d.]/g, '')) || 0; bbsData[index][field] = field === 'dia' ? parseInt(numericVal) : numericVal; }
+                var item = bbsData[index]; if(item.type !== 'HEADING' && (field === 'clearSpan' || field === 'spacing')) {
+                    var curSpanMeter = parseFloat(item.clearSpan) || 0, curSpanMM = curSpanMeter * 1000, curSpacStr = item.spacing.toString();
+                    if (curSpanMeter > 0) {
+                        if (curSpacStr.includes('/')) { 
+                            var zoneParts = curSpacStr.split('/').map(Number); 
+                            if (zoneParts.length === 3) { 
+                                var z1S = zoneParts[0] || 100, z2S = zoneParts[1] || 150, z3S = zoneParts[2] || 100; 
+                                if(curSpacStr.includes('/150/')) { 
+                                    var zone1SpanMM = curSpanMM / 4;
+                                    var zone2SpanMM = curSpanMM / 2;
+                                    var zone3SpanMM = curSpanMM / 4;
+                                    bbsData[index].noBars = Math.ceil((zone1SpanMM / z1S) + (zone2SpanMM / z2S) + (zone3SpanMM / z3S) + 1);
+                                } else { 
+                                    var segmentSpanMM = curSpanMM / 3; 
+                                    bbsData[index].noBars = Math.ceil((segmentSpanMM / z1S) + (segmentSpanMM / z2S) + (segmentSpanMM / z3S) + 1); 
+                                }
+                            } 
+                        } else { 
+                            var singleS = parseFloat(curSpacStr) || 150; 
+                            if (singleS > 0) bbsData[index].noBars = Math.ceil((curSpanMM / singleS) + 1); 
+                        }
+                        bbsData[index].cutLength = curSpanMeter.toFixed(3); 
+                    }
+                }
+                if(bbsData[index].type !== 'HEADING') { 
+                    bbsData[index].noBars = Math.ceil(parseFloat(bbsData[index].noBars) || 0);
+                    var finalBars = parseFloat(bbsData[index].noBars) || 0, finalMembers = parseFloat(bbsData[index].noMembers) || 0, finalCutLen = parseFloat(bbsData[index].cutLength) || 0; 
+                    bbsData[index].totalLength = Math.round((finalMembers * finalBars * finalCutLen) * 100) / 100; 
+                }
+            } else bbsData[index][field] = text;
+            executeSilentAutoSave(); renderTable();
         }
 
+        /* MISSING FUNCTION 1 ADDED: Renders the active layout steel data grid tracker */
         function renderTable() {
-            var tbody = document.getElementById('bbsTableBody');
-            if(!tbody) return;
-            tbody.innerHTML = "";
-            var slNo = 1;
-            var diaTotals = {8:0, 10:0, 12:0, 16:0, 20:0, 25:0, 32:0, 40:0};
-            var containsData = false;
-            var finalHTML = "";
-            var dataCount = 0;
-
+            var tbody = document.getElementById('bbsTableBody'); if(!tbody) return; tbody.innerHTML = "";
+            var slNo = 1; var diaTotals = {8:0, 10:0, 12:0, 16:0, 20:0, 25:0, 32:0, 40:0}; var containsData = false; var finalHTML = ""; var dataCount = 0;
             for (var index = 0; index < bbsData.length; index++) {
                 var item = bbsData[index];
-                if(item.type === 'HEADING') {
-                    if (searchFilterText !== "" && item.text.toLowerCase().indexOf(searchFilterText) === -1) continue;
-                    finalHTML += '<tr class="heading-row"><td colspan="17">SECTION: ' + item.text + '</td>' +
-                        '<td><button class="del-btn" onclick="deleteEntry(' + index + ')">X</button></td></tr>';
-                } else {
-                    if (searchFilterText !== "" && item.desc.toLowerCase().indexOf(searchFilterText) === -1) continue;
-                    containsData = true;
-                    dataCount++;
-                    var diaCols = "";
-                    for (var dIdx = 0; dIdx < activeDias.length; dIdx++) {
-                        var d = activeDias[dIdx];
-                        if(item.dia === d) {
-                            diaCols += '<td>' + item.totalLength + '</td>';
-                            diaTotals[d] += item.totalLength;
-                        } else {
-                            diaCols += '<td style="color:#cbd5e1;">0</td>';
-                        }
-                    }
-                    var dispSpan = (item.clearSpan === "") ? "" : item.clearSpan + " mm";
-                    var dispSpac = (item.spacing === "") ? "" : item.spacing + " mm";
-                    finalHTML += '<tr><td>' + (slNo++) + '</td><td>' + item.desc + '</td><td>' + item.dia + 'mm</td><td>' + dispSpan + '</td><td>' + dispSpac + '</td><td>' + item.noMembers + '</td><td>' + item.noBars + '</td><td>' + item.cutLength + '</td><td style="font-weight:600;">' + item.totalLength + '</td>' + diaCols + '<td><button class="del-btn" onclick="deleteEntry(' + index + ')">Delete</button></td></tr>';
+                if(item.type === 'HEADING') { finalHTML += '<tr class="heading-row"><td colspan="20"><div class="heading-flex-layout"><div class="section-editable-text" contenteditable="true" oninput="updateInlineValue(' + index + ', \'text\', this.innerText)">' + item.text + '</div><button class="section-exit-btn" onclick="deleteWholeSectionBlock(' + index + ')">Exit / Delete Block</button></div></td></tr>'; } 
+                else { 
+                    containsData = true; dataCount++; var diaCols = ""; for (var dIdx = 0; dIdx < activeDias.length; dIdx++) { var d = activeDias[dIdx]; if(item.dia === d) { diaCols += '<td>' + item.totalLength + '</td>'; diaTotals[d] += item.totalLength; } else { diaCols += '<td style="color:#cbd5e1;">0</td>'; } }
+                    var roundedBars = Math.ceil(item.noBars);
+                    finalHTML += '<tr><td>' + (slNo++) + '</td><td class="editable-cell" contenteditable="true" oninput="updateInlineValue(' + index + ', \'desc\', this.innerText)">' + item.desc + '</td><td class="editable-cell" contenteditable="true" oninput="updateInlineValue(' + index + ', \'dia\', this.innerText)">' + item.dia + '</td><td class="editable-cell" contenteditable="true" oninput="updateInlineValue(' + index + ', \'clearSpan\', this.innerText)">' + item.clearSpan + '</td><td class="editable-cell" contenteditable="true" oninput="updateInlineValue(' + index + ', \'spacing\', this.innerText)">' + item.spacing + '</td><td class="editable-cell" contenteditable="true" oninput="updateInlineValue(' + index + ', \'noMembers\', this.innerText)">' + item.noMembers + '</td><td>' + roundedBars + '</td><td class="editable-cell" contenteditable="true" oninput="updateInlineValue(' + index + ', \'cutLength\', this.innerText)">' + item.cutLength + '</td><td style="font-weight:600;">' + item.totalLength + '</td>' + diaCols + '<td><button class="del-btn" onclick="deleteEntry(' + index + ')">Delete</button></td></tr>'; 
                 }
             }
-
-            // Update Insights Dashboard
-            document.getElementById('dashTotalEntries').innerText = dataCount + " Items";
-            
+            var dashCountNode = document.getElementById('dashTotalEntries'); if(dashCountNode) dashCountNode.innerText = dataCount + " Items";
             if(containsData) {
-                var weights = {8:0.395, 10:0.617, 12:0.890, 16:1.580, 20:2.470, 25:3.850, 32:6.310, 40:9.860};
-                var grandTotalKg = 0;
-                
-                var r1 = '<tr><td colspan="8" style="text-align:right; font-weight:bold; background:#f1f5f9; color:#1e293b;">Total Length (m)</td><td style="font-weight:bold;">-</td>';
-                for (var i = 0; i < activeDias.length; i++) { r1 += '<td style="font-weight:bold; background:#e2e8f0; color:#1e293b;">' + diaTotals[activeDias[i]].toFixed(2) + '</td>'; }
-                r1 += '<td></td></tr>';
-                
-                var r3 = '<tr><td colspan="8" style="text-align:right; font-weight:bold; background:#f1f5f9; color:#1e293b;">Weight (In Kg)</td><td style="font-weight:bold;">-</td>';
-                for (var i = 0; i < activeDias.length; i++) {
-                    var d = activeDias[i];
-                    var kg = diaTotals[d] * weights[d];
-                    grandTotalKg += kg;
-                    r3 += '<td style="font-weight:bold; color:#2563eb; background:#dbeafe;">' + kg.toFixed(2) + '</td>';
-                }
-                r3 += '<td></td></tr>';
-                
-                var r4 = '<tr style="background:#dcfce7; font-weight:bold; color:#166434;"><td colspan="8" style="text-align:right;">Net Summary:</td>' +
-                          '<td colspan="3">' + grandTotalKg.toFixed(2) + ' Kg</td>' +
-                          '<td colspan="6">' + (grandTotalKg/1000).toFixed(4) + ' M.T.</td></tr>';
-                
-                var steelRate = parseFloat(document.getElementById('steelRatePerKg').value) || 0;
-                var costRow = "";
-                if(steelRate > 0) {
-                    var totalCost = grandTotalKg * steelRate;
-                    costRow = '<tr style="background:#fee2e2; font-weight:bold; color:#991b1b;"><td colspan="8" style="text-align:right;">Estimated Steel Cost:</td>' + 
-                              '<td colspan="9" style="text-align:left; padding-left:15px;">₹ ' + totalCost.toLocaleString('en-IN', {maximumFractionDigits: 2}) + ' (at ₹' + steelRate + '/Kg)</td></tr>';
-                }
-                finalHTML += (r1 + r3 + r4 + costRow);
-                
-                document.getElementById('dashTotalWeight').innerText = grandTotalKg.toFixed(1) + " Kg";
-            } else {
-                document.getElementById('dashTotalWeight').innerText = "0.0 Kg";
-            }
+                var weights = {8:0.395, 10:0.617, 12:0.890, 16:1.580, 20:2.470, 25:3.850, 32:6.310, 40:9.860}, grandTotalKg = 0;
+                var r1 = '<tr><td colspan="8" style="text-align:right; font-weight:bold; background:#f1f5f9;">Total Length (m)</td><td>-</td>'; for (var i = 0; i < activeDias.length; i++) r1 += '<td>' + diaTotals[activeDias[i]].toFixed(2) + '</td>'; r1 += '<td></td></tr>';
+                var r3 = '<tr><td colspan="8" style="text-align:right; font-weight:bold; background:#f1f5f9;">Weight (In Kg)</td><td>-</td>'; for (var i = 0; i < activeDias.length; i++) { var d = activeDias[i], kg = diaTotals[d] * weights[d]; grandTotalKg += kg; r3 += '<td style="font-weight:bold; color:#2563eb;">' + kg.toFixed(2) + '</td>'; } r3 += '<td></td></tr>';
+                var grandTotalMT = grandTotalKg / 1000; var r4 = '<tr style="background:#dcfce7; font-weight:bold;"><td colspan="8" style="text-align:right;">Net Project Summary:</td><td colspan="4">' + grandTotalKg.toFixed(2) + ' Kg</td><td colspan="8">' + grandTotalMT.toFixed(4) + ' M.T. (Metric Tonnes)</td></tr>';
+                var steelRateNode = document.getElementById('steelRatePerKg'); var steelRate = steelRateNode ? (parseFloat(steelRateNode.value) || 0) : 0, costRow = "";
+                if(steelRate > 0) { var totalCost = grandTotalKg * steelRate; costRow = '<tr style="background:#fee2e2; font-weight:bold; color:#991b1b;"><td colspan="8" style="text-align:right;">Estimated Steel Cost (Amount):</td><td colspan="12" style="text-align:left; padding-left:15px; font-size:14px;">₹ ' + totalCost.toLocaleString('en-IN', {maximumFractionDigits: 2}) + '</td></tr>'; }
+                finalHTML += (r1 + r3 + r4 + costRow); var dashWeightNode = document.getElementById('dashTotalWeight'); if(dashWeightNode) dashWeightNode.innerText = grandTotalKg.toFixed(2) + " Kg";
+            } else { var dashWeightNode = document.getElementById('dashTotalWeight'); if(dashWeightNode) dashWeightNode.innerText = "0.00 Kg"; }
             tbody.innerHTML = finalHTML;
         }
 
         function exportToCleanFormatedExcel() {
-            var pEl = document.getElementById('projectName');
-            var dEl = document.getElementById('reportDate');
-            var projName = pEl ? pEl.value.toUpperCase() : "NEW PROJECT";
-            var rawDate = dEl ? dEl.value : "N/A";
-
-            var htmlData = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><meta charset="UTF-8"><style>table { border-collapse: collapse; } th, td { padding: 6px; text-align: center; font-family: Calibri, sans-serif; font-size: 11pt; } th { font-weight: bold; } .main-header-title { font-size: 16pt; font-weight: bold; text-align: center; background-color: #ffffff; } .sub-header-title { font-size: 11pt; font-weight: bold; text-align: center; background-color: #ffffff; }</style></head><body><table><thead>';
-            htmlData += '<tr><th colspan="14" class="main-header-title">' + projName + '</th><th colspan="3" style="text-align:right;font-weight:bold;font-size:11pt;background:#ffffff;">Date:- ' + rawDate + '</th></tr>';
-            htmlData += '<tr><th colspan="17" class="sub-header-title">STEEL MEASUREMENT BOOK REPORT</th></tr>';
-            htmlData += '<tr><th rowspan="2" style="border: 1px solid #7f7f7f; background-color: #cbd5e1;">Sl No</th><th rowspan="2" style="border: 1px solid #7f7f7f; background-color: #cbd5e1;">Description</th><th rowspan="2" style="border: 1px solid #7f7f7f; background-color: #cbd5e1;">Dia</th><th rowspan="2" style="border: 1px solid #7f7f7f; background-color: #cbd5e1;">Clear Span</th><th rowspan="2" style="border: 1px solid #7f7f7f; background-color: #cbd5e1;">Spacing</th><th colspan="2" style="border: 1px solid #7f7f7f; background-color: #cbd5e1;">Nos</th><th rowspan="2" style="border: 1px solid #7f7f7f; background-color: #cbd5e1;">Cut Length</th><th rowspan="2" style="border: 1px solid #7f7f7f; background-color: #cbd5e1;">Total Length</th><th colspan="8" style="border: 1px solid #7f7f7f; background-color: #cbd5e1;">Diameter Wise Breakdowns (Meters Total Length)</th></tr>';
-            htmlData += '<tr><th style="border: 1px solid #7f7f7f; background-color: #cbd5e1;">Members</th><th style="border: 1px solid #7f7f7f; background-color: #cbd5e1;">Bars</th><th style="border: 1px solid #7f7f7f; background-color: #cbd5e1;">8mm</th><th style="border: 1px solid #7f7f7f; background-color: #cbd5e1;">10mm</th><th style="border: 1px solid #7f7f7f; background-color: #cbd5e1;">12mm</th><th style="border: 1px solid #7f7f7f; background-color: #cbd5e1;">16mm</th><th style="border: 1px solid #7f7f7f; background-color: #cbd5e1;">20mm</th><th style="border: 1px solid #7f7f7f; background-color: #cbd5e1;">25mm</th><th style="border: 1px solid #7f7f7f; background-color: #cbd5e1;">32mm</th><th style="border: 1px solid #7f7f7f; background-color: #cbd5e1;">40mm</th></tr></thead><tbody>';
-
-            var slNo = 1;
-            var diaTotals = {8:0, 10:0, 12:0, 16:0, 20:0, 25:0, 32:0, 40:0};
-            var containsData = false;
-
+            var projName = document.getElementById('projectName') ? document.getElementById('projectName').value.toUpperCase() : "NEW_PROJECT";
+            var htmlData = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><meta charset="UTF-8"></head><body><table border="1"><thead><tr><th colspan="17" style="font-size:14pt;font-weight:bold;">' + projName + ' - STEEL REPORT</th></tr><tr><th>Sl No</th><th>Description</th><th>Dia</th><th>Clear Span (m)</th><th>Spacing (mm)</th><th>Members</th><th>Bars</th><th>Cut Length</th><th>Total Length</th><th>8mm</th><th>10mm</th><th>12mm</th><th>16mm</th><th>20mm</th><th>25mm</th><th>32mm</th><th>40mm</th></tr></thead><tbody>';
+            var weights = {8:0.395, 10:0.617, 12:0.890, 16:1.580, 20:2.470, 25:3.850, 32:6.310, 40:9.860}, diaTotals = {8:0, 10:0, 12:0, 16:0, 20:0, 25:0, 32:0, 40:0}, grandTotalKg = 0;
             for (var i = 0; i < bbsData.length; i++) {
-                var item = bbsData[i];
-                if(item.type === 'HEADING') {
-                    if (searchFilterText !== "" && item.text.toLowerCase().indexOf(searchFilterText) === -1) continue;
-                    htmlData += '<tr><td colspan="17" style="text-align: left; font-weight: bold; background-color: #cbd5e1; padding: 6px; border: 1px solid #7f7f7f;">SECTION: ' + item.text + '</td></tr>';
-                } else if(item.type === 'DATA') {
-                    if (searchFilterText !== "" && item.desc.toLowerCase().indexOf(searchFilterText) === -1) continue;
-                    containsData = true;
-                    
-                    var outSpan = (item.clearSpan === "") ? "" : item.clearSpan + " mm";
-                    var outSpac = (item.spacing === "") ? "" : item.spacing + " mm";
-                    
-                    htmlData += '<tr><td style="border: 1px solid #7f7f7f;">' + slNo++ + '</td><td style="text-align: left; padding-left: 5px; border: 1px solid #7f7f7f;">' + item.desc + '</td><td style="border: 1px solid #7f7f7f;">' + item.dia + 'mm</td><td style="border: 1px solid #7f7f7f;">' + outSpan + '</td><td style="border: 1px solid #7f7f7f;">' + outSpac + '</td><td style="border: 1px solid #7f7f7f;">' + item.noMembers + '</td><td style="border: 1px solid #7f7f7f;">' + item.noBars + '</td><td style="border: 1px solid #7f7f7f;">' + item.cutLength + '</td><td style="font-weight: bold; background-color: #f8fafc; border: 1px solid #7f7f7f;">' + item.totalLength + '</td>';
-                    
-                    for (var dIdx = 0; dIdx < activeDias.length; dIdx++) {
-                        var d = activeDias[dIdx];
-                        if(item.dia === d) {
-                            htmlData += '<td style="border: 1px solid #7f7f7f;">' + item.totalLength + '</td>';
-                            diaTotals[d] += item.totalLength;
-                        } else {
-                            htmlData += '<td style="border: 1px solid #7f7f7f; color:#cbd5e1;">0</td>';
-                        }
-                    }
-                    htmlData += '</tr>';
-                }
+                var item = bbsData[i]; if(item.type === 'HEADING') { htmlData += '<tr><td colspan="17" style="background:#cbd5e1;font-weight:bold;">' + item.text + '</td></tr>'; } 
+                else { var cols = ""; for(var d=0; d<activeDias.length; d++) { var cd = activeDias[d]; if(item.dia === cd) { cols += '<td>' + item.totalLength + '</td>'; diaTotals[cd] += item.totalLength; grandTotalKg += (item.totalLength * weights[cd]); } else cols += '<td>0</td>'; } htmlData += '<tr><td>' + (i+1) + '</td><td>' + item.desc + '</td><td>' + item.dia + '</td><td>' + item.clearSpan + '</td><td>' + item.spacing + '</td><td>' + item.noMembers + '</td><td>' + Math.ceil(item.noBars) + '</td><td>' + item.cutLength + '</td><td>' + item.totalLength + '</td>' + cols + '</tr>'; }
             }
-
-            if(containsData) {
-                var weights = {8:0.395, 10:0.617, 12:0.890, 16:1.580, 20:2.470, 25:3.850, 32:6.310, 40:9.860};
-                var grandTotalKg = 0;
-                
-                htmlData += '<tr><td colspan="8" style="text-align: right; font-weight: bold; background-color: #f1f5f9; border: 1px solid #7f7f7f;">Total Length (m)</td><td style="font-weight: bold; background-color: #f1f5f9; border: 1px solid #7f7f7f;">-</td>';
-                for (var i = 0; i < activeDias.length; i++) { htmlData += '<td style="font-weight: bold; background-color: #e2e8f0; border: 1px solid #7f7f7f;">' + diaTotals[activeDias[i]].toFixed(2) + '</td>'; }
-                htmlData += '</tr>';
-                
-                htmlData += '<tr><td colspan="8" style="text-align: right; font-weight: bold; background-color: #f1f5f9; border: 1px solid #7f7f7f;">Weight (In Kg)</td><td style="font-weight: bold; background-color: #f1f5f9; border: 1px solid #7f7f7f;">-</td>';
-                for (var i = 0; i < activeDias.length; i++) {
-                    var d = activeDias[i];
-                    var kg = diaTotals[d] * weights[d];
-                    grandTotalKg += kg;
-                    htmlData += '<td style="font-weight: bold; color: #1e40af; background-color: #dbeafe; border: 1px solid #7f7f7f;">' + kg.toFixed(2) + '</td>';
-                }
-                htmlData += '</tr>';
-                
-                htmlData += '<tr><td colspan="8" style="text-align: center; font-weight: bold; background-color: #dcfce7; color: #166434; border: 1px solid #7f7f7f;">Net Project Summary:</td><td colspan="3" style="font-weight: bold; background-color: #dcfce7; color: #166434; border: 1px solid #7f7f7f;">' + grandTotalKg.toFixed(2) + ' Kg</td><td colspan="6" style="font-weight: bold; background-color: #dcfce7; color: #166434; border: 1px solid #7f7f7f;">' + (grandTotalKg/1000).toFixed(4) + ' M.T.</td></tr>';
-                
-                var steelRate = parseFloat(document.getElementById('steelRatePerKg').value) || 0;
-                if(steelRate > 0) {
-                    var totalCost = grandTotalKg * steelRate;
-                    htmlData += '<tr><td colspan="8" style="text-align: right; font-weight: bold; background-color: #fee2e2; color: #991b1b; border: 1px solid #7f7f7f;">Estimated Steel Cost:</td><td colspan="9" style="text-align: left; font-weight: bold; background-color: #fee2e2; color: #991b1b; padding-left:15px; border: 1px solid #7f7f7f;">₹ ' + totalCost.toLocaleString('en-IN', {maximumFractionDigits: 2}) + ' (at ₹' + steelRate + '/Kg)</td></tr>';
-                }
-            }
-            htmlData += '</tbody></table></body></html>';
-
-            var cleanFileName = projName.replace(/\s+/g, '_') + "_BBS_SMB.xls";
-            var base64Data = btoa(unescape(encodeURIComponent(htmlData)));
-            var downloadLink = document.createElement("a");
-            downloadLink.href = "data:application/vnd.ms-excel;base64," + base64Data;
-            downloadLink.download = cleanFileName;
-            document.body.appendChild(downloadLink);
-            downloadLink.click();
-            document.body.removeChild(downloadLink);
+            htmlData += '<tr><td colspan="9" style="font-weight:bold; text-align:right;">Total Length (m)</td>'; for(var d=0; d<activeDias.length; d++) htmlData += '<td>' + diaTotals[activeDias[d]].toFixed(2) + '</td>'; htmlData += '</tr><tr><td colspan="9" style="font-weight:bold; text-align:right;">Weight (Kg)</td>'; for(var d=0; d<activeDias.length; d++) htmlData += '<td>' + (diaTotals[d] * weights[activeDias[d]]).toFixed(2) + '</td>'; htmlData += '</tr><tr style="background:#dcfce7; font-weight:bold;"><td colspan="5">Net Project Summary:</td><td colspan="4">' + grandTotalKg.toFixed(2) + ' Kg</td><td colspan="8">' + (grandTotalKg/1000).toFixed(4) + ' M.T.</td></tr></tbody></table></body></html>';
+            var base64 = btoa(unescape(encodeURIComponent(htmlData))), a = document.createElement("a"); a.href = "data:application/vnd.ms-excel;base64," + base64; a.download = projName.replace(/\s+/g, '_') + "_Report.xls"; document.body.appendChild(a); a.click(); document.body.removeChild(a);
         }
+
+        function toggleConcreteInputMode() { var mode = document.getElementById('concInputMode').value; document.getElementById('concDirectWrapper').style.display = (mode === 'DIRECT' ? 'block' : 'none'); document.getElementById('concDimWrapper').style.display = (mode === 'DIMENSION' ? 'block' : 'none'); }
+        function toggleConcreteMixMode() { var grade = document.getElementById('concMixGrade').value; document.getElementById('concCustomRatioWrapper').style.display = (grade === 'CUSTOM' ? 'block' : 'none'); }
+        function toggleBrickInputMode() { var mode = document.getElementById('brickInputMode').value; document.getElementById('brickDirectWrapper').style.display = (mode === 'DIRECT' ? 'block' : 'none'); document.getElementById('brickDimWrapper').style.display = (mode === 'DIMENSION' ? 'block' : 'none'); }
+        function toggleBlockInputMode() { var mode = document.getElementById('blockInputMode').value; document.getElementById('blockDirectWrapper').style.display = (mode === 'DIRECT' ? 'block' : 'none'); document.getElementById('blockDimWrapper').style.display = (mode === 'DIMENSION' ? 'block' : 'none'); }
+        function toggleBlockSizeMode() { var size = document.getElementById('blockSizeSelect').value; document.getElementById('blockCustomSizeWrapper').style.display = (size === 'CUSTOM' ? 'block' : 'none'); }
+        function toggleBlockMixMode() { var mix = document.getElementById('blockMortarRatio').value; document.getElementById('blockCustomMixWrapper').style.display = (mix === 'CUSTOM' ? 'block' : 'none'); }
+        function togglePlasterInputMode() { var mode = document.getElementById('plasterInputMode').value; document.getElementById('plasterDirectWrapper').style.display = (mode === 'DIRECT' ? 'block' : 'none'); document.getElementById('plasterDimWrapper').style.display = (mode === 'DIMENSION' ? 'block' : 'none'); }
+        function toggleTileInputMode() { var mode = document.getElementById('tileInputMode').value; document.getElementById('tileDirectWrapper').style.display = (mode === 'DIRECT' ? 'block' : 'none'); document.getElementById('tileDimWrapper').style.display = (mode === 'DIMENSION' ? 'block' : 'none'); }
 
         function calculateSteelWeight() {
             var dia = parseFloat(document.getElementById('calcSteelDia').value) || 0;
-            if(dia <= 0) return alert("Please enter valid diameter.");
-            var w = (dia * dia) / 162;
-            document.getElementById('steelResultBox').innerHTML = "Unit Weight: " + w.toFixed(3) + " Kg/m<br>Weight of 1 Bar (12m): " + (w * 12).toFixed(2) + " Kg";
+            if(dia <= 0) return alert("Please enter a valid diameter.");
+            var unitWeight = (dia * dia) / 162.2;
+            document.getElementById('steelResultBox').innerHTML = "Unit Weight: <b>" + unitWeight.toFixed(3) + " Kg/m</b><br>Standard Single Bar (12m): <b>" + (unitWeight * 12).toFixed(2) + " Kg</b>";
             document.getElementById('steelResultBox').style.display = "block";
         }
 
-        function calculateConcrete() {
-            var mode = document.getElementById('concreteInputMode').value;
-            var vol = 0;
-            if (mode === "DIM") {
-                var l = parseFloat(document.getElementById('ccL').value) || 0;
-                var w = parseFloat(document.getElementById('ccW').value) || 0;
-                var h = parseFloat(document.getElementById('ccH').value) || 0;
-                var unit = document.getElementById('ccUnit').value;
-                vol = l * w * h;
-                if(unit === "FT") vol = vol / 35.3147; 
-            } else {
-                vol = parseFloat(document.getElementById('calcVol').value) || 0;
-            }
-            if(vol <= 0) return alert("Please enter valid records.");
-            
-            var grade = document.getElementById('calcGrade').value;
-            var cR = 1, sR = 1.5, aR = 3;
-            if(grade === "M15") { cR=1; sR=2; aR=4; }
-            else if(grade === "M25") { cR=1; sR=1; aR=2; }
-            else if(grade === "CUSTOM") {
-                cR = parseFloat(document.getElementById('custCement').value) || 1;
-                sR = parseFloat(document.getElementById('custSand').value) || 1.5;
-                aR = parseFloat(document.getElementById('custAggr').value) || 3;
-            }
-            var dryVol = vol * 1.54;
-            var sum = cR + sR + aR;
-            var cVol = (cR / sum) * dryVol;
-            document.getElementById('concreteResultBox').innerHTML = "Cement: " + Math.ceil(cVol / 0.0347) + " Bags<br>Sand: " + ((sR/sum)*dryVol*35.315).toFixed(2) + " cft<br>Aggregate: " + ((aR/sum)*dryVol*35.315).toFixed(2) + " cft";
-            document.getElementById('concreteResultBox').style.display = "block";
+        function calculateConcrete() { 
+            var mode = document.getElementById('concInputMode').value; var vol = 0;
+            if (mode === 'DIRECT') vol = parseFloat(document.getElementById('calcVol').value) || 0;
+            else { var l = parseFloat(document.getElementById('concLen').value) || 0, w = parseFloat(document.getElementById('concWidth').value) || 0, t = parseFloat(document.getElementById('concThick').value) || 0, unit = document.getElementById('concDimUnit').value; vol = l * w * t; if (unit === 'FEET') vol = vol / 35.3147; }
+            if(vol <= 0) return alert("Please enter valid volume records.");
+            var grade = document.getElementById('concMixGrade').value; var cR = 1, sR = 1.5, aR = 3;
+            if (grade === 'M15') { cR = 1; sR = 2; aR = 4; } else if (grade === 'M20') { cR = 1; sR = 1.5; aR = 3; } else if (grade === 'M25') { cR = 1; sR = 1; aR = 2; } else { cR = parseFloat(document.getElementById('concCustC').value) || 1; sR = parseFloat(document.getElementById('concCustS').value) || 1.5; aR = parseFloat(document.getElementById('concCustA').value) || 3; }
+            var dryVol = vol * 1.54, totalParts = cR + sR + aR, cementVol = (cR / totalParts) * dryVol, cementBags = cementVol / 0.0347, sandCft = ((sR / totalParts) * dryVol) * 35.3147, aggCft = ((aR / totalParts) * dryVol) * 35.3147;
+            document.getElementById('concreteResultBox').innerHTML = "Total Volume: <b>" + vol.toFixed(4) + " m³</b><br>Cement: <b>" + cementBags.toFixed(2) + " Bags</b><br>Sand: <b>" + sandCft.toFixed(2) + " cft</b><br>Aggregate: <b>" + aggCft.toFixed(2) + " cft</b>"; document.getElementById('concreteResultBox').style.display = "block"; 
         }
 
-        function calculateBricks() {
-            var mode = document.getElementById('brickInputMode').value;
-            var vol = 0;
-            if (mode === "DIM") {
-                var l = parseFloat(document.getElementById('bkL').value) || 0;
-                var w = parseFloat(document.getElementById('bkW').value) || 0;
-                var h = parseFloat(document.getElementById('bkH').value) || 0;
-                var unit = document.getElementById('bkUnit').value;
-                vol = l * w * h;
-                if(unit === "FT") vol = vol / 35.3147;
-            } else {
-                var vVal = parseFloat(document.getElementById('brickVol').value) || 0;
-                vol = (document.getElementById('brickUnit').value === "CFT") ? (vVal/35.3147) : vVal;
-            }
-            if(vol <= 0) return alert("Please enter valid records.");
-            
-            var totalBricks = Math.ceil(vol * 500); 
-            var dryMortar = (vol * 0.30) * 1.33;
-            var sumRatio = (document.getElementById('brickRatio').value === "1:4") ? 5 : 7;
-            var cementBags = Math.ceil(((1 / sumRatio) * dryMortar) / 0.0347);
-            var sandCft = ((sumRatio - 1) / sumRatio) * dryMortar * 35.3147;
-
-            document.getElementById('brickResultBox').innerHTML = "Total Bricks: " + totalBricks + " Nos<br>Cement: " + cementBags + " Bags<br>Sand: " + sandCft.toFixed(2) + " cft";
-            document.getElementById('brickResultBox').style.display = "block";
+        function calculateBrickWork() {
+            var mode = document.getElementById('brickInputMode').value; var vol = 0;
+            if (mode === 'DIRECT') { var val = parseFloat(document.getElementById('brickVolVal').value) || 0, unit = document.getElementById('brickVolUnit').value; vol = unit === 'CFT' ? val / 35.3147 : val; }
+            else { var l = parseFloat(document.getElementById('brickLen').value) || 0, w = parseFloat(document.getElementById('brickThick').value) || 0, h = parseFloat(document.getElementById('brickHeight').value) || 0, unit = document.getElementById('brickDimUnit').value; vol = l * w * h; if (unit === 'FEET') vol = vol / 35.3147; }
+            if(vol <= 0) return alert("Please enter valid dimensional layout entries.");
+            var ratio = document.getElementById('brickMortarRatio').value, totalParts = ratio === '1:4' ? 5 : 7, totalBricks = vol * 500, mortarVol = vol * 0.30, dryMortar = mortarVol * 1.33, cementBags = (dryMortar * (1 / totalParts)) / 0.0347, sandCft = (dryMortar * ((totalParts - 1) / totalParts)) * 35.3147;
+            document.getElementById('brickResultBox').innerHTML = "Total Bricks: <b>" + totalBricks.toFixed(2) + " Nos</b><br>Cement: <b>" + cementBags.toFixed(2) + " Bags</b><br>Sand: <b>" + sandCft.toFixed(2) + " cft</b>"; document.getElementById('brickResultBox').style.display = "block";
         }
 
-        function calculateBlocks() {
-            var mode = document.getElementById('blockInputMode').value;
-            var vol = 0;
-            if (mode === "DIM") {
-                var l = parseFloat(document.getElementById('blL').value) || 0;
-                var w = parseFloat(document.getElementById('blW').value) || 0;
-                var h = parseFloat(document.getElementById('blH').value) || 0;
-                var unit = document.getElementById('blUnit').value;
-                vol = l * w * h;
-                if(unit === "CFT") vol = vol / 35.3147;
-            } else {
-                vol = parseFloat(document.getElementById('blockVol').value) || 0;
+        function calculateBlockWork() {
+            var mode = document.getElementById('blockInputMode').value; 
+            var rawVol = 0;
+            if (mode === 'DIRECT') {
+                rawVol = parseFloat(document.getElementById('blockVolVal').value) || 0;
+            } else { 
+                var l = parseFloat(document.getElementById('blockLen').value) || 0;
+                var w = parseFloat(document.getElementById('blockThick').value) || 0;
+                var h = parseFloat(document.getElementById('blockHeight').value) || 0;
+                var unit = document.getElementById('blockDimUnit').value; 
+                rawVol = l * w * h; 
+                if (unit === 'FEET') rawVol = rawVol / 35.3147; 
             }
-            if(vol <= 0) return alert("Please enter valid volume.");
             
-            var size = document.getElementById('blockSize').value;
-            var bL = 0.4, bW = 0.2, bH = 0.2;
-            if(size === "inch4") bW = 0.1;
-            else if(size === "CUSTOM") {
-                bL = (parseFloat(document.getElementById('custBlockL').value) || 400) / 1000;
-                bW = (parseFloat(document.getElementById('custBlockW').value) || 200) / 1000;
-                bH = (parseFloat(document.getElementById('custBlockH').value) || 200) / 1000;
+            var deductionVol = parseFloat(document.getElementById('blockDeductionVol').value) || 0;
+            var netVol = rawVol - deductionVol;
+            if(netVol <= 0) return alert("Please type a valid target net total volume.");
+            
+            var sizeOpt = document.getElementById('blockSizeSelect').value;
+            var bl = 600, bw = 200, bh = 200; 
+            
+            if (sizeOpt === '400x100x200') { 
+                bl = 400; bw = 100; bh = 200; 
+            } else if (sizeOpt === 'CUSTOM') { 
+                bl = parseFloat(document.getElementById('blockCustL').value) || 600; 
+                bw = parseFloat(document.getElementById('blockCustW').value) || 200; 
+                bh = parseFloat(document.getElementById('blockCustH').value) || 200; 
             }
-            var totalBlocks = Math.ceil(vol / (bL * bW * bH));
-            var dryMortar = (vol * 0.12) * 1.33;
-            var ratio = document.getElementById('blockRatio').value;
+            
+            var blockVolWithMortar = ((bl + 10) / 1000) * ((bw + 10) / 1000) * ((bh + 10) / 1000);
+            var totalBlocks = netVol / blockVolWithMortar;
+            
+            var singleRealBlockVol = (bl / 1000) * (bw / 1000) * (bh / 1000);
+            var netBlocksSolidVol = totalBlocks * singleRealBlockVol;
+            var wetMortarVol = netVol - netBlocksSolidVol;
+            var dryMortar = wetMortarVol * 1.33; 
+            
+            var mix = document.getElementById('blockMortarRatio').value;
             var cPart = 1, sPart = 6;
-            if(ratio === "1:4") { cPart = 1; sPart = 4; }
-            else if(ratio === "CUSTOM") {
-                cPart = parseFloat(document.getElementById('custBlockCement').value) || 1;
-                sPart = parseFloat(document.getElementById('custBlockSand').value) || 6;
+            if (mix === 'CUSTOM') { 
+                cPart = parseFloat(document.getElementById('blockCustC').value) || 1; 
+                sPart = parseFloat(document.getElementById('blockCustS').value) || 6; 
             }
-            var cementBags = Math.ceil(((cPart / (cPart + sPart)) * dryMortar) / 0.0347);
-            var sandCft = (sPart / (cPart + sPart)) * dryMortar * 35.3147;
-
-            document.getElementById('blockResultBox').innerHTML = "Total Blocks: " + totalBlocks + " Nos<br>Cement: " + cementBags + " Bags<br>Sand: " + sandCft.toFixed(2) + " cft";
+            var totalParts = cPart + sPart;
+            var cementBags = (dryMortar * (cPart / totalParts)) / 0.0347;
+            var sandCft = (dryMortar * (sPart / totalParts)) * 35.3147;
+            
+            document.getElementById('blockResultBox').innerHTML = "Net Volume calculated: <b>" + netVol.toFixed(3) + " m³</b><br>Total AAC Blocks: <b>" + Math.ceil(totalBlocks) + " Nos</b><br>Cement: <b>" + cementBags.toFixed(2) + " Bags</b><br>Sand: <b>" + sandCft.toFixed(2) + " cft</b>"; 
             document.getElementById('blockResultBox').style.display = "block";
         }
 
-        function calculatePlaster() {
-            var mode = document.getElementById('plasterInputMode').value;
-            var areaM2 = 0;
-            if(mode === "DIM") {
-                var l = parseFloat(document.getElementById('plL').value) || 0;
-                var h = parseFloat(document.getElementById('plH').value) || 0;
-                var unit = document.getElementById('plUnit').value;
-                var area = l * h;
-                areaM2 = (unit === "SQFT") ? (area / 10.7639) : area;
-            } else {
-                var aVal = parseFloat(document.getElementById('plasterArea').value) || 0;
-                areaM2 = (document.getElementById('plasterUnit').value === "SQFT") ? (aVal/10.7639) : aVal;
+        function calculatePlasterWork() {
+            var mode = document.getElementById('plasterInputMode').value; var area = 0;
+            if (mode === 'DIRECT') { var val = parseFloat(document.getElementById('plasterAreaVal').value) || 0, unit = document.getElementById('plasterAreaUnit').value; area = unit === 'SQFT' ? val / 10.7639 : val; }
+            else { var l = parseFloat(document.getElementById('plasterLen').value) || 0, h = parseFloat(document.getElementById('plasterHeight').value) || 0, unit = document.getElementById('plasterDimUnit').value; area = l * h; if (unit === 'FEET') area = area / 10.7639; }
+            if(area <= 0) return alert("Please enter valid area coordinates.");
+            var thick = parseFloat(document.getElementById('plasterThick').value) || 12, mix = document.getElementById('plasterMix').value, totalParts = mix === '1:4' ? 5 : 7, wetVol = area * (thick / 1000), dryVol = wetVol * 1.35, cementBags = (dryVol * (1 / totalParts)) / 0.0347, sandCft = (dryVol * ((totalParts - 1) / totalParts)) * 35.3147;
+            document.getElementById('plasterResultBox').innerHTML = "Cement: <b>" + cementBags.toFixed(2) + " Bags</b><br>Sand: <b>" + sandCft.toFixed(2) + " cft</b>"; document.getElementById('plasterResultBox').style.display = "block";
+        }
+
+        function calculateTileWork() {
+            var mode = document.getElementById('tileInputMode').value; var areaSqM = 0, areaSqFt = 0;
+            if (mode === 'DIRECT') { var val = parseFloat(document.getElementById('tileAreaVal').value) || 0, unit = document.getElementById('tileAreaUnit').value; if (unit === 'SQFT') { areaSqFt = val; areaSqM = val / 10.7639; } else { areaSqM = val; areaSqFt = val * 10.7639; } }
+            else { var l = parseFloat(document.getElementById('tileFloorLen').value) || 0, w = parseFloat(document.getElementById('tileFloorWidth').value) || 0; areaSqFt = l * w; areaSqM = areaSqFt / 10.7639; }
+            if(areaSqFt <= 0) return alert("Please verify flooring variables.");
+            var tl = parseFloat(document.getElementById('tileLen').value) || 1, tw = parseFloat(document.getElementById('tileWidth').value) || 1, tUnit = document.getElementById('tileSizeUnit').value, singleTileAreaSqFt = tl * tw;
+            if (tUnit === 'INCH') singleTileAreaSqFt = (tl * tw) / 144; if (tUnit === 'MM') singleTileAreaSqFt = (tl * tw) / 92903.04;
+            var totalTiles = areaSqFt / singleTileAreaSqFt, cementBags = areaSqM * 0.24;
+            document.getElementById('tileResultBox').innerHTML = "Total Tiles Required: <b>" + totalTiles.toFixed(2) + " Nos</b><br>Mortar Cement Paste: <b>" + cementBags.toFixed(2) + " Bags</b>"; document.getElementById('tileResultBox').style.display = "block";
+        }
+
+        function calculateShuttering() { 
+            var areaVal = parseFloat(document.getElementById('shutteringAreaVal').value) || 0; 
+            if(areaVal <= 0) return alert("Please type a valid target area."); 
+            var unitElementSelect = document.getElementById('shutteringUnitSelect').value; 
+            var areaSqM = unitElementSelect === 'SQFT' ? areaVal / 10.7639 : areaVal; 
+            var plySheets = areaSqM / 2.97; 
+            var releaseOil = areaSqM * 0.2; 
+            document.getElementById('shutteringResultBox').innerHTML = "Ply Sheets (8'x4'): <b>" + plySheets.toFixed(2) + " Nos</b><br>Release Oil: <b>" + releaseOil.toFixed(2) + " Liters</b>"; 
+            document.getElementById('shutteringResultBox').style.display = "block"; 
+        }
+
+        function verifyQualityParameter() { 
+            var slump = parseFloat(document.getElementById('qcSlump').value) || 0; 
+            var cube = parseFloat(document.getElementById('qcCube').value) || 0; 
+            var age = document.getElementById('qcAgeSelect').value;
+            var targetGrade = document.getElementById('qcConcreteGradeSelect').value;
+            
+            var targetStrength = 20; 
+            if(targetGrade === "M15") targetStrength = 15;
+            else if(targetGrade === "M25") targetStrength = 25;
+            else if(targetGrade === "M30") targetStrength = 30;
+
+            var requiredRatio = 1.0; 
+            var periodText = "28 Days";
+            if(age === "7DAYS") { requiredRatio = 0.65; periodText = "7 Days"; }
+            else if(age === "14DAYS") { requiredRatio = 0.90; periodText = "14 Days"; }
+
+            var passMinStrength = targetStrength * requiredRatio;
+            var statusStr = ""; 
+            
+            if (slump >= 75 && slump <= 125) {
+                statusStr += "✔️ Slump Workability: <b>PASSED (Result: " + slump + " mm)</b><br>"; 
+            } else { 
+                statusStr += "❌ Slump Workability: <b>FAILED (Standard: 75-125 mm)</b><br>"; 
+            } 
+            
+            if (cube >= passMinStrength) { 
+                statusStr += "✔️ " + periodText + " Cube Test (" + targetGrade + "): <b>PASSED (Result: " + cube.toFixed(1) + " N/mm² / Min Target: " + passMinStrength.toFixed(1) + ")</b>"; 
+            } else { 
+                statusStr += "❌ " + periodText + " Cube Test (" + targetGrade + "): <b>FAILED (Result: " + cube.toFixed(1) + " N/mm² / Min Target: " + passMinStrength.toFixed(1) + ")</b>"; 
+            } 
+            document.getElementById('qualityResultBox').innerHTML = statusStr; 
+            document.getElementById('qualityResultBox').style.display = "block"; 
+        }
+
+        // ==========================================
+        // MASTER MEASUREMENT TAB CONTROLS & AUTO RESET
+        // ==========================================
+        function switchMasterMeasTab(tabId) {
+            var contents = document.getElementsByClassName('modal-tab-content');
+            var buttons = document.getElementsByClassName('modal-tab-btn');
+            for (var i = 0; i < contents.length; i++) {
+                contents[i].classList.remove('active');
+                buttons[i].classList.remove('active');
             }
-            if(areaM2 <= 0) return alert("Please check input dimensions.");
-            
-            var thick = parseFloat(document.getElementById('plasterThick').value) || 12;
-            var dryVol = (areaM2 * (thick / 1000)) * 1.33;
-            var sum = (document.getElementById('plasterRatio').value === "1:4") ? 5 : 7;
-            
-            document.getElementById('plasterResultBox').innerHTML = "Cement: " + Math.ceil((dryVol/sum)/0.0347) + " Bags<br>Sand: " + (((sum-1)/sum)*dryVol*35.315).toFixed(2) + " cft";
-            document.getElementById('plasterResultBox').style.display = "block";
-        }
-
-        function calculateTiles() {
-            var mode = document.getElementById('tileInputMode').value;
-            var areaSqft = 0;
-            if(mode === "DIM") {
-                var l = parseFloat(document.getElementById('tlL').value) || 0;
-                var w = parseFloat(document.getElementById('tlW').value) || 0;
-                areaSqft = l * w; 
-            } else {
-                var aVal = parseFloat(document.getElementById('tileArea').value) || 0;
-                var unit = document.getElementById('tileUnit').value;
-                areaSqft = (unit === "M2") ? (aVal * 10.7639) : aVal;
+            document.getElementById(tabId).classList.add('active');
+            document.getElementById('btn-' + tabId).classList.add('active');
+            if(tabId === 'mmTab1') { 
+                document.getElementById('mmOperationsModeSelect').value = "NEW";
+                toggleMmHistoryPanel("NEW");
+                loadMasterMeasHistoryList(); 
             }
-            if(areaSqft <= 0) return alert("Please input valid area records.");
-            
-            var tileL = parseFloat(document.getElementById('tileDimL').value) || 1;
-            var tileW = parseFloat(document.getElementById('tileDimW').value) || 1;
-            var tUnit = document.getElementById('individualTileUnit').value;
-            
-            var singleTileAreaSqft = tileL * tileW;
-            if(tUnit === "MM") { singleTileAreaSqft = (tileL / 304.8) * (tileW / 304.8); }
-            else if(tUnit === "INCH") { singleTileAreaSqft = (tileL / 12) * (tileW / 12); }
-            
-            var areaM2 = areaSqft / 10.7639;
-            var totalTilePieces = Math.ceil((areaSqft / singleTileAreaSqft) * 1.10); 
-            var bags = Math.ceil(((1/6)*(areaM2*0.025*1.33))/0.0347) + Math.ceil(areaM2 * 0.08);
-
-            document.getElementById('tileResultBox').innerHTML = "Total Tiles Required: " + totalTilePieces + " Nos<br>Mortar Cement Paste: " + bags + " Bags";
-            document.getElementById('tileResultBox').style.display = "block";
         }
 
-        function calculateShuttering() {
-            var area = parseFloat(document.getElementById('shutterArea').value) || 0;
-            var unit = document.getElementById('shutterUnit').value;
-            if(area <= 0) return alert("Please input valid area.");
-            var areaM2 = (unit === "SQFT") ? (area / 10.7639) : area;
-            document.getElementById('shutteringResultBox').innerHTML = "Ply Sheets (8'x4'): " + Math.ceil(areaM2/2.97) + " Nos<br>Release Oil: " + (areaM2*0.2).toFixed(1) + " Liters";
-            document.getElementById('shutteringResultBox').style.display = "block";
-        }
-
-        function saveStateToHistory() {
-            var pEl = document.getElementById('projectName');
-            var dEl = document.getElementById('reportDate');
-            var pName = pEl ? pEl.value.trim().toUpperCase() : "NEW PROJECT";
-            var dateVal = dEl ? dEl.value : "";
-            var historyData = localStorage.getItem('bbs_app_history');
-            var historyArr = [];
+        function executeMasterMeasAutoSave() {
+            var projName = document.getElementById('mmProjectName').value.trim().toUpperCase() || "UNNAMED SITE REFERENCE";
+            var sheetTitle = document.getElementById('mmSheetTitle').value.trim() || "MEASUREMENT SHEET";
             
-            if(historyData) {
-                try { historyArr = JSON.parse(atob(historyData)); } catch(e) { historyArr = []; }
+            var saveState = {
+                id: btoa(projName + "_" + sheetTitle),
+                title: sheetTitle,
+                projectName: projName,
+                periodDate: document.getElementById('mmPeriodDate').value,
+                data: masterMeasData,
+                timestamp: new Date().toISOString()
+            };
+            
+            var historyLog = [];
+            var raw = localStorage.getItem('master_measurement_history_records_db');
+            if(raw) {
+                try { historyLog = JSON.parse(atob(raw)); } catch(e){}
             }
             
-            historyArr = historyArr.filter(function(item) { return item.name !== pName; });
-            historyArr.unshift({ name: pName, date: dateVal, data: bbsData, timestamp: new Date().toLocaleTimeString() });
-            if(historyArr.length > 15) historyArr.pop();
-            
-            localStorage.setItem('bbs_app_history', btoa(JSON.stringify(historyArr)));
+            historyLog = historyLog.filter(function(x) { return x.id !== saveState.id; });
+            historyLog.unshift(saveState);
+            localStorage.setItem('master_measurement_history_records_db', btoa(JSON.stringify(historyLog)));
+            updateHistoryDropdownOptions();
         }
 
-        function loadHistoryList() {
-            var historyData = localStorage.getItem('bbs_app_history');
-            var listContainer = document.getElementById('historyList');
-            if(!historyData || !listContainer) return;
-            var historyArr = [];
-            try { historyArr = JSON.parse(atob(historyData)); } catch(e) { return; }
-            listContainer.innerHTML = "";
-            historyArr.forEach(function(item) {
-                var div = document.createElement('div');
-                div.className = 'history-item';
-                div.innerText = item.name + " (" + item.timestamp + ")";
-                div.onclick = function() {
-                    var pEl = document.getElementById('projectName');
-                    var dEl = document.getElementById('reportDate');
-                    if(pEl) pEl.value = item.name;
-                    if(dEl) dEl.value = item.date || "";
-                    currentActiveProject = item.name;
-                    bbsData = JSON.parse(JSON.stringify(item.data));
-                    renderTable();
-                    closeAllModals();
-                    switchTab('tab3');
-                };
-                listContainer.appendChild(div);
+        function addMasterMeasEntry() {
+            var desc = document.getElementById('mmDesc').value.trim() || "Item Description";
+            var unit = document.getElementById('mmUnit').value || "CUM";
+            var nos1 = parseFloat(document.getElementById('mmNos1').value) || 1;
+            var nos2 = parseFloat(document.getElementById('mmNos2').value) || 1;
+            var entryType = document.getElementById('mmEntryType').value; 
+            
+            var lRaw = document.getElementById('mmL').value;
+            var bRaw = document.getElementById('mmB').value;
+            var dRaw = document.getElementById('mmD').value;
+
+            var qty = nos1 * nos2;
+            if (lRaw !== "" && !isNaN(parseFloat(lRaw))) qty *= parseFloat(lRaw);
+            if (bRaw !== "" && !isNaN(parseFloat(bRaw))) qty *= parseFloat(bRaw);
+            if (dRaw !== "" && !isNaN(parseFloat(dRaw))) qty *= parseFloat(dRaw);
+
+            if(entryType === 'DEDUCTION') {
+                qty = -Math.abs(qty);
+            }
+
+            masterMeasData.push({
+                desc: desc,
+                unit: unit,
+                nos1: nos1,
+                nos2: nos2,
+                l: lRaw !== "" ? parseFloat(lRaw).toFixed(3) : "",
+                b: bRaw !== "" ? parseFloat(bRaw).toFixed(3) : "",
+                d: dRaw !== "" ? parseFloat(dRaw).toFixed(3) : "",
+                qty: qty.toFixed(3),
+                type: entryType
             });
+
+            document.getElementById('mmL').value = "";
+            document.getElementById('mmB').value = "";
+            document.getElementById('mmD').value = "";
+
+            executeMasterMeasAutoSave();
+            renderMasterMeasTable();
+            switchMasterMeasTab('mmTab3'); 
+        }
+
+        function updateMasterMeasInlineCell(index, field, valueText) {
+            if(!masterMeasData[index]) return;
+            var text = valueText.trim();
+            
+            if(field === 'desc' || field === 'unit') {
+                masterMeasData[index][field] = text;
+            } else {
+                masterMeasData[index][field] = text === "" ? "" : parseFloat(text) || 0;
+            }
+
+            var item = masterMeasData[index];
+            var n1 = parseFloat(item.nos1) || 1;
+            var n2 = parseFloat(item.nos2) || 1;
+            var calcQty = n1 * n2;
+            
+            if (item.l !== "" && !isNaN(parseFloat(item.l))) calcQty *= parseFloat(item.l);
+            if (item.b !== "" && !isNaN(parseFloat(item.b))) calcQty *= parseFloat(item.b);
+            if (item.d !== "" && !isNaN(parseFloat(item.d))) calcQty *= parseFloat(item.d);
+
+            if(item.type === 'DEDUCTION') {
+                calcQty = -Math.abs(calcQty);
+            }
+            masterMeasData[index].qty = calcQty.toFixed(3);
+            
+            var totalQty = 0;
+            for (var i = 0; i < masterMeasData.length; i++) {
+                totalQty += parseFloat(masterMeasData[i].qty);
+            }
+            document.getElementById('mmTotalQty').innerText = totalQty.toFixed(3);
+            
+            var qtyCell = document.getElementById('mmQtyCell_' + index);
+            if(qtyCell) {
+                qtyCell.innerText = masterMeasData[index].qty;
+                qtyCell.style.color = item.type === 'DEDUCTION' ? '#ef4444' : '#2563eb';
+            }
+            executeMasterMeasAutoSave();
+        }
+
+        /* MISSING FUNCTION 2 ADDED: Renders the premium preview tracking grid for measurements modal */
+        function renderMasterMeasTable() {
+            var tbody = document.getElementById('mmTableBody'); if(!tbody) return;
+            tbody.innerHTML = "";
+            var totalQty = 0;
+
+            for (var i = 0; i < masterMeasData.length; i++) {
+                var item = masterMeasData[i];
+                var currentQty = parseFloat(item.qty);
+                totalQty += currentQty;
+                
+                var colorStyle = item.type === 'DEDUCTION' ? 'style="color:#ef4444; font-weight:bold;"' : 'style="color:#2563eb; font-weight:bold;"';
+                var rowLabel = item.type === 'DEDUCTION' ? '<span style="color:#ef4444;">[Ded]</span> ' : '';
+
+                tbody.innerHTML += '<tr>' +
+                    '<td>' + (i + 1) + '</td>' +
+                    '<td contenteditable="true" oninput="updateMasterMeasInlineCell(' + i + ', \'desc\', this.innerText)" style="text-align:left;">' + rowLabel + item.desc + '</td>' +
+                    '<td contenteditable="true" oninput="updateMasterMeasInlineCell(' + i + ', \'unit\', this.innerText)">' + item.unit + '</td>' +
+                    '<td contenteditable="true" oninput="updateMasterMeasInlineCell(' + i + ', \'nos1\', this.innerText)">' + item.nos1 + '</td>' +
+                    '<td contenteditable="true" oninput="updateMasterMeasInlineCell(' + i + ', \'nos2\', this.innerText)">' + item.nos2 + '</td>' +
+                    '<td contenteditable="true" oninput="updateMasterMeasInlineCell(' + i + ', \'l\', this.innerText)">' + item.l + '</td>' +
+                    '<td contenteditable="true" oninput="updateMasterMeasInlineCell(' + i + ', \'b\', this.innerText)">' + item.b + '</td>' +
+                    '<td contenteditable="true" oninput="updateMasterMeasInlineCell(' + i + ', \'d\', this.innerText)">' + item.d + '</td>' +
+                    '<td id="mmQtyCell_' + i + '" ' + colorStyle + '>' + item.qty + '</td>' +
+                    '<td><button class="del-btn" onclick="deleteMasterMeasEntry(' + i + ')">X</button></td>' +
+                    '</tr>';
+            }
+            var mmTotalQtyNode = document.getElementById('mmTotalQty'); if(mmTotalQtyNode) mmTotalQtyNode.innerText = totalQty.toFixed(3);
+        }
+
+        function deleteMasterMeasEntry(index) {
+            masterMeasData.splice(index, 1);
+            executeMasterMeasAutoSave();
+            renderMasterMeasTable();
+        }
+
+        function clearMasterMeasAll() {
+            if(confirm("Clear entire measurement table?")) {
+                masterMeasData = [];
+                executeMasterMeasAutoSave();
+                renderMasterMeasTable();
+                switchMasterMeasTab('mmTab1'); 
+            }
+        }
+
+        function copyMasterMeasClipboard() {
+            if (masterMeasData.length === 0) return triggerToastNotification("Table is empty.");
+            var title = document.getElementById('mmSheetTitle').value || "MEASUREMENT SHEET";
+            var pName = document.getElementById('mmProjectName').value || "N/A";
+            var date = document.getElementById('mmPeriodDate').value || "N/A";
+            
+            var text = "📊 " + title + "\nProject Name: " + pName + "\nBilling Date: " + date + "\n---------------------\n";
+            for (var i = 0; i < masterMeasData.length; i++) {
+                var m = masterMeasData[i];
+                var typeMark = m.type === 'DEDUCTION' ? "[-] " : "[+] ";
+                text += (i+1) + ". " + typeMark + m.desc + " | Unit: " + m.unit + " | L:" + m.l + " B:" + m.b + " D:" + m.d + " | Qty: " + m.qty + "\n";
+            }
+            text += "---------------------\nTotal Net Qty = " + document.getElementById('mmTotalQty').innerText;
+            
+            var dummy = document.createElement('textarea'); document.body.appendChild(dummy);
+            dummy.value = text; dummy.select(); document.execCommand('copy'); document.body.removeChild(dummy);
+            triggerToastNotification("Measurement records copied successfully!");
+        }
+
+        function saveMasterMeasLocalStorage() {
+            executeMasterMeasAutoSave();
+            loadMasterMeasHistoryList();
+            triggerToastNotification("Measurement sheet recorded successfully!");
+        }
+
+        function updateHistoryDropdownOptions() {
+            var selectNode = document.getElementById('mmLoadHistorySelect');
+            if(!selectNode) return;
+            selectNode.innerHTML = '<option value="" selected disabled>📂 -- Load Saved Measurement Sheets History --</option>';
+            
+            var historyLog = [];
+            var raw = localStorage.getItem('master_measurement_history_records_db');
+            if(raw) {
+                try { historyLog = JSON.parse(atob(raw)); } catch(e){}
+            }
+            
+            historyLog.forEach(function(record) {
+                var opt = document.createElement('option');
+                opt.value = record.id;
+                opt.innerText = record.projectName + " - " + record.title + " (" + record.data.length + " rows)";
+                selectNode.appendChild(opt);
+            });
+        }
+
+        function triggerMasterMeasOpen(recordId) {
+            if(!recordId) return;
+            var historyLog = [];
+            var raw = localStorage.getItem('master_measurement_history_records_db');
+            if(raw) {
+                try { historyLog = JSON.parse(atob(raw)); } catch(e){}
+            }
+            
+            var selectedSheet = historyLog.find(function(x) { return x.id === recordId; });
+            if(selectedSheet) {
+                document.getElementById('mmProjectName').value = selectedSheet.projectName;
+                document.getElementById('mmSheetTitle').value = selectedSheet.title;
+                document.getElementById('mmPeriodDate').value = selectedSheet.periodDate || "";
+                masterMeasData = JSON.parse(JSON.stringify(selectedSheet.data));
+                renderMasterMeasTable();
+                triggerToastNotification("Measurement record loaded successfully!");
+                switchMasterMeasTab('mmTab3'); 
+            }
+        }
+
+        function toggleMmHistoryPanel(mode) {
+            var panel = document.getElementById('mmConditionalHistoryPanel');
+            if (mode === "OLD") {
+                panel.style.display = "block";
+            } else {
+                panel.style.display = "none";
+                masterMeasData = [];
+                renderMasterMeasTable();
+                document.getElementById('mmProjectName').value = "NEW STRUCTURAL SITE";
+                document.getElementById('mmSheetTitle').value = "Excavation MEASUREMENT SHEET";
+                document.getElementById('mmPeriodDate').value = "";
+            }
+        }
+
+        function triggerMasterMeasRename(recordId) {
+            mmRenameTargetEncoded = recordId;
+            var historyLog = [];
+            var raw = localStorage.getItem('master_measurement_history_records_db');
+            if(raw) {
+                try { historyLog = JSON.parse(atob(raw)); } catch(e){}
+            }
+            var target = historyLog.find(x => x.id === recordId);
+            if(target) {
+                document.getElementById('newMmProjectNameInput').value = target.projectName;
+                safeModalToggle('mmRenameModal', 'flex');
+            }
+        }
+
+        function submitMmProjectRename() {
+            var newName = document.getElementById('newMmProjectNameInput').value;
+            if(!newName || newName.trim() === "") return alert("Please type a valid project layout reference.");
+            newName = newName.trim().toUpperCase();
+            
+            var historyLog = [];
+            var raw = localStorage.getItem('master_measurement_history_records_db');
+            if(raw) {
+                try { historyLog = JSON.parse(atob(raw)); } catch(e){}
+            }
+            
+            var index = historyLog.findIndex(x => x.id === mmRenameTargetEncoded);
+            if(index !== -1) {
+                historyLog[index].projectName = newName;
+                historyLog[index].id = btoa(newName + "_" + historyLog[index].title);
+                localStorage.setItem('master_measurement_history_records_db', btoa(JSON.stringify(historyLog)));
+                safeModalToggle('mmRenameModal', 'none');
+                updateHistoryDropdownOptions();
+                loadMasterMeasHistoryList();
+                triggerToastNotification("Project Renamed Successfully!");
+            }
+        }
+
+        function triggerMasterMeasDelete(recordId) {
+            if(!confirm("Are you sure you want to delete this measurement sheet permanently?")) return;
+            var historyLog = [];
+            var raw = localStorage.getItem('master_measurement_history_records_db');
+            if(raw) {
+                try { historyLog = JSON.parse(atob(raw)); } catch(e){}
+            }
+            historyLog = historyLog.filter(x => x.id !== recordId);
+            localStorage.setItem('master_measurement_history_records_db', btoa(JSON.stringify(historyLog)));
+            updateHistoryDropdownOptions();
+            loadMasterMeasHistoryList();
+            triggerToastNotification("Sheet deleted permanently!");
+        }
+
+        function handleMasterMeasSearch(val) {
+            mmSearchQuery = val.toLowerCase().trim();
+            loadMasterMeasHistoryList();
+        }
+
+        function loadMasterMeasHistoryList() {
+            var container = document.getElementById('mmHistorySandboxContainer');
+            if(!container) return;
+            container.innerHTML = "";
+            
+            var historyLog = [];
+            var raw = localStorage.getItem('master_measurement_history_records_db');
+            if(raw) {
+                try { historyLog = JSON.parse(atob(raw)); } catch(e){}
+            }
+            
+            var matchCount = 0;
+            historyLog.forEach(function(item) {
+                if(mmSearchQuery !== "" && !item.projectName.toLowerCase().includes(mmSearchQuery)) return;
+                matchCount++;
+                
+                var row = document.createElement('div');
+                row.className = 'history-row-item';
+                row.style.background = 'var(--table-bg)';
+                row.style.margin = '4px 0';
+                row.style.padding = '8px 10px';
+                row.style.borderRadius = '6px';
+                row.style.border = '1px solid var(--border-color)';
+                
+                row.innerHTML = '<div class="history-file-meta" style="font-size:13px; font-weight:700; color:var(--text-main);">📁 ' + item.projectName + ' <span style="font-weight:500; font-size:11px; color:var(--text-muted);">(' + item.title + ')</span></div>' +
+                                '<div class="history-actions-wrap">' +
+                                    '<button class="h-btn h-open" style="background:#2563eb; color:#fff;" onclick="triggerMasterMeasOpen(\''+item.id+'\')">Open</button>' +
+                                    '<button class="h-btn h-edit" style="background:#eab308; color:#000;" onclick="triggerMasterMeasRename(\''+item.id+'\')">Edit</button>' +
+                                    '<button class="h-btn h-delete" style="background:#ef4444; color:#fff;" onclick="triggerMasterMeasDelete(\''+item.id+'\')">Delete</button>' +
+                                '</div>';
+                container.appendChild(row);
+            });
+
+            if(matchCount === 0) {
+                container.innerHTML = "<div style='font-size:12px; color:var(--text-muted); text-align:center; padding:15px;'>No matching records found.</div>";
+            }
         }
     </script>
 </head>
 <body>
 
-<div class="container">
-    <!-- Real Google AdMob Banner Integration -->
-<div id="admob-banner-container" style="width: 100%; text-align: center; margin: 10px 0; min-height: 50px; background: #fff; display: flex; justify-content: center; align-items: center;">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8020646090697615" crossorigin="anonymous"></script>
-    <!-- BBS Pro Top Banner -->
-    <ins class="adsbygoogle"
-         style="display:inline-block;width:320px;height:50px"
-         data-ad-client="ca-pub-8020646090697615"
-         data-ad-slot="6301025904"></ins>
-    <script>
-         (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-</div>
+<div id="toastNoticeDock" class="toast-notification-box"></div>
 
+<div class="container">
+    <div class="admob-banner-placeholder">⚡ GOOGLE ADMOB BANNER INTERFACE INTEGRATED ⚡</div>
 
     <div class="header-section">
         <div class="header-title-container">
-            <button id="hamburgerTrigger" class="menu-hamburger-btn" onclick="toggleMainMenu(event)">☰</button>
-            <h2>BBS Pro Engine</h2>
+            <button id="hamburgerTrigger" class="menu-hamburger-btn" tabindex="1" onclick="toggleMainMenu(event)">☰</button>
+            <h2 id="appMainHeadingTitle">BBS Pro Engine Premium</h2>
         </div>
-        <button class="theme-toggle-btn" onclick="toggleTheme()"><span id="themeBtnText">🌙 Dark</span></button>
+        <div class="header-controls">
+            <!-- REPLACED DROPDOWN WITH GOOGLE TRANSLATE WIDGET NODE -->
+            <div id="google_translate_element"></div>
+            <button class="theme-toggle-btn" id="themeTogglerNode" tabindex="2" onclick="toggleTheme()"><span id="themeBtnText">🌙 Dark</span></button>
+        </div>
+        
         <div id="mainMenuDropdown" class="dropdown-menu-box">
-            <button onclick="openModal('civilCalcModal')">🧮 Steel Unit Calculator</button>
-            <button onclick="openModal('concreteCalcModal')">🧱 Concrete Layout Engine</button>
-            <button onclick="openModal('brickCalcModal')">🔴 Brickwork Material Model</button>
-            <button onclick="openModal('blockCalcModal')">🔲 Blockwork Custom Solver</button>
-            <button onclick="openModal('plasterCalcModal')">⏳ Plaster Estimator</button>
-            <button onclick="openModal('tileCalcModal')">🧱 Tile & Flooring Dock</button>
-            <button onclick="openModal('shutteringCalcModal')">🪵 Shuttering Frame Solver</button>
-            <button onclick="openModal('historyModal')">📜 Project Sessions History</button>
-            <button onclick="openModal('aboutModal')">👑 App Info & Subscription</button>
-            <button style="background: #2563eb; color: #ffffff; font-weight: bold;" onclick="shareNativeApkFile()">🤝 Share App File (APK)</button>
+            <div class="menu-header-label">📊 Dashboard Menu</div>
+            
+            <button id="menuBtnMasterMeasText" class="menu-premium-btn btn-gradient-blue" tabindex="2.5" onclick="openModal('masterMeasurementModal')">
+                ## 1. 📏 Master Measurement
+            </button>
+            
+            <button id="menuBtnCalcFolderText" class="menu-premium-btn btn-gradient-orange" tabindex="2.6" onclick="toggleCalcFolder(event)">
+                🧮 Material Calculator Folder 🔽
+            </button>
+            
+            <div id="calculatorsMenuFolder" class="menu-folder-container">
+                <button id="menuBtnSteelUnitText" tabindex="3" onclick="openModal('civilCalcModal')">🎨 Steel Unit Calculator</button>
+                <button id="menuBtnConcreteText" tabindex="4" onclick="openModal('concreteCalcModal')">🧱 Concrete Layout Engine</button>
+                <button id="menuBtnBrickText" tabindex="5" onclick="openModal('brickCalcModal')">🔴 Brickwork Material Model</button>
+                <button id="menuBtnBlockText" tabindex="6" onclick="openModal('blockCalcModal')">🔲 AAC Blockwork Custom Solver</button>
+                <button id="menuBtnPlasterText" tabindex="7" onclick="openModal('plasterCalcModal')">⏳ Plaster Estimator</button>
+                <button id="menuBtnTileText" tabindex="8" onclick="openModal('tileCalcModal')">🧱 Tile & Flooring Dock</button>
+                <button id="menuBtnShutterText" tabindex="9" onclick="openModal('shutteringCalcModal')">🪵 Shuttering Frame Solver</button>
+                <button id="menuBtnQcText" tabindex="10" onclick="openModal('qualityCalcModal')">🏆 Quality Control Expert Mode</button>
+            </div>
+
+            <button id="menuBtnShareText" class="menu-premium-btn btn-gradient-green" tabindex="12" onclick="triggerApkShare()">
+                🤝 Share a Friend
+            </button>
+            
+            <button class="menu-premium-btn btn-gradient-disabled" disabled>
+                🚀 New Feature Coming Soon
+            </button>
+            
+            <button id="menuBtnInfoText" class="menu-premium-btn btn-gradient-gray" tabindex="11" onclick="openModal('infoModal')">
+                👑 About App Info
+            </button>
         </div>
     </div>
 
     <div class="tabs-nav">
-        <div id="btn-tab1" class="tab-btn active" onclick="switchTab('tab1')">1. PROJECT INIT</div>
-        <div id="btn-tab2" class="tab-btn" onclick="switchTab('tab2')">2. INPUT BAR DATA</div>
-        <div id="btn-tab3" class="tab-btn" onclick="switchTab('tab3')">3. EXCEL/PDF GRID</div>
+        <div id="btn-tab1" class="tab-btn active" tabindex="13" onclick="switchTab('tab1')">1. PROJECT INIT</div>
+        <div id="btn-tab2" class="tab-btn" tabindex="14" onclick="switchTab('tab2')">2. INPUT BAR DATA</div>
+        <div id="btn-tab3" class="tab-btn" tabindex="15" onclick="switchTab('tab3')">3. EXCEL/PDF GRID</div>
     </div>
 
     <!-- TAB 1 -->
     <div id="tab1" class="tab-content active">
+        <div class="form-row" style="margin-bottom: 15px; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));">
+            <div class="form-group">
+                <label data-lang-key="lbl_proj_name">Project Name / Site Reference</label>
+                <input type="text" id="projectName" tabindex="16" placeholder=".e.g. Metro Bridge Sector 4" oninput="checkAndResetForNewProject()">
+            </div>
+            <div class="form-group">
+                <label data-lang-key="lbl_ops_mode">Sheet Operations Mode</label>
+                <select id="projectSheetModeSelect" tabindex="17" onchange="handleSheetModeChange()" style="border-color:#2563eb; color:#2563eb;">
+                    <option value="NEW" id="optNewCanvasSelect" selected>🆕 Create New Sheet Canvas</option>
+                    <option value="OLD" id="optOldBackupSelect">📂 Load Old Session Backup</option>
+                </select>
+            </div>
+        </div>
+
         <div class="form-row">
             <div class="form-group">
-                <label>Project Name / Site Reference</label>
-                <input type="text" id="projectName" value="NEW PROJECT" oninput="checkAndResetForNewProject()">
+                <label data-lang-key="lbl_record_date">Billing Record Date</label>
+                <input type="date" id="reportDate" tabindex="18">
             </div>
             <div class="form-group">
-                <label>Billing Record Date</label>
-                <input type="date" id="reportDate" onchange="saveStateToHistory()">
-            </div>
-            <div class="form-group">
-                <label>Create Section Heading</label>
-                <input type="text" id="compTitle" placeholder="e.g. BEAM, FOOTING">
+                <label data-lang-key="lbl_sec_heading">Create Section Heading</label>
+                <input type="text" id="compTitle" tabindex="19" placeholder=".e.g. BEAM PIER 12">
             </div>
             <div class="form-group">
                 <div class="action-inline-group">
-                    <button class="action-btn sec-btn" onclick="addComponentHeading()">Add Heading</button>
-                    <button class="action-btn reset-inline-btn" onclick="resetAllEngineData()">Reset</button>
+                    <button class="action-btn sec-btn" tabindex="20" onclick="addComponentHeading()"><span id="addHeadingBtnText">Add Heading</span></button>
+                    <button class="action-btn reset-inline-btn" tabindex="21" onclick="clearAllWithAutoSave()"><span id="clearAllBtnText">Clear All</span></button>
                 </div>
             </div>
         </div>
@@ -819,25 +1241,28 @@
     <!-- TAB 2 -->
     <div id="tab2" class="tab-content">
         <div style="margin-bottom: 15px;">
-            <button type="button" onclick="openModal('bbsAutoCalcModal')" style="background: linear-gradient(145deg, #1e293b, #334155); color: #fff; padding: 12px; font-size:12px; font-weight: bold; text-transform:uppercase; border:none; border-radius:6px; box-shadow: 2px 4px 8px rgba(0,0,0,0.15); cursor:pointer; width:100%;">📐 Open Area Spacing Pop-up (Auto Solver)</button>
+            <button type="button" class="launcher-arrow-btn" id="launcherAutoSolverBtnText" tabindex="22" onclick="openModal('bbsAutoCalcModal')">
+                📐 Input Clear Span or Spacing 🔽
+            </button>
         </div>
 
         <div class="custom-dim-panel" style="background:#f8fafc; border-left:4px solid #2563eb; margin-bottom:15px; padding:10px;">
-            <label style="color:#2563eb; font-weight:bold; font-size:11px;">🏢 Column / Footing Shape Generator</label>
-            <div class="form-row-nested-two" style="margin-top:5px;">
-                <div class="form-group"><label style="color:#1e293b;">Straight Length (m)</label><input type="number" id="colMainLength" placeholder="e.g. 3.25" step="any" oninput="triggerColumnFootingMath()"></div>
-                <div class="form-group"><label style="color:#1e293b;">L-Hook Shape Bend (m)</label><input type="number" id="colLHook" placeholder="e.g. 0.30" step="any" oninput="triggerColumnFootingMath()"></div>
+            <label data-lang-key="lbl_shape_gen" style="color:#2563eb; font-weight:bold; font-size:11px;">🏢 Column / Footing Shape Generator</label>
+            <div class="form-row-three-boxes" style="margin-top:5px;">
+                <div class="form-group"><label data-lang-key="lbl_straight_len" style="color:#1e293b;">Straight Length (m)</label><input type="number" tabindex="23" id="colMainLength" placeholder=".e.g. 3.25" step="any" oninput="triggerColumnFootingMath()"></div>
+                <div class="form-group"><label data-lang-key="lbl_left_hook" style="color:#1e293b;">Left L-Hook (mm)</label><input type="number" tabindex="23a" id="colLeftHook" placeholder=".e.g. 300" step="any" oninput="triggerColumnFootingMath()"></div>
+                <div class="form-group"><label data-lang-key="lbl_right_hook" style="color:#1e293b;">Right L-Hook (mm)</label><input type="number" tabindex="24" id="colRightHook" placeholder=".e.g. 300" step="any" oninput="triggerColumnFootingMath()"></div>
             </div>
         </div>
 
         <div class="form-row">
             <div class="form-group">
-                <label>Bar Description</label>
-                <input type="text" id="desc" value="Main Bottom Rebar">
+                <label data-lang-key="lbl_bar_name">Bar Name</label>
+                <input type="text" id="desc" tabindex="25" placeholder=".e.g. Main Bottom bar">
             </div>
             <div class="form-group">
-                <label>Diameter (mm)</label>
-                <select id="dia">
+                <label data-lang-key="lbl_dia">Diameter (mm)</label>
+                <select id="dia" tabindex="26">
                     <option value="8">8 mm</option><option value="10">10 mm</option>
                     <option value="12">12 mm</option><option value="16" selected>16 mm</option>
                     <option value="20">20 mm</option><option value="25">25 mm</option>
@@ -845,53 +1270,49 @@
                 </select>
             </div>
             <div class="form-group">
-                <label>Clear Span Record (mm)</label>
-                <input type="text" id="clearSpanInput" placeholder="Auto loaded or Custom" readonly style="background:#e2e8f0; color:#64748b;">
+                <label data-lang-key="lbl_clear_span">Clear Span Record (Meter)</label>
+                <input type="text" id="clearSpanInput" placeholder=".e.g. 5.450" readonly style="background:#e2e8f0; color:#64748b;">
             </div>
             <div class="form-group">
-                <label>Spacing Record (mm)</label>
-                <input type="text" id="spacingInput" placeholder="Auto loaded or Custom" readonly style="background:#e2e8f0; color:#64748b;">
+                <label data-lang-key="lbl_spacing_rec">Spacing Record (mm)</label>
+                <input type="text" id="spacingInput" placeholder=".e.g. 150" readonly style="background:#e2e8f0; color:#64748b;">
             </div>
             <div class="form-group">
-                <label>Members Count</label>
-                <input type="number" id="noMembers" value="1" step="any">
+                <label data-lang-key="lbl_members_cnt">Members Count</label>
+                <input type="number" id="noMembers" tabindex="27" placeholder=".e.g. 2" step="any">
             </div>
             <div class="form-group">
-                <label>Bars per Member (Nos)</label>
-                <input type="number" id="noBars" value="10" step="any">
+                <label data-lang-key="lbl_bars_member">Bars per Member (Nos)</label>
+                <input type="number" id="noBars" tabindex="28" placeholder=".e.g. 12" step="any">
             </div>
             <div class="form-group">
-                <label>Total Cut Length (m)</label>
-                <input type="number" id="cutLength" value="4.50" step="any">
+                <label data-lang-key="lbl_total_cut">Total Cut Length (m)</label>
+                <input type="number" id="cutLength" tabindex="29" placeholder=".e.g. 6.25" step="any">
             </div>
             <div class="form-group">
-                <button class="action-btn" onclick="addBarEntry()">Insert Bar</button>
+                <button class="action-btn" id="insertBarBtnNode" tabindex="30" onclick="addBarEntry()">Insert Bar</button>
             </div>
         </div>
     </div>
 
     <!-- TAB 3 -->
     <div id="tab3" class="tab-content">
-        <!-- 📈 QUICK INSIGHTS DASHBOARD -->
         <div class="stats-dashboard">
-            <div class="stat-card">
-                <div>Total Bars Entered</div>
-                <div id="dashTotalEntries">0 Items</div>
-            </div>
-            <div class="stat-card">
-                <div>Net Project Weight</div>
-                <div id="dashTotalWeight">0.0 Kg</div>
-            </div>
+            <div class="stat-card"><div id="statTotalBarsLabel" data-lang-key="lbl_total_entered">Total Bars Entered</div><div id="dashTotalEntries">0 Items</div></div>
+            <div class="stat-card"><div id="statNetWeightLabel" data-lang-key="lbl_net_weight">Net Project Weight</div><div id="dashTotalWeight">0.00 Kg</div></div>
         </div>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:10px; margin-bottom: 12px;">
-            <div class="form-group" style="margin-bottom:0;">
-                <label>🔍 Live Grid Search Filter</label>
-                <input type="text" id="gridSearchBox" placeholder="Search item description..." oninput="filterBbsGrid()">
-            </div>
-            <div class="form-group" style="margin-bottom:0;">
-                <label>💰 Steel Rate (Per Kg)</label>
-                <input type="number" id="steelRatePerKg" placeholder="e.g. 65" oninput="renderTable()">
+            <div class="form-group" style="margin-bottom:0;"><label data-lang-key="lbl_search_filter">🔍 Live Grid Search Filter</label><input type="text" tabindex="31" id="gridSearchBox" placeholder="Search..." oninput="filterBbsGrid()"></div>
+            <div class="form-group" style="margin-bottom:0;"><label data-lang-key="lbl_steel_rate">💰 Steel Rate (Per Kg)</label><input type="number" tabindex="32" id="steelRatePerKg" placeholder=".e.g. 65" oninput="renderTable()"></div>
+        </div>
+
+        <h3 id="liveProjectHeaderName" style="margin: 15px 0 5px 0; font-size:14px; font-weight:bold; color:#2563eb; text-transform:uppercase;">📁 CURRENT SHEET LOG: NEW PROJECT</h3>
+
+        <div id="printHeaderContainer">
+            <div class="print-header-row">
+                <div>PROJECT REFERENCE: <span id="printProjName">-</span></div>
+                <div>BILLING DATE: <span id="printProjDate">-</span></div>
             </div>
         </div>
 
@@ -899,280 +1320,590 @@
             <table id="bbsTable">
                 <thead>
                     <tr>
-                        <th rowspan="2">Sl No</th>
-                        <th rowspan="2">Description</th>
-                        <th rowspan="2">Dia</th>
-                        <th rowspan="2">Clear Span</th>
-                        <th rowspan="2">Spacing</th>
-                        <th colspan="2">Nos</th>
-                        <th rowspan="2">Cut Length</th>
-                        <th rowspan="2">Total Length</th>
-                        <th colspan="8">Diameter Wise Breakdowns</th>
-                        <th rowspan="2">Action</th>
+                        <th rowspan="2">Sl No</th><th rowspan="2">Description</th><th rowspan="2">Dia</th><th rowspan="2">Clear Span (m)</th><th rowspan="2">Spacing (mm)</th><th colspan="2">Nos</th><th rowspan="2">Cut Length</th><th rowspan="2">Total Length</th><th colspan="8">Diameter Wise Breakdowns (Meters)</th><th rowspan="2">Action</th>
                     </tr>
                     <tr>
-                        <th>Members</th><th>Bars</th>
-                        <th>8mm</th><th>10mm</th><th>12mm</th><th>16mm</th><th>20mm</th><th>25mm</th><th>32mm</th><th>40mm</th>
+                        <th>Members</th><th>Bars</th><th>8mm</th><th>10mm</th><th>12mm</th><th>16mm</th><th>20mm</th><th>25mm</th><th>32mm</th><th>40mm</th>
                     </tr>
                 </thead>
                 <tbody id="bbsTableBody"></tbody>
             </table>
         </div>
+        
         <div class="grid-actions-panel">
-            <button class="download-btn" onclick="exportToCleanFormatedExcel()">📥 Export Excel</button>
-            <button class="share-pdf-btn" onclick="shareAsProfessionalPDF()">📄 Print PDF</button>
-            <button class="copy-btn" onclick="copyTableToClipboardText()">📋 Copy Text for WA</button>
+            <button class="download-btn" id="btnExportExcelNode" tabindex="33" onclick="exportToCleanFormatedExcel()">📥 Export Excel</button>
+            <button class="share-pdf-btn" id="btnPrintPdfNode" tabindex="34" onclick="shareAsProfessionalPDF()">📄 Print PDF</button>
+            <button class="copy-btn" id="btnCopyWaNode" tabindex="35" onclick="copyTableToClipboardText()">📋 Copy Text for WA</button>
+            <button class="manual-save-sheet-btn" id="btnSaveSheetNode" tabindex="35a" onclick="manualSaveStateToHistory()">💾 Save Sheet Data</button>
         </div>
     </div>
 </div>
 
-<!-- MODALS SECTION -->
-<div id="bbsAutoCalcModal" class="modal-overlay" onclick="if(event.target == this) closeAllModals()">
+<!-- ALL IN ONE MASTER MEASUREMENT MODAL -->
+<div id="masterMeasurementModal" class="modal-overlay" onclick="if(event.target == this) closeAllModals()">
+    <div class="modal-box" style="max-width: 95%; width: 1000px;">
+        <button class="modal-close-btn" onclick="closeAllModals()">X</button>
+        
+        <div class="modal-tabs-nav">
+            <button id="btn-mmTab1" class="modal-tab-btn active" onclick="switchMasterMeasTab('mmTab1')">1. MEASUREMENT INIT</button>
+            <button id="btn-mmTab2" class="modal-tab-btn" onclick="switchMasterMeasTab('mmTab2')">2. INPUT ENTRY DATA</button>
+            <button id="btn-mmTab3" class="modal-tab-btn" onclick="switchMasterMeasTab('mmTab3')">3. LIVE PREVIEW GRID</button>
+        </div>
+
+        <!-- PART 1: MEASUREMENT INIT TAB -->
+        <div id="mmTab1" class="modal-tab-content active">
+            <div class="form-group" style="margin-bottom: 15px;">
+                <label style="color:#2563eb; font-weight: bold;">Sheet Operations Mode</label>
+                <select id="mmOperationsModeSelect" onchange="toggleMmHistoryPanel(this.value)" style="border-color:#2563eb; color:#2563eb; font-weight: bold;">
+                    <option value="NEW" selected>🆕 Create New Sheet Canvas</option>
+                    <option value="OLD">📂 Load Old Session Backup</option>
+                </select>
+            </div>
+
+            <div id="mmConditionalHistoryPanel" style="display: none;">
+                <div class="form-group" style="margin-top: 10px; margin-bottom: 15px;">
+                    <label style="font-size: 11px; color: #2563eb; font-weight:700;">🔍 SEARCH SAVED SHEET REFERENCE</label>
+                    <input type="text" placeholder="Type name to search sheet..." oninput="handleMasterMeasSearch(this.value)">
+                </div>
+                
+                <div style="margin: 10px 0 20px 0; border: 1px solid var(--border-color); border-radius: 8px; padding: 8px; background: rgba(0,0,0,0.01);">
+                    <div id="mmHistorySandboxContainer" style="max-height: 220px; overflow-y: auto;"></div>
+                </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px;">
+                <div class="form-group">
+                    <label style="color:#2563eb;">🏢 Project Name / Site Reference</label>
+                    <input type="text" id="mmProjectName" placeholder=".e.g. Near Over Head Tank side" value="NEW STRUCTURAL SITE">
+                </div>
+                <div class="form-group">
+                    <label>Excel Sheet Main Title Heading</label>
+                    <input type="text" id="mmSheetTitle" placeholder=".e.g. Excavation MEASUREMENT SHEET" value="Excavation MEASUREMENT SHEET">
+                </div>
+                <div class="form-group">
+                    <label>Billing Period Date Range</label>
+                    <input type="text" id="mmPeriodDate" placeholder=".e.g. 10.05.2023 to 30.05.2023">
+                </div>
+            </div>
+            <div style="margin-top:15px; text-align:right;">
+                <button class="action-btn" style="width:200px; background:#2563eb;" onclick="switchMasterMeasTab('mmTab2')">Next: Entry Input ➡️</button>
+            </div>
+        </div>
+
+        <!-- PART 2: INPUT ENTRY DATA TAB -->
+        <div id="mmTab2" class="modal-tab-content">
+            <div class="modal-inner-group-box" style="background:#f8fafc; border-left: 5px solid #2563eb; padding: 15px;">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; align-items: end;">
+                    <div class="form-group" style="grid-column: span 2;">
+                        <label>Description (Structural Item Location Name)</label>
+                        <input type="text" id="mmDesc" placeholder=".e.g. Excavation for footing 1200X1200">
+                    </div>
+                    <div class="form-group">
+                        <label>Unit</label>
+                        <input type="text" id="mmUnit" placeholder=".e.g. CUM, SQM, RMT" value="CUM">
+                    </div>
+                    <div class="form-group">
+                        <label>NOS 1</label>
+                        <input type="number" id="mmNos1" placeholder=".e.g. 19" value="1">
+                    </div>
+                    <div class="form-group">
+                        <label>NOS 2</label>
+                        <input type="number" id="mmNos2" placeholder=".e.g. 1" value="1">
+                    </div>
+                    <div class="form-group">
+                        <label>L (Length)</label>
+                        <input type="number" id="mmL" placeholder=".e.g. 1.350" step="any">
+                    </div>
+                    <div class="form-group">
+                        <label>B (Width)</label>
+                        <input type="number" id="mmB" placeholder=".e.g. 1.350" step="any">
+                    </div>
+                    <div class="form-group">
+                        <label>D (Depth / Height)</label>
+                        <input type="number" id="mmD" placeholder=".e.g. 1.500" step="any">
+                    </div>
+                    <div class="form-group">
+                        <label style="color:#ea580c; font-weight:bold;">Entry Calculation Type</label>
+                        <select id="mmEntryType" style="border: 2px solid #ea580c;">
+                            <option value="ADDITION" selected>➕ Addition Row (+)</option>
+                            <option value="DEDUCTION">➖ Deduction (Door/Window) (-)</option>
+                        </select>
+                    </div>
+                </div>
+                <div style="margin-top: 15px; text-align: right;">
+                    <button class="action-btn" style="width: 100%; background: linear-gradient(145deg, #2563eb, #1d4ed8);" onclick="addMasterMeasEntry()">Insert Entry & View Sheet</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- PART 3: LIVE PREVIEW GRID TAB -->
+        <div id="mmTab3" class="modal-tab-content">
+            <div class="table-responsive" style="max-height: 42vh; margin-top: 5px;">
+                <table>
+                    <thead>
+                        <tr style="background: linear-gradient(145deg, #1e293b, #0f172a);">
+                            <th style="width: 50px;">Sr.No.</th>
+                            <th>Description [Click cell text values to live Edit formulas]</th>
+                            <th style="width: 70px;">Unit</th>
+                            <th style="width: 65px;">NOS</th>
+                            <th style="width: 65px;">NOS</th>
+                            <th style="width: 75px;">L</th>
+                            <th style="width: 75px;">B</th>
+                            <th style="width: 75px;">D</th>
+                            <th style="width: 110px;">QTY</th>
+                            <th style="width: 50px;">Act</th>
+                        </tr>
+                    </thead>
+                    <tbody id="mmTableBody"></tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="8" style="text-align: right; font-weight: bold; background: #cbd5e1; font-size:14px;">Total =</td>
+                            <td id="mmTotalQty" style="font-weight: bold; background: #dcfce7; color: #166434; font-size:14px;">0.000</td>
+                            <td style="background: #cbd5e1;"></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-top: 15px;">
+                <button class="action-btn" style="background: #ef4444;" onclick="clearMasterMeasAll()">Wipe Table</button>
+                <button class="action-btn" style="background: #6366f1;" onclick="copyMasterMeasClipboard()">📋 Copy Raw Text</button>
+                <button class="action-btn" style="background: #eab308; color:#000;" onclick="saveMasterMeasLocalStorage()">💾 Save To History</button>
+                <button class="action-btn" style="background: linear-gradient(145deg, #22c55e, #15803d);" onclick="exportToCleanFormatedExcel()">📥 Download Excel Layout</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- AAC BLOCKWORK CUSTOM SOLVER MODAL -->
+<div id="blockCalcModal" class="modal-overlay" onclick="if(event.target == this) closeAllModals()">
     <div class="modal-box">
         <button class="modal-close-btn" onclick="closeAllModals()">X</button>
+        <h3>🔲 AAC Blockwork Custom Solver</h3>
+        
+        <div class="form-group">
+            <label>AAC Blockwork Input Mode</label>
+            <select id="blockInputMode" onchange="toggleBlockInputMode()">
+                <option value="DIRECT">Direct Input Volume</option>
+                <option value="DIMENSION">Use Custom Wall Dimension</option>
+            </select>
+        </div>
+
+        <div id="blockDirectWrapper" class="form-group">
+            <label>Gross Volume (m³)</label>
+            <input type="number" id="blockVolVal" placeholder=".e.g. 1" step="any">
+        </div>
+
+        <div id="blockDimWrapper" class="modal-inner-group-box" style="display:none;">
+            <div class="form-group"><label>Length</label><input type="number" id="blockLen" placeholder=".e.g. 5" step="any"></div>
+            <div class="form-group"><label>Width / Thickness</label><input type="number" id="blockThick" placeholder=".e.g. 0.2" step="any"></div>
+            <div class="form-group"><label>Height</label><input type="number" id="blockHeight" placeholder=".e.g. 3" step="any"></div>
+            <div class="form-group">
+                <label>Dimension Unit</label>
+                <select id="blockDimUnit">
+                    <option value="METERS">Meters</option>
+                    <option value="FEET">Feet</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group" style="background: rgba(239,68,68,0.03); border: 1px dashed #ef4444; padding: 10px; border-radius: 6px; margin-bottom:12px;">
+            <label style="color:#ef4444;">➖ Windows / Doors Openings Deduction Volume (m³)</label>
+            <input type="number" id="blockDeductionVol" placeholder=".e.g. 0.15" step="any" value="0">
+        </div>
+
+        <div class="form-group">
+            <label>Standard Block Sizes</label>
+            <select id="blockSizeSelect" onchange="toggleBlockSizeMode()">
+                <option value="600x200x200">600x200x200 mm (8 inch standard)</option>
+                <option value="400x100x200">400x100x200 mm (4 inch standard)</option>
+                <option value="CUSTOM">-- Custom Size Selection (mm) --</option>
+            </select>
+        </div>
+
+        <div id="blockCustomSizeWrapper" class="modal-inner-group-box" style="display:none;">
+            <label>Custom Size (mm) [L : W : H]</label>
+            <div style="display:flex; gap:8px;">
+                <input type="number" id="blockCustL" placeholder="Length (.e.g. 600)" value="600">
+                <input type="number" id="blockCustW" placeholder="Width (.e.g. 200)" value="200">
+                <input type="number" id="blockCustH" placeholder="Height (.e.g. 200)" value="200">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Mortar Mix Ratio</label>
+            <select id="blockMortarRatio" onchange="toggleBlockMixMode()">
+                <option value="1:6">1:6 Cement Mortar</option>
+                <option value="CUSTOM">Custom Ratio Mix</option>
+            </select>
+        </div>
+
+        <div id="blockCustomMixWrapper" class="modal-inner-group-box" style="display:none;">
+            <label>Custom Mix Parts (C : S)</label>
+            <div style="display:flex; gap:8px;">
+                <input type="number" id="blockCustC" placeholder="Cement Part" value="1">
+                <input type="number" id="blockCustS" placeholder="Sand Part" value="6">
+            </div>
+        </div>
+
+        <button class="action-btn" id="btnBlockComputeNode" onclick="calculateBlockWork()">Calculate Blocks</button>
+        <div id="blockResultBox" class="calc-result-box" style="display:none;"></div>
+    </div>
+</div>
+
+<!-- RENAME MODAL -->
+<div id="renameModal" class="modal-overlay" onclick="if(event.target == this) closeAllModals()">
+    <div class="modal-box">
+        <button class="modal-close-btn" onclick="closeAllModals()">X</button>
+        <h3>✏️ Rename Project Sheet</h3>
+        <div class="form-group">
+            <label>Enter new project sheet reference name:</label>
+            <input type="text" id="newProjectNameInput" placeholder="Enter name here...">
+        </div>
+        <button type="button" class="action-btn" onclick="submitProjectRename()">OK</button>
+    </div>
+</div>
+
+<!-- MASTER MEASUREMENT RENAME MODAL -->
+<div id="mmRenameModal" class="modal-overlay" onclick="if(event.target == this) safeModalToggle('mmRenameModal','none')">
+    <div class="modal-box">
+        <button class="modal-close-btn" onclick="safeModalToggle('mmRenameModal','none')">X</button>
+        <h3>✏️ Rename Measurement Site Reference</h3>
+        <div class="form-group">
+            <label>Enter new site project reference name:</label>
+            <input type="text" id="newMmProjectNameInput" placeholder="Enter name here...">
+        </div>
+        <button type="button" class="action-btn" onclick="submitMmProjectRename()">OK</button>
+    </div>
+</div>
+
+<!-- HISTORY CENTER MODAL -->
+<div id="historyModal" class="modal-overlay" onclick="if(event.target == this) closeAllModals()">
+    <div class="modal-box">
+        <button class="modal-close-btn" onclick="closeAllModals()">X</button>
+        <h3>📜 BBS Saved Sheets Log</h3>
+        <div class="form-group" style="margin-top: 10px; margin-bottom: 15px;">
+            <label style="font-size: 10px; color: #2563eb;">🔍 Search Saved Sheet Reference</label>
+            <input type="text" placeholder="Type name to search sheet..." oninput="handleHistorySearch(this.value)">
+        </div>
+        <div id="historyList" class="history-list" style="max-height: 45vh; overflow-y: auto; border: 1px solid var(--border-color); border-radius: 6px; background: rgba(0,0,0,0.01); padding: 5px;"></div>
+    </div>
+</div>
+
+<div id="bbsAutoCalcModal" class="modal-overlay" onclick="if(event.target == this) closeAllModals()">
+    <div class="modal-box">
+        <button class="modal-close-btn" tabindex="36" onclick="closeAllModals()">X</button>
         <h3>📐 Advanced Spacing Auto Solver</h3>
-        <div class="form-group">
-            <label>Total Span / Size</label>
-            <input type="number" id="hlSpan" placeholder="Leave empty for blank schedule..." step="any">
+        <div style="display: flex; gap: 8px; margin-bottom: 10px;">
+            <div style="flex: 2;"><label>Total Span (Meters)</label><input type="number" tabindex="37" id="hlSpan" placeholder=".e.g. 4.5" step="any"></div>
+            <div style="flex: 1;">
+                <label>Divide Mode</label>
+                <select id="modalSpacingSelectMode" tabindex="38" onchange="toggleModalSpacingMode()">
+                    <option value="L1" selected>L/1</option>
+                    <option value="L3">L/3</option>
+                    <option value="L4">L/4</option>
+                </select>
+            </div>
         </div>
-        <div class="form-group">
-            <label>Span Dimension Unit</label>
-            <select id="hlSpanUnit">
-                <option value="METER" selected>Meters</option>
-                <option value="MM">mm</option>
-                <option value="INCH">Inches</option>
-                <option value="FT">Feet</option>
-            </select>
+        <div id="modalSingleBoxWrapper" class="form-group">
+            <label>Center-to-Center Spacing (mm)</label>
+            <input type="number" id="hlSpacingSingleInput" tabindex="39" placeholder=".e.g. 150" step="any">
         </div>
-        <div class="form-group">
-            <label>Center-to-Center Spacing</label>
-            <input type="number" id="hlSpacing" placeholder="Enter bar spacing..." step="any">
+        <div id="modalTripleBoxWrapper" style="display: none; background: rgba(37, 99, 235, 0.03); border: 1px solid var(--border-color); border-radius: 8px; padding: 12px; margin-bottom: 12px;">
+            <label style="color: #2563eb; font-weight: bold; font-size: 11px; display: block; margin-bottom: 8px;">Zone-Wise Split Spacing (mm)</label>
+            <div style="display: flex; gap: 8px;">
+                <div style="flex: 1;"><label style="font-size: 10px;">Zone 1</label><input type="number" id="z1Spacing" placeholder=".e.g. 100" step="any"></div>
+                <div style="flex: 1;"><label style="font-size: 10px;">Zone 2</label><input type="number" id="z2Spacing" placeholder=".e.g. 150" step="any"></div>
+                <div style="flex: 1;"><label style="font-size: 10px;">Zone 3</label><input type="number" id="z3Spacing" placeholder=".e.g. 100" step="any"></div>
+            </div>
         </div>
+        <button type="button" class="action-btn" tabindex="40" onclick="calculateAutoBarSpacingAndLength()">Compute & Apply Data</button>
+    </div>
+</div>
+
+<div id="civilCalcModal" class="modal-overlay" onclick="if(event.target == this) closeAllModals()">
+    <div class="modal-box">
+        <button class="modal-close-btn" tabindex="41" onclick="closeAllModals()">X</button>
+        <h3>🧮 Steel Unit Weight Solver</h3>
         <div class="form-group">
-            <label>Spacing Measurement Unit</label>
-            <select id="hlSpacingUnit">
-                <option value="MM" selected>mm</option>
-                <option value="INCH">Inches</option>
-            </select>
+            <label>Rebar Diameter (mm)</label>
+            <input type="number" tabindex="42" id="calcSteelDia" placeholder="Diameter .e.g. 16">
         </div>
-        <button type="button" class="action-btn" onclick="calculateAutoBarSpacingAndLength()">Compute & Apply Data</button>
+        <button class="action-btn" id="btnSteelComputeNode" tabindex="43" onclick="calculateSteelWeight()">Calculate Weight</button>
+        <div id="steelResultBox" class="calc-result-box" style="display:none;"></div>
     </div>
 </div>
 
 <div id="concreteCalcModal" class="modal-overlay" onclick="if(event.target == this) closeAllModals()">
     <div class="modal-box">
-        <button class="modal-close-btn" onclick="closeAllModals()">X</button>
+        <button class="modal-close-btn" tabindex="44" onclick="closeAllModals()">X</button>
         <h3>🧱 Concrete Layout Estimator</h3>
-        <select id="concreteInputMode" onchange="toggleDimInputBlock('concreteInputMode','concreteDimBlock'); safeModalToggle('concreteDirectVolBlock', (this.value=='VOL'?'block':'none'))" style="margin-bottom:10px;">
-            <option value="VOL">Direct Input Total Volume</option>
-            <option value="DIM">Use Wall / Structural Dimensions</option>
-        </select>
-        <div id="concreteDirectVolBlock" class="form-group">
+        <div class="form-group">
+            <label>Concrete Input Method Mode</label>
+            <select id="concInputMode" onchange="toggleConcreteInputMode()">
+                <option value="DIRECT">Direct Input Total Volume</option>
+                <option value="DIMENSION">Use Wall / Structural Dimensions</option>
+            </select>
+        </div>
+        
+        <div id="concDirectWrapper" class="form-group">
             <label>Volume (m³)</label>
-            <input type="number" id="calcVol" placeholder="e.g. 10" value="10" step="any">
+            <input type="number" id="calcVol" placeholder="10" step="any">
         </div>
-        <div id="concreteDimBlock" class="custom-dim-panel" style="display:none;">
-            <div class="form-group"><label>Length</label><input type="number" id="ccL" placeholder="Length" step="any"></div>
-            <div class="form-group"><label>Width</label><input type="number" id="ccW" placeholder="Width" step="any"></div>
-            <div class="form-group"><label>Height/Thick</label><input type="number" id="ccH" placeholder="Thickness" step="any"></div>
-            <div class="form-group"><label>Dimension Unit</label><select id="ccUnit"><option value="METER">Meters</option><option value="FT">Feet</option></select></div>
+
+        <div id="concDimWrapper" class="modal-inner-group-box" style="display:none;">
+            <div class="form-group"><label>Length</label><input type="number" id="concLen" placeholder="Length" step="any"></div>
+            <div class="form-group"><label>Width</label><input type="number" id="concWidth" placeholder="Width" step="any"></div>
+            <div class="form-group"><label>Height / Thickness</label><input type="number" id="concThick" placeholder="Thickness" step="any"></div>
+            <div class="form-group">
+                <label>Dimension Unit</label>
+                <select id="concDimUnit">
+                    <option value="METERS">Meters</option>
+                    <option value="FEET">Feet</option>
+                </select>
+            </div>
         </div>
-        <div class="form-group" style="margin-top:10px;">
+
+        <div class="form-group">
             <label>Mix Proportion Grade</label>
-            <select id="calcGrade" onchange="toggleConcreteCustomOption()">
+            <select id="concMixGrade" onchange="toggleConcreteMixMode()">
                 <option value="M15">M15 (1:2:4)</option>
                 <option value="M20" selected>M20 (1:1.5:3)</option>
                 <option value="M25">M25 (1:1:2)</option>
                 <option value="CUSTOM">-- Custom Ratio Mix --</option>
             </select>
         </div>
-        <div id="concreteCustomRatioBlock" style="display:none; background:#cbd5e1; padding:12px; border-radius:6px; margin-bottom:10px;">
-            <label>Custom Mix Parts (C : S : A)</label>
-            <div class="form-row-nested">
-                <input type="number" id="custCement" value="1" step="any">
-                <input type="number" id="custSand" value="1.5" step="any">
-                <input type="number" id="custAggr" value="3" step="any">
-            </div>
-        </div>
-        <button class="action-btn" onclick="calculateConcrete()">Calculate Material</button>
-        <div id="concreteResultBox" class="calc-result-box" style="display:none;"></div>
-    </div>
-</div>
 
-<div id="blockCalcModal" class="modal-overlay" onclick="if(event.target == this) closeAllModals()">
-    <div class="modal-box">
-        <button class="modal-close-btn" onclick="closeAllModals()">X</button>
-        <h3>🔲 Concrete Blockwork Custom Solver</h3>
-        <select id="blockInputMode" onchange="toggleDimInputBlock('blockInputMode','blockDimBlock'); safeModalToggle('blockDirectVolBlock', (this.value=='VOL'?'block':'none'))" style="margin-bottom:10px;">
-            <option value="VOL">Direct Input Volume</option>
-            <option value="DIM">Use Custom Wall Dimension</option>
-        </select>
-        <div id="blockDirectVolBlock" class="form-group">
-            <label>Volume (m³)</label>
-            <input type="number" id="blockVol" placeholder="e.g. 12" value="12" step="any">
-        </div>
-        <div id="blockDimBlock" class="custom-dim-panel" style="display:none;">
-            <div class="form-group"><label>Wall Length</label><input type="number" id="blL" placeholder="Length" step="any"></div>
-            <div class="form-group"><label>Thickness</label><input type="number" id="blW" placeholder="Width" step="any"></div>
-            <div class="form-group"><label>Wall Height</label><input type="number" id="blH" placeholder="Height" step="any"></div>
-            <div class="form-group"><label>Dimension Unit</label><select id="blUnit"><option value="METER">Meters</option><option value="FT">Feet</option></select></div>
-        </div>
-        <div class="form-group" style="margin-top:10px;">
-            <label>Standard Block Sizes</label>
-            <select id="blockSize" onchange="toggleBlockSizeOption()">
-                <option value="inch8" selected>400x200x200 mm (8 inch)</option>
-                <option value="inch4">400x100x200 mm (4 inch)</option>
-                <option value="CUSTOM">-- Custom Size Selection --</option>
-            </select>
-        </div>
-        <div id="blockSizeCustomBlock" class="custom-dim-panel" style="display:none; background:#cbd5e1; margin-bottom:10px;">
-            <label>Custom Size (mm)</label>
-            <div class="form-row-nested">
-                <input type="number" id="custBlockL" placeholder="L" step="any"><input type="number" id="custBlockW" placeholder="W" step="any"><input type="number" id="custBlockH" placeholder="H" step="any">
+        <div id="concCustomRatioWrapper" class="modal-inner-group-box" style="display:none;">
+            <label>Custom Mix Parts (C : S : A)</label>
+            <div style="display:flex; gap:8px;">
+                <input type="number" id="concCustC" placeholder="Cement" value="1">
+                <input type="number" id="concCustS" placeholder="Sand" value="1.5">
+                <input type="number" id="concCustA" placeholder="Aggregate" value="3">
             </div>
         </div>
-        <div class="form-group">
-            <label>Mortar Mix Ratio</label>
-            <select id="blockRatio" onchange="toggleBlockCustomOption()">
-                <option value="1:6" selected>1:6 Cement Mortar</option>
-                <option value="CUSTOM">Custom Ratio Mix</option>
-            </select>
-        </div>
-        <div id="blockCustomRatioBlock" style="display:none; background:#cbd5e1; padding:12px; border-radius:6px; margin-bottom:10px;">
-            <label>Custom Parts (C : S)</label>
-            <div class="form-row-nested-two">
-                <input type="number" id="custBlockCement" value="1" step="any"><input type="number" id="custBlockSand" value="6" step="any">
-            </div>
-        </div>
-        <button class="action-btn" onclick="calculateBlocks()">Calculate Blocks</button>
-        <div id="blockResultBox" class="calc-result-box" style="display:none;"></div>
+
+        <button class="action-btn" id="btnConcComputeNode" tabindex="46" onclick="calculateConcrete()">Calculate Material</button>
+        <div id="concreteResultBox" class="calc-result-box" style="display:none;"></div>
     </div>
 </div>
 
 <div id="brickCalcModal" class="modal-overlay" onclick="if(event.target == this) closeAllModals()">
     <div class="modal-box">
-        <button class="modal-close-btn" onclick="closeAllModals()">X</button>
+        <button class="modal-close-btn" tabindex="47" onclick="closeAllModals()">X</button>
         <h3>🔴 Brickwork Structural Solver</h3>
-        <select id="brickInputMode" onchange="toggleDimInputBlock('brickInputMode','brickDimBlock'); safeModalToggle('brickDirectVolBlock', (this.value=='VOL'?'block':'none'))" style="margin-bottom:10px;">
-            <option value="VOL">Direct Volume Mode</option>
-            <option value="DIM">Use Custom Wall Dimension</option>
-        </select>
-        <div id="brickDirectVolBlock" class="custom-dim-panel">
-            <div class="form-group"><label>Volume Value</label><input type="number" id="brickVol" value="5" step="any"></div>
-            <div class="form-group"><label>Volume Unit</label><select id="brickUnit"><option value="M3">Cubic Meters (m³)</option><option value="CFT">Cubic Feet (cft)</option></select></div>
+        <div class="form-group">
+            <label>Brickwork Method Mode</label>
+            <select id="brickInputMode" onchange="toggleBrickInputMode()">
+                <option value="DIRECT">Direct Volume Mode</option>
+                <option value="DIMENSION">Use Custom Wall Dimension</option>
+            </select>
         </div>
-        <div id="brickDimBlock" class="custom-dim-panel" style="display:none;">
-            <div class="form-group"><label>Length</label><input type="number" id="bkL" placeholder="Length" step="any"></div>
-            <div class="form-group"><label>Thickness</label><input type="number" id="bkW" placeholder="Width" step="any"></div>
-            <div class="form-group"><label>Height</label><input type="number" id="bkH" placeholder="Height" step="any"></div>
-            <div class="form-group"><label>Dimension Unit</label><select id="bkUnit"><option value="METER">Meters</option><option value="FT">Feet</option></select></div>
+
+        <div id="brickDirectWrapper" class="modal-inner-group-box">
+            <div class="form-group"><label>Volume Value</label><input type="number" id="brickVolVal" placeholder="5" step="any"></div>
+            <div class="form-group">
+                <label>Volume Unit</label>
+                <select id="brickVolUnit">
+                    <option value="CUBIC_METERS">Cubic Meters (m³)</option>
+                    <option value="CFT">Cubic Feet (cft)</option>
+                </select>
+            </div>
         </div>
-        <div class="form-group" style="margin-top:10px;">
+
+        <div id="brickDimWrapper" class="modal-inner-group-box" style="display:none;">
+            <div class="form-group"><label>Length</label><input type="number" id="brickLen" placeholder="Length" step="any"></div>
+            <div class="form-group"><label>Width</label><input type="number" id="brickThick" placeholder="Width" step="any"></div>
+            <div class="form-group"><label>Height / Thickness</label><input type="number" id="brickHeight" placeholder="Height" step="any"></div>
+            <div class="form-group">
+                <label>Dimension Unit</label>
+                <select id="brickDimUnit">
+                    <option value="METERS">Meters</option>
+                    <option value="FEET">Feet</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
             <label>Mortar Ratio</label>
-            <select id="brickRatio"><option value="1:4">1:4 Mix</option><option value="1:6" selected>1:6 Mix</option></select>
+            <select id="brickMortarRatio">
+                <option value="1:4">1:4 Mix</option>
+                <option value="1:6" selected>1:6 Mix</option>
+            </select>
         </div>
-        <button class="action-btn" onclick="calculateBricks()">Calculate Bricks</button>
+
+        <button class="action-btn" id="btnBrickComputeNode" tabindex="48" onclick="calculateBrickWork()">Calculate Bricks</button>
         <div id="brickResultBox" class="calc-result-box" style="display:none;"></div>
     </div>
 </div>
 
 <div id="plasterCalcModal" class="modal-overlay" onclick="if(event.target == this) closeAllModals()">
     <div class="modal-box">
-        <button class="modal-close-btn" onclick="closeAllModals()">X</button>
+        <button class="modal-close-btn" tabindex="50" onclick="closeAllModals()">X</button>
         <h3>⏳ Plaster Material Model</h3>
-        <select id="plasterInputMode" onchange="toggleDimInputBlock('plasterInputMode','plasterDimBlock'); safeModalToggle('plasterDirectVolBlock', (this.value=='VOL'?'block':'none'))" style="margin-bottom:10px;">
-            <option value="VOL">Direct Area Input</option>
-            <option value="DIM">Use Wall Dimensions</option>
-        </select>
-        <div id="plasterDirectVolBlock" class="custom-dim-panel">
-            <div class="form-group"><label>Area Value</label><input type="number" id="plasterArea" value="150" step="any"></div>
-            <div class="form-group"><label>Area Unit</label><select id="plasterUnit"><option value="SQFT">Sqft</option><option value="M2">m²</option></select></div>
+        <div class="form-group">
+            <label>Plaster Calculation Mode</label>
+            <select id="plasterInputMode" onchange="togglePlasterInputMode()">
+                <option value="DIRECT">Direct Area Input</option>
+                <option value="DIMENSION">Use Wall Dimensions</option>
+            </select>
         </div>
-        <div id="plasterDimBlock" class="custom-dim-panel" style="display:none;">
-            <div class="form-group"><label>Wall Length</label><input type="number" id="plL" placeholder="Length" step="any"></div>
-            <div class="form-group"><label>Wall Height</label><input type="number" id="plH" placeholder="Height" step="any"></div>
-            <div class="form-group"><label>Dimension Unit</label><select id="plUnit"><option value="SQFT">Feet</option><option value="M2">Meters</option></select></div>
-        </div>
-        <div class="form-group" style="margin-top:10px;">
-            <label>Thickness & Mix</label>
-            <div class="form-row-nested-two">
-                <select id="plasterThick"><option value="12">12mm</option><option value="15">15mm</option><option value="20">20mm</option></select>
-                <select id="plasterRatio"><option value="1:4">1:4</option><option value="1:6" selected>1:6</option></select>
+
+        <div id="plasterDirectWrapper" class="modal-inner-group-box">
+            <div class="form-group"><label>Area Value</label><input type="number" id="plasterAreaVal" placeholder="150" step="any"></div>
+            <div class="form-group">
+                <label>Area Unit</label>
+                <select id="plasterAreaUnit">
+                    <option value="SQFT">Sqft</option>
+                    <option value="SQM">Meters</option>
+                </select>
             </div>
         </div>
-        <button class="action-btn" onclick="calculatePlaster()">Calculate Plaster</button>
+
+        <div id="plasterDimWrapper" class="modal-inner-group-box" style="display:none;">
+            <div class="form-group"><label>Wall Length</label><input type="number" id="plasterLen" placeholder="Length" step="any"></div>
+            <div class="form-group"><label>Wall Height</label><input type="number" id="plasterHeight" placeholder="Height" step="any"></div>
+            <div class="form-group">
+                <label>Dimension Unit</label>
+                <select id="plasterDimUnit">
+                    <option value="FEET">Feet</option>
+                    <option value="METERS">Meters</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Thickness & Mortar Mix</label>
+            <div style="display:flex; gap:8px;">
+                <select id="plasterThick">
+                    <option value="12">12mm</option>
+                    <option value="15">15mm</option>
+                    <option value="20">20mm</option>
+                </select>
+                <select id="plasterMix">
+                    <option value="1:4">1:4</option>
+                    <option value="1:6" selected>1:6</option>
+                </select>
+            </div>
+        </div>
+
+        <button class="action-btn" id="btnPlasterComputeNode" onclick="calculatePlasterWork()">Calculate Plaster</button>
         <div id="plasterResultBox" class="calc-result-box" style="display:none;"></div>
     </div>
 </div>
 
 <div id="tileCalcModal" class="modal-overlay" onclick="if(event.target == this) closeAllModals()">
     <div class="modal-box">
-        <button class="modal-close-btn" onclick="closeAllModals()">X</button>
+        <button class="modal-close-btn" tabindex="51" onclick="closeAllModals()">X</button>
         <h3>🧱 Tile & Flooring Solver</h3>
-        <select id="tileInputMode" onchange="toggleDimInputBlock('tileInputMode','tileDimBlock'); safeModalToggle('tileDirectVolBlock', (this.value=='VOL'?'block':'none'))" style="margin-bottom:10px;">
-            <option value="VOL">Direct Carpet Area</option>
-            <option value="DIM">Custom Floor Size</option>
-        </select>
-        <div id="tileDirectVolBlock" class="form-group">
-            <label>Area Value</label>
-            <input type="number" id="tileArea" value="500" step="any">
+        <div class="form-group">
+            <label>Tile Input Mode Option</label>
+            <select id="tileInputMode" onchange="toggleTileInputMode()">
+                <option value="DIRECT">Direct Carpet Area</option>
+                <option value="DIMENSION">Custom Floor Size</option>
+            </select>
         </div>
-        <div id="tileDimBlock" class="custom-dim-panel" style="display:none;">
-            <div class="form-group"><label>Floor Length (ft)</label><input type="number" id="tlL" placeholder="Length" step="any"></div>
-            <div class="form-group"><label>Floor Width (ft)</label><input type="number" id="tlW" placeholder="Width" step="any"></div>
-        </div>
-        <div class="form-group" style="margin-top:5px;">
-            <label>Area Measurement Unit</label>
-            <select id="tileUnit"><option value="SQFT">Square Feet</option><option value="M2">Square Meters</option></select>
-        </div>
-        <div class="custom-dim-panel" style="background:#e0f2fe; border-color:#7dd3fc; margin-bottom:10px;">
-            <label style="color:#0369a1;">📏 Configure Single Tile Size Layout</label>
-            <div class="form-group" style="margin-top:5px;"><label>Tile Length</label><input type="number" id="tileDimL" value="1" step="any"></div>
-            <div class="form-group"><label>Tile Width</label><input type="number" id="tileDimW" value="1" step="any"></div>
+
+        <div id="tileDirectWrapper" class="modal-inner-group-box">
+            <div class="form-group"><label>Area Value</label><input type="number" id="tileAreaVal" placeholder="500" step="any"></div>
             <div class="form-group">
-                <label>Tile Size Unit</label>
-                <select id="individualTileUnit"><option value="FT" selected>Feet (ft)</option><option value="INCH">Inches</option><option value="MM">mm</option></select>
+                <label>Area Measurement Unit</label>
+                <select id="tileAreaUnit">
+                    <option value="SQFT">Square Feet</option>
+                    <option value="SQM">Square Meters</option>
+                </select>
             </div>
         </div>
-        <button class="action-btn" onclick="calculateTiles()">Calculate Tiles</button>
-        <div id="tileResultBox" class="calc-result-box" style="display:none;"></div>
-    </div>
-</div>
 
-<div id="aboutModal" class="modal-overlay" onclick="if(event.target == this) closeAllModals()">
-    <div class="modal-box">
-        <button class="modal-close-btn" onclick="closeAllModals()">X</button>
-        <h3>👑 Premium Subscription Center</h3>
-        <div class="about-card" style="background: var(--bg-card); border-left-color: #2563eb;">
-            <strong>BBS Pro Engine v1.1.0</strong><br>
-            Developed securely for structural calculation optimization. Secure local sandbox verified.
+        <div id="tileDimWrapper" class="modal-inner-group-box" style="display:none;">
+            <div class="form-group"><label>Floor Length (ft)</label><input type="number" id="tileFloorLen" placeholder="Length" step="any"></div>
+            <div class="form-group"><label>Floor Width (ft)</label><input type="number" id="tileFloorWidth" placeholder="Width" step="any"></div>
         </div>
-        <div class="admob-banner-placeholder" style="margin-top:20px;">🛡️ Play Protect Checked Secure Offline Sandbox</div>
-    </div>
-</div>
 
-<div id="civilCalcModal" class="modal-overlay" onclick="if(event.target == this) closeAllModals()">
-    <div class="modal-box">
-        <button class="modal-close-btn" onclick="closeAllModals()">X</button>
-        <h3>🧮 Steel Unit Weight Solver</h3>
-        <input type="number" id="calcSteelDia" placeholder="Diameter e.g. 16" step="any">
-        <button class="action-btn" onclick="calculateSteelWeight()">Calculate Weight</button>
-        <div id="steelResultBox" class="calc-result-box" style="display:none;"></div>
+        <div class="modal-inner-group-box" style="background: rgba(37, 99, 235, 0.05);">
+            <label>📐 Configure Single Tile Size Layout</label>
+            <div class="form-group" style="margin-top:5px;"><label>Tile Length</label><input type="number" id="tileLen" value="1" step="any"></div>
+            <div class="form-group"><label>Tile Width</label><input type="number" id="tileWidth" value="1" step="any"></div>
+            <div class="form-group">
+                <label>Tile Size Layout Unit</label>
+                <select id="tileSizeUnit">
+                    <option value="FEET">Feet (ft)</option>
+                    <option value="INCH">Inches</option>
+                    <option value="MM">mm</option>
+                </select>
+            </div>
+        </div>
+
+        <button class="action-btn" id="btnTileComputeNode" onclick="calculateTileWork()">Calculate Tiles</button>
+        <div id="tileResultBox" class="calc-result-box" style="display:none;"></div>
     </div>
 </div>
 
 <div id="shutteringCalcModal" class="modal-overlay" onclick="if(event.target == this) closeAllModals()">
     <div class="modal-box">
-        <button class="modal-close-btn" onclick="closeAllModals()">X</button>
-        <h3>Formwork Area Solver</h3>
-        <input type="number" id="shutterArea" placeholder="Area" step="any"><select id="shutterUnit"><option value="SQFT">Sqft</option><option value="M2">m²</option></select>
-        <button class="action-btn" onclick="calculateShuttering()">Calculate</button>
+        <button class="modal-close-btn" tabindex="52" onclick="closeAllModals()">X</button>
+        <h3>🪵 Formwork Area Solver</h3>
+        <div class="form-group">
+            <label>Formwork Target Area</label>
+            <input type="number" id="shutteringAreaVal" value="1" step="any">
+        </div>
+        <div class="form-group">
+            <label>Formwork Area Unit</label>
+            <select id="shutteringUnitSelect">
+                <option value="SQFT">Sqft</option>
+                <option value="SQM">m²</option>
+            </select>
+        </div>
+        <button class="action-btn" id="btnShutComputeNode" onclick="calculateShuttering()">Calculate</button>
         <div id="shutteringResultBox" class="calc-result-box" style="display:none;"></div>
     </div>
 </div>
 
-<div id="historyModal" class="modal-overlay" onclick="if(event.target == this) closeAllModals()">
-    <div class="modal-box"><button class="modal-close-btn" onclick="closeAllModals()">X</button><h3>📜 Session Sync Log</h3><div id="historyList" class="history-list"></div></div>
+<!-- UPGRADED QUALITY CONTROL SYSTEM -->
+<div id="qualityCalcModal" class="modal-overlay" onclick="if(event.target == this) closeAllModals()">
+    <div class="modal-box">
+        <button class="modal-close-btn" tabindex="53" onclick="closeAllModals()">X</button>
+        <h3>🏆 Quality Control Expert Mode</h3>
+        
+        <div class="form-group">
+            <label>Target Design Concrete Grade</label>
+            <select id="qcConcreteGradeSelect">
+                <option value="M15">M15 Grade Concrete</option>
+                <option value="M20" selected>M20 Grade Concrete</option>
+                <option value="M25">M25 Grade Concrete</option>
+                <option value="M30">M30 Grade Concrete</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Testing Age Period Option</label>
+            <select id="qcAgeSelect">
+                <option value="7DAYS">7 Days Cure Test (65% Target)</option>
+                <option value="14DAYS">14 Days Cure Test (90% Target)</option>
+                <option value="28DAYS" selected>28 Days Standard Test (100% Target)</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Concrete Slump Value (mm)</label>
+            <input type="number" id="qcSlump" placeholder=".e.g. 100" step="any">
+        </div>
+        
+        <div class="form-group">
+            <label>Cube Compressive Strength Result (N/mm²)</label>
+            <input type="number" id="qcCube" placeholder=".e.g. 25" step="any">
+        </div>
+
+        <button class="action-btn" id="btnQcComputeNode" onclick="verifyQualityParameter()">Verify Quality Parameters</button>
+        <div id="qualityResultBox" class="calc-result-box" style="display:none;"></div>
+    </div>
+</div>
+
+<div id="infoModal" class="modal-overlay" onclick="if(event.target == this) closeAllModals()">
+    <div class="modal-box">
+        <button class="modal-close-btn" tabindex="54" onclick="closeAllModals()">X</button>
+        <h3>👑 App Info & About</h3>
+        <p>BBS Structural Engine - v2.0 Premium License Registered.</p>
+    </div>
 </div>
 
 </body>
