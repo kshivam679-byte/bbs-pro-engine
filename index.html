@@ -190,7 +190,7 @@
             margin-bottom: 12px;
         }
 
-        /* FIRE TV REMOTE SUPPORT STYLING[span_2](start_span)[span_2](end_span) */
+        /* FIRE TV REMOTE SUPPORT STYLING[span_0](start_span)[span_0](end_span) */
         input:focus, button:focus, select:focus, .tab-btn:focus, .modal-tab-btn:focus {
             border: 4px solid #ff9900 !important;
             background-color: #fff3e0 !important;
@@ -242,7 +242,7 @@
         var currentLang = "en";
         var searchFilterText = "";
 
-        // SECURITY LAYER: Store & Application Policy Safe Context Lock[span_3](start_span)[span_3](end_span)[span_4](start_span)[span_4](end_span)
+        // SECURITY LAYER: Store & Application Policy Safe Context Lock[span_1](start_span)[span_1](end_span)[span_2](start_span)[span_2](end_span)
         document.addEventListener('contextmenu', event => event.preventDefault());
 
         function toggleCalcFolder(e) {
@@ -272,7 +272,7 @@
                 if (menu && btn && !menu.contains(e.target) && e.target !== btn) menu.style.display = 'none';
             });
 
-            // AMAZON FIRE TV / D-PAD ENGINE ACCENT SELECTION ROUTE[span_5](start_span)[span_5](end_span)
+            // AMAZON FIRE TV / D-PAD ENGINE ACCENT SELECTION ROUTE[span_3](start_span)[span_3](end_span)
             document.addEventListener('keydown', function(event) {
                 if (event.key === 'Enter' || event.keyCode === 13) {
                     var activeElement = document.activeElement;
@@ -627,7 +627,7 @@
                 var weights = {8:0.395, 10:0.617, 12:0.890, 16:1.580, 20:2.470, 25:3.850, 32:6.310, 40:9.860}, grandTotalKg = 0;
                 var r1 = '<tr><td colspan="8" style="text-align:right; font-weight:bold; background:#f1f5f9;">Total Length (m)</td><td>-</td>'; for (var i = 0; i < activeDias.length; i++) r1 += '<td>' + diaTotals[activeDias[i]].toFixed(2) + '</td>'; r1 += '<td></td></tr>';
                 var r3 = '<tr><td colspan="8" style="text-align:right; font-weight:bold; background:#f1f5f9;">Weight (In Kg)</td><td>-</td>'; for (var i = 0; i < activeDias.length; i++) { var d = activeDias[i], kg = diaTotals[d] * weights[d]; grandTotalKg += kg; r3 += '<td style="font-weight:bold; color:#2563eb;">' + kg.toFixed(2) + '</td>'; } r3 += '<td></td></tr>';
-                var grandTotalMT = grandTotalKg / 1000; var r4 = '<tr style="background:#dcfce7; font-weight:bold;"><td colspan="8" style="text-align:right;">Net Project Summary:</td><td colspan="4">' + grandTotalKg.toFixed(2) + ' Kg</td><td colspan="8">' + grandTotalMT.toFixed(4) + ' M.T. (Metric Tonnes)</td></tr>';
+                var grandTotalMT = grandTotalKg / 1000; var r4 = '<tr style="background:#dcfce7; font-weight:bold;"><td colspan="8" style="text-align:right;">Net Project Summary:</td><td colspan="4">' + grandTotalKg.toFixed(2) + ' Kg</td><td colspan="8">' + (grandTotalMT).toFixed(4) + ' M.T. (Metric Tonnes)</td></tr>';
                 var steelRateNode = document.getElementById('steelRatePerKg'); var steelRate = steelRateNode ? (parseFloat(steelRateNode.value) || 0) : 0, costRow = "";
                 if(steelRate > 0) { var totalCost = grandTotalKg * steelRate; costRow = '<tr style="background:#fee2e2; font-weight:bold; color:#991b1b;"><td colspan="8" style="text-align:right;">Estimated Steel Cost (Amount):</td><td colspan="12" style="text-align:left; padding-left:15px; font-size:14px;">₹ ' + totalCost.toLocaleString('en-IN', {maximumFractionDigits: 2}) + '</td></tr>'; }
                 finalHTML += (r1 + r3 + r4 + costRow); var dashWeightNode = document.getElementById('dashTotalWeight'); if(dashWeightNode) dashWeightNode.innerText = grandTotalKg.toFixed(2) + " Kg";
@@ -669,7 +669,7 @@
             }
             htmlData += '</tr>';
             
-            // Weight Row - SAFE MAPPED ACCENT FOR ACTIVE DIAS
+            // Weight Row - FIXED FROM MULTIPLE MAPPING ERRORS
             htmlData += '<tr><td colspan="9" style="font-weight:bold; text-align:right;">Weight (Kg)</td>'; 
             for(var d=0; d<activeDias.length; d++) { 
                 var currentDia = activeDias[d];
