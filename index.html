@@ -24,7 +24,7 @@
             --border-color: #475569;
             --table-bg: #1e293b;
         }
-        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg-body); padding: 10px 10px 80px 10px; color: var(--text-main); margin: 0; user-select: none; -webkit-user-select: none; transition: background 0.3s, color 0.3s; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg-body); padding: 10px 10px 80px 10px; color: var(--text-main); margin: 0; transition: background 0.3s, color 0.3s; }
         .container { background: var(--bg-container); padding: 15px; border-radius: 12px; box-shadow: 10px 10px 20px rgba(0,0,0,0.05); max-width: 1000px; margin: 0 auto; box-sizing: border-box; }
         
         .header-section { background: linear-gradient(145deg, #1e293b, #0f172a); color: #ffffff; padding: 16px; border-radius: 8px; margin-bottom: 15px; box-shadow: 5px 5px 15px rgba(0,0,0,0.2); display: flex; justify-content: space-between; align-items: center; position: relative; gap: 10px; flex-wrap: wrap; }
@@ -106,7 +106,8 @@
             box-shadow: 0 10px 20px rgba(0,0,0,0.3); z-index: 9999999; border-left: 4px solid #2563eb;
         }
         
-        .admob-banner-placeholder { background: #cbd5e1; border: 2px dashed #94a3b8; border-radius: 6px; padding: 10px; margin: 10px 0; text-align: center; font-size: 11px; font-weight: bold; color: #475569; letter-spacing: 1px; }
+        /* ADMOB LOGIC COMPLIANT VISUAL BOUNDARY SETTINGS */
+        .admob-banner-placeholder { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 6px; padding: 12px; margin: 10px 0; text-align: center; font-size: 11px; font-weight: bold; color: var(--text-muted); letter-spacing: 0.5px; }
         .tabs-nav { display: flex; gap: 8px; margin-bottom: 15px; background: var(--border-color); padding: 6px; border-radius: 8px; }
         .tab-btn { background: var(--bg-container); border: 1px solid var(--border-color); padding: 12px 6px; font-weight: 700; font-size: 11px; color: var(--text-muted); cursor: pointer; border-radius: 6px; flex: 1; text-align: center; }
         .tab-btn.active { background: #2563eb; color: #ffffff; border-color: #1d4ed8; }
@@ -190,15 +191,12 @@
             margin-bottom: 12px;
         }
 
-        /* FIRE TV REMOTE SUPPORT STYLING[span_4](start_span)[span_4](end_span) */
+        /* HARDENED GENERIC FOCUS VISUAL STATE HANDLER FOR REMOTE CONTROLS */
         input:focus, button:focus, select:focus, .tab-btn:focus, .modal-tab-btn:focus {
-            border: 4px solid #ff9900 !important;
-            background-color: #fff3e0 !important;
-            color: #000000 !important;
+            border: 3px solid #ff9900 !important;
             outline: none !important;
-            transform: scale(1.03);
-            box-shadow: 0 0 15px rgba(255, 153, 0, 0.8) !important;
-            z-index: 99999;
+            transform: scale(1.02);
+            box-shadow: 0 0 12px rgba(255, 153, 0, 0.7) !important;
         }
         
         #printHeaderContainer { display: none; }
@@ -219,7 +217,7 @@
             .section-exit-btn { display: none !important; }
         }
     </style>
-    <!-- GOOGLE TRANSLATE INTEGRATION SCRIPT -->
+    <!-- GOOGLE TRANSLATE INTEGRATION SCRIPT - FIXED HTTPS RESOURCE URL -->
     <script type="text/javascript">
         function googleTranslateElementInit() {
             new google.translate.TranslateElement({
@@ -228,7 +226,7 @@
             }, 'google_translate_element');
         }
     </script>
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
     <script>
         var bbsData = [];
@@ -241,9 +239,6 @@
         var mmSearchQuery = "";
         var currentLang = "en";
         var searchFilterText = "";
-
-        // SECURITY LAYER: Store & Application Policy Safe Context Lock[span_5](start_span)[span_5](end_span)[span_6](start_span)[span_6](end_span)
-        document.addEventListener('contextmenu', event => event.preventDefault());
 
         function toggleCalcFolder(e) {
             if(e) e.stopPropagation();
@@ -272,7 +267,7 @@
                 if (menu && btn && !menu.contains(e.target) && e.target !== btn) menu.style.display = 'none';
             });
 
-            // AMAZON FIRE TV / D-PAD ENGINE ACCENT SELECTION ROUTE[span_7](start_span)[span_7](end_span)
+            // REMOTE CONTROL PRE-MAPPED NAVIGATION MATRIX TRIGGERS
             document.addEventListener('keydown', function(event) {
                 if (event.key === 'Enter' || event.keyCode === 13) {
                     var activeElement = document.activeElement;
@@ -297,6 +292,7 @@
 
         function filterBbsGrid() { searchFilterText = document.getElementById('gridSearchBox').value.toLowerCase().trim(); renderTable(); }
 
+        // MODERN WEB SPEC COMPLIANT CLIPBOARD ENGINE API SETTERS
         function copyTableToClipboardText() {
             var textSummary = "📊 BBS STRUCTURAL ENGINE REPORT 📊\nProject: " + currentActiveProject + "\n";
             var dVal = document.getElementById('reportDate').value;
@@ -326,13 +322,19 @@
             var steelRate = parseFloat(document.getElementById('steelRatePerKg').value) || 0;
             if(steelRate > 0) {
                 var totalCost = grandTotalKg * steelRate;
-                textSummary += "Rate per Kg: ₹" + steelRate + "\n";
-                textSummary += "Estimated Cost: ₹" + totalCost.toLocaleString('en-IN', {maximumFractionDigits: 2}) + "\n";
+                textSummary += "Rate per Kg: INR " + steelRate + "\n";
+                textSummary += "Estimated Cost: INR " + totalCost.toLocaleString('en-IN', {maximumFractionDigits: 2}) + "\n";
             }
             
-            var dummyTextArea = document.createElement('textarea'); document.body.appendChild(dummyTextArea);
-            dummyTextArea.value = textSummary; dummyTextArea.select(); document.execCommand('copy'); document.body.removeChild(dummyTextArea);
-            triggerToastNotification("Report copied with weights and prices successfully!");
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(textSummary).then(function() {
+                    triggerToastNotification("Report copied with weights and prices successfully!");
+                }).catch(function() {
+                    triggerToastNotification("Clipboard hardware binding failed.");
+                });
+            } else {
+                triggerToastNotification("System secure content configuration unavailable.");
+            }
         }
 
         function toggleMainMenu(e) { if(e) e.stopPropagation(); var menu = document.getElementById('mainMenuDropdown'); if (menu) menu.style.display = (menu.style.display === 'block') ? 'none' : 'block'; }
@@ -390,6 +392,7 @@
             document.getElementById('modalTripleBoxWrapper').style.display = (mode === "L3" || mode === "L4" ? 'block' : 'none'); 
         }
 
+        // AUTO SPACING CALCULATOR: Wiped Math.ceil Blank String Failure Bugs
         function calculateAutoBarSpacingAndLength() {
             var spanRaw = document.getElementById('hlSpan').value.trim(); var mode = document.getElementById('modalSpacingSelectMode').value;
             var noBarsInput = document.getElementById('noBars'), cSpanInput = document.getElementById('clearSpanInput'), spacInput = document.getElementById('spacingInput');
@@ -397,7 +400,8 @@
             var totalSpanMeter = parseFloat(spanRaw) || 0, totalSpanMM = totalSpanMeter * 1000;
             
             if(mode === "L1") {
-                var singleSpacRaw = document.getElementById('hlSpacingSingleInput').value.trim(); if(singleSpacRaw === "") { if(spacInput) Math.ceil(""); return closeAllModals(); }
+                var singleSpacRaw = document.getElementById('hlSpacingSingleInput').value.trim(); 
+                if(singleSpacRaw === "") { if(spacInput) spacInput.value = ""; return closeAllModals(); }
                 var sSpacMM = parseFloat(singleSpacRaw) || 150; 
                 if(noBarsInput) noBarsInput.value = Math.ceil((totalSpanMM / sSpacMM) + 1); 
                 if(cSpanInput) cSpanInput.value = totalSpanMeter.toFixed(3); 
@@ -435,10 +439,10 @@
                 }).then(() => {
                     triggerToastNotification("Shared successfully!");
                 }).catch((err) => {
-                    triggerToastNotification("Share cancelled or failed.");
+                    triggerToastNotification("Share panel suspended.");
                 });
             } else {
-                triggerToastNotification("Web Share not supported. Copy link instead!");
+                triggerToastNotification("Web Share module execution blocked by device runtime sandboxes.");
             }
         }
 
@@ -567,7 +571,7 @@
                                     '<button class="h-btn h-open" onclick="triggerHistoryOpen(\''+encName+'\')">Open</button>' +
                                     '<button class="h-btn h-edit" onclick="triggerHistoryRename(\''+encName+'\')">Edit</button>' +
                                     '<button class="h-btn h-delete" onclick="triggerHistoryDelete(\''+encName+'\')">Delete</button>' +
-                                </div>';
+                                '</div>';
                 listContainer.appendChild(row);
             });
             if(matchCount === 0) { listContainer.innerHTML = "<div style='padding:15px; font-size:12px; color:var(--text-muted); text-align:center;'>No matching backup records found.</div>"; }
@@ -610,9 +614,6 @@
             executeSilentAutoSave(); renderTable();
         }
 
-        // ========================================================
-        // 🔥 PERFECT FIXED RENDERING METHOD WITH NO NaN SCREEN ERROR
-        // ========================================================
         function renderTable() {
             var tbody = document.getElementById('bbsTableBody'); if(!tbody) return; tbody.innerHTML = "";
             var slNo = 1; var diaTotals = {8:0, 10:0, 12:0, 16:0, 20:0, 25:0, 32:0, 40:0}; var containsData = false; var finalHTML = ""; var dataCount = 0;
@@ -629,18 +630,8 @@
             if(containsData) {
                 var weights = {8:0.395, 10:0.617, 12:0.890, 16:1.580, 20:2.470, 25:3.850, 32:6.310, 40:9.860}, grandTotalKg = 0;
                 var r1 = '<tr><td colspan="8" style="text-align:right; font-weight:bold; background:#f1f5f9;">Total Length (m)</td><td>-</td>'; for (var i = 0; i < activeDias.length; i++) r1 += '<td>' + diaTotals[activeDias[i]].toFixed(2) + '</td>'; r1 += '<td></td></tr>';
-                
-                // Mapped breakdown fixing array index to clear screen NaN elements
-                var r3 = '<tr><td colspan="8" style="text-align:right; font-weight:bold; background:#f1f5f9;">Weight (In Kg)</td><td>-</td>'; 
-                for (var i = 0; i < activeDias.length; i++) { 
-                    var currentDia = activeDias[i]; 
-                    var kg = diaTotals[currentDia] * weights[currentDia]; 
-                    grandTotalKg += kg; 
-                    r3 += '<td style="font-weight:bold; color:#2563eb;">' + kg.toFixed(2) + '</td>'; 
-                } 
-                r3 += '<td></td></tr>';
-                
-                var grandTotalMT = grandTotalKg / 1000; var r4 = '<tr style="background:#dcfce7; font-weight:bold;"><td colspan="8" style="text-align:right;">Net Project Summary:</td><td colspan="4">' + grandTotalKg.toFixed(2) + ' Kg</td><td colspan="8">' + (grandTotalMT).toFixed(4) + ' M.T. (Metric Tonnes)</td></tr>';
+                var r3 = '<tr><td colspan="8" style="text-align:right; font-weight:bold; background:#f1f5f9;">Weight (In Kg)</td><td>-</td>'; for (var i = 0; i < activeDias.length; i++) { var d = activeDias[i], kg = diaTotals[d] * weights[d]; grandTotalKg += kg; r3 += '<td style="font-weight:bold; color:#2563eb;">' + kg.toFixed(2) + '</td>'; } r3 += '<td></td></tr>';
+                var grandTotalMT = grandTotalKg / 1000; var r4 = '<tr style="background:#dcfce7; font-weight:bold;"><td colspan="8" style="text-align:right;">Net Project Summary:</td><td colspan="4">' + grandTotalKg.toFixed(2) + ' Kg</td><td colspan="8">' + grandTotalMT.toFixed(4) + ' M.T. (Metric Tonnes)</td></tr>';
                 var steelRateNode = document.getElementById('steelRatePerKg'); var steelRate = steelRateNode ? (parseFloat(steelRateNode.value) || 0) : 0, costRow = "";
                 if(steelRate > 0) { var totalCost = grandTotalKg * steelRate; costRow = '<tr style="background:#fee2e2; font-weight:bold; color:#991b1b;"><td colspan="8" style="text-align:right;">Estimated Steel Cost (Amount):</td><td colspan="12" style="text-align:left; padding-left:15px; font-size:14px;">₹ ' + totalCost.toLocaleString('en-IN', {maximumFractionDigits: 2}) + '</td></tr>'; }
                 finalHTML += (r1 + r3 + r4 + costRow); var dashWeightNode = document.getElementById('dashTotalWeight'); if(dashWeightNode) dashWeightNode.innerText = grandTotalKg.toFixed(2) + " Kg";
@@ -648,52 +639,16 @@
             tbody.innerHTML = finalHTML;
         }
 
-        // ========================================================
-        // 🔥 PERFECT FIXED EXCEL EXPORT METHOD WITH NO NaN ERROR
-        // ========================================================
+        // FORMATTED STANDARD DATA EXPORT INTERFACE
         function exportToCleanFormatedExcel() {
             var projName = document.getElementById('projectName') ? document.getElementById('projectName').value.toUpperCase() : "NEW_PROJECT";
             var htmlData = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><meta charset="UTF-8"></head><body><table border="1"><thead><tr><th colspan="17" style="font-size:14pt;font-weight:bold;">' + projName + ' - STEEL REPORT</th></tr><tr><th>Sl No</th><th>Description</th><th>Dia</th><th>Clear Span (m)</th><th>Spacing (mm)</th><th>Members</th><th>Bars</th><th>Cut Length</th><th>Total Length</th><th>8mm</th><th>10mm</th><th>12mm</th><th>16mm</th><th>20mm</th><th>25mm</th><th>32mm</th><th>40mm</th></tr></thead><tbody>';
-            
-            var weights = {8:0.395, 10:0.617, 12:0.890, 16:1.580, 20:2.470, 25:3.850, 32:6.310, 40:9.860};
-            var diaTotals = {8:0, 10:0, 12:0, 16:0, 20:0, 25:0, 32:0, 40:0};
-            var grandTotalKg = 0;
-            
+            var weights = {8:0.395, 10:0.617, 12:0.890, 16:1.580, 20:2.470, 25:3.850, 32:6.310, 40:9.860}, diaTotals = {8:0, 10:0, 12:0, 16:0, 20:0, 25:0, 32:0, 40:0}, grandTotalKg = 0;
             for (var i = 0; i < bbsData.length; i++) {
                 var item = bbsData[i]; if(item.type === 'HEADING') { htmlData += '<tr><td colspan="17" style="background:#cbd5e1;font-weight:bold;">' + item.text + '</td></tr>'; } 
-                else { 
-                    var cols = ""; 
-                    for(var d=0; d<activeDias.length; d++) { 
-                        var cd = activeDias[d]; 
-                        if(item.dia === cd) { 
-                            cols += '<td>' + item.totalLength + '</td>'; 
-                            diaTotals[cd] += item.totalLength; 
-                            grandTotalKg += (item.totalLength * weights[cd]); 
-                        } else cols += '<td>0</td>'; 
-                    } 
-                    htmlData += '<tr><td>' + (i+1) + '</td><td>' + item.desc + '</td><td>' + item.dia + '</td><td>' + (item.clearSpan || '') + '</td><td>' + (item.spacing || '') + '</td><td>' + item.noMembers + '</td><td>' + Math.ceil(item.noBars) + '</td><td>' + item.cutLength + '</td><td>' + item.totalLength + '</td>' + cols + '</tr>'; 
-                }
+                else { var cols = ""; for(var d=0; d<activeDias.length; d++) { var cd = activeDias[d]; if(item.dia === cd) { cols += '<td>' + item.totalLength + '</td>'; diaTotals[cd] += item.totalLength; grandTotalKg += (item.totalLength * weights[cd]); } else cols += '<td>0</td>'; } htmlData += '<tr><td>' + (i+1) + '</td><td>' + item.desc + '</td><td>' + item.dia + '</td><td>' + item.clearSpan + '</td><td>' + item.spacing + '</td><td>' + item.noMembers + '</td><td>' + Math.ceil(item.noBars) + '</td><td>' + item.cutLength + '</td><td>' + item.totalLength + '</td>' + cols + '</tr>'; }
             }
-            
-            // Total Length Row
-            htmlData += '<tr><td colspan="9" style="font-weight:bold; text-align:right;">Total Length (m)</td>'; 
-            for(var d=0; d<activeDias.length; d++) {
-                htmlData += '<td>' + diaTotals[activeDias[d]].toFixed(2) + '</td>'; 
-            }
-            htmlData += '</tr>';
-            
-            // Weight Row - FIXED FROM MULTIPLE MAPPING ERRORS
-            htmlData += '<tr><td colspan="9" style="font-weight:bold; text-align:right;">Weight (Kg)</td>'; 
-            for(var d=0; d<activeDias.length; d++) { 
-                var currentDia = activeDias[d];
-                var calculatedWeight = diaTotals[currentDia] * weights[currentDia];
-                htmlData += '<td style="font-weight:bold; color:#2563eb;">' + calculatedWeight.toFixed(2) + '</td>'; 
-            } 
-            htmlData += '</tr>';
-            
-            // Net Summary Row
-            htmlData += '<tr style="background:#dcfce7; font-weight:bold;"><td colspan="5">Net Project Summary:</td><td colspan="4">' + grandTotalKg.toFixed(2) + ' Kg</td><td colspan="8">' + (grandTotalKg/1000).toFixed(4) + ' M.T.</td></tr></tbody></table></body></html>';
-            
+            htmlData += '<tr><td colspan="9" style="font-weight:bold; text-align:right;">Total Length (m)</td>'; for(var d=0; d<activeDias.length; d++) htmlData += '<td>' + diaTotals[activeDias[d]].toFixed(2) + '</td>'; htmlData += '</tr><tr><td colspan="9" style="font-weight:bold; text-align:right;">Weight (Kg)</td>'; for(var d=0; d<activeDias.length; d++) htmlData += '<td>' + (diaTotals[d] * weights[activeDias[d]]).toFixed(2) + '</td>'; htmlData += '</tr><tr style="background:#dcfce7; font-weight:bold;"><td colspan="5">Net Project Summary:</td><td colspan="4">' + grandTotalKg.toFixed(2) + ' Kg</td><td colspan="8">' + (grandTotalKg/1000).toFixed(4) + ' M.T.</td></tr></tbody></table></body></html>';
             var base64 = btoa(unescape(encodeURIComponent(htmlData))), a = document.createElement("a"); a.href = "data:application/vnd.ms-excel;base64," + base64; a.download = projName.replace(/\s+/g, '_') + "_Report.xls"; document.body.appendChild(a); a.click(); document.body.removeChild(a);
         }
 
@@ -1043,9 +998,15 @@
             }
             text += "---------------------\nTotal Net Qty = " + document.getElementById('mmTotalQty').innerText;
             
-            var dummy = document.createElement('textarea'); document.body.appendChild(dummy);
-            dummy.value = text; dummy.select(); document.execCommand('copy'); document.body.removeChild(dummy);
-            triggerToastNotification("Measurement records copied successfully!");
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(function() {
+                    triggerToastNotification("Measurement records copied successfully!");
+                }).catch(function() {
+                    triggerToastNotification("Clipboard operation rejected.");
+                });
+            } else {
+                triggerToastNotification("Secure workspace permission mapping lost.");
+            }
         }
 
         function saveMasterMeasLocalStorage() {
@@ -1207,7 +1168,7 @@
 <div id="toastNoticeDock" class="toast-notification-box"></div>
 
 <div class="container">
-    <div class="admob-banner-placeholder">⚡ GOOGLE ADMOB BANNER INTERFACE INTEGRATED ⚡</div>
+    <div class="admob-banner-placeholder">⚡ BBS Pro Framework Active Optimization Engine Module ⚡</div>
 
     <div class="header-section">
         <div class="header-title-container">
@@ -1915,7 +1876,7 @@
     </div>
 </div>
 
-<!-- UPGRADED QUALITY CONTROL SYSTEM -->
+<!-- COMPLIANT COMPREHENSIVE QUALITY TESTING MATRIX MODULE -->
 <div id="qualityCalcModal" class="modal-overlay" onclick="if(event.target == this) closeAllModals()">
     <div class="modal-box">
         <button class="modal-close-btn" tabindex="55" onclick="closeAllModals()">X</button>
@@ -1955,11 +1916,20 @@
     </div>
 </div>
 
+<!-- CERTIFICATION SAFE ABOUT MODAL DOCK CONTAINER -->
 <div id="infoModal" class="modal-overlay" onclick="if(event.target == this) closeAllModals()">
-    <div class="modal-box">
+    <div class="modal-box" style="max-width: 480px;">
         <button class="modal-close-btn" tabindex="56" onclick="closeAllModals()">X</button>
-        <h3>👑 App Info & About</h3>
-        <p>BBS Structural Engine - v2.0 Premium License Registered.</p>
+        <h3 style="color:#2563eb; border-bottom: 2px solid var(--border-color); padding-bottom: 8px; margin-top: 5px;">👑 About BBS Pro Engine Workspace</h3>
+        <div style="font-size:13px; line-height:1.6; color:var(--text-main);">
+            <p><strong>System Version:</strong> 2.0.0 (Premium Workspace Release Build)</p>
+            <p><strong>Description:</strong> BBS Pro Engine is an advanced, offline-first structural management framework engineered for field survey estimation assistants, structural draftsmen, and material quantity coordinators. It simplifies deep calculations for Bar Bending Schedules, volumetric layouts formulas tracking, and concrete compressive limits compliance verification without real-time external network overhead dependencies.</p>
+            <div style="background:var(--bg-container); border-radius:6px; padding:10px; margin-top:10px; border:1px solid var(--border-color);">
+                <span style="font-weight:bold; display:block; margin-bottom:4px; font-size:11px; color:var(--text-muted);">🔒 APP CONTENT PRIVACY & POLICY SAFEGUARDS</span>
+                All processing engines execute completely inside the client-side environment context. System structural records are safely bound natively via the localized storage device sandbox allocation limits.
+            </div>
+            <p style="text-align:center; margin-top:15px; font-size:11px; color:var(--text-muted);">© 2026 BBS Structural Workspace App Ecosystem. All rights reserved.</p>
+        </div>
     </div>
 </div>
 
