@@ -327,7 +327,7 @@
                 ph_heading: "जैसे: बीम पियर 12",
                 ph_bar: "जैसे: मुख्य निचली बार",
                 admob_placeholder: "⚡ बीबीएस फ्रेमवर्क सक्रिय अनुकूलन इंजन मॉड्यूल ⚡",
-                th_sl: "क्र.सं.", th_desc: "विवरण", th_dia: "व्यास", th_cspan: "क्लियर स्पैन (मी)", th_spac: "स्पेसिंग (मिमी)", th_nos: "संख्या", th_mem: "मेंबर्स", th_bars: "सरिया", th_cut: "कट लंबाई", th_tot: "कुल लंबाई", th_act: "कार्रवाई",
+                th_sl: "क्र.सं.", th_desc: "विवरण", th_dia: "व्यास", th_cspan: "क्लियर स्पैन (मी)", th_spac: "स्पेसिंग (मिमी)", th_nos: "संख्या", th_mem: "मेंबers", th_bars: "सरिया", th_cut: "कट लंबाई", th_tot: "कुल लंबाई", th_act: "कार्रवाई",
                 btn_delete: "हटाएं"
             }
         };
@@ -812,33 +812,187 @@
 
         function exportToCleanFormatedExcel() {
             var projName = document.getElementById('projectName') ? document.getElementById('projectName').value.toUpperCase() : "NEW_PROJECT";
-            var htmlData = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><meta charset="UTF-8"></head><body><table border="1"><thead><tr><th colspan="17" style="font-size:14pt;font-weight:bold;">' + projName + ' - STEEL REPORT</th></tr><tr><th>Sl No</th><th>Description</th><th>Dia</th><th>Clear Span (m)</th><th>Spacing (mm)</th><th>Members</th><th>Bars</th><th>Cut Length</th><th>Total Length</th><th>8mm</th><th>10mm</th><th>12mm</th><th>16mm</th><th>20mm</th><th>25mm</th><th>32mm</th><th>40mm</th></tr></thead><tbody>';
-            var weights = {8:0.395, 10:0.617, 12:0.890, 16:1.580, 20:2.470, 25:3.850, 32:6.310, 40:9.860}, diaTotals = {8:0, 10:0, 12:0, 16:0, 20:0, 25:0, 32:0, 40:0}, grandTotalKg = 0;
+            
+            // Pipe rack RA-01_ Javed.xlsx exact structured format layout engine mapping
+            var htmlData = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">' +
+                '<head><meta charset="UTF-8"><style>' +
+                'table { border-collapse: collapse; font-family: Calibri, sans-serif; }' +
+                'td, th { border: 0.5pt solid #000000; text-align: center; vertical-align: middle; font-size: 11pt; }' +
+                '.main-title { font-size: 16pt; font-weight: bold; background-color: #D9E1F2; color: #000000; height: 35px; }' +
+                '.header-top { background-color: #1F4E78; color: #FFFFFF; font-weight: bold; height: 25px; }' +
+                '.header-bottom { background-color: #2F5597; color: #FFFFFF; font-weight: bold; height: 25px; }' +
+                '.heading-row { background-color: #FFF2CC; font-weight: bold; text-align: left; font-size: 11pt; height: 24px; text-transform: uppercase; }' +
+                '.dia-active { font-weight: bold; color: #000000; }' +
+                '.dia-zero { color: #BFBFBF; }' +
+                '.summary-label { font-weight: bold; background-color: #F2F2F2; text-align: right; }' +
+                '.summary-val { font-weight: bold; background-color: #F2F2F2; }' +
+                '.grand-total { font-weight: bold; background-color: #E2EFDA; color: #375623; font-size: 12pt; height: 30px; }' +
+                '</style></head><body>' +
+                '<table>' +
+                '<thead>' +
+                '<tr><th colspan="17" class="main-title">' + projName + ' - BAR BENDING SCHEDULE REPORT</th></tr>' +
+                '<tr class="header-top">' +
+                '  <th rowspan="2">Sl No</th>' +
+                '  <th rowspan="2">Description of Bars</th>' +
+                '  <th rowspan="2">Dia (mm)</th>' +
+                '  <th rowspan="2">Clear Span (m)</th>' +
+                '  <th rowspan="2">Spacing (mm)</th>' +
+                '  <th colspan="2">No of Items</th>' +
+                '  <th rowspan="2">Cutting Length (m)</th>' +
+                '  <th rowspan="2">Total Length (m)</th>' +
+                '  <th colspan="8">Diameter wise Break Up Length (mtr)</th>' +
+                '</tr>' +
+                '<tr class="header-bottom">' +
+                '  <th>No of Members</th><th>Bars in Each</th>' +
+                '  <th>8mm</th><th>10mm</th><th>12mm</th><th>16mm</th><th>20mm</th><th>25mm</th><th>32mm</th><th>40mm</th>' +
+                '</tr>' +
+                '</thead><tbody>';
+
+            var weights = {8:0.395, 10:0.617, 12:0.890, 16:1.580, 20:2.470, 25:3.850, 32:6.310, 40:9.860};
+            var diaTotals = {8:0, 10:0, 12:0, 16:0, 20:0, 25:0, 32:0, 40:0};
+            var grandTotalKg = 0;
+            var counter = 1;
+
             for (var i = 0; i < bbsData.length; i++) {
-                var item = bbsData[i]; if(item.type === 'HEADING') { htmlData += '<tr><td colspan="17" style="background:#cbd5e1;font-weight:bold;">' + item.text + '</td></tr>'; } 
-                else { var cols = ""; for(var d=0; d<activeDias.length; d++) { var cd = activeDias[d]; if(item.dia === cd) { cols += '<td>' + item.totalLength + '</td>'; diaTotals[cd] += item.totalLength; } else cols += '<td>0</td>'; } htmlData += '<tr><td>' + (i+1) + '</td><td>' + item.desc + '</td><td>' + item.dia + '</td><td>' + item.clearSpan + '</td><td>' + item.spacing + '</td><td>' + item.noMembers + '</td><td>' + Math.ceil(item.noBars) + '</td><td>' + item.cutLength + '</td><td>' + item.totalLength + '</td>' + cols + '</tr>'; }
+                var item = bbsData[i];
+                if (item.type === 'HEADING') {
+                    htmlData += '<tr><td colspan="17" class="heading-row" style="text-align:left; padding-left:10px;"><b>' + item.text + '</b></td></tr>';
+                } else {
+                    var diaCols = "";
+                    for (var d = 0; d < activeDias.length; d++) {
+                        var cd = activeDias[d];
+                        if (item.dia === cd) {
+                            diaCols += '<td class="dia-active">' + item.totalLength.toFixed(2) + '</td>';
+                            diaTotals[cd] += item.totalLength;
+                        } else {
+                            diaCols += '<td class="dia-zero">0.00</td>';
+                        }
+                    }
+                    htmlData += '<tr>' +
+                        '<td>' + (counter++) + '</td>' +
+                        '<td style="text-align:left;">' + item.desc + '</td>' +
+                        '<td>' + item.dia + '</td>' +
+                        '<td>' + (parseFloat(item.clearSpan) || 0).toFixed(3) + '</td>' +
+                        '<td>' + item.spacing + '</td>' +
+                        '<td>' + item.noMembers + '</td>' +
+                        '<td>' + Math.ceil(item.noBars) + '</td>' +
+                        '<td>' + item.cutLength.toFixed(3) + '</td>' +
+                        '<td style="font-weight:bold;">' + item.totalLength.toFixed(2) + '</td>' +
+                        diaCols +
+                        '</tr>';
+                }
             }
-            htmlData += '<tr><td colspan="9" style="font-weight:bold; text-align:right;">Total Length (m)</td>'; for(var d=0; d<activeDias.length; d++) htmlData += '<td>' + diaTotals[activeDias[d]].toFixed(2) + '</td>'; htmlData += '</tr><tr><td colspan="9" style="font-weight:bold; text-align:right;">Weight (Kg)</td>'; for(var d=0; d<activeDias.length; d++) { var dSize = activeDias[d]; var calculatedWeightVal = diaTotals[dSize] * weights[dSize]; grandTotalKg += calculatedWeightVal; htmlData += '<td style="font-weight:bold;">' + calculatedWeightVal.toFixed(2) + '</td>'; } htmlData += '</tr><tr style="background:#dcfce7; font-weight:bold;"><td colspan="5">Net Project Summary:</td><td colspan="4">' + grandTotalKg.toFixed(2) + ' Kg</td><td colspan="8">' + (grandTotalKg/1000).toFixed(4) + ' M.T.</td></tr></tbody></table></body></html>';
-            var base64 = btoa(unescape(encodeURIComponent(htmlData))), a = document.createElement("a"); a.href = "data:application/vnd.ms-excel;base64," + base64; a.download = projName.replace(/\s+/g, '_') + "_Report.xls"; document.body.appendChild(a); a.click(); document.body.removeChild(a);
+
+            // Total Length Row
+            htmlData += '<tr><td colspan="8" class="summary-label">Total Length (m)</td><td class="summary-val">-</td>';
+            for (var d = 0; d < activeDias.length; d++) {
+                htmlData += '<td class="summary-val">' + diaTotals[activeDias[d]].toFixed(2) + '</td>';
+            }
+            htmlData += '</tr>';
+
+            // Weight Row
+            htmlData += '<tr><td colspan="8" class="summary-label">Weight (In Kg)</td><td class="summary-val">-</td>';
+            for (var d = 0; d < activeDias.length; d++) {
+                var dSize = activeDias[d];
+                var calculatedWeightVal = diaTotals[dSize] * weights[dSize];
+                grandTotalKg += calculatedWeightVal;
+                htmlData += '<td class="summary-val" style="color:#1F4E78;">' + calculatedWeightVal.toFixed(2) + '</td>';
+            }
+            htmlData += '</tr>';
+
+            // Grand Summary row matching Javed structural matrix standard
+            var grandTotalMT = grandTotalKg / 1000;
+            htmlData += '<tr class="grand-total">' +
+                '<td colspan="5">Net Summary Weight:</td>' +
+                '<td colspan="4">' + grandTotalKg.toFixed(2) + ' Kg</td>' +
+                '<td colspan="8">' + grandTotalMT.toFixed(4) + ' M.T.</td>' +
+                '</tr>';
+
+            htmlData += '</tbody></table></body></html>';
+
+            var base64 = btoa(unescape(encodeURIComponent(htmlData))), a = document.createElement("a");
+            a.href = "data:application/vnd.ms-excel;base64," + base64;
+            a.download = projName.replace(/\s+/g, '_') + "_BBS_Report.xls";
+            document.body.appendChild(a); a.click(); document.body.removeChild(a);
         }
 
         function exportMasterMeasExcel() {
             var title = document.getElementById('mmSheetTitle').value || "MEASUREMENT SHEET";
             var pName = document.getElementById('mmProjectName').value || "NEW_SITE";
-            var htmlData = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><meta charset="UTF-8"></head><body><table border="1"><thead><tr><th colspan="9" style="font-size:14pt;font-weight:bold;text-align:center;height:40px;">' + pName.toUpperCase() + ' - ' + title.toUpperCase() + '</th></tr><tr><th colspan="9" style="height:15px;border:none;"></th></tr><tr><th>Sr.No.</th><th>Description</th><th>Unit</th><th>NOS 1</th><th>NOS 2</th><th>L</th><th>B</th><th>D</th><th>QTY</th></tr></thead><tbody>';
+            var periodDate = document.getElementById('mmPeriodDate').value || "";
+
+            // NEW_STRUCTURAL_SITE_Measurement (4).xls exact structured matching mapping
+            var htmlData = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">' +
+                '<head><meta charset="UTF-8"><style>' +
+                'table { border-collapse: collapse; font-family: Arial, sans-serif; }' +
+                'td, th { border: 0.5pt solid #7F7F7F; padding: 6px; text-align: center; vertical-align: middle; font-size: 10pt; }' +
+                '.header-brand { background-color: #EAEAEA; font-size: 14pt; font-weight: bold; height: 35px; color: #002060; }' +
+                '.header-meta { font-size: 10pt; font-weight: bold; background-color: #F2F2F2; text-align: left; height: 20px; }' +
+                '.th-main { background-color: #5B9BD5; color: #FFFFFF; font-weight: bold; font-size: 11pt; height: 26px; }' +
+                '.row-deduction { color: #C00000; font-weight: 500; }' +
+                '.row-addition { color: #000000; }' +
+                '.qty-col { font-weight: bold; background-color: #F2F2F2; text-align: right; }' +
+                '.total-label { font-weight: bold; background-color: #D9E1F2; text-align: right; font-size: 11pt; }' +
+                '.total-val { font-weight: bold; background-color: #E2EFDA; color: #375623; text-align: right; font-size: 12pt; height: 28px; }' +
+                '</style></head><body>' +
+                '<table>' +
+                '<thead>' +
+                '<tr><th colspan="9" class="header-brand">' + pName.toUpperCase() + '</th></tr>' +
+                '<tr><th colspan="9" class="header-meta">Item Heading Description: ' + title.toUpperCase() + '</th></tr>' +
+                (periodDate ? '<tr><th colspan="9" class="header-meta">Period/Date Reference: ' + periodDate + '</th></tr>' : '') +
+                '<tr><th colspan="9" style="height:10px; border:none; background:#ffffff;"></th></tr>' +
+                '<tr class="th-main">' +
+                '  <th style="width:50px;">Sr.No.</th>' +
+                '  <th style="text-align:left; width:350px;">Description of Item Location</th>' +
+                '  <th style="width:70px;">Unit</th>' +
+                '  <th style="width:60px;">NOS 1</th>' +
+                '  <th style="width:60px;">NOS 2</th>' +
+                '  <th style="width:80px;">Length (L)</th>' +
+                '  <th style="width:80px;">Breadth (B)</th>' +
+                '  <th style="width:80px;">Depth (D)</th>' +
+                '  <th style="width:110px;">Quantity (QTY)</th>' +
+                '</tr>' +
+                '</thead><tbody>';
+
             var totalQty = 0;
             for (var i = 0; i < masterMeasData.length; i++) {
-                var m = masterMeasData[i]; totalQty += parseFloat(m.qty); var rowLabel = m.type === 'DEDUCTION' ? '[Ded] ' : '';
-                htmlData += '<tr><td>' + (i+1) + '</td><td>' + rowLabel + m.desc + '</td><td>' + m.unit + '</td><td>' + m.nos1 + '</td><td>' + m.nos2 + '</td><td>' + m.l + '</td><td>' + m.b + '</td><td>' + m.d + '</td><td>' + m.qty + '</td></tr>';
+                var m = masterMeasData[i];
+                var currentQty = parseFloat(m.qty);
+                totalQty += currentQty;
+                
+                var rowClass = m.type === 'DEDUCTION' ? 'class="row-deduction"' : 'class="row-addition"';
+                var prefixLabel = m.type === 'DEDUCTION' ? '[Deduction] ' : '';
+                
+                htmlData += '<tr ' + rowClass + '>' +
+                    '<td>' + (i + 1) + '</td>' +
+                    '<td style="text-align:left;">' + prefixLabel + m.desc + '</td>' +
+                    '<td>' + m.unit + '</td>' +
+                    '<td>' + m.nos1 + '</td>' +
+                    '<td>' + m.nos2 + '</td>' +
+                    '<td>' + (m.l !== "" ? parseFloat(m.l).toFixed(3) : "-") + '</td>' +
+                    '<td>' + (m.b !== "" ? parseFloat(m.b).toFixed(3) : "-") + '</td>' +
+                    '<td>' + (m.d !== "" ? parseFloat(m.d).toFixed(3) : "-") + '</td>' +
+                    '<td class="qty-col" style="color: ' + (m.type === 'DEDUCTION' ? '#C00000' : '#002060') + ';">' + currentQty.toFixed(3) + '</td>' +
+                    '</tr>';
             }
-            htmlData += '<tr><td colspan="8" style="font-weight:bold; text-align:right;">Total =</td><td style="font-weight:bold; background:#dcfce7;">' + totalQty.toFixed(3) + '</td></tr></tbody></table></body></html>';
-            var base64 = btoa(unescape(encodeURIComponent(htmlData))), a = document.createElement("a"); a.href = "data:application/vnd.ms-excel;base64," + base64; a.download = pName.replace(/\s+/g, '_') + "_Measurement.xls"; document.body.appendChild(a); a.click(); document.body.removeChild(a);
+
+            // Total Net Summary Row
+            htmlData += '<tr>' +
+                '<td colspan="8" class="total-label">Net Total Calculated Quantity =</td>' +
+                '<td class="total-val">' + totalQty.toFixed(3) + '</td>' +
+                '</tr>' +
+                '</tbody></table></body></html>';
+
+            var base64 = btoa(unescape(encodeURIComponent(htmlData))), a = document.createElement("a");
+            a.href = "data:application/vnd.ms-excel;base64," + base64;
+            a.download = pName.replace(/\s+/g, '_') + "_Master_Measurement.xls";
+            document.body.appendChild(a); a.click(); document.body.removeChild(a);
         }
 
         function toggleConcreteInputMode() { var mode = document.getElementById('concInputMode').value; document.getElementById('concDirectWrapper').style.display = (mode === 'DIRECT' ? 'block' : 'none'); document.getElementById('concDimWrapper').style.display = (mode === 'DIMENSION' ? 'block' : 'none'); }
         function toggleConcreteMixMode() { var grade = document.getElementById('concMixGrade').value; document.getElementById('concCustomRatioWrapper').style.display = (grade === 'CUSTOM' ? 'block' : 'none'); }
         function toggleBrickInputMode() { var mode = document.getElementById('brickInputMode').value; document.getElementById('brickDirectWrapper').style.display = (mode === 'DIRECT' ? 'block' : 'none'); document.getElementById('brickDimWrapper').style.display = (mode === 'DIMENSION' ? 'block' : 'none'); }
-        function toggleBlockInputMode() { var mode = document.getElementById('blockInputMode').value; document.getElementById('blockDirectWrapper').style.display = (mode === 'DIRECT' ? 'block' : 'none'); document.getElementById('blockDimWrapper').style.display = (mode === 'DIMENSION' ? 'block' : 'none'); }
+        function toggleBlockInputMode() { var mode = document.getElementById('blockInputMode').value; document.getElementById('blockDirectWrapper').style.display = (mode === 'DIRECT' ? 'block' : 'none'); document.getElementById('brickDimWrapper').style.display = (mode === 'DIMENSION' ? 'block' : 'none'); }
         function toggleBlockSizeMode() { var size = document.getElementById('blockSizeSelect').value; document.getElementById('blockCustomSizeWrapper').style.display = (size === 'CUSTOM' ? 'block' : 'none'); }
         function toggleBlockMixMode() { var mix = document.getElementById('blockMortarRatio').value; document.getElementById('blockCustomMixWrapper').style.display = (mix === 'CUSTOM' ? 'block' : 'none'); }
         function togglePlasterInputMode() { var mode = document.getElementById('plasterInputMode').value; document.getElementById('plasterDirectWrapper').style.display = (mode === 'DIRECT' ? 'block' : 'none'); document.getElementById('plasterDimWrapper').style.display = (mode === 'DIMENSION' ? 'block' : 'none'); }
@@ -1841,7 +1995,7 @@
             <p><strong>System Version:</strong> 2.0.0</p>
             <p>BBS Structural Engine is an offline structural management framework engineered for surveyors and quantity estimators. It facilitates calculations for Bar Bending Schedules, volumetric layouts formulas tracking, and concrete limits compliance verification without real-time external network dependencies.</p>
             <div style="background:var(--bg-container); border-radius:6px; padding:10px; margin-top:10px; border:1px solid var(--border-color);">
-                <span style="font-weight:bold; display:block; margin-bottom:4px; font-size:11px; color:var(--text-muted);">🔒 CONTENT PRIVACY & POLICY SAFEGUARDS</span>
+                <span style="font-weight:bold; display:block; margin-bottom:4px; font-size:11px; color:var(--text-muted); ...🔒 CONTENT PRIVACY & POLICY SAFEGUARDS</span>
                 All processing engines execute completely inside the client-side context. Structural data records are safely saved locally using the system's sandbox data structures.
             </div>
             <p style="text-align:center; margin-top:15px; font-size:11px; color:var(--text-muted);">© 2026 BBS Structural Workspace App Ecosystem. All rights reserved.</p>
