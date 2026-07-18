@@ -190,7 +190,7 @@
             margin-bottom: 12px;
         }
 
-        /* FIRE TV REMOTE SUPPORT STYLING[span_0](start_span)[span_0](end_span) */
+        /* FIRE TV REMOTE SUPPORT STYLING[span_2](start_span)[span_2](end_span) */
         input:focus, button:focus, select:focus, .tab-btn:focus, .modal-tab-btn:focus {
             border: 4px solid #ff9900 !important;
             background-color: #fff3e0 !important;
@@ -242,7 +242,7 @@
         var currentLang = "en";
         var searchFilterText = "";
 
-        // SECURITY LAYER: Store & Application Policy Safe Context Lock[span_1](start_span)[span_1](end_span)[span_2](start_span)[span_2](end_span)
+        // SECURITY LAYER: Store & Application Policy Safe Context Lock[span_3](start_span)[span_3](end_span)[span_4](start_span)[span_4](end_span)
         document.addEventListener('contextmenu', event => event.preventDefault());
 
         function toggleCalcFolder(e) {
@@ -272,7 +272,7 @@
                 if (menu && btn && !menu.contains(e.target) && e.target !== btn) menu.style.display = 'none';
             });
 
-            // AMAZON FIRE TV / D-PAD ENGINE ACCENT SELECTION ROUTE[span_3](start_span)[span_3](end_span)
+            // AMAZON FIRE TV / D-PAD ENGINE ACCENT SELECTION ROUTE[span_5](start_span)[span_5](end_span)
             document.addEventListener('keydown', function(event) {
                 if (event.key === 'Enter' || event.keyCode === 13) {
                     var activeElement = document.activeElement;
@@ -565,7 +565,7 @@
                 row.innerHTML = '<div class="history-file-meta">📁 ' + item.projectName + '</div>' +
                                 '<div class="history-actions-wrap">' +
                                     '<button class="h-btn h-open" onclick="triggerHistoryOpen(\''+encName+'\')">Open</button>' +
-                                    '<button class="h-btn h-edit" onclick="triggerHistoryOpen(\''+encName+'\')">Edit</button>' +
+                                    '<button class="h-btn h-edit" onclick="triggerHistoryRename(\''+encName+'\')">Edit</button>' +
                                     '<button class="h-btn h-delete" onclick="triggerHistoryDelete(\''+encName+'\')">Delete</button>' +
                                 '</div>';
                 listContainer.appendChild(row);
