@@ -268,6 +268,37 @@
             }
         };
 
+        // RESTORED FIX FOR MODAL ACTIONS (CRITICAL)
+        function openModal(mId) { 
+            document.getElementById('mainMenuDropdown').style.display = 'none'; 
+            closeAllModals(); 
+            safeModalToggle(mId, 'flex'); 
+            if(mId === 'historyModal') loadHistoryList(); 
+            if(mId === 'masterMeasurementModal') { 
+                document.getElementById('mmOperationsModeSelect').value = "NEW"; 
+                toggleMmHistoryPanel("NEW"); 
+                loadMasterMeasHistoryList(); 
+            } 
+        }
+        
+        function closeAllModals() { 
+            safeModalToggle('civilCalcModal', 'none'); 
+            safeModalToggle('masterMeasurementModal', 'none'); 
+            safeModalToggle('concreteCalcModal', 'none'); 
+            safeModalToggle('brickCalcModal', 'none'); 
+            safeModalToggle('blockCalcModal', 'none'); 
+            safeModalToggle('plasterCalcModal', 'none'); 
+            safeModalToggle('tileCalcModal', 'none'); 
+            safeModalToggle('shutteringCalcModal', 'none'); 
+            safeModalToggle('infoModal', 'none'); 
+            safeModalToggle('qualityCalcModal', 'none'); 
+            safeModalToggle('bbsAutoCalcModal', 'none'); 
+            safeModalToggle('historyModal', 'none'); 
+            safeModalToggle('renameModal', 'none'); 
+            safeModalToggle('mmRenameModal', 'none');
+            resetModeToNewCanvas();
+        }
+
         function switchApplicationLanguage(langKey) {
             currentLang = langKey;
             var textSet = langTranslationDictionary[langKey] || langTranslationDictionary.en;
@@ -285,7 +316,6 @@
             document.getElementById('addHeadingBtnText').innerText = textSet.btn_add_heading;
             document.getElementById('clearAllBtnText').innerText = textSet.btn_clear_all;
 
-            // Upgraded Input Labels Translators Block
             document.getElementById('lbl_straigt_len').innerText = textSet.lbl_straigt_len;
             document.getElementById('lbl_left_hook').innerText = textSet.lbl_left_hook;
             document.getElementById('lbl_right_hook').innerText = textSet.lbl_right_hook;
@@ -490,30 +520,6 @@
             closeAllModals();
         }
 
-        function addComponentHeading() { 
-            var comp = document.getElementById('compTitle'); 
-            var title = comp ? comp.value.trim() : ""; 
-            if(title === "") return alert("Please enter a Section Name."); 
-            
-            bbsData.push({ type: 'HEADING', text: title.toUpperCase(), dateAdded: new Date().toISOString() }); 
-            comp.value = ""; 
-            executeSilentAutoSave(); 
-            renderTable(); 
-            
-            setTimeout(function() {
-                switchTab('tab2');
-            }, 50);
-        }
-        
-        function triggerColumnFootingMath() { 
-            var mainLen = parseFloat(document.getElementById('colMainLength').value) || 0;
-            var leftHookMM = parseFloat(document.getElementById('colLeftHook').value) || 0;
-            var rightHookMM = parseFloat(document.getElementById('colRightHook').value) || 0;
-            
-            var netCutLen = mainLen + (leftHookMM / 1000) + (rightHookMM / 1000);
-            document.getElementById('cutLength').value = netCutLen.toFixed(3); 
-        }
-        
         // HARDENED ABSOLUTE MATH VALIDATION INJECTION (Zero NaN Exposure)
         function addBarEntry() { 
             var desc = document.getElementById('desc').value.trim() || "Main Bar";
@@ -671,6 +677,7 @@
             executeSilentAutoSave(); renderTable();
         }
 
+        // PERFECT DATA SAFE RENDER MATRIX LOOP (Zero NaN Exposure)
         function renderTable() {
             var tbody = document.getElementById('bbsTableBody'); if(!tbody) return; tbody.innerHTML = "";
             var slNo = 1; var diaTotals = {8:0, 10:0, 12:0, 16:0, 20:0, 25:0, 32:0, 40:0}; var containsData = false; var finalHTML = ""; var dataCount = 0;
