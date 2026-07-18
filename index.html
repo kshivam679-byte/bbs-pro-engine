@@ -453,7 +453,22 @@
             resetModeToNewCanvas();
         }
 
-        function addComponentHeading() { var comp = document.getElementById('compTitle'), title = comp ? comp.value.trim() : ""; if(title === "") return alert("Please enter a Section Name."); bbsData.push({ type: 'HEADING', text: title.toUpperCase(), dateAdded: new Date().toISOString() }); comp.value = ""; executeSilentAutoSave(); renderTable(); switchTab('tab2'); }
+        // FIXED CRITICAL FLOW BLOCK BUG HERE
+        function addComponentHeading() { 
+            var comp = document.getElementById('compTitle'); 
+            var title = comp ? comp.value.trim() : ""; 
+            if(title === "") return alert("Please enter a Section Name."); 
+            
+            bbsData.push({ type: 'HEADING', text: title.toUpperCase(), dateAdded: new Date().toISOString() }); 
+            comp.value = ""; 
+            executeSilentAutoSave(); 
+            renderTable(); 
+            
+            // Forced async wrapper to prevent framework tab locking context
+            setTimeout(function() {
+                switchTab('tab2');
+            }, 50);
+        }
         
         function triggerColumnFootingMath() { 
             var mainLen = parseFloat(document.getElementById('colMainLength').value) || 0;
@@ -1871,7 +1886,9 @@
                 <option value="SQM">m²</option>
             </select>
         </div>
-        <button class="action-btn" id="btnShutComputeNode" onclick="calculateShuttering()">Calculate</button>
+        <div class="form-group">
+            <button class="action-btn" id="btnShutComputeNode" onclick="calculateShuttering()">Calculate</button>
+        </div>
         <div id="shutteringResultBox" class="calc-result-box" style="display:none;"></div>
     </div>
 </div>
