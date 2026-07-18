@@ -31,31 +31,6 @@
         body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg-body); padding: 10px 10px 80px 10px; color: var(--text-main); margin: 0; transition: background 0.3s, color 0.3s; overflow-y: auto; }
         .container { background: var(--bg-container); padding: 15px; border-radius: 12px; box-shadow: 10px 10px 20px rgba(0,0,0,0.05); max-width: 1000px; margin: 0 auto; box-sizing: border-box; }
         
-        /* App Quick Navigation Header */
-        .app-quick-nav-bar {
-            display: flex;
-            gap: 10px;
-            background: linear-gradient(145deg, #1e293b, #334155);
-            padding: 10px;
-            border-radius: 8px;
-            margin-bottom: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            overflow-x: auto;
-        }
-        .nav-quick-btn {
-            background: #2563eb;
-            color: #ffffff;
-            border: none;
-            padding: 8px 14px;
-            font-size: 12px;
-            font-weight: bold;
-            border-radius: 6px;
-            cursor: pointer;
-            white-space: nowrap;
-            transition: background 0.2s;
-        }
-        .nav-quick-btn:hover { background: #1d4ed8; }
-        
         .header-section { background: linear-gradient(145deg, #1e293b, #0f172a); color: #ffffff; padding: 16px; border-radius: 8px; margin-bottom: 15px; box-shadow: 5px 5px 15px rgba(0,0,0,0.2); display: flex; justify-content: space-between; align-items: center; position: relative; gap: 10px; flex-wrap: wrap; }
         .header-section h2 { margin: 0; font-size: 18px; font-weight: 700; letter-spacing: 0.5px; }
         .menu-hamburger-btn { font-size: 24px; background: none; border: none; color: white; cursor: pointer; padding: 5px 10px; order: -1; margin-right: 10px; outline: none; }
@@ -106,7 +81,7 @@
         .btn-gradient-green:hover { background: linear-gradient(145deg, #059669, #047857); }
         .btn-gradient-gray { background: linear-gradient(145deg, #64748b, #475569); color: #ffffff !important; }
         .btn-gradient-gray:hover { background: linear-gradient(145deg, #475569, #334155); }
-        .btn-gradient-disabled { background: linear-gradient(145deg, #cbd5e1, #94a3b8); color: #64748b !important; opacity: 0.7; cursor: not-allowed !important; }
+        .btn-gradient-disabled { background: linear-gradient(145deg, #cbd5e1, #94a3b8); color: #64748b !important; opacity: 0.7; cursor: not-allowed !allowed !important; }
         [data-theme="dark"] .btn-gradient-disabled { background: linear-gradient(145deg, #475569, #334155); color: #94a3b8 !important; }
 
         .menu-folder-container { display: none; background: rgba(0,0,0,0.04); border-radius: 8px; padding: 6px; margin-bottom: 8px; border: 1px inset rgba(0,0,0,0.1); }
@@ -218,22 +193,22 @@
             box-shadow: 0 0 12px rgba(255, 153, 0, 0.7) !important;
         }
         
-        /* Floating Navigation Scroll Buttons */
+        /* Floating Navigation Scroll Buttons Overlay Adjustments */
         .floating-scroll-nav {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
+            bottom: 85px;
+            right: 15px;
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 10px;
             z-index: 9999999;
         }
         .scroll-nav-btn {
-            background: rgba(37, 99, 235, 0.9);
+            background: #2563eb;
             color: #ffffff;
             border: 2px solid #ffffff;
-            width: 45px;
-            height: 45px;
+            width: 46px;
+            height: 46px;
             border-radius: 50%;
             font-size: 20px;
             font-weight: bold;
@@ -241,12 +216,12 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            transition: all 0.2s;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+            transition: all 0.2s ease;
         }
         .scroll-nav-btn:hover {
             background: #1d4ed8;
-            transform: scale(1.1);
+            transform: scale(1.08);
         }
         
         #printHeaderContainer { display: none; }
@@ -254,7 +229,7 @@
             @page { size: landscape; margin: 8mm; }
             html, body { width: 100%; background: #fff !important; padding: 0; margin: 0; font-size: 10pt; color: #000 !important; }
             .container { box-shadow: none !important; padding: 0 !important; max-width: 100% !important; background: transparent !important; }
-            .header-section, .tabs-nav, #tab1, #tab2, .admob-banner-placeholder, .grid-actions-panel, .del-btn, th:last-child, td:last-child, .stats-dashboard, div[style*="grid-template-columns"], #liveProjectHeaderName, .floating-scroll-nav, .app-quick-nav-bar { display: none !important; }
+            .header-section, .tabs-nav, #tab1, #tab2, .admob-banner-placeholder, .grid-actions-panel, .del-btn, th:last-child, td:last-child, .stats-dashboard, div[style*="grid-template-columns"], #liveProjectHeaderName, .floating-scroll-nav { display: none !important; }
             .tab-content { display: none !important; }
             #tab3 { display: block !important; border: none !important; box-shadow: none !important; padding: 0 !important; background: transparent !important; }
             #printHeaderContainer { display: block !important; margin-bottom: 15px; border: 2px solid #000 !important; padding: 10px !important; background: #f1f5f9 !important; }
@@ -1304,7 +1279,7 @@
 </head>
 <body>
 
-<!-- Floating Scroll Navigation Controls -->
+<!-- Floating Scroll Navigation Controls Arrow Overlays -->
 <div class="floating-scroll-nav">
     <button class="scroll-nav-btn" onclick="scrollToPosition('top')" title="Scroll To Top">▲</button>
     <button class="scroll-nav-btn" onclick="scrollToPosition('bottom')" title="Scroll To Bottom">▼</button>
@@ -1313,14 +1288,6 @@
 <div id="toastNoticeDock" class="toast-notification-box"></div>
 
 <div class="container">
-    <!-- App Navigation Bar Elements -->
-    <div class="app-quick-nav-bar">
-        <button class="nav-quick-btn" onclick="switchTab('tab1')">📍 Project Settings</button>
-        <button class="nav-quick-btn" onclick="switchTab('tab2')">📝 Bar Data Entry</button>
-        <button class="nav-quick-btn" onclick="switchTab('tab3')">📋 View Report Grid</button>
-        <button class="nav-quick-btn" style="background: #eab308; color: #000;" onclick="openModal('masterMeasurementModal')">📏 Measurement Canvas</button>
-    </div>
-
     <div class="admob-banner-placeholder">⚡ BBS Framework Active Optimization Engine Module ⚡</div>
 
     <div class="header-section">
