@@ -24,8 +24,37 @@
             --border-color: #475569;
             --table-bg: #1e293b;
         }
-        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg-body); padding: 10px 10px 80px 10px; color: var(--text-main); margin: 0; transition: background 0.3s, color 0.3s; }
+        html, body {
+            scroll-behavior: smooth;
+            height: 100%;
+        }
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg-body); padding: 10px 10px 80px 10px; color: var(--text-main); margin: 0; transition: background 0.3s, color 0.3s; overflow-y: auto; }
         .container { background: var(--bg-container); padding: 15px; border-radius: 12px; box-shadow: 10px 10px 20px rgba(0,0,0,0.05); max-width: 1000px; margin: 0 auto; box-sizing: border-box; }
+        
+        /* App Quick Navigation Header */
+        .app-quick-nav-bar {
+            display: flex;
+            gap: 10px;
+            background: linear-gradient(145deg, #1e293b, #334155);
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            overflow-x: auto;
+        }
+        .nav-quick-btn {
+            background: #2563eb;
+            color: #ffffff;
+            border: none;
+            padding: 8px 14px;
+            font-size: 12px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: background 0.2s;
+        }
+        .nav-quick-btn:hover { background: #1d4ed8; }
         
         .header-section { background: linear-gradient(145deg, #1e293b, #0f172a); color: #ffffff; padding: 16px; border-radius: 8px; margin-bottom: 15px; box-shadow: 5px 5px 15px rgba(0,0,0,0.2); display: flex; justify-content: space-between; align-items: center; position: relative; gap: 10px; flex-wrap: wrap; }
         .header-section h2 { margin: 0; font-size: 18px; font-weight: 700; letter-spacing: 0.5px; }
@@ -137,7 +166,6 @@
         .reset-inline-btn { background: linear-gradient(145deg, #ef4444, #b91c1c) !important; flex: 1; }
         .grid-actions-panel { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-top: 20px; }
         .download-btn { background: linear-gradient(145deg, #22c55e, #15803d); color: #ffffff; padding: 15px; font-size: 13px; text-transform: uppercase; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; transition: all 0.15s ease-in-out; }
-        .share-pdf-btn { background: linear-gradient(145deg, #ea580c, #c2410c); color: #ffffff; padding: 15px; font-size: 13px; text-transform: uppercase; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; transition: all 0.15s ease-in-out; }
         .copy-btn { background: linear-gradient(145deg, #6366f1, #4338ca); color: #ffffff; padding: 15px; font-size: 13px; text-transform: uppercase; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; transition: all 0.15s ease-in-out; }
         .del-btn { background: #ef4444; color: #ffffff; padding: 6px 10px; font-size: 12px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; transition: all 0.15s ease-in-out; }
         
@@ -190,12 +218,43 @@
             box-shadow: 0 0 12px rgba(255, 153, 0, 0.7) !important;
         }
         
+        /* Floating Navigation Scroll Buttons */
+        .floating-scroll-nav {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 9999999;
+        }
+        .scroll-nav-btn {
+            background: rgba(37, 99, 235, 0.9);
+            color: #ffffff;
+            border: 2px solid #ffffff;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            transition: all 0.2s;
+        }
+        .scroll-nav-btn:hover {
+            background: #1d4ed8;
+            transform: scale(1.1);
+        }
+        
         #printHeaderContainer { display: none; }
         @media print {
             @page { size: landscape; margin: 8mm; }
             html, body { width: 100%; background: #fff !important; padding: 0; margin: 0; font-size: 10pt; color: #000 !important; }
             .container { box-shadow: none !important; padding: 0 !important; max-width: 100% !important; background: transparent !important; }
-            .header-section, .tabs-nav, #tab1, #tab2, .admob-banner-placeholder, .grid-actions-panel, .del-btn, th:last-child, td:last-child, .stats-dashboard, div[style*="grid-template-columns"], #liveProjectHeaderName { display: none !important; }
+            .header-section, .tabs-nav, #tab1, #tab2, .admob-banner-placeholder, .grid-actions-panel, .del-btn, th:last-child, td:last-child, .stats-dashboard, div[style*="grid-template-columns"], #liveProjectHeaderName, .floating-scroll-nav, .app-quick-nav-bar { display: none !important; }
             .tab-content { display: none !important; }
             #tab3 { display: block !important; border: none !important; box-shadow: none !important; padding: 0 !important; background: transparent !important; }
             #printHeaderContainer { display: block !important; margin-bottom: 15px; border: 2px solid #000 !important; padding: 10px !important; background: #f1f5f9 !important; }
@@ -266,7 +325,6 @@
                 lbl_search: "🔍 Live Grid Search Filter",
                 lbl_rate: "💰 Steel Rate (Per Kg)",
                 btn_excel: "📥 Export Excel",
-                btn_pdf: "📄 Print PDF",
                 btn_wa: "📋 Copy Text for WA",
                 btn_save: "💾 Save Sheet Data",
                 ph_proj: ".e.g. Metro Bridge Sector 4",
@@ -320,7 +378,6 @@
                 lbl_search: "🔍 लाइव ग्रिड खोज फ़िल्टर",
                 lbl_rate: "💰 स्टील दर (प्रति किलो)",
                 btn_excel: "📥 एक्सेल डाउनलोड करें",
-                btn_pdf: "📄 प्रिंट पीडीएफ",
                 btn_wa: "📋 व्हाट्सएप के लिए कॉपी करें",
                 btn_save: "💾 शीट डेटा सुरक्षित करें",
                 ph_proj: "जैसे: मेट्रो ब्रिज सेक्टर 4",
@@ -384,7 +441,6 @@
             document.querySelector('label[data-lang-key="lbl_steel_rate"]').innerText = tr.lbl_rate;
             
             document.getElementById("btnExportExcelNode").innerText = tr.btn_excel;
-            document.getElementById("btnPrintPdfNode").innerText = tr.btn_pdf;
             document.getElementById("btnCopyWaNode").innerText = tr.btn_wa;
             document.getElementById("btnSaveSheetNode").innerText = tr.btn_save;
             
@@ -505,7 +561,6 @@
 
         function toggleMainMenu(e) { if(e) e.stopPropagation(); var menu = document.getElementById('mainMenuDropdown'); if (menu) menu.style.display = (menu.style.display === 'block') ? 'none' : 'block'; }
         function toggleDimInputBlock(mId, bId) { safeModalToggle(bId, (document.getElementById(mId).value === 'DIM' ? 'block' : 'none')); }
-        function shareAsProfessionalPDF() { document.getElementById('printProjName').innerText = document.getElementById('projectName').value.toUpperCase(); var dVal = document.getElementById('reportDate').value; document.getElementById('printProjDate').innerText = dVal ? dVal : "N/A"; window.print(); }
 
         function resetModeToNewCanvas() {
             if(document.getElementById('projectSheetModeSelect')) {
@@ -547,6 +602,7 @@
             var pInput = document.getElementById('projectName'); var inputName = pInput ? pInput.value.trim().toUpperCase() : "NEW PROJECT";
             var screenHeader = document.getElementById('liveProjectHeaderName'); if(screenHeader) screenHeader.innerText = "📁 CURRENT SHEET LOG: " + (inputName === "" ? "NEW PROJECT" : inputName);
             if (inputName !== currentActiveProject && inputName !== "") { currentActiveProject = inputName; if(document.getElementById('projectSheetModeSelect').value === "NEW") { bbsData = []; renderTable(); } }
+            updateLiveProjectHeader();
         }
 
         function handleSheetModeChange() { if(document.getElementById('projectSheetModeSelect').value === "OLD") { openModal('historyModal'); } else { bbsData = []; renderTable(); } }
@@ -672,9 +728,16 @@
                 document.getElementById('reportDate').value = item.date || "";
                 currentActiveProject = item.projectName; bbsData = JSON.parse(JSON.stringify(item.data));
                 renderTable(); closeAllModals(); switchTab('tab3');
-                var screenHeader = document.getElementById('liveProjectHeaderName');
-                if(screenHeader) screenHeader.innerText = "📁 CURRENT SHEET LOG: " + item.projectName;
+                updateLiveProjectHeader();
                 triggerToastNotification("Sheet Loaded Successfully!");
+            }
+        }
+
+        function updateLiveProjectHeader() {
+            var screenHeader = document.getElementById('liveProjectHeaderName');
+            var dVal = document.getElementById('reportDate').value;
+            if(screenHeader) {
+                screenHeader.innerText = "📁 CURRENT SHEET LOG: " + currentActiveProject + (dVal ? " (" + dVal + ")" : "");
             }
         }
 
@@ -702,8 +765,7 @@
                 if(currentActiveProject === oldName) {
                     currentActiveProject = newName;
                     document.getElementById('projectName').value = newName;
-                    var screenHeader = document.getElementById('liveProjectHeaderName');
-                    if(screenHeader) screenHeader.innerText = "📁 CURRENT SHEET LOG: " + newName;
+                    updateLiveProjectHeader();
                 }
                 closeAllModals(); openModal('historyModal'); triggerToastNotification("Project Renamed Successfully!");
             }
@@ -718,8 +780,7 @@
             if(currentActiveProject === atob(projNameEncoded)) {
                 bbsData = []; renderTable(); currentActiveProject = "NEW PROJECT";
                 document.getElementById('projectName').value = "";
-                var screenHeader = document.getElementById('liveProjectHeaderName');
-                if(screenHeader) screenHeader.innerText = "📁 CURRENT SHEET LOG: NEW PROJECT";
+                updateLiveProjectHeader();
             }
             loadHistoryList(); triggerToastNotification("Backup Deleted Permanently!");
         }
@@ -808,29 +869,34 @@
                 finalHTML += (r1 + r3 + r4 + costRow); var dashWeightNode = document.getElementById('dashTotalWeight'); if(dashWeightNode) dashWeightNode.innerText = grandTotalKg.toFixed(2) + " Kg";
             } else { var dashWeightNode = document.getElementById('dashTotalWeight'); if(dashWeightNode) dashWeightNode.innerText = "0.00 Kg"; }
             tbody.innerHTML = finalHTML;
+            updateLiveProjectHeader();
         }
 
         function exportToCleanFormatedExcel() {
             var projName = document.getElementById('projectName') ? document.getElementById('projectName').value.toUpperCase() : "NEW_PROJECT";
+            var dVal = document.getElementById('reportDate').value;
+            var headerTitle = projName + " - STEEL REPORT" + (dVal ? " (" + dVal + ")" : "");
             
             var htmlData = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">' +
                 '<head><meta charset="UTF-8">' +
-                '<!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>BBS Summary</x:Name><x:WorksheetOptions><x:Panes></x:Panes></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]-->' +
+                '<!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>BBS Summary</x:Name><x:WorksheetOptions><x:Panes></x:Panes><x:ProtectContents>False</x:ProtectContents><x:ProtectObjects>False</x:ProtectObjects><x:ProtectScenarios>False</x:ProtectScenarios></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]-->' +
                 '<style>' +
                 'table { border-collapse: collapse; font-family: Calibri, sans-serif; background: #ffffff; }' +
-                'td, th { border: 0.5pt solid #000000; text-align: center; vertical-align: middle; font-size: 11pt; }' +
-                '.main-title { font-size: 14pt; font-weight: bold; background-color: #ffffff; color: #000000; height: 35px; }' +
+                'td, th { text-align: center; vertical-align: middle; font-size: 11pt; border: none; }' +
+                '.main-title { font-size: 14pt; font-weight: bold; background-color: #ffffff; color: #000000; height: 35px; border: 0.5pt solid #000000; }' +
                 '.header-row th { background-color: #ffffff; color: #000000; font-weight: bold; border: 0.5pt solid #000000; }' +
-                '.heading-row { background-color: #cbd5e1; font-weight: bold; text-align: left; font-size: 11pt; height: 24px; text-transform: uppercase; }' +
-                '.dia-active { font-weight: bold; color: #000000; }' +
-                '.dia-zero { color: #000000; }' +
-                '.summary-label { font-weight: bold; text-align: right; }' +
-                '.summary-val { font-weight: bold; }' +
-                '.grand-total { font-weight: bold; background-color: #dcfce7; color: #000000; font-size: 11pt; height: 30px; }' +
+                '.heading-row { background-color: #cbd5e1; font-weight: bold; text-align: left; font-size: 11pt; height: 24px; text-transform: uppercase; border: 0.5pt solid #000000; }' +
+                '.data-cell { border: 0.5pt solid #000000; }' +
+                '.dia-active { font-weight: bold; color: #000000; border: 0.5pt solid #000000; }' +
+                '.dia-zero { color: #000000; border: 0.5pt solid #000000; }' +
+                '.summary-label { font-weight: bold; text-align: right; border: 0.5pt solid #000000; }' +
+                '.summary-val { font-weight: bold; border: 0.5pt solid #000000; }' +
+                '.grand-total { font-weight: bold; background-color: #dcfce7; color: #000000; font-size: 11pt; height: 30px; border: 0.5pt solid #000000; }' +
                 '</style></head><body>' +
+                '<!--[if gte mso 10]><style>table {mso-displayed-gridlines:false;}</style><![endif]-->' +
                 '<table>' +
                 '<thead>' +
-                '<tr><th colspan="17" class="main-title">' + projName + ' - STEEL REPORT</th></tr>' +
+                '<tr><th colspan="17" class="main-title">' + headerTitle + '</th></tr>' +
                 '<tr class="header-row">' +
                 '  <th>Sl No</th>' +
                 '  <th>Description</th>' +
@@ -866,15 +932,15 @@
                         }
                     }
                     htmlData += '<tr>' +
-                        '<td>' + (counter++) + '</td>' +
-                        '<td style="text-align:left;">' + item.desc + '</td>' +
-                        '<td>' + item.dia + '</td>' +
-                        '<td>' + item.clearSpan + '</td>' +
-                        '<td>' + item.spacing + '</td>' +
-                        '<td>' + item.noMembers + '</td>' +
-                        '<td>' + Math.ceil(item.noBars) + '</td>' +
-                        '<td>' + item.cutLength + '</td>' +
-                        '<td>' + item.totalLength + '</td>' +
+                        '<td class="data-cell">' + (counter++) + '</td>' +
+                        '<td class="data-cell" style="text-align:left;">' + item.desc + '</td>' +
+                        '<td class="data-cell">' + item.dia + '</td>' +
+                        '<td class="data-cell">' + item.clearSpan + '</td>' +
+                        '<td class="data-cell">' + item.spacing + '</td>' +
+                        '<td class="data-cell">' + item.noMembers + '</td>' +
+                        '<td class="data-cell">' + Math.ceil(item.noBars) + '</td>' +
+                        '<td class="data-cell">' + item.cutLength + '</td>' +
+                        '<td class="data-cell">' + item.totalLength + '</td>' +
                         diaCols +
                         '</tr>';
                 }
@@ -900,9 +966,9 @@
             // Grand Summary row
             var grandTotalMT = grandTotalKg / 1000;
             htmlData += '<tr class="grand-total">' +
-                '<td colspan="5" style="text-align:left;">Net Project Summary:</td>' +
-                '<td colspan="4">' + grandTotalKg.toFixed(2) + ' Kg</td>' +
-                '<td colspan="8">' + grandTotalMT.toFixed(4) + ' M.T.</td>' +
+                '<td colspan="5" style="text-align:left; border: 0.5pt solid #000000;">Net Project Summary:</td>' +
+                '<td colspan="4" style="border: 0.5pt solid #000000;">' + grandTotalKg.toFixed(2) + ' Kg</td>' +
+                '<td colspan="8" style="border: 0.5pt solid #000000;">' + grandTotalMT.toFixed(4) + ' M.T.</td>' +
                 '</tr>';
 
             htmlData += '</tbody></table></body></html>';
@@ -916,22 +982,26 @@
         function exportMasterMeasExcel() {
             var title = document.getElementById('mmSheetTitle').value || "Excavation MEASUREMENT SHEET";
             var pName = document.getElementById('mmProjectName').value || "NEW STRUCTURAL SITE";
+            var date = document.getElementById('mmPeriodDate').value || "";
+            var displayTitle = pName.toUpperCase() + (date ? " (" + date + ")" : "");
 
             var htmlData = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">' +
                 '<head><meta charset="UTF-8">' +
-                '<!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>Measurement</x:Name><x:WorksheetOptions><x:Panes></x:Panes></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]-->' +
+                '<!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>Measurement</x:Name><x:WorksheetOptions><x:Panes></x:Panes><x:ProtectContents>False</x:ProtectContents><x:ProtectObjects>False</x:ProtectObjects><x:ProtectScenarios>False</x:ProtectScenarios></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]-->' +
                 '<style>' +
                 'table { border-collapse: collapse; font-family: Arial, sans-serif; background: #ffffff; }' +
-                'td, th { border: 0.5pt solid #000000; padding: 6px; text-align: center; vertical-align: middle; font-size: 10pt; }' +
-                '.header-brand { font-size: 12pt; font-weight: bold; height: 30px; text-align: center; background-color: #ffffff; }' +
-                '.th-main th { font-weight: bold; font-size: 10pt; height: 26px; background-color: #ffffff; }' +
-                '.heading-row-item { font-weight: bold; text-align: center; font-size: 10pt; height: 24px; background-color: #ffffff; }' +
-                '.total-label { font-weight: bold; text-align: right; }' +
-                '.total-val { font-weight: bold; text-align: right; }' +
+                'td, th { padding: 6px; text-align: center; vertical-align: middle; font-size: 10pt; border: none; }' +
+                '.header-brand { font-size: 12pt; font-weight: bold; height: 30px; text-align: center; background-color: #ffffff; border: 0.5pt solid #000000; }' +
+                '.th-main th { font-weight: bold; font-size: 10pt; height: 26px; background-color: #ffffff; border: 0.5pt solid #000000; }' +
+                '.heading-row-item { font-weight: bold; text-align: center; font-size: 10pt; height: 24px; background-color: #ffffff; border: 0.5pt solid #000000; }' +
+                '.data-cell { border: 0.5pt solid #000000; }' +
+                '.total-label { font-weight: bold; text-align: right; border: 0.5pt solid #000000; }' +
+                '.total-val { font-weight: bold; text-align: right; border: 0.5pt solid #000000; }' +
                 '</style></head><body>' +
+                '<!--[if gte mso 10]><style>table {mso-displayed-gridlines:false;}</style><![endif]-->' +
                 '<table>' +
                 '<thead>' +
-                '<tr><th colspan="9" class="header-brand">' + pName.toUpperCase() + '</th></tr>' +
+                '<tr><th colspan="9" class="header-brand">' + displayTitle + '</th></tr>' +
                 '<tr class="th-main">' +
                 '  <th>Sr.No.</th>' +
                 '  <th>Description</th>' +
@@ -953,22 +1023,22 @@
                 totalQty += currentQty;
                 
                 htmlData += '<tr>' +
-                    '<td>' + (i + 1) + '</td>' +
-                    '<td style="text-align:left;">' + m.desc + '</td>' +
-                    '<td>' + m.unit + '</td>' +
-                    '<td>' + m.nos1 + '</td>' +
-                    '<td>' + m.nos2 + '</td>' +
-                    '<td>' + (m.l !== "" ? m.l : "") + '</td>' +
-                    '<td>' + (m.b !== "" ? m.b : "") + '</td>' +
-                    '<td>' + (m.d !== "" ? m.d : "") + '</td>' +
-                    '<td>' + currentQty + '</td>' +
+                    '<td class="data-cell">' + (i + 1) + '</td>' +
+                    '<td class="data-cell" style="text-align:left;">' + m.desc + '</td>' +
+                    '<td class="data-cell">' + m.unit + '</td>' +
+                    '<td class="data-cell">' + m.nos1 + '</td>' +
+                    '<td class="data-cell">' + m.nos2 + '</td>' +
+                    '<td class="data-cell">' + (m.l !== "" ? m.l : "") + '</td>' +
+                    '<td class="data-cell">' + (m.b !== "" ? m.b : "") + '</td>' +
+                    '<td class="data-cell">' + (m.d !== "" ? m.d : "") + '</td>' +
+                    '<td class="data-cell">' + currentQty + '</td>' +
                     '</tr>';
             }
 
             // Total Summary Row
             htmlData += '<tr>' +
                 '<td colspan="8" class="total-label">Total =</td>' +
-                '<td class="total-val">' + totalQty + '</td>' +
+                '<td class="total-val">' + totalQty.toFixed(3) + '</td>' +
                 '</tr>' +
                 '</tbody></table></body></html>';
 
@@ -1123,9 +1193,10 @@
         function renderMasterMeasTable() {
             var tbody = document.getElementById('mmTableBody'); if(!tbody) return; tbody.innerHTML = ""; var totalQty = 0;
             var sheetTitle = document.getElementById('mmSheetTitle').value || "Excavation MEASUREMENT SHEET";
+            var dateRange = document.getElementById('mmPeriodDate').value;
+            var finalTitleDisplay = sheetTitle + (dateRange ? " (" + dateRange + ")" : "");
             
-            // Fixed Placement: Injects Heading layout row under th headers exactly as requested
-            tbody.innerHTML += '<tr><td colspan="10" style="background:#ffffff; font-weight:bold; text-align:center; text-transform:uppercase; color:#0f172a; border: 1px solid var(--border-color); font-size: 11px; padding: 10px 4px;">' + sheetTitle + '</td></tr>';
+            tbody.innerHTML += '<tr><td colspan="10" style="background:#ffffff; font-weight:bold; text-align:center; text-transform:uppercase; color:#0f172a; border: 1px solid var(--border-color); font-size: 11px; padding: 10px 4px;">' + finalTitleDisplay + '</td></tr>';
             
             for (var i = 0; i < masterMeasData.length; i++) {
                 var item = masterMeasData[i]; var currentQty = parseFloat(item.qty); totalQty += currentQty;
@@ -1221,13 +1292,35 @@
             });
             if(matchCount === 0) container.innerHTML = "<div style='font-size:12px; color:var(--text-muted); text-align:center; padding:15px;'>No matching records found.</div>";
         }
+
+        function scrollToPosition(dir) {
+            if(dir === 'top') {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+            }
+        }
     </script>
 </head>
 <body>
 
+<!-- Floating Scroll Navigation Controls -->
+<div class="floating-scroll-nav">
+    <button class="scroll-nav-btn" onclick="scrollToPosition('top')" title="Scroll To Top">▲</button>
+    <button class="scroll-nav-btn" onclick="scrollToPosition('bottom')" title="Scroll To Bottom">▼</button>
+</div>
+
 <div id="toastNoticeDock" class="toast-notification-box"></div>
 
 <div class="container">
+    <!-- App Navigation Bar Elements -->
+    <div class="app-quick-nav-bar">
+        <button class="nav-quick-btn" onclick="switchTab('tab1')">📍 Project Settings</button>
+        <button class="nav-quick-btn" onclick="switchTab('tab2')">📝 Bar Data Entry</button>
+        <button class="nav-quick-btn" onclick="switchTab('tab3')">📋 View Report Grid</button>
+        <button class="nav-quick-btn" style="background: #eab308; color: #000;" onclick="openModal('masterMeasurementModal')">📏 Measurement Canvas</button>
+    </div>
+
     <div class="admob-banner-placeholder">⚡ BBS Framework Active Optimization Engine Module ⚡</div>
 
     <div class="header-section">
@@ -1282,7 +1375,7 @@
     <div class="tabs-nav">
         <div id="btn-tab1" class="tab-btn active" tabindex="15" onclick="switchTab('tab1')">1. PROJECT INIT</div>
         <div id="btn-tab2" class="tab-btn" tabindex="16" onclick="switchTab('tab2')">2. INPUT BAR DATA</div>
-        <div id="btn-tab3" class="tab-btn" tabindex="17" onclick="switchTab('tab3')">3. EXCEL/PDF GRID</div>
+        <div id="btn-tab3" class="tab-btn" tabindex="17" onclick="switchTab('tab3')">3. EXCEL GRID</div>
     </div>
 
     <!-- TAB 1 -->
@@ -1304,7 +1397,7 @@
         <div class="form-row">
             <div class="form-group">
                 <label data-lang-key="lbl_record_date">Billing Record Date</label>
-                <input type="date" id="reportDate" tabindex="20">
+                <input type="date" id="reportDate" tabindex="20" onchange="updateLiveProjectHeader()">
             </div>
             <div class="form-group">
                 <label data-lang-key="lbl_sec_heading">Create Section Heading</label>
@@ -1413,7 +1506,6 @@
         
         <div class="grid-actions-panel">
             <button class="download-btn" id="btnExportExcelNode" tabindex="36" onclick="exportToCleanFormatedExcel()">📥 Export Excel</button>
-            <button class="share-pdf-btn" id="btnPrintPdfNode" tabindex="37" onclick="shareAsProfessionalPDF()">📄 Print PDF</button>
             <button class="copy-btn" id="btnCopyWaNode" tabindex="38" onclick="copyTableToClipboardText()">📋 Copy Text for WA</button>
             <button class="manual-save-sheet-btn" id="btnSaveSheetNode" tabindex="39" onclick="manualSaveStateToHistory()">💾 Save Sheet Data</button>
         </div>
@@ -1463,7 +1555,7 @@
                 </div>
                 <div class="form-group">
                     <label>Billing Period Date Range</label>
-                    <input type="text" id="mmPeriodDate" placeholder=".e.g. 10.05.2023 to 30.05.2023">
+                    <input type="text" id="mmPeriodDate" placeholder=".e.g. 10.05.2023 to 30.05.2023" onchange="renderMasterMeasTable()">
                 </div>
             </div>
             <div style="margin-top:15px; text-align:right;">
