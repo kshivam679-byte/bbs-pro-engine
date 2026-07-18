@@ -31,26 +31,11 @@
         .header-section h2 { margin: 0; font-size: 18px; font-weight: 700; letter-spacing: 0.5px; }
         .menu-hamburger-btn { font-size: 24px; background: none; border: none; color: white; cursor: pointer; padding: 5px 10px; order: -1; margin-right: 10px; outline: none; }
         .header-title-container { display: flex; align-items: center; flex-grow: 1; }
-        .header-controls { display: flex; align-items: center; gap: 10px; }
-        .theme-toggle-btn { background: #3b82f6; border: none; color: white; padding: 6px 12px; border-radius: 20px; font-weight: bold; cursor: pointer; font-size: 12px; white-space: nowrap; }
         
-        /* GOOGLE TRANSLATE CUSTOM STYLING */
-        #google_translate_element select {
-            background: #2563eb !important;
-            border: 2px solid #3b82f6 !important;
-            color: white !important;
-            padding: 6px 10px !important;
-            border-radius: 20px !important;
-            font-weight: bold !important;
-            font-size: 12px !important;
-            outline: none !important;
-            cursor: pointer !important;
-            width: auto !important;
-        }
-        .goog-te-gadget { color: transparent !important; font-size: 0 !important; }
-        .goog-te-gadget span { display: none !important; }
-        .goog-te-banner-frame.skiptranslate { display: none !important; }
-        body { top: 0px !important; }
+        /* SIDE-BY-SIDE CONTROLS LAYOUT ALIGNMENT */
+        .header-controls { display: flex; align-items: center; gap: 12px; }
+        .lang-dropdown-custom { background: #2563eb; border: 2px solid #3b82f6; color: white; padding: 6px 12px; border-radius: 20px; font-weight: bold; font-size: 12px; outline: none; cursor: pointer; height: 32px; box-sizing: border-box; }
+        .theme-toggle-btn { background: #3b82f6; border: none; color: white; padding: 6px 12px; border-radius: 20px; font-weight: bold; cursor: pointer; font-size: 12px; white-space: nowrap; height: 32px; display: flex; align-items: center; justify-content: center; box-sizing: border-box; }
         
         /* PREMIUM MENU CONTAINER */
         .dropdown-menu-box { 
@@ -106,7 +91,6 @@
             box-shadow: 0 10px 20px rgba(0,0,0,0.3); z-index: 9999999; border-left: 4px solid #2563eb;
         }
         
-        /* ADMOB LOGIC COMPLIANT VISUAL BOUNDARY SETTINGS */
         .admob-banner-placeholder { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 6px; padding: 12px; margin: 10px 0; text-align: center; font-size: 11px; font-weight: bold; color: var(--text-muted); letter-spacing: 0.5px; }
         .tabs-nav { display: flex; gap: 8px; margin-bottom: 15px; background: var(--border-color); padding: 6px; border-radius: 8px; }
         .tab-btn { background: var(--bg-container); border: 1px solid var(--border-color); padding: 12px 6px; font-weight: 700; font-size: 11px; color: var(--text-muted); cursor: pointer; border-radius: 6px; flex: 1; text-align: center; }
@@ -217,16 +201,6 @@
             .section-exit-btn { display: none !important; }
         }
     </style>
-    <!-- GOOGLE TRANSLATE INTEGRATION SCRIPT - FIXED HTTPS RESOURCE URL -->
-    <script type="text/javascript">
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement({
-                pageLanguage: 'en',
-                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-            }, 'google_translate_element');
-        }
-    </script>
-    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
     <script>
         var bbsData = [];
@@ -239,6 +213,53 @@
         var mmSearchQuery = "";
         var currentLang = "en";
         var searchFilterText = "";
+
+        // MULTI-LANGUAGE TRANSLATION DICTIONARY FOR LOCAL POLICY SETTINGS
+        var langTranslationDictionary = {
+            en: {
+                app_title: "BBS Pro Engine Premium",
+                init_tab: "1. PROJECT INIT",
+                input_tab: "2. INPUT BAR DATA",
+                grid_tab: "3. EXCEL/PDF GRID",
+                lbl_proj_name: "Project Name / Site Reference",
+                lbl_ops_mode: "Sheet Operations Mode",
+                lbl_record_date: "Billing Record Date",
+                lbl_sec_heading: "Create Section Heading",
+                btn_add_heading: "Add Heading",
+                btn_clear_all: "Clear All"
+            },
+            hi: {
+                app_title: "बीबीएस प्रो इंजन प्रीमियम",
+                init_tab: "1. प्रोजेक्ट लोड",
+                input_tab: "2. सरिया इनपुट डेटा",
+                grid_tab: "3. एक्सेल/पीडीएफ ग्रिड",
+                lbl_proj_name: "परियोजना का नाम / साइट संदर्भ",
+                lbl_ops_mode: "शीट संचालन मोड",
+                lbl_record_date: "बिलिंग रिकॉर्ड तिथि",
+                lbl_sec_heading: "सेक्शन हेडिंग बनाएं",
+                btn_add_heading: "हेडिंग जोड़ें",
+                btn_clear_all: "सब साफ करें"
+            }
+        };
+
+        function switchApplicationLanguage(langKey) {
+            currentLang = langKey;
+            var textSet = langTranslationDictionary[langKey] || langTranslationDictionary.en;
+            
+            document.getElementById('appMainHeadingTitle').innerText = textSet.app_title;
+            document.getElementById('btn-tab1').innerText = textSet.init_tab;
+            document.getElementById('btn-tab2').innerText = textSet.input_tab;
+            document.getElementById('btn-tab3').innerText = textSet.grid_tab;
+            
+            document.querySelector('[data-lang-key="lbl_proj_name"]').innerText = textSet.lbl_proj_name;
+            document.querySelector('[data-lang-key="lbl_ops_mode"]').innerText = textSet.lbl_ops_mode;
+            document.querySelector('[data-lang-key="lbl_record_date"]').innerText = textSet.lbl_record_date;
+            document.querySelector('[data-lang-key="lbl_sec_heading"]').innerText = textSet.lbl_sec_heading;
+            
+            document.getElementById('addHeadingBtnText').innerText = textSet.btn_add_heading;
+            document.getElementById('clearAllBtnText').innerText = textSet.btn_clear_all;
+            triggerToastNotification(langKey === 'hi' ? "भाषा बदली गई: हिंदी" : "Language changed to English");
+        }
 
         function toggleCalcFolder(e) {
             if(e) e.stopPropagation();
@@ -267,7 +288,6 @@
                 if (menu && btn && !menu.contains(e.target) && e.target !== btn) menu.style.display = 'none';
             });
 
-            // REMOTE CONTROL PRE-MAPPED NAVIGATION MATRIX TRIGGERS
             document.addEventListener('keydown', function(event) {
                 if (event.key === 'Enter' || event.keyCode === 13) {
                     var activeElement = document.activeElement;
@@ -292,7 +312,6 @@
 
         function filterBbsGrid() { searchFilterText = document.getElementById('gridSearchBox').value.toLowerCase().trim(); renderTable(); }
 
-        // MODERN WEB SPEC COMPLIANT CLIPBOARD ENGINE API SETTERS
         function copyTableToClipboardText() {
             var textSummary = "📊 BBS STRUCTURAL ENGINE REPORT 📊\nProject: " + currentActiveProject + "\n";
             var dVal = document.getElementById('reportDate').value;
@@ -309,9 +328,10 @@
                     textSummary += "\n🔹 " + item.text + "\n";
                 } else if(item.type === 'DATA') {
                     validEntriesFound = true;
-                    var itemWeight = (item.totalLength * (weights[item.dia] || 0)).toFixed(2);
+                    var parsedLen = parseFloat(item.totalLength) || 0;
+                    var itemWeight = (parsedLen * (weights[item.dia] || 0)).toFixed(2);
                     grandTotalKg += parseFloat(itemWeight);
-                    textSummary += "• " + item.desc + " | Dia: " + item.dia + "mm | Total Bars: " + Math.ceil(item.noBars) + " | Total Len: " + item.totalLength + "m | Weight: " + itemWeight + " Kg\n";
+                    textSummary += "• " + item.desc + " | Dia: " + item.dia + "mm | Total Bars: " + Math.ceil(parseFloat(item.noBars) || 0) + " | Total Len: " + parsedLen + "m | Weight: " + itemWeight + " Kg\n";
                 }
             }
             if(!validEntriesFound) return triggerToastNotification("The layout table is currently empty.");
@@ -332,8 +352,6 @@
                 }).catch(function() {
                     triggerToastNotification("Clipboard hardware binding failed.");
                 });
-            } else {
-                triggerToastNotification("System secure content configuration unavailable.");
             }
         }
 
@@ -392,7 +410,6 @@
             document.getElementById('modalTripleBoxWrapper').style.display = (mode === "L3" || mode === "L4" ? 'block' : 'none'); 
         }
 
-        // AUTO SPACING CALCULATOR: Wiped Math.ceil Blank String Failure Bugs
         function calculateAutoBarSpacingAndLength() {
             var spanRaw = document.getElementById('hlSpan').value.trim(); var mode = document.getElementById('modalSpacingSelectMode').value;
             var noBarsInput = document.getElementById('noBars'), cSpanInput = document.getElementById('clearSpanInput'), spacInput = document.getElementById('spacingInput');
@@ -430,30 +447,6 @@
             closeAllModals();
         }
 
-        function triggerApkShare() {
-            if (navigator.share) {
-                navigator.share({
-                    title: 'BBS Structural Pro Engine',
-                    text: 'Check out this Premium Civil Engineering Structural Calculator!',
-                    url: window.location.href
-                }).then(() => {
-                    triggerToastNotification("Shared successfully!");
-                }).catch((err) => {
-                    triggerToastNotification("Share panel suspended.");
-                });
-            } else {
-                triggerToastNotification("Web Share module execution blocked by device runtime sandboxes.");
-            }
-        }
-
-        function openModal(mId) { document.getElementById('mainMenuDropdown').style.display = 'none'; closeAllModals(); safeModalToggle(mId, 'flex'); if(mId === 'historyModal') loadHistoryList(); if(mId === 'masterMeasurementModal') { document.getElementById('mmOperationsModeSelect').value = "NEW"; toggleMmHistoryPanel("NEW"); loadMasterMeasHistoryList(); } }
-        
-        function closeAllModals() { 
-            safeModalToggle('civilCalcModal', 'none'); safeModalToggle('masterMeasurementModal', 'none'); safeModalToggle('concreteCalcModal', 'none'); safeModalToggle('brickCalcModal', 'none'); safeModalToggle('blockCalcModal', 'none'); safeModalToggle('plasterCalcModal', 'none'); safeModalToggle('tileCalcModal', 'none'); safeModalToggle('shutteringCalcModal', 'none'); safeModalToggle('infoModal', 'none'); safeModalToggle('qualityCalcModal', 'none'); safeModalToggle('bbsAutoCalcModal', 'none'); safeModalToggle('historyModal', 'none'); safeModalToggle('renameModal', 'none'); safeModalToggle('mmRenameModal', 'none');
-            resetModeToNewCanvas();
-        }
-
-        // FIXED CRITICAL FLOW BLOCK BUG HERE
         function addComponentHeading() { 
             var comp = document.getElementById('compTitle'); 
             var title = comp ? comp.value.trim() : ""; 
@@ -464,7 +457,6 @@
             executeSilentAutoSave(); 
             renderTable(); 
             
-            // Forced async wrapper to prevent framework tab locking context
             setTimeout(function() {
                 switchTab('tab2');
             }, 50);
@@ -592,6 +584,7 @@
             if(matchCount === 0) { listContainer.innerHTML = "<div style='padding:15px; font-size:12px; color:var(--text-muted); text-align:center;'>No matching backup records found.</div>"; }
         }
 
+        // ABSOLUTE CRITICAL NAN SAFETY ALIGNMENT ENGINE FIX
         function updateInlineValue(index, field, valueText) {
             if(!bbsData[index]) return; var text = valueText.trim();
             if(field === 'dia' || field === 'noMembers' || field === 'noBars' || field === 'cutLength' || field === 'clearSpan' || field === 'spacing' || field === 'text') {
@@ -629,6 +622,7 @@
             executeSilentAutoSave(); renderTable();
         }
 
+        // PERFECT DATA SAFE RENDER MATRIX LOOP (Zero NaN Exposure)
         function renderTable() {
             var tbody = document.getElementById('bbsTableBody'); if(!tbody) return; tbody.innerHTML = "";
             var slNo = 1; var diaTotals = {8:0, 10:0, 12:0, 16:0, 20:0, 25:0, 32:0, 40:0}; var containsData = false; var finalHTML = ""; var dataCount = 0;
@@ -636,35 +630,22 @@
                 var item = bbsData[index];
                 if(item.type === 'HEADING') { finalHTML += '<tr class="heading-row"><td colspan="20"><div class="heading-flex-layout"><div class="section-editable-text" contenteditable="true" oninput="updateInlineValue(' + index + ', \'text\', this.innerText)">' + item.text + '</div><button class="section-exit-btn" onclick="deleteWholeSectionBlock(' + index + ')">Exit / Delete Block</button></div></td></tr>'; } 
                 else { 
-                    containsData = true; dataCount++; var diaCols = ""; for (var dIdx = 0; dIdx < activeDias.length; dIdx++) { var d = activeDias[dIdx]; if(item.dia === d) { diaCols += '<td>' + item.totalLength + '</td>'; diaTotals[d] += item.totalLength; } else { diaCols += '<td style="color:#cbd5e1;">0</td>'; } }
-                    var roundedBars = Math.ceil(item.noBars);
-                    finalHTML += '<tr><td>' + (slNo++) + '</td><td class="editable-cell" contenteditable="true" oninput="updateInlineValue(' + index + ', \'desc\', this.innerText)">' + item.desc + '</td><td class="editable-cell" contenteditable="true" oninput="updateInlineValue(' + index + ', \'dia\', this.innerText)">' + item.dia + '</td><td class="editable-cell" contenteditable="true" oninput="updateInlineValue(' + index + ', \'clearSpan\', this.innerText)">' + item.clearSpan + '</td><td class="editable-cell" contenteditable="true" oninput="updateInlineValue(' + index + ', \'spacing\', this.innerText)">' + item.spacing + '</td><td class="editable-cell" contenteditable="true" oninput="updateInlineValue(' + index + ', \'noMembers\', this.innerText)">' + item.noMembers + '</td><td>' + roundedBars + '</td><td class="editable-cell" contenteditable="true" oninput="updateInlineValue(' + index + ', \'cutLength\', this.innerText)">' + item.cutLength + '</td><td style="font-weight:600;">' + item.totalLength + '</td>' + diaCols + '<td><button class="del-btn" onclick="deleteEntry(' + index + ')">Delete</button></td></tr>'; 
+                    containsData = true; dataCount++; var diaCols = ""; for (var dIdx = 0; dIdx < activeDias.length; dIdx++) { var d = activeDias[dIdx]; if(item.dia === d) { diaCols += '<td>' + (parseFloat(item.totalLength) || 0) + '</td>'; diaTotals[d] += (parseFloat(item.totalLength) || 0); } else { diaCols += '<td style="color:#cbd5e1;">0</td>'; } }
+                    var roundedBars = Math.ceil(parseFloat(item.noBars) || 0);
+                    finalHTML += '<tr><td>' + (slNo++) + '</td><td class="editable-cell" contenteditable="true" oninput="updateInlineValue(' + index + ', \'desc\', this.innerText)">' + item.desc + '</td><td class="editable-cell" contenteditable="true" oninput="updateInlineValue(' + index + ', \'dia\', this.innerText)">' + item.dia + '</td><td class="editable-cell" contenteditable="true" oninput="updateInlineValue(' + index + ', \'clearSpan\', this.innerText)">' + item.clearSpan + '</td><td class="editable-cell" contenteditable="true" oninput="updateInlineValue(' + index + ', \'spacing\', this.innerText)">' + item.spacing + '</td><td class="editable-cell" contenteditable="true" oninput="updateInlineValue(' + index + ', \'noMembers\', this.innerText)">' + item.noMembers + '</td><td>' + roundedBars + '</td><td class="editable-cell" contenteditable="true" oninput="updateInlineValue(' + index + ', \'cutLength\', this.innerText)">' + item.cutLength + '</td><td style="font-weight:600;">' + (parseFloat(item.totalLength) || 0) + '</td>' + diaCols + '<td><button class="del-btn" onclick="deleteEntry(' + index + ')">Delete</button></td></tr>'; 
                 }
             }
             var dashCountNode = document.getElementById('dashTotalEntries'); if(dashCountNode) dashCountNode.innerText = dataCount + " Items";
             if(containsData) {
                 var weights = {8:0.395, 10:0.617, 12:0.890, 16:1.580, 20:2.470, 25:3.850, 32:6.310, 40:9.860}, grandTotalKg = 0;
-                var r1 = '<tr><td colspan="8" style="text-align:right; font-weight:bold; background:#f1f5f9;">Total Length (m)</td><td>-</td>'; for (var i = 0; i < activeDias.length; i++) r1 += '<td>' + diaTotals[activeDias[i]].toFixed(2) + '</td>'; r1 += '<td></td></tr>';
-                var r3 = '<tr><td colspan="8" style="text-align:right; font-weight:bold; background:#f1f5f9;">Weight (In Kg)</td><td>-</td>'; for (var i = 0; i < activeDias.length; i++) { var d = activeDias[i], kg = diaTotals[d] * weights[d]; grandTotalKg += kg; r3 += '<td style="font-weight:bold; color:#2563eb;">' + kg.toFixed(2) + '</td>'; } r3 += '<td></td></tr>';
-                var grandTotalMT = grandTotalKg / 1000; var r4 = '<tr style="background:#dcfce7; font-weight:bold;"><td colspan="8" style="text-align:right;">Net Project Summary:</td><td colspan="4">' + grandTotalKg.toFixed(2) + ' Kg</td><td colspan="8">' + grandTotalMT.toFixed(4) + ' M.T. (Metric Tonnes)</td></tr>';
+                var r1 = '<tr><td colspan="8" style="text-align:right; font-weight:bold; background:#f1f5f9;">Total Length (m)</td><td>-</td>'; for (var i = 0; i < activeDias.length; i++) r1 += '<td>' + (diaTotals[activeDias[i]] || 0).toFixed(2) + '</td>'; r1 += '<td></td></tr>';
+                var r3 = '<tr><td colspan="8" style="text-align:right; font-weight:bold; background:#f1f5f9;">Weight (In Kg)</td><td>-</td>'; for (var i = 0; i < activeDias.length; i++) { var d = activeDias[i], kg = (diaTotals[d] || 0) * weights[d]; grandTotalKg += kg; r3 += '<td style="font-weight:bold; color:#2563eb;">' + (kg || 0).toFixed(2) + '</td>'; } r3 += '<td></td></tr>';
+                var grandTotalMT = grandTotalKg / 1000; var r4 = '<tr style="background:#dcfce7; font-weight:bold;"><td colspan="8" style="text-align:right;">Net Project Summary:</td><td colspan="4">' + (grandTotalKg || 0).toFixed(2) + ' Kg</td><td colspan="8">' + (grandTotalMT || 0).toFixed(4) + ' M.T. (Metric Tonnes)</td></tr>';
                 var steelRateNode = document.getElementById('steelRatePerKg'); var steelRate = steelRateNode ? (parseFloat(steelRateNode.value) || 0) : 0, costRow = "";
-                if(steelRate > 0) { var totalCost = grandTotalKg * steelRate; costRow = '<tr style="background:#fee2e2; font-weight:bold; color:#991b1b;"><td colspan="8" style="text-align:right;">Estimated Steel Cost (Amount):</td><td colspan="12" style="text-align:left; padding-left:15px; font-size:14px;">₹ ' + totalCost.toLocaleString('en-IN', {maximumFractionDigits: 2}) + '</td></tr>'; }
-                finalHTML += (r1 + r3 + r4 + costRow); var dashWeightNode = document.getElementById('dashTotalWeight'); if(dashWeightNode) dashWeightNode.innerText = grandTotalKg.toFixed(2) + " Kg";
+                if(steelRate > 0) { var totalCost = grandTotalKg * steelRate; costRow = '<tr style="background:#fee2e2; font-weight:bold; color:#991b1b;"><td colspan="8" style="text-align:right;">Estimated Steel Cost (Amount):</td><td colspan="12" style="text-align:left; padding-left:15px; font-size:14px;">₹ ' + (totalCost || 0).toLocaleString('en-IN', {maximumFractionDigits: 2}) + '</td></tr>'; }
+                finalHTML += (r1 + r3 + r4 + costRow); var dashWeightNode = document.getElementById('dashTotalWeight'); if(dashWeightNode) dashWeightNode.innerText = (grandTotalKg || 0).toFixed(2) + " Kg";
             } else { var dashWeightNode = document.getElementById('dashTotalWeight'); if(dashWeightNode) dashWeightNode.innerText = "0.00 Kg"; }
             tbody.innerHTML = finalHTML;
-        }
-
-        // FORMATTED STANDARD DATA EXPORT INTERFACE
-        function exportToCleanFormatedExcel() {
-            var projName = document.getElementById('projectName') ? document.getElementById('projectName').value.toUpperCase() : "NEW_PROJECT";
-            var htmlData = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><meta charset="UTF-8"></head><body><table border="1"><thead><tr><th colspan="17" style="font-size:14pt;font-weight:bold;">' + projName + ' - STEEL REPORT</th></tr><tr><th>Sl No</th><th>Description</th><th>Dia</th><th>Clear Span (m)</th><th>Spacing (mm)</th><th>Members</th><th>Bars</th><th>Cut Length</th><th>Total Length</th><th>8mm</th><th>10mm</th><th>12mm</th><th>16mm</th><th>20mm</th><th>25mm</th><th>32mm</th><th>40mm</th></tr></thead><tbody>';
-            var weights = {8:0.395, 10:0.617, 12:0.890, 16:1.580, 20:2.470, 25:3.850, 32:6.310, 40:9.860}, diaTotals = {8:0, 10:0, 12:0, 16:0, 20:0, 25:0, 32:0, 40:0}, grandTotalKg = 0;
-            for (var i = 0; i < bbsData.length; i++) {
-                var item = bbsData[i]; if(item.type === 'HEADING') { htmlData += '<tr><td colspan="17" style="background:#cbd5e1;font-weight:bold;">' + item.text + '</td></tr>'; } 
-                else { var cols = ""; for(var d=0; d<activeDias.length; d++) { var cd = activeDias[d]; if(item.dia === cd) { cols += '<td>' + item.totalLength + '</td>'; diaTotals[cd] += item.totalLength; grandTotalKg += (item.totalLength * weights[cd]); } else cols += '<td>0</td>'; } htmlData += '<tr><td>' + (i+1) + '</td><td>' + item.desc + '</td><td>' + item.dia + '</td><td>' + item.clearSpan + '</td><td>' + item.spacing + '</td><td>' + item.noMembers + '</td><td>' + Math.ceil(item.noBars) + '</td><td>' + item.cutLength + '</td><td>' + item.totalLength + '</td>' + cols + '</tr>'; }
-            }
-            htmlData += '<tr><td colspan="9" style="font-weight:bold; text-align:right;">Total Length (m)</td>'; for(var d=0; d<activeDias.length; d++) htmlData += '<td>' + diaTotals[activeDias[d]].toFixed(2) + '</td>'; htmlData += '</tr><tr><td colspan="9" style="font-weight:bold; text-align:right;">Weight (Kg)</td>'; for(var d=0; d<activeDias.length; d++) htmlData += '<td>' + (diaTotals[d] * weights[activeDias[d]]).toFixed(2) + '</td>'; htmlData += '</tr><tr style="background:#dcfce7; font-weight:bold;"><td colspan="5">Net Project Summary:</td><td colspan="4">' + grandTotalKg.toFixed(2) + ' Kg</td><td colspan="8">' + (grandTotalKg/1000).toFixed(4) + ' M.T.</td></tr></tbody></table></body></html>';
-            var base64 = btoa(unescape(encodeURIComponent(htmlData))), a = document.createElement("a"); a.href = "data:application/vnd.ms-excel;base64," + base64; a.download = projName.replace(/\s+/g, '_') + "_Report.xls"; document.body.appendChild(a); a.click(); document.body.removeChild(a);
         }
 
         function exportMasterMeasExcel() {
@@ -1190,8 +1171,13 @@
             <button id="hamburgerTrigger" class="menu-hamburger-btn" tabindex="1" onclick="toggleMainMenu(event)">☰</button>
             <h2 id="appMainHeadingTitle">BBS Pro Engine Premium</h2>
         </div>
+        
+        <!-- SIDE BY SIDE ALIGNED CONFIGURATION PANEL CONTROLS -->
         <div class="header-controls">
-            <div id="google_translate_element"></div>
+            <select id="langSelect" onchange="switchApplicationLanguage(this.value)" class="lang-dropdown-custom">
+                <option value="en">English</option>
+                <option value="hi">हिंदी (Hindi)</option>
+            </select>
             <button class="theme-toggle-btn" id="themeTogglerNode" tabindex="2" onclick="toggleTheme()"><span id="themeBtnText">🌙 Dark</span></button>
         </div>
         
@@ -1282,19 +1268,19 @@
         <div class="custom-dim-panel" style="background:#f8fafc; border-left:4px solid #2563eb; margin-bottom:15px; padding:10px;">
             <label data-lang-key="lbl_shape_gen" style="color:#2563eb; font-weight:bold; font-size:11px;">🏢 Column / Footing Shape Generator</label>
             <div class="form-row-three-boxes" style="margin-top:5px;">
-                <div class="form-group"><label data-lang-key="lbl_straight_len" style="color:#1e293b;">Straight Length (m)</label><input type="number" tabindex="25" id="colMainLength" placeholder=".e.g. 3.25" step="any" oninput="triggerColumnFootingMath()"></div>
-                <div class="form-group"><label data-lang-key="lbl_left_hook" style="color:#1e293b;">Left L-Hook (mm)</label><input type="number" tabindex="26" id="colLeftHook" placeholder=".e.g. 300" step="any" oninput="triggerColumnFootingMath()"></div>
-                <div class="form-group"><label data-lang-key="lbl_right_hook" style="color:#1e293b;">Right L-Hook (mm)</label><input type="number" tabindex="27" id="colRightHook" placeholder=".e.g. 300" step="any" oninput="triggerColumnFootingMath()"></div>
+                <div class="form-group"><label style="color:#1e293b;">Straight Length (m)</label><input type="number" tabindex="25" id="colMainLength" placeholder=".e.g. 3.25" step="any" oninput="triggerColumnFootingMath()"></div>
+                <div class="form-group"><label style="color:#1e293b;">Left L-Hook (mm)</label><input type="number" tabindex="26" id="colLeftHook" placeholder=".e.g. 300" step="any" oninput="triggerColumnFootingMath()"></div>
+                <div class="form-group"><label style="color:#1e293b;">Right L-Hook (mm)</label><input type="number" tabindex="27" id="colRightHook" placeholder=".e.g. 300" step="any" oninput="triggerColumnFootingMath()"></div>
             </div>
         </div>
 
         <div class="form-row">
             <div class="form-group">
-                <label data-lang-key="lbl_bar_name">Bar Name</label>
+                <label>Bar Name</label>
                 <input type="text" id="desc" tabindex="28" placeholder=".e.g. Main Bottom bar">
             </div>
             <div class="form-group">
-                <label data-lang-key="lbl_dia">Diameter (mm)</label>
+                <label>Diameter (mm)</label>
                 <select id="dia" tabindex="29">
                     <option value="8">8 mm</option><option value="10">10 mm</option>
                     <option value="12">12 mm</option><option value="16" selected>16 mm</option>
@@ -1303,23 +1289,23 @@
                 </select>
             </div>
             <div class="form-group">
-                <label data-lang-key="lbl_clear_span">Clear Span Record (Meter)</label>
+                <label>Clear Span Record (Meter)</label>
                 <input type="text" id="clearSpanInput" placeholder=".e.g. 5.450" readonly style="background:#e2e8f0; color:#64748b;">
             </div>
             <div class="form-group">
-                <label data-lang-key="lbl_spacing_rec">Spacing Record (mm)</label>
+                <label>Spacing Record (mm)</label>
                 <input type="text" id="spacingInput" placeholder=".e.g. 150" readonly style="background:#e2e8f0; color:#64748b;">
             </div>
             <div class="form-group">
-                <label data-lang-key="lbl_members_cnt">Members Count</label>
+                <label>Members Count</label>
                 <input type="number" id="noMembers" tabindex="30" placeholder=".e.g. 2" step="any">
             </div>
             <div class="form-group">
-                <label data-lang-key="lbl_bars_member">Bars per Member (Nos)</label>
+                <label>Bars per Member (Nos)</label>
                 <input type="number" id="noBars" tabindex="31" placeholder=".e.g. 12" step="any">
             </div>
             <div class="form-group">
-                <label data-lang-key="lbl_total_cut">Total Cut Length (m)</label>
+                <label>Total Cut Length (m)</label>
                 <input type="number" id="cutLength" tabindex="32" placeholder=".e.g. 6.25" step="any">
             </div>
             <div class="form-group">
@@ -1331,13 +1317,13 @@
     <!-- TAB 3 -->
     <div id="tab3" class="tab-content">
         <div class="stats-dashboard">
-            <div class="stat-card"><div id="statTotalBarsLabel" data-lang-key="lbl_total_entered">Total Bars Entered</div><div id="dashTotalEntries">0 Items</div></div>
-            <div class="stat-card"><div id="statNetWeightLabel" data-lang-key="lbl_net_weight">Net Project Weight</div><div id="dashTotalWeight">0.00 Kg</div></div>
+            <div>Total Bars Entered<div id="dashTotalEntries">0 Items</div></div>
+            <div>Net Project Weight<div id="dashTotalWeight">0.00 Kg</div></div>
         </div>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:10px; margin-bottom: 12px;">
-            <div class="form-group" style="margin-bottom:0;"><label data-lang-key="lbl_search_filter">🔍 Live Grid Search Filter</label><input type="text" tabindex="34" id="gridSearchBox" placeholder="Search..." oninput="filterBbsGrid()"></div>
-            <div class="form-group" style="margin-bottom:0;"><label data-lang-key="lbl_steel_rate">💰 Steel Rate (Per Kg)</label><input type="number" tabindex="35" id="steelRatePerKg" placeholder=".e.g. 65" oninput="renderTable()"></div>
+            <div class="form-group" style="margin-bottom:0;"><label>🔍 Live Grid Search Filter</label><input type="text" tabindex="34" id="gridSearchBox" placeholder="Search..." oninput="filterBbsGrid()"></div>
+            <div class="form-group" style="margin-bottom:0;"><label>💰 Steel Rate (Per Kg)</label><input type="number" tabindex="35" id="steelRatePerKg" placeholder=".e.g. 65" oninput="renderTable()"></div>
         </div>
 
         <h3 id="liveProjectHeaderName" style="margin: 15px 0 5px 0; font-size:14px; font-weight:bold; color:#2563eb; text-transform:uppercase;">📁 CURRENT SHEET LOG: NEW PROJECT</h3>
