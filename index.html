@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="description" content="BBS Pro Engine - Premium Civil Engineering Structural Calculator.">
-    <title>BBS Structural Pro Engine</title>
+    <meta name="description" content="BBS Engine - Civil Engineering Structural Calculator.">
+    <title>BBS Structural Engine</title>
     <style>
         :root {
             --bg-body: #e2e8f0;
@@ -31,13 +31,23 @@
         .header-section h2 { margin: 0; font-size: 18px; font-weight: 700; letter-spacing: 0.5px; }
         .menu-hamburger-btn { font-size: 24px; background: none; border: none; color: white; cursor: pointer; padding: 5px 10px; order: -1; margin-right: 10px; outline: none; }
         .header-title-container { display: flex; align-items: center; flex-grow: 1; }
+        .header-controls { display: flex; align-items: center; gap: 10px; }
+        .theme-toggle-btn { background: #3b82f6; border: none; color: white; padding: 6px 12px; border-radius: 20px; font-weight: bold; cursor: pointer; font-size: 12px; white-space: nowrap; }
         
-        /* SIDE-BY-SIDE CONTROLS ALIGNMENT UPGRADED */
-        .header-controls { display: flex; align-items: center; gap: 12px; }
-        .lang-dropdown-custom { background: #2563eb; border: 2px solid #3b82f6; color: white; padding: 6px 12px; border-radius: 20px; font-weight: bold; font-size: 12px; outline: none; cursor: pointer; height: 32px; box-sizing: border-box; }
-        .theme-toggle-btn { background: #3b82f6; border: none; color: white; padding: 6px 12px; border-radius: 20px; font-weight: bold; cursor: pointer; font-size: 12px; white-space: nowrap; height: 32px; display: flex; align-items: center; justify-content: center; box-sizing: border-box; }
+        /* CUSTOM CUSTOM LANGUAGE SELECT DROPDOWN */
+        .custom-lang-selector {
+            background: #2563eb !important;
+            border: 2px solid #3b82f6 !important;
+            color: white !important;
+            padding: 6px 10px !important;
+            border-radius: 20px !important;
+            font-weight: bold !important;
+            font-size: 12px !important;
+            outline: none !important;
+            cursor: pointer !important;
+            width: auto !important;
+        }
         
-        /* PREMIUM MENU CONTAINER */
         .dropdown-menu-box { 
             display: none; 
             position: absolute; top: 60px; left: 16px; 
@@ -49,7 +59,6 @@
         
         .menu-header-label { background: linear-gradient(145deg, #0f172a, #1e293b); color: #38bdf8; padding: 10px 14px; font-size: 13px; font-weight: 800; text-transform: uppercase; border-radius: 6px; margin-bottom: 10px; letter-spacing: 0.5px; text-align: center; box-shadow: inset 0 1px 1px rgba(255,255,255,0.1); }
         
-        /* 3D UI MODERN BUTTON STYLING */
         .dropdown-menu-box button.menu-premium-btn { 
             width: 100%; padding: 12px 16px; border: none; text-align: left; font-size: 14px; font-weight: 700; 
             cursor: pointer; border-radius: 8px; margin-bottom: 8px; transition: all 0.2s ease; 
@@ -175,7 +184,6 @@
             margin-bottom: 12px;
         }
 
-        /* HARDENED GENERIC FOCUS VISUAL STATE HANDLER FOR REMOTE CONTROLS */
         input:focus, button:focus, select:focus, .tab-btn:focus, .modal-tab-btn:focus {
             border: 3px solid #ff9900 !important;
             outline: none !important;
@@ -211,137 +219,205 @@
         var renameTargetEncoded = "";
         var mmRenameTargetEncoded = "";
         var mmSearchQuery = "";
-        var currentLang = "en";
         var searchFilterText = "";
 
-        // MULTI-LANGUAGE TRANSLATION DICTIONARY FOR LOCAL POLICY SETTINGS
-        var langTranslationDictionary = {
+        // 100% DICTIONARY DATA FOR ALL CONTEXT STRINGS
+        var currentLang = "en";
+        var langData = {
             en: {
-                app_title: "BBS Pro Engine Premium",
-                init_tab: "1. PROJECT INIT",
-                input_tab: "2. INPUT BAR DATA",
-                grid_tab: "3. EXCEL/PDF GRID",
+                app_title: "BBS Structural Engine",
+                menu_dash: "📊 Dashboard Menu",
+                menu_mm: "📏 Master Measurement",
+                menu_mat_folder: "🧮 Material Calculator Folder 🔽",
+                menu_steel: "Steel Unit Weight Solver",
+                menu_concrete: "Concrete Layout Estimator",
+                menu_brick: "Brickwork Structural Solver",
+                menu_block: "AAC Blockwork Custom Solver",
+                menu_plaster: "Plaster Material Model",
+                menu_tile: "Tile & Flooring Solver",
+                menu_shutter: "Formwork Area Solver",
+                menu_qc: "Quality Control Dashboard",
+                menu_share: "🤝 Share App Framework",
+                menu_info: "ℹ️ About App Information",
+                tab_init: "1. PROJECT INIT",
+                tab_input: "2. INPUT BAR DATA",
+                tab_grid: "3. EXCEL/PDF GRID",
                 lbl_proj_name: "Project Name / Site Reference",
                 lbl_ops_mode: "Sheet Operations Mode",
-                lbl_record_date: "Billing Record Date",
-                lbl_sec_heading: "Create Section Heading",
-                btn_add_heading: "Add Heading",
-                btn_clear_all: "Clear All",
-                lbl_straigt_len: "Straight Length (m)",
+                opt_new: "🆕 Create New Sheet Canvas",
+                opt_old: "📂 Load Old Session Backup",
+                lbl_date: "Billing Record Date",
+                lbl_heading: "Create Section Heading",
+                btn_add_head: "Add Heading",
+                btn_clear: "Clear All",
+                btn_autosolve: "📐 Input Clear Span or Spacing 🔽",
+                lbl_shape_gen: "🏢 Column / Footing Shape Generator",
+                lbl_straight: "Straight Length (m)",
                 lbl_left_hook: "Left L-Hook (mm)",
                 lbl_right_hook: "Right L-Hook (mm)",
                 lbl_bar_name: "Bar Name",
                 lbl_dia: "Diameter (mm)",
-                lbl_clear_span: "Clear Span Record (Meter)",
-                lbl_spacing_rec: "Spacing Record (mm)",
-                lbl_members_cnt: "Members Count",
+                lbl_span: "Clear Span Record (Meter)",
+                lbl_spacing: "Spacing Record (mm)",
+                lbl_members: "Members Count",
                 lbl_bars_member: "Bars per Member (Nos)",
-                lbl_total_cut: "Total Cut Length (m)",
-                btn_insert_bar: "Insert Bar",
-                dash_entered: "Total Bars Entered",
-                dash_weight: "Net Project Weight"
+                lbl_cut_len: "Total Cut Length (m)",
+                btn_insert: "Insert Bar",
+                lbl_entered: "Total Bars Entered",
+                lbl_weight: "Net Project Weight",
+                lbl_search: "🔍 Live Grid Search Filter",
+                lbl_rate: "💰 Steel Rate (Per Kg)",
+                btn_excel: "📥 Export Excel",
+                btn_pdf: "📄 Print PDF",
+                btn_wa: "📋 Copy Text for WA",
+                btn_save: "💾 Save Sheet Data",
+                ph_proj: ".e.g. Metro Bridge Sector 4",
+                ph_heading: ".e.g. BEAM PIER 12",
+                ph_bar: ".e.g. Main Bottom bar",
+                admob_placeholder: "⚡ BBS Framework Active Optimization Engine Module ⚡",
+                th_sl: "Sl No", th_desc: "Description", th_dia: "Dia", th_cspan: "Clear Span (m)", th_spac: "Spacing (mm)", th_nos: "Nos", th_mem: "Members", th_bars: "Bars", th_cut: "Cut Length", th_tot: "Total Length", th_act: "Action",
+                btn_delete: "Delete"
             },
             hi: {
-                app_title: "बीबीएस प्रो इंजन प्रीमियम",
-                init_tab: "1. प्रोजेक्ट लोड",
-                input_tab: "2. सरिया इनपुट डेटा",
-                grid_tab: "3. एक्सेल/पीडीएफ ग्रिड",
-                lbl_proj_name: "परियोजना का नाम / साइट संदर्भ",
-                lbl_ops_mode: "शीट संचालन मोड",
-                lbl_record_date: "बिलिंग रिकॉर्ड तिथि",
-                lbl_sec_heading: "सेक्शन हेडिंग बनाएं",
-                btn_add_heading: "हेडिंग जोड़ें",
-                btn_clear_all: "सब साफ करें",
-                lbl_straigt_len: "सीधी लंबाई (m)",
-                lbl_left_hook: "बायां L-हुक (mm)",
-                lbl_right_hook: "दायां L-हुक (mm)",
+                app_title: "बीबीएस स्ट्रक्चरल इंजन",
+                menu_dash: "📊 डैशबोर्ड मेनू",
+                menu_mm: "📏 मास्टर मेजरमेंट शीट",
+                menu_mat_folder: "🧮 सामग्री कैलकुलेटर फ़ोल्डर 🔽",
+                menu_steel: "स्टील यूनिट वेट सॉल्वर",
+                menu_concrete: "कंक्रीट लेआउट अनुमानक",
+                menu_brick: "ईंटवर्क सामग्री मॉडल",
+                menu_block: "एएसी ब्लॉकवर्क कस्टम सॉल्वर",
+                menu_plaster: "प्लास्टर सामग्री मॉडल",
+                menu_tile: "टाइल और फ़्लोरिंग सॉल्वर",
+                menu_shutter: "शटरिंग फ्रेम सॉल्वर",
+                menu_qc: "गुणवत्ता नियंत्रण डैशबोर्ड",
+                menu_share: "🤝 ऐप दोस्तों को शेयर करें",
+                menu_info: "ℹ️ ऐप की जानकारी के बारे में",
+                tab_init: "1. प्रोजेक्ट सेटिंग",
+                tab_input: "2. बार डेटा इनपुट",
+                tab_grid: "3. एक्सेल/पीडीएफ ग्रिड",
+                lbl_proj_name: "प्रोजेक्ट का नाम / साइट का संदर्भ",
+                lbl_ops_mode: "शीट ऑपरेशन्स मोड",
+                opt_new: "🆕 नया शीट कैनवास बनाएं",
+                opt_old: "📂 पुराना बैकअप लोड करें",
+                lbl_date: "बिलिंग रिकॉर्ड दिनांक",
+                lbl_heading: "सेक्शन हेडिंग बनाएं",
+                btn_add_head: "हेडिंग जोड़ें",
+                btn_clear: "सब साफ़ करें",
+                btn_autosolve: "📐 स्पैन या स्पेसिंग इनपुट करें 🔽",
+                lbl_shape_gen: "🏢 कॉलम / फुटिंग शेप जेनरेटर",
+                lbl_straight: "सीधी लंबाई (मीटर)",
+                lbl_left_hook: "बायां एल-हुक (मिमी)",
+                lbl_right_hook: "दायां एल-हुक (मिमी)",
                 lbl_bar_name: "सरिया का नाम",
-                lbl_dia: "व्यास (Diameter) (mm)",
-                lbl_clear_span: "क्लियर स्पैन रिकॉर्ड (Meter)",
-                lbl_spacing_rec: "स्पेसिंग रिकॉर्ड (mm)",
-                lbl_members_cnt: "मेम्बर्स की संख्या (Count)",
-                lbl_bars_member: "प्रति मेम्बर सरिया (Nos)",
-                lbl_total_cut: "कुल कटिंग लंबाई (m)",
-                btn_insert_bar: "सरिया दर्ज करें",
-                dash_entered: "कुल दर्ज सरिया",
-                dash_weight: "कुल प्रोजेक्ट वजन"
+                lbl_dia: "व्यास (मिमी)",
+                lbl_span: "क्लियर स्पैन रिकॉर्ड (मीटर)",
+                lbl_spacing: "स्पेसिंग रिकॉर्ड (मिमी)",
+                lbl_members: "सदस्यों की संख्या (Members)",
+                lbl_bars_member: "प्रति सदस्य सरिया संख्या",
+                lbl_cut_len: "कुल कट लंबाई (मीटर)",
+                btn_insert: "डेटा दर्ज करें",
+                lbl_entered: "कुल दर्ज सरिया संख्या",
+                lbl_weight: "कुल प्रोजेक्ट वजन",
+                lbl_search: "🔍 लाइव ग्रिड खोज फ़िल्टर",
+                lbl_rate: "💰 स्टील दर (प्रति किलो)",
+                btn_excel: "📥 एक्सेल डाउनलोड करें",
+                btn_pdf: "📄 प्रिंट पीडीएफ",
+                btn_wa: "📋 व्हाट्सएप के लिए कॉपी करें",
+                btn_save: "💾 शीट डेटा सुरक्षित करें",
+                ph_proj: "जैसे: मेट्रो ब्रिज सेक्टर 4",
+                ph_heading: "जैसे: बीम पियर 12",
+                ph_bar: "जैसे: मुख्य निचली बार",
+                admob_placeholder: "⚡ बीबीएस फ्रेमवर्क सक्रिय अनुकूलन इंजन मॉड्यूल ⚡",
+                th_sl: "क्र.सं.", th_desc: "विवरण", th_dia: "व्यास", th_cspan: "क्लियर स्पैन (मी)", th_spac: "स्पेसिंग (मिमी)", th_nos: "संख्या", th_mem: "मेंबर्स", th_bars: "सरिया", th_cut: "कट लंबाई", th_tot: "कुल लंबाई", th_act: "कार्रवाई",
+                btn_delete: "हटाएं"
             }
         };
 
-        // RESTORED FIX FOR MODAL ACTIONS (CRITICAL)
-        function openModal(mId) { 
-            document.getElementById('mainMenuDropdown').style.display = 'none'; 
-            closeAllModals(); 
-            safeModalToggle(mId, 'flex'); 
-            if(mId === 'historyModal') loadHistoryList(); 
-            if(mId === 'masterMeasurementModal') { 
-                document.getElementById('mmOperationsModeSelect').value = "NEW"; 
-                toggleMmHistoryPanel("NEW"); 
-                loadMasterMeasHistoryList(); 
-            } 
-        }
-        
-        function closeAllModals() { 
-            safeModalToggle('civilCalcModal', 'none'); 
-            safeModalToggle('masterMeasurementModal', 'none'); 
-            safeModalToggle('concreteCalcModal', 'none'); 
-            safeModalToggle('brickCalcModal', 'none'); 
-            safeModalToggle('blockCalcModal', 'none'); 
-            safeModalToggle('plasterCalcModal', 'none'); 
-            safeModalToggle('tileCalcModal', 'none'); 
-            safeModalToggle('shutteringCalcModal', 'none'); 
-            safeModalToggle('infoModal', 'none'); 
-            safeModalToggle('qualityCalcModal', 'none'); 
-            safeModalToggle('bbsAutoCalcModal', 'none'); 
-            safeModalToggle('historyModal', 'none'); 
-            safeModalToggle('renameModal', 'none'); 
-            safeModalToggle('mmRenameModal', 'none');
-            resetModeToNewCanvas();
-        }
-
-        function switchApplicationLanguage(langKey) {
-            currentLang = langKey;
-            var textSet = langTranslationDictionary[langKey] || langTranslationDictionary.en;
+        function switchApplicationLanguage(lang) {
+            currentLang = lang;
+            var tr = langData[lang];
             
-            document.getElementById('appMainHeadingTitle').innerText = textSet.app_title;
-            document.getElementById('btn-tab1').innerText = textSet.init_tab;
-            document.getElementById('btn-tab2').innerText = textSet.input_tab;
-            document.getElementById('btn-tab3').innerText = textSet.grid_tab;
+            document.getElementById("appMainHeadingTitle").innerText = tr.app_title;
+            document.querySelector(".menu-header-label").innerText = tr.menu_dash;
+            document.getElementById("menuBtnMasterMeasText").innerHTML = "## 1. " + tr.menu_mm;
+            document.getElementById("menuBtnCalcFolderText").innerText = tr.menu_mat_folder;
+            document.getElementById("menuBtnSteelUnitText").innerText = "🎨 " + tr.menu_steel;
+            document.getElementById("menuBtnConcreteText").innerText = "🧱 " + tr.menu_concrete;
+            document.getElementById("menuBtnBrickText").innerText = "🔴 " + tr.menu_brick;
+            document.getElementById("menuBtnBlockText").innerText = "🔲 " + tr.menu_block;
+            document.getElementById("menuBtnPlasterText").innerText = "⏳ " + tr.menu_plaster;
+            document.getElementById("menuBtnTileText").innerText = "🧱 " + tr.menu_tile;
+            document.getElementById("menuBtnShutterText").innerText = "🪵 " + tr.menu_shutter;
+            document.getElementById("menuBtnQcText").innerText = "🏆 " + tr.menu_qc;
+            document.getElementById("menuBtnShareText").innerText = tr.menu_share;
+            document.getElementById("menuBtnInfoText").innerText = tr.menu_info;
             
-            document.querySelector('[data-lang-key="lbl_proj_name"]').innerText = textSet.lbl_proj_name;
-            document.querySelector('[data-lang-key="lbl_ops_mode"]').innerText = textSet.lbl_ops_mode;
-            document.querySelector('[data-lang-key="lbl_record_date"]').innerText = textSet.lbl_record_date;
-            document.querySelector('[data-lang-key="lbl_sec_heading"]').innerText = textSet.lbl_sec_heading;
+            document.getElementById("btn-tab1").innerText = tr.tab_init;
+            document.getElementById("btn-tab2").innerText = tr.tab_input;
+            document.getElementById("btn-tab3").innerText = tr.tab_grid;
             
-            document.getElementById('addHeadingBtnText').innerText = textSet.btn_add_heading;
-            document.getElementById('clearAllBtnText').innerText = textSet.btn_clear_all;
-
-            document.getElementById('lbl_straigt_len').innerText = textSet.lbl_straigt_len;
-            document.getElementById('lbl_left_hook').innerText = textSet.lbl_left_hook;
-            document.getElementById('lbl_right_hook').innerText = textSet.lbl_right_hook;
-            document.getElementById('lbl_bar_name').innerText = textSet.lbl_bar_name;
-            document.getElementById('lbl_dia').innerText = textSet.lbl_dia;
-            document.getElementById('lbl_clear_span').innerText = textSet.lbl_clear_span;
-            document.getElementById('lbl_spacing_rec').innerText = textSet.lbl_spacing_rec;
-            document.getElementById('lbl_members_cnt').innerText = textSet.lbl_members_cnt;
-            document.getElementById('lbl_bars_member').innerText = textSet.lbl_bars_member;
-            document.getElementById('lbl_total_cut').innerText = textSet.lbl_total_cut;
-            document.getElementById('insertBarBtnNode').innerText = textSet.btn_insert_bar;
+            document.querySelector('label[data-lang-key="lbl_proj_name"]').innerText = tr.lbl_proj_name;
+            document.querySelector('label[data-lang-key="lbl_ops_mode"]').innerText = tr.lbl_ops_mode;
+            document.getElementById("optNewCanvasSelect").innerText = tr.opt_new;
+            document.getElementById("optOldBackupSelect").innerText = tr.opt_old;
+            document.querySelector('label[data-lang-key="lbl_record_date"]').innerText = tr.lbl_date;
+            document.querySelector('label[data-lang-key="lbl_sec_heading"]').innerText = tr.lbl_heading;
+            document.getElementById("addHeadingBtnText").innerText = tr.btn_add_head;
+            document.getElementById("clearAllBtnText").innerText = tr.btn_clear;
+            document.getElementById("launcherAutoSolverBtnText").innerText = tr.btn_autosolve;
+            document.querySelector('label[data-lang-key="lbl_shape_gen"]').innerText = tr.lbl_shape_gen;
+            document.querySelector('label[data-lang-key="lbl_straight_len"]').innerText = tr.lbl_straight;
+            document.querySelector('label[data-lang-key="lbl_left_hook"]').innerText = tr.lbl_left_hook;
+            document.querySelector('label[data-lang-key="lbl_right_hook"]').innerText = tr.lbl_right_hook;
             
-            document.getElementById('dash_entered_lbl').innerText = textSet.dash_entered;
-            document.getElementById('dash_weight_lbl').innerText = textSet.dash_weight;
-
-            triggerToastNotification(langKey === 'hi' ? "भाषा बदली गई: हिंदी" : "Language changed to English");
+            document.querySelector('label[data-lang-key="lbl_bar_name"]').innerText = tr.lbl_bar_name;
+            document.querySelector('label[data-lang-key="lbl_dia"]').innerText = tr.lbl_dia;
+            document.querySelector('label[data-lang-key="lbl_clear_span"]').innerText = tr.lbl_span;
+            document.querySelector('label[data-lang-key="lbl_spacing_rec"]').innerText = tr.lbl_spacing;
+            document.querySelector('label[data-lang-key="lbl_members_cnt"]').innerText = tr.lbl_members;
+            document.querySelector('label[data-lang-key="lbl_bars_member"]').innerText = tr.lbl_bars_member;
+            document.querySelector('label[data-lang-key="lbl_total_cut"]').innerText = tr.lbl_cut_len;
+            document.getElementById("insertBarBtnNode").innerText = tr.btn_insert;
+            
+            document.getElementById("statTotalBarsLabel").innerText = tr.lbl_entered;
+            document.getElementById("statNetWeightLabel").innerText = tr.lbl_weight;
+            document.querySelector('label[data-lang-key="lbl_search_filter"]').innerText = tr.lbl_search;
+            document.querySelector('label[data-lang-key="lbl_steel_rate"]').innerText = tr.lbl_rate;
+            
+            document.getElementById("btnExportExcelNode").innerText = tr.btn_excel;
+            document.getElementById("btnPrintPdfNode").innerText = tr.btn_pdf;
+            document.getElementById("btnCopyWaNode").innerText = tr.btn_wa;
+            document.getElementById("btnSaveSheetNode").innerText = tr.btn_save;
+            
+            document.getElementById("projectName").placeholder = tr.ph_proj;
+            document.getElementById("compTitle").placeholder = tr.ph_heading;
+            document.getElementById("desc").placeholder = tr.ph_bar;
+            
+            document.querySelector(".admob-banner-placeholder").innerText = tr.admob_placeholder;
+            
+            // Dynamic Table Headers Translation Updates
+            var headerCols = document.getElementById("bbsTable").querySelectorAll("thead th");
+            if(headerCols.length >= 11) {
+                headerCols[0].innerText = tr.th_sl;
+                headerCols[1].innerText = tr.th_desc;
+                headerCols[2].innerText = tr.th_dia;
+                headerCols[3].innerText = tr.th_cspan;
+                headerCols[4].innerText = tr.th_spac;
+                headerCols[5].innerText = tr.th_nos;
+                headerCols[6].innerText = tr.th_mem;
+                headerCols[7].innerText = tr.th_bars;
+                headerCols[8].innerText = tr.th_cut;
+                headerCols[9].innerText = tr.th_tot;
+                headerCols[10].innerText = tr.th_act;
+            }
+            renderTable();
         }
 
         function toggleCalcFolder(e) {
             if(e) e.stopPropagation();
             var folder = document.getElementById('calculatorsMenuFolder');
-            if(folder.style.display === 'block') {
-                folder.style.display = 'none';
-            } else {
-                folder.style.display = 'block';
-            }
+            folder.style.display = (folder.style.display === 'block') ? 'none' : 'block';
         }
 
         function triggerToastNotification(msg) {
@@ -370,6 +446,7 @@
                     }
                 }
             });
+            switchApplicationLanguage('en');
         };
 
         function toggleTheme() {
@@ -386,7 +463,7 @@
         function filterBbsGrid() { searchFilterText = document.getElementById('gridSearchBox').value.toLowerCase().trim(); renderTable(); }
 
         function copyTableToClipboardText() {
-            var textSummary = "📊 BBS STRUCTURAL ENGINE REPORT 📊\nProject: " + currentActiveProject + "\n";
+            var textSummary = "📊 BBS STRUCTURAL REPORT 📊\nProject: " + currentActiveProject + "\n";
             var dVal = document.getElementById('reportDate').value;
             if(dVal) textSummary += "Date: " + dVal + "\n";
             textSummary += "--------------------------------\n";
@@ -401,10 +478,9 @@
                     textSummary += "\n🔹 " + item.text + "\n";
                 } else if(item.type === 'DATA') {
                     validEntriesFound = true;
-                    var parsedLen = parseFloat(item.totalLength) || 0;
-                    var itemWeight = (parsedLen * (weights[item.dia] || 0)).toFixed(2);
+                    var itemWeight = (item.totalLength * (weights[item.dia] || 0)).toFixed(2);
                     grandTotalKg += parseFloat(itemWeight);
-                    textSummary += "• " + item.desc + " | Dia: " + item.dia + "mm | Total Bars: " + Math.ceil(parseFloat(item.noBars) || 0) + " | Total Len: " + parsedLen + "m | Weight: " + itemWeight + " Kg\n";
+                    textSummary += "• " + item.desc + " | Dia: " + item.dia + "mm | Total Bars: " + Math.ceil(item.noBars) + " | Total Len: " + item.totalLength + "m | Weight: " + itemWeight + " Kg\n";
                 }
             }
             if(!validEntriesFound) return triggerToastNotification("The layout table is currently empty.");
@@ -421,10 +497,12 @@
             
             if (navigator.clipboard && navigator.clipboard.writeText) {
                 navigator.clipboard.writeText(textSummary).then(function() {
-                    triggerToastNotification("Report copied with weights and prices successfully!");
+                    triggerToastNotification("Report copied successfully!");
                 }).catch(function() {
-                    triggerToastNotification("Clipboard hardware binding failed.");
+                    triggerToastNotification("Clipboard binding failed.");
                 });
+            } else {
+                triggerToastNotification("System secure configuration unavailable.");
             }
         }
 
@@ -440,23 +518,23 @@
 
         function clearAllWithAutoSave() {
             if (bbsData.length > 0) { executeSilentAutoSave(); }
-            if(document.getElementById('projectName')) document.getElementById('projectName').value = "";
-            if(document.getElementById('reportDate')) document.getElementById('reportDate').value = "";
-            if(document.getElementById('desc')) document.getElementById('desc').value = "";
-            if(document.getElementById('clearSpanInput')) document.getElementById('clearSpanInput').value = "";
-            if(document.getElementById('spacingInput')) document.getElementById('spacingInput').value = "";
-            if(document.getElementById('noMembers')) document.getElementById('noMembers').value = "";
-            if(document.getElementById('noBars')) document.getElementById('noBars').value = "";
-            if(document.getElementById('cutLength')) document.getElementById('cutLength').value = "";
-            if(document.getElementById('compTitle')) document.getElementById('compTitle').value = "";
-            if(document.getElementById('colMainLength')) document.getElementById('colMainLength').value = "";
-            if(document.getElementById('colLeftHook')) document.getElementById('colLeftHook').value = "";
-            if(document.getElementById('colRightHook')) document.getElementById('colRightHook').value = "";
-            if(document.getElementById('hlSpan')) document.getElementById('hlSpan').value = "";
-            if(document.getElementById('hlSpacingSingleInput')) document.getElementById('hlSpacingSingleInput').value = "";
-            if(document.getElementById('z1Spacing')) document.getElementById('z1Spacing').value = "";
-            if(document.getElementById('z2Spacing')) document.getElementById('z2Spacing').value = "";
-            if(document.getElementById('z3Spacing')) document.getElementById('z3Spacing').value = "";
+            document.getElementById('projectName').value = "";
+            document.getElementById('reportDate').value = "";
+            document.getElementById('desc').value = "";
+            document.getElementById('clearSpanInput').value = "";
+            document.getElementById('spacingInput').value = "";
+            document.getElementById('noMembers').value = "";
+            document.getElementById('noBars').value = "";
+            document.getElementById('cutLength').value = "";
+            document.getElementById('compTitle').value = "";
+            document.getElementById('colMainLength').value = "";
+            document.getElementById('colLeftHook').value = "";
+            document.getElementById('colRightHook').value = "";
+            document.getElementById('hlSpan').value = "";
+            document.getElementById('hlSpacingSingleInput').value = "";
+            document.getElementById('z1Spacing').value = "";
+            document.getElementById('z2Spacing').value = "";
+            document.getElementById('z3Spacing').value = "";
             
             currentActiveProject = "NEW PROJECT";
             var screenHeader = document.getElementById('liveProjectHeaderName');
@@ -465,7 +543,7 @@
             resetModeToNewCanvas();
             bbsData = []; renderTable();
             switchTab('tab1'); 
-            triggerToastNotification("All form data fields wiped successfully!"); 
+            triggerToastNotification("All form fields reset successfully!"); 
         }
 
         function checkAndResetForNewProject() {
@@ -496,42 +574,75 @@
                 if(noBarsInput) noBarsInput.value = Math.ceil((totalSpanMM / sSpacMM) + 1); 
                 if(cSpanInput) cSpanInput.value = totalSpanMeter.toFixed(3); 
                 if(spacInput) spacInput.value = sSpacMM.toFixed(0);
-            } else if(mode === "L3") {
-                var z1 = document.getElementById('z1Spacing').value.trim(), z2 = document.getElementById('z2Spacing').value.trim(), z3 = document.getElementById('z3Spacing').value.trim();
-                if(z1 === "" && z2 === "" && z3 === "") { if(spacInput) spacInput.value = ""; return closeAllModals(); }
-                var z1V = parseFloat(z1) || 100, z2V = parseFloat(z2) || 150, z3V = parseFloat(z3) || 100;
-                var equalSplitMM = totalSpanMM / 3; 
-                if(noBarsInput) noBarsInput.value = Math.ceil((equalSplitMM / z1V) + (equalSplitMM / z2V) + (equalSplitMM / z3V) + 1); 
-                if(cSpanInput) cSpanInput.value = totalSpanMeter.toFixed(3);
-                spacInput.value = z1V.toFixed(0) + "/" + z2V.toFixed(0) + "/" + z3V.toFixed(0);
-            } else if(mode === "L4") {
+            } else if(mode === "L3" || mode === "L4") {
                 var z1 = document.getElementById('z1Spacing').value.trim(), z2 = document.getElementById('z2Spacing').value.trim(), z3 = document.getElementById('z3Spacing').value.trim();
                 if(z1 === "" && z2 === "" && z3 === "") { if(spacInput) spacInput.value = ""; return closeAllModals(); }
                 var z1V = parseFloat(z1) || 100, z2V = parseFloat(z2) || 150, z3V = parseFloat(z3) || 100;
                 
-                var zone1SpanMM = totalSpanMM / 4;
-                var zone2SpanMM = totalSpanMM / 2;
-                var zone3SpanMM = totalSpanMM / 4;
-                
-                if(noBarsInput) noBarsInput.value = Math.ceil((zone1SpanMM / z1V) + (zone2SpanMM / z2V) + (zone3SpanMM / z3V) + 1); 
+                if(mode === "L3") {
+                    var equalSplitMM = totalSpanMM / 3; 
+                    if(noBarsInput) noBarsInput.value = Math.ceil((equalSplitMM / z1V) + (equalSplitMM / z2V) + (equalSplitMM / z3V) + 1); 
+                } else {
+                    var zone1SpanMM = totalSpanMM / 4;
+                    var zone2SpanMM = totalSpanMM / 2;
+                    var zone3SpanMM = totalSpanMM / 4;
+                    if(noBarsInput) noBarsInput.value = Math.ceil((zone1SpanMM / z1V) + (zone2SpanMM / z2V) + (zone3SpanMM / z3V) + 1); 
+                }
                 if(cSpanInput) cSpanInput.value = totalSpanMeter.toFixed(3);
                 spacInput.value = z1V.toFixed(0) + "/" + z2V.toFixed(0) + "/" + z3V.toFixed(0);
             }
             closeAllModals();
         }
 
-        // HARDENED ABSOLUTE MATH VALIDATION INJECTION (Zero NaN Exposure)
+        function triggerApkShare() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'BBS Structural Engine',
+                    text: 'Check out this structural engineering calculator!',
+                    url: window.location.href
+                }).then(() => {
+                    triggerToastNotification("Shared successfully!");
+                }).catch(() => {
+                    triggerToastNotification("Share panel dismissed.");
+                });
+            } else {
+                triggerToastNotification("Web Share module execution blocked by runtime sandbox.");
+            }
+        }
+
+        function openModal(mId) { document.getElementById('mainMenuDropdown').style.display = 'none'; closeAllModals(); safeModalToggle(mId, 'flex'); if(mId === 'historyModal') loadHistoryList(); if(mId === 'masterMeasurementModal') { document.getElementById('mmOperationsModeSelect').value = "NEW"; toggleMmHistoryPanel("NEW"); loadMasterMeasHistoryList(); } }
+        
+        function closeAllModals() { 
+            safeModalToggle('civilCalcModal', 'none'); safeModalToggle('masterMeasurementModal', 'none'); safeModalToggle('concreteCalcModal', 'none'); safeModalToggle('brickCalcModal', 'none'); safeModalToggle('blockCalcModal', 'none'); safeModalToggle('plasterCalcModal', 'none'); safeModalToggle('tileCalcModal', 'none'); safeModalToggle('shutteringCalcModal', 'none'); safeModalToggle('infoModal', 'none'); safeModalToggle('qualityCalcModal', 'none'); safeModalToggle('bbsAutoCalcModal', 'none'); safeModalToggle('historyModal', 'none'); safeModalToggle('renameModal', 'none'); safeModalToggle('mmRenameModal', 'none');
+            resetModeToNewCanvas();
+        }
+
+        function addComponentHeading() { 
+            var comp = document.getElementById('compTitle'); 
+            var title = comp ? comp.value.trim() : ""; 
+            if(title === "") return alert("Please enter a Section Name."); 
+            
+            bbsData.push({ type: 'HEADING', text: title.toUpperCase(), dateAdded: new Date().toISOString() }); 
+            comp.value = ""; 
+            executeSilentAutoSave(); 
+            renderTable(); 
+            setTimeout(function() { switchTab('tab2'); }, 50);
+        }
+        
+        function triggerColumnFootingMath() { 
+            var mainLen = parseFloat(document.getElementById('colMainLength').value) || 0;
+            var leftHookMM = parseFloat(document.getElementById('colLeftHook').value) || 0;
+            var rightHookMM = parseFloat(document.getElementById('colRightHook').value) || 0;
+            
+            var netCutLen = mainLen + (leftHookMM / 1000) + (rightHookMM / 1000);
+            document.getElementById('cutLength').value = netCutLen.toFixed(3); 
+        }
+        
         function addBarEntry() { 
             var desc = document.getElementById('desc').value.trim() || "Main Bar";
             var dia = parseInt(document.getElementById('dia').value) || 16;
-            
-            // NaN Fallback Guard: empty input fields handle safely
-            var noMembers = parseFloat(document.getElementById('noMembers').value);
-            if(isNaN(noMembers) || noMembers <= 0) noMembers = 1;
-
-            var noBars = parseFloat(document.getElementById('noBars').value);
-            if(isNaN(noBars) || noBars <= 0) noBars = 1;
-
+            var noMembers = parseFloat(document.getElementById('noMembers').value) || 0;
+            var noBars = parseFloat(document.getElementById('noBars').value) || 0;
             var cutLen = parseFloat(document.getElementById('cutLength').value) || 0;
             var clearSpan = document.getElementById('clearSpanInput').value || "";
             var spacing = document.getElementById('spacingInput').value || "";
@@ -544,7 +655,7 @@
         }
 
         function deleteEntry(index) { bbsData.splice(index, 1); executeSilentAutoSave(); renderTable(); }
-        function deleteWholeSectionBlock(index) { if(confirm("Are you sure you want to delete this heading block along with all its rebar entries?")) { var targetIndex = index; bbsData.splice(targetIndex, 1); while(targetIndex < bbsData.length && bbsData[targetIndex].type !== 'HEADING') { bbsData.splice(targetIndex, 1); } executeSilentAutoSave(); renderTable(); } }
+        function deleteWholeSectionBlock(index) { if(confirm("Are you sure you want to delete this heading block along with all its entries?")) { var targetIndex = index; bbsData.splice(targetIndex, 1); while(targetIndex < bbsData.length && bbsData[targetIndex].type !== 'HEADING') { bbsData.splice(targetIndex, 1); } executeSilentAutoSave(); renderTable(); } }
 
         function executeSilentAutoSave() {
             var stateObj = { projectName: currentActiveProject, date: document.getElementById('reportDate').value, timestamp: new Date().toISOString(), data: bbsData };
@@ -553,7 +664,7 @@
             localStorage.setItem('bbs_master_history_log', btoa(JSON.stringify(existingHistory)));
         }
 
-        function manualSaveStateToHistory() { executeSilentAutoSave(); triggerToastNotification("Data saved successfully to BBS History sandbox backup!"); }
+        function manualSaveStateToHistory() { executeSilentAutoSave(); triggerToastNotification("Data saved successfully!"); }
 
         function triggerHistoryOpen(projNameEncoded) {
             var raw = localStorage.getItem('bbs_master_history_log');
@@ -581,7 +692,7 @@
 
         function submitProjectRename() {
             var newName = document.getElementById('newProjectNameInput').value;
-            if(!newName || newName.trim() === "") return alert("Please enter a valid project sheet reference name.");
+            if(!newName || newName.trim() === "") return alert("Please enter a valid reference name.");
             newName = newName.trim().toUpperCase();
             var oldName = atob(renameTargetEncoded);
             if(newName === oldName) { closeAllModals(); openModal('historyModal'); return; }
@@ -602,7 +713,7 @@
         }
 
         function triggerHistoryDelete(projNameEncoded) {
-            if(!confirm("Are you sure you want to delete this backup project sheet permanently?")) return;
+            if(!confirm("Are you sure you want to delete this session backup permanently?")) return;
             var raw = localStorage.getItem('bbs_master_history_log');
             var arr = []; if(raw) { try { arr = JSON.parse(atob(raw)); } catch(e){} }
             arr = arr.filter(x => btoa(x.projectName) !== projNameEncoded);
@@ -613,7 +724,7 @@
                 var screenHeader = document.getElementById('liveProjectHeaderName');
                 if(screenHeader) screenHeader.innerText = "📁 CURRENT SHEET LOG: NEW PROJECT";
             }
-            loadHistoryList(); triggerToastNotification("Project Sheet Deleted Permanently!");
+            loadHistoryList(); triggerToastNotification("Backup Deleted Permanently!");
         }
 
         function handleHistorySearch(val) { logSearchQuery = val.toLowerCase().trim(); loadHistoryList(); }
@@ -637,7 +748,7 @@
                                 '</div>';
                 listContainer.appendChild(row);
             });
-            if(matchCount === 0) { listContainer.innerHTML = "<div style='padding:15px; font-size:12px; color:var(--text-muted); text-align:center;'>No matching backup records found.</div>"; }
+            if(matchCount === 0) { listContainer.innerHTML = "<div style='padding:15px; font-size:12px; color:var(--text-muted); text-align:center;'>No records found.</div>"; }
         }
 
         function updateInlineValue(index, field, valueText) {
@@ -652,9 +763,7 @@
                             if (zoneParts.length === 3) { 
                                 var z1S = zoneParts[0] || 100, z2S = zoneParts[1] || 150, z3S = zoneParts[2] || 100; 
                                 if(curSpacStr.includes('/150/')) { 
-                                    var zone1SpanMM = curSpanMM / 4;
-                                    var zone2SpanMM = curSpanMM / 2;
-                                    var zone3SpanMM = curSpanMM / 4;
+                                    var zone1SpanMM = curSpanMM / 4; var zone2SpanMM = curSpanMM / 2; var zone3SpanMM = curSpanMM / 4;
                                     bbsData[index].noBars = Math.ceil((zone1SpanMM / z1S) + (zone2SpanMM / z2S) + (zone3SpanMM / z3S) + 1);
                                 } else { 
                                     var segmentSpanMM = curSpanMM / 3; 
@@ -677,28 +786,29 @@
             executeSilentAutoSave(); renderTable();
         }
 
-        // PERFECT DATA SAFE RENDER MATRIX LOOP (Zero NaN Exposure)
         function renderTable() {
             var tbody = document.getElementById('bbsTableBody'); if(!tbody) return; tbody.innerHTML = "";
             var slNo = 1; var diaTotals = {8:0, 10:0, 12:0, 16:0, 20:0, 25:0, 32:0, 40:0}; var containsData = false; var finalHTML = ""; var dataCount = 0;
+            var trDel = langData[currentActiveProject] ? langData[currentActiveProject].btn_delete : (langData[currentLang].btn_delete || "Delete");
+
             for (var index = 0; index < bbsData.length; index++) {
                 var item = bbsData[index];
-                if(item.type === 'HEADING') { finalHTML += '<tr class="heading-row"><td colspan="20"><div class="heading-flex-layout"><div class="section-editable-text" contenteditable="true" oninput="updateInlineValue(' + index + ', \'text\', this.innerText)">' + item.text + '</div><button class="section-exit-btn" onclick="deleteWholeSectionBlock(' + index + ')">Exit / Delete Block</button></div></td></tr>'; } 
+                if(item.type === 'HEADING') { finalHTML += '<tr class="heading-row"><td colspan="20"><div class="heading-flex-layout"><div class="section-editable-text" contenteditable="true" oninput="updateInlineValue(' + index + ', \'text\', this.innerText)">' + item.text + '</div><button class="section-exit-btn" onclick="deleteWholeSectionBlock(' + index + ')">Delete Block</button></div></td></tr>'; } 
                 else { 
-                    containsData = true; dataCount++; var diaCols = ""; for (var dIdx = 0; dIdx < activeDias.length; dIdx++) { var d = activeDias[dIdx]; if(item.dia === d) { diaCols += '<td>' + (parseFloat(item.totalLength) || 0) + '</td>'; diaTotals[d] += (parseFloat(item.totalLength) || 0); } else { diaCols += '<td style="color:#cbd5e1;">0</td>'; } }
-                    var roundedBars = Math.ceil(parseFloat(item.noBars) || 0);
-                    finalHTML += '<tr><td>' + (slNo++) + '</td><td class="editable-cell" contenteditable="true" oninput="updateInlineValue(' + index + ', \'desc\', this.innerText)">' + item.desc + '</td><td class="editable-cell" contenteditable="true" oninput="updateInlineValue(' + index + ', \'dia\', this.innerText)">' + item.dia + '</td><td class="editable-cell" contenteditable="true" oninput="updateInlineValue(' + index + ', \'clearSpan\', this.innerText)">' + item.clearSpan + '</td><td class="editable-cell" contenteditable="true" oninput="updateInlineValue(' + index + ', \'spacing\', this.innerText)">' + item.spacing + '</td><td class="editable-cell" contenteditable="true" oninput="updateInlineValue(' + index + ', \'noMembers\', this.innerText)">' + item.noMembers + '</td><td>' + roundedBars + '</td><td class="editable-cell" contenteditable="true" oninput="updateInlineValue(' + index + ', \'cutLength\', this.innerText)">' + item.cutLength + '</td><td style="font-weight:600;">' + (parseFloat(item.totalLength) || 0) + '</td>' + diaCols + '<td><button class="del-btn" onclick="deleteEntry(' + index + ')">Delete</button></td></tr>'; 
+                    containsData = true; dataCount++; var diaCols = ""; for (var dIdx = 0; dIdx < activeDias.length; dIdx++) { var d = activeDias[dIdx]; if(item.dia === d) { diaCols += '<td>' + item.totalLength + '</td>'; diaTotals[d] += item.totalLength; } else { diaCols += '<td style="color:#cbd5e1;">0</td>'; } }
+                    var roundedBars = Math.ceil(item.noBars);
+                    finalHTML += '<tr><td>' + (slNo++) + '</td><td class="editable-cell" contenteditable="true" oninput="updateInlineValue(' + index + ', \'desc\', this.innerText)">' + item.desc + '</td><td class="editable-cell" contenteditable="true" oninput="updateInlineValue(' + index + ', \'dia\', this.innerText)">' + item.dia + '</td><td class="editable-cell" contenteditable="true" oninput="updateInlineValue(' + index + ', \'clearSpan\', this.innerText)">' + item.clearSpan + '</td><td class="editable-cell" contenteditable="true" oninput="updateInlineValue(' + index + ', \'spacing\', this.innerText)">' + item.spacing + '</td><td class="editable-cell" contenteditable="true" oninput="updateInlineValue(' + index + ', \'noMembers\', this.innerText)">' + item.noMembers + '</td><td>' + roundedBars + '</td><td class="editable-cell" contenteditable="true" oninput="updateInlineValue(' + index + ', \'cutLength\', this.innerText)">' + item.cutLength + '</td><td style="font-weight:600;">' + item.totalLength + '</td>' + diaCols + '<td><button class="del-btn" onclick="deleteEntry(' + index + ')">'+trDel+'</button></td></tr>'; 
                 }
             }
             var dashCountNode = document.getElementById('dashTotalEntries'); if(dashCountNode) dashCountNode.innerText = dataCount + " Items";
             if(containsData) {
                 var weights = {8:0.395, 10:0.617, 12:0.890, 16:1.580, 20:2.470, 25:3.850, 32:6.310, 40:9.860}, grandTotalKg = 0;
-                var r1 = '<tr><td colspan="8" style="text-align:right; font-weight:bold; background:#f1f5f9;">Total Length (m)</td><td>-</td>'; for (var i = 0; i < activeDias.length; i++) r1 += '<td>' + (diaTotals[activeDias[i]] || 0).toFixed(2) + '</td>'; r1 += '<td></td></tr>';
-                var r3 = '<tr><td colspan="8" style="text-align:right; font-weight:bold; background:#f1f5f9;">Weight (In Kg)</td><td>-</td>'; for (var i = 0; i < activeDias.length; i++) { var d = activeDias[i], kg = (diaTotals[d] || 0) * weights[d]; grandTotalKg += kg; r3 += '<td style="font-weight:bold; color:#2563eb;">' + (kg || 0).toFixed(2) + '</td>'; } r3 += '<td></td></tr>';
-                var grandTotalMT = grandTotalKg / 1000; var r4 = '<tr style="background:#dcfce7; font-weight:bold;"><td colspan="8" style="text-align:right;">Net Project Summary:</td><td colspan="4">' + (grandTotalKg || 0).toFixed(2) + ' Kg</td><td colspan="8">' + (grandTotalMT || 0).toFixed(4) + ' M.T. (Metric Tonnes)</td></tr>';
+                var r1 = '<tr><td colspan="8" style="text-align:right; font-weight:bold; background:#f1f5f9;">Total Length (m)</td><td>-</td>'; for (var i = 0; i < activeDias.length; i++) r1 += '<td>' + diaTotals[activeDias[i]].toFixed(2) + '</td>'; r1 += '<td></td></tr>';
+                var r3 = '<tr><td colspan="8" style="text-align:right; font-weight:bold; background:#f1f5f9;">Weight (In Kg)</td><td>-</td>'; for (var i = 0; i < activeDias.length; i++) { var d = activeDias[i], kg = diaTotals[d] * weights[d]; grandTotalKg += kg; r3 += '<td style="font-weight:bold; color:#2563eb;">' + kg.toFixed(2) + '</td>'; } r3 += '<td></td></tr>';
+                var grandTotalMT = grandTotalKg / 1000; var r4 = '<tr style="background:#dcfce7; font-weight:bold;"><td colspan="8" style="text-align:right;">Net Project Summary:</td><td colspan="4">' + grandTotalKg.toFixed(2) + ' Kg</td><td colspan="8">' + grandTotalMT.toFixed(4) + ' M.T.</td></tr>';
                 var steelRateNode = document.getElementById('steelRatePerKg'); var steelRate = steelRateNode ? (parseFloat(steelRateNode.value) || 0) : 0, costRow = "";
-                if(steelRate > 0) { var totalCost = grandTotalKg * steelRate; costRow = '<tr style="background:#fee2e2; font-weight:bold; color:#991b1b;"><td colspan="8" style="text-align:right;">Estimated Steel Cost (Amount):</td><td colspan="12" style="text-align:left; padding-left:15px; font-size:14px;">₹ ' + (totalCost || 0).toLocaleString('en-IN', {maximumFractionDigits: 2}) + '</td></tr>'; }
-                finalHTML += (r1 + r3 + r4 + costRow); var dashWeightNode = document.getElementById('dashTotalWeight'); if(dashWeightNode) dashWeightNode.innerText = (grandTotalKg || 0).toFixed(2) + " Kg";
+                if(steelRate > 0) { var totalCost = grandTotalKg * steelRate; costRow = '<tr style="background:#fee2e2; font-weight:bold; color:#991b1b;"><td colspan="8" style="text-align:right;">Estimated Steel Cost:</td><td colspan="12" style="text-align:left; padding-left:15px; font-size:14px;">₹ ' + totalCost.toLocaleString('en-IN', {maximumFractionDigits: 2}) + '</td></tr>'; }
+                finalHTML += (r1 + r3 + r4 + costRow); var dashWeightNode = document.getElementById('dashTotalWeight'); if(dashWeightNode) dashWeightNode.innerText = grandTotalKg.toFixed(2) + " Kg";
             } else { var dashWeightNode = document.getElementById('dashTotalWeight'); if(dashWeightNode) dashWeightNode.innerText = "0.00 Kg"; }
             tbody.innerHTML = finalHTML;
         }
@@ -709,9 +819,9 @@
             var weights = {8:0.395, 10:0.617, 12:0.890, 16:1.580, 20:2.470, 25:3.850, 32:6.310, 40:9.860}, diaTotals = {8:0, 10:0, 12:0, 16:0, 20:0, 25:0, 32:0, 40:0}, grandTotalKg = 0;
             for (var i = 0; i < bbsData.length; i++) {
                 var item = bbsData[i]; if(item.type === 'HEADING') { htmlData += '<tr><td colspan="17" style="background:#cbd5e1;font-weight:bold;">' + item.text + '</td></tr>'; } 
-                else { var cols = ""; for(var d=0; d<activeDias.length; d++) { var cd = activeDias[d]; if(item.dia === cd) { cols += '<td>' + (parseFloat(item.totalLength) || 0) + '</td>'; diaTotals[cd] += (parseFloat(item.totalLength) || 0); grandTotalKg += ((parseFloat(item.totalLength) || 0) * weights[cd]); } else cols += '<td>0</td>'; } htmlData += '<tr><td>' + (i+1) + '</td><td>' + item.desc + '</td><td>' + item.dia + '</td><td>' + item.clearSpan + '</td><td>' + item.spacing + '</td><td>' + item.noMembers + '</td><td>' + Math.ceil(parseFloat(item.noBars) || 0) + '</td><td>' + item.cutLength + '</td><td>' + (parseFloat(item.totalLength) || 0) + '</td>' + cols + '</tr>'; }
+                else { var cols = ""; for(var d=0; d<activeDias.length; d++) { var cd = activeDias[d]; if(item.dia === cd) { cols += '<td>' + item.totalLength + '</td>'; diaTotals[cd] += item.totalLength; grandTotalKg += (item.totalLength * weights[cd]); } else cols += '<td>0</td>'; } htmlData += '<tr><td>' + (i+1) + '</td><td>' + item.desc + '</td><td>' + item.dia + '</td><td>' + item.clearSpan + '</td><td>' + item.spacing + '</td><td>' + item.noMembers + '</td><td>' + Math.ceil(item.noBars) + '</td><td>' + item.cutLength + '</td><td>' + item.totalLength + '</td>' + cols + '</tr>'; }
             }
-            htmlData += '<tr><td colspan="9" style="font-weight:bold; text-align:right;">Total Length (m)</td>'; for(var d=0; d<activeDias.length; d++) htmlData += '<td>' + (diaTotals[activeDias[d]] || 0).toFixed(2) + '</td>'; htmlData += '</tr><tr><td colspan="9" style="font-weight:bold; text-align:right;">Weight (Kg)</td>'; for(var d=0; d<activeDias.length; d++) htmlData += '<td>' + ((diaTotals[activeDias[d]] || 0) * weights[activeDias[d]]).toFixed(2) + '</td>'; htmlData += '</tr><tr style="background:#dcfce7; font-weight:bold;"><td colspan="5">Net Project Summary:</td><td colspan="4">' + (grandTotalKg || 0).toFixed(2) + ' Kg</td><td colspan="8">' + (grandTotalKg/1000).toFixed(4) + ' M.T.</td></tr></tbody></table></body></html>';
+            htmlData += '<tr><td colspan="9" style="font-weight:bold; text-align:right;">Total Length (m)</td>'; for(var d=0; d<activeDias.length; d++) htmlData += '<td>' + diaTotals[activeDias[d]].toFixed(2) + '</td>'; htmlData += '</tr><tr><td colspan="9" style="font-weight:bold; text-align:right;">Weight (Kg)</td>'; for(var d=0; d<activeDias.length; d++) htmlData += '<td>' + (diaTotals[d] * weights[activeDias[d]]).toFixed(2) + '</td>'; htmlData += '</tr><tr style="background:#dcfce7; font-weight:bold;"><td colspan="5">Net Project Summary:</td><td colspan="4">' + grandTotalKg.toFixed(2) + ' Kg</td><td colspan="8">' + (grandTotalKg/1000).toFixed(4) + ' M.T.</td></tr></tbody></table></body></html>';
             var base64 = btoa(unescape(encodeURIComponent(htmlData))), a = document.createElement("a"); a.href = "data:application/vnd.ms-excel;base64," + base64; a.download = projName.replace(/\s+/g, '_') + "_Report.xls"; document.body.appendChild(a); a.click(); document.body.removeChild(a);
         }
 
@@ -721,9 +831,7 @@
             var htmlData = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><meta charset="UTF-8"></head><body><table border="1"><thead><tr><th colspan="9" style="font-size:14pt;font-weight:bold;">' + pName.toUpperCase() + ' - ' + title.toUpperCase() + '</th></tr><tr><th>Sr.No.</th><th>Description</th><th>Unit</th><th>NOS 1</th><th>NOS 2</th><th>L</th><th>B</th><th>D</th><th>QTY</th></tr></thead><tbody>';
             var totalQty = 0;
             for (var i = 0; i < masterMeasData.length; i++) {
-                var m = masterMeasData[i];
-                totalQty += parseFloat(m.qty);
-                var rowLabel = m.type === 'DEDUCTION' ? '[Ded] ' : '';
+                var m = masterMeasData[i]; totalQty += parseFloat(m.qty); var rowLabel = m.type === 'DEDUCTION' ? '[Ded] ' : '';
                 htmlData += '<tr><td>' + (i+1) + '</td><td>' + rowLabel + m.desc + '</td><td>' + m.unit + '</td><td>' + m.nos1 + '</td><td>' + m.nos2 + '</td><td>' + m.l + '</td><td>' + m.b + '</td><td>' + m.d + '</td><td>' + m.qty + '</td></tr>';
             }
             htmlData += '<tr><td colspan="8" style="font-weight:bold; text-align:right;">Total =</td><td style="font-weight:bold; background:#dcfce7;">' + totalQty.toFixed(3) + '</td></tr></tbody></table></body></html>';
@@ -740,8 +848,7 @@
         function toggleTileInputMode() { var mode = document.getElementById('tileInputMode').value; document.getElementById('tileDirectWrapper').style.display = (mode === 'DIRECT' ? 'block' : 'none'); document.getElementById('tileDimWrapper').style.display = (mode === 'DIMENSION' ? 'block' : 'none'); }
 
         function calculateSteelWeight() {
-            var dia = parseFloat(document.getElementById('calcSteelDia').value) || 0;
-            if(dia <= 0) return alert("Please enter a valid diameter.");
+            var dia = parseFloat(document.getElementById('calcSteelDia').value) || 0; if(dia <= 0) return alert("Please enter a valid diameter.");
             var unitWeight = (dia * dia) / 162.2;
             document.getElementById('steelResultBox').innerHTML = "Unit Weight: <b>" + unitWeight.toFixed(3) + " Kg/m</b><br>Standard Single Bar (12m): <b>" + (unitWeight * 12).toFixed(2) + " Kg</b>";
             document.getElementById('steelResultBox').style.display = "block";
@@ -762,59 +869,27 @@
             var mode = document.getElementById('brickInputMode').value; var vol = 0;
             if (mode === 'DIRECT') { var val = parseFloat(document.getElementById('brickVolVal').value) || 0, unit = document.getElementById('brickVolUnit').value; vol = unit === 'CFT' ? val / 35.3147 : val; }
             else { var l = parseFloat(document.getElementById('brickLen').value) || 0, w = parseFloat(document.getElementById('brickThick').value) || 0, h = parseFloat(document.getElementById('brickHeight').value) || 0, unit = document.getElementById('brickDimUnit').value; vol = l * w * h; if (unit === 'FEET') vol = vol / 35.3147; }
-            if(vol <= 0) return alert("Please enter valid dimensional layout entries.");
+            if(vol <= 0) return alert("Please enter valid entries.");
             var ratio = document.getElementById('brickMortarRatio').value, totalParts = ratio === '1:4' ? 5 : 7, totalBricks = vol * 500, mortarVol = vol * 0.30, dryMortar = mortarVol * 1.33, cementBags = (dryMortar * (1 / totalParts)) / 0.0347, sandCft = (dryMortar * ((totalParts - 1) / totalParts)) * 35.3147;
             document.getElementById('brickResultBox').innerHTML = "Total Bricks: <b>" + totalBricks.toFixed(2) + " Nos</b><br>Cement: <b>" + cementBags.toFixed(2) + " Bags</b><br>Sand: <b>" + sandCft.toFixed(2) + " cft</b>"; document.getElementById('brickResultBox').style.display = "block";
         }
 
         function calculateBlockWork() {
-            var mode = document.getElementById('blockInputMode').value; 
-            var rawVol = 0;
-            if (mode === 'DIRECT') {
-                rawVol = parseFloat(document.getElementById('blockVolVal').value) || 0;
-            } else { 
-                var l = parseFloat(document.getElementById('blockLen').value) || 0;
-                var w = parseFloat(document.getElementById('blockThick').value) || 0;
-                var h = parseFloat(document.getElementById('blockHeight').value) || 0;
-                var unit = document.getElementById('blockDimUnit').value; 
-                rawVol = l * w * h; 
-                if (unit === 'FEET') rawVol = rawVol / 35.3147; 
-            }
-            
-            var deductionVol = parseFloat(document.getElementById('blockDeductionVol').value) || 0;
-            var netVol = rawVol - deductionVol;
-            if(netVol <= 0) return alert("Please type a valid target net total volume.");
-            
-            var sizeOpt = document.getElementById('blockSizeSelect').value;
-            var bl = 600, bw = 200, bh = 200; 
-            
-            if (sizeOpt === '400x100x200') { 
-                bl = 400; bw = 100; bh = 200; 
-            } else if (sizeOpt === 'CUSTOM') { 
-                bl = parseFloat(document.getElementById('blockCustL').value) || 600; 
-                bw = parseFloat(document.getElementById('blockCustW').value) || 200; 
-                bh = parseFloat(document.getElementById('blockCustH').value) || 200; 
-            }
-            
-            var blockVolWithMortar = ((bl + 10) / 1000) * ((bw + 10) / 1000) * ((bh + 10) / 1000);
-            var totalBlocks = netVol / blockVolWithMortar;
-            
-            var singleRealBlockVol = (bl / 1000) * (bw / 1000) * (bh / 1000);
-            var netBlocksSolidVol = totalBlocks * singleRealBlockVol;
-            var wetMortarVol = netVol - netBlocksSolidVol;
-            var dryMortar = wetMortarVol * 1.33; 
-            
-            var mix = document.getElementById('blockMortarRatio').value;
-            var cPart = 1, sPart = 6;
-            if (mix === 'CUSTOM') { 
-                cPart = parseFloat(document.getElementById('blockCustC').value) || 1; 
-                sPart = parseFloat(document.getElementById('blockCustS').value) || 6; 
-            }
-            var totalParts = cPart + sPart;
-            var cementBags = (dryMortar * (cPart / totalParts)) / 0.0347;
-            var sandCft = (dryMortar * (sPart / totalParts)) * 35.3147;
-            
-            document.getElementById('blockResultBox').innerHTML = "Net Volume calculated: <b>" + netVol.toFixed(3) + " m³</b><br>Total AAC Blocks: <b>" + Math.ceil(totalBlocks) + " Nos</b><br>Cement: <b>" + cementBags.toFixed(2) + " Bags</b><br>Sand: <b>" + sandCft.toFixed(2) + " cft</b>"; 
+            var mode = document.getElementById('blockInputMode').value; var rawVol = 0;
+            if (mode === 'DIRECT') { rawVol = parseFloat(document.getElementById('blockVolVal').value) || 0; } 
+            else { var l = parseFloat(document.getElementById('blockLen').value) || 0, w = parseFloat(document.getElementById('blockThick').value) || 0, h = parseFloat(document.getElementById('blockHeight').value) || 0, unit = document.getElementById('blockDimUnit').value; rawVol = l * w * h; if (unit === 'FEET') rawVol = rawVol / 35.3147; }
+            var deductionVol = parseFloat(document.getElementById('blockDeductionVol').value) || 0; var netVol = rawVol - deductionVol;
+            if(netVol <= 0) return alert("Please type a valid target total volume.");
+            var sizeOpt = document.getElementById('blockSizeSelect').value; var bl = 600, bw = 200, bh = 200; 
+            if (sizeOpt === '400x100x200') { bl = 400; bw = 100; bh = 200; } 
+            else if (sizeOpt === 'CUSTOM') { bl = parseFloat(document.getElementById('blockCustL').value) || 600; bw = parseFloat(document.getElementById('blockCustW').value) || 200; bh = parseFloat(document.getElementById('blockCustH').value) || 200; }
+            var blockVolWithMortar = ((bl + 10) / 1000) * ((bw + 10) / 1000) * ((bh + 10) / 1000); var totalBlocks = netVol / blockVolWithMortar;
+            var singleRealBlockVol = (bl / 1000) * (bw / 1000) * (bh / 1000); var netBlocksSolidVol = totalBlocks * singleRealBlockVol;
+            var wetMortarVol = netVol - netBlocksSolidVol; var dryMortar = wetMortarVol * 1.33; 
+            var mix = document.getElementById('blockMortarRatio').value; var cPart = 1, sPart = 6;
+            if (mix === 'CUSTOM') { cPart = parseFloat(document.getElementById('blockCustC').value) || 1; sPart = parseFloat(document.getElementById('blockCustS').value) || 6; }
+            var totalParts = cPart + sPart; var cementBags = (dryMortar * (cPart / totalParts)) / 0.0347; var sandCft = (dryMortar * (sPart / totalParts)) * 35.3147;
+            document.getElementById('blockResultBox').innerHTML = "Net Volume: <b>" + netVol.toFixed(3) + " m³</b><br>Total AAC Blocks: <b>" + Math.ceil(totalBlocks) + " Nos</b><br>Cement: <b>" + cementBags.toFixed(2) + " Bags</b><br>Sand: <b>" + sandCft.toFixed(2) + " cft</b>"; 
             document.getElementById('blockResultBox').style.display = "block";
         }
 
@@ -822,7 +897,7 @@
             var mode = document.getElementById('plasterInputMode').value; var area = 0;
             if (mode === 'DIRECT') { var val = parseFloat(document.getElementById('plasterAreaVal').value) || 0, unit = document.getElementById('plasterAreaUnit').value; area = unit === 'SQFT' ? val / 10.7639 : val; }
             else { var l = parseFloat(document.getElementById('plasterLen').value) || 0, h = parseFloat(document.getElementById('plasterHeight').value) || 0, unit = document.getElementById('plasterDimUnit').value; area = l * h; if (unit === 'FEET') area = area / 10.7639; }
-            if(area <= 0) return alert("Please enter valid area coordinates.");
+            if(area <= 0) return alert("Please enter valid coordinates.");
             var thick = parseFloat(document.getElementById('plasterThick').value) || 12, mix = document.getElementById('plasterMix').value, totalParts = mix === '1:4' ? 5 : 7, wetVol = area * (thick / 1000), dryVol = wetVol * 1.35, cementBags = (dryVol * (1 / totalParts)) / 0.0347, sandCft = (dryVol * ((totalParts - 1) / totalParts)) * 35.3147;
             document.getElementById('plasterResultBox').innerHTML = "Cement: <b>" + cementBags.toFixed(2) + " Bags</b><br>Sand: <b>" + sandCft.toFixed(2) + " cft</b>"; document.getElementById('plasterResultBox').style.display = "block";
         }
@@ -839,378 +914,158 @@
         }
 
         function calculateShuttering() { 
-            var areaVal = parseFloat(document.getElementById('shutteringAreaVal').value) || 0; 
-            if(areaVal <= 0) return alert("Please type a valid target area."); 
-            var unitElementSelect = document.getElementById('shutteringUnitSelect').value; 
-            var areaSqM = unitElementSelect === 'SQFT' ? areaVal / 10.7639 : areaVal; 
-            var plySheets = areaSqM / 2.97; 
-            var releaseOil = areaSqM * 0.2; 
+            var areaVal = parseFloat(document.getElementById('shutteringAreaVal').value) || 0; if(areaVal <= 0) return alert("Please type a valid target area."); 
+            var unitElementSelect = document.getElementById('shutteringUnitSelect').value; var areaSqM = unitElementSelect === 'SQFT' ? areaVal / 10.7639 : areaVal; 
+            var plySheets = areaSqM / 2.97; var releaseOil = areaSqM * 0.2; 
             document.getElementById('shutteringResultBox').innerHTML = "Ply Sheets (8'x4'): <b>" + plySheets.toFixed(2) + " Nos</b><br>Release Oil: <b>" + releaseOil.toFixed(2) + " Liters</b>"; 
             document.getElementById('shutteringResultBox').style.display = "block"; 
         }
 
         function verifyQualityParameter() { 
-            var slump = parseFloat(document.getElementById('qcSlump').value) || 0; 
-            var cube = parseFloat(document.getElementById('qcCube').value) || 0; 
-            var age = document.getElementById('qcAgeSelect').value;
-            var targetGrade = document.getElementById('qcConcreteGradeSelect').value;
-            
-            var targetStrength = 20; 
-            if(targetGrade === "M15") targetStrength = 15;
-            else if(targetGrade === "M25") targetStrength = 25;
-            else if(targetGrade === "M30") targetStrength = 30;
-
-            var requiredRatio = 1.0; 
-            var periodText = "28 Days";
-            if(age === "7DAYS") { requiredRatio = 0.65; periodText = "7 Days"; }
-            else if(age === "14DAYS") { requiredRatio = 0.90; periodText = "14 Days"; }
-
-            var passMinStrength = targetStrength * requiredRatio;
-            var statusStr = ""; 
-            
-            if (slump >= 75 && slump <= 125) {
-                statusStr += "✔️ Slump Workability: <b>PASSED (Result: " + slump + " mm)</b><br>"; 
-            } else { 
-                statusStr += "❌ Slump Workability: <b>FAILED (Standard: 75-125 mm)</b><br>"; 
-            } 
-            
-            if (cube >= passMinStrength) { 
-                statusStr += "✔️ " + periodText + " Cube Test (" + targetGrade + "): <b>PASSED (Result: " + cube.toFixed(1) + " N/mm² / Min Target: " + passMinStrength.toFixed(1) + ")</b>"; 
-            } else { 
-                statusStr += "❌ " + periodText + " Cube Test (" + targetGrade + "): <b>FAILED (Result: " + cube.toFixed(1) + " N/mm² / Min Target: " + passMinStrength.toFixed(1) + ")</b>"; 
-            } 
-            document.getElementById('qualityResultBox').innerHTML = statusStr; 
-            document.getElementById('qualityResultBox').style.display = "block"; 
+            var slump = parseFloat(document.getElementById('qcSlump').value) || 0; var cube = parseFloat(document.getElementById('qcCube').value) || 0; 
+            var age = document.getElementById('qcAgeSelect').value; var targetGrade = document.getElementById('qcConcreteGradeSelect').value;
+            var targetStrength = 20; if(targetGrade === "M15") targetStrength = 15; else if(targetGrade === "M25") targetStrength = 25; else if(targetGrade === "M30") targetStrength = 30;
+            var requiredRatio = 1.0; var periodText = "28 Days"; if(age === "7DAYS") { requiredRatio = 0.65; periodText = "7 Days"; } else if(age === "14DAYS") { requiredRatio = 0.90; periodText = "14 Days"; }
+            var passMinStrength = targetStrength * requiredRatio; var statusStr = ""; 
+            if (slump >= 75 && slump <= 125) statusStr += "✔️ Slump Workability: <b>PASSED (Result: " + slump + " mm)</b><br>"; else statusStr += "❌ Slump Workability: <b>FAILED (Standard: 75-125 mm)</b><br>"; 
+            if (cube >= passMinStrength) statusStr += "✔️ " + periodText + " Cube Test (" + targetGrade + "): <b>PASSED (Result: " + cube.toFixed(1) + " N/mm² / Min Target: " + passMinStrength.toFixed(1) + ")</b>"; 
+            else statusStr += "❌ " + periodText + " Cube Test (" + targetGrade + "): <b>FAILED (Result: " + cube.toFixed(1) + " N/mm² / Min Target: " + passMinStrength.toFixed(1) + ")</b>"; 
+            document.getElementById('qualityResultBox').innerHTML = statusStr; document.getElementById('qualityResultBox').style.display = "block"; 
         }
 
         function switchMasterMeasTab(tabId) {
-            var contents = document.getElementsByClassName('modal-tab-content');
-            var buttons = document.getElementsByClassName('modal-tab-btn');
-            for (var i = 0; i < contents.length; i++) {
-                contents[i].classList.remove('active');
-                buttons[i].classList.remove('active');
-            }
-            document.getElementById(tabId).classList.add('active');
-            document.getElementById('btn-' + tabId).classList.add('active');
-            if(tabId === 'mmTab1') { 
-                document.getElementById('mmOperationsModeSelect').value = "NEW";
-                toggleMmHistoryPanel("NEW");
-                loadMasterMeasHistoryList(); 
-            }
+            var contents = document.getElementsByClassName('modal-tab-content'); var buttons = document.getElementsByClassName('modal-tab-btn');
+            for (var i = 0; i < contents.length; i++) { contents[i].classList.remove('active'); buttons[i].classList.remove('active'); }
+            document.getElementById(tabId).classList.add('active'); document.getElementById('btn-' + tabId).classList.add('active');
+            if(tabId === 'mmTab1') { document.getElementById('mmOperationsModeSelect').value = "NEW"; toggleMmHistoryPanel("NEW"); loadMasterMeasHistoryList(); }
         }
 
         function executeMasterMeasAutoSave() {
             var projName = document.getElementById('mmProjectName').value.trim().toUpperCase() || "UNNAMED SITE REFERENCE";
             var sheetTitle = document.getElementById('mmSheetTitle').value.trim() || "MEASUREMENT SHEET";
-            
-            var saveState = {
-                id: btoa(projName + "_" + sheetTitle),
-                title: sheetTitle,
-                projectName: projName,
-                periodDate: document.getElementById('mmPeriodDate').value,
-                data: masterMeasData,
-                timestamp: new Date().toISOString()
-            };
-            
-            var historyLog = [];
-            var raw = localStorage.getItem('master_measurement_history_records_db');
-            if(raw) {
-                try { historyLog = JSON.parse(atob(raw)); } catch(e){}
-            }
-            
-            historyLog = historyLog.filter(function(x) { return x.id !== saveState.id; });
-            historyLog.unshift(saveState);
-            localStorage.setItem('master_measurement_history_records_db', btoa(JSON.stringify(historyLog)));
-            updateHistoryDropdownOptions();
+            var saveState = { id: btoa(projName + "_" + sheetTitle), title: sheetTitle, projectName: projName, periodDate: document.getElementById('mmPeriodDate').value, data: masterMeasData, timestamp: new Date().toISOString() };
+            var historyLog = []; var raw = localStorage.getItem('master_measurement_history_records_db'); if(raw) { try { historyLog = JSON.parse(atob(raw)); } catch(e){} }
+            historyLog = historyLog.filter(function(x) { return x.id !== saveState.id; }); historyLog.unshift(saveState);
+            localStorage.setItem('master_measurement_history_records_db', btoa(JSON.stringify(historyLog))); updateHistoryDropdownOptions();
         }
 
         function addMasterMeasEntry() {
-            var desc = document.getElementById('mmDesc').value.trim() || "Item Description";
-            var unit = document.getElementById('mmUnit').value || "CUM";
-            var nos1 = parseFloat(document.getElementById('mmNos1').value) || 1;
-            var nos2 = parseFloat(document.getElementById('mmNos2').value) || 1;
-            var entryType = document.getElementById('mmEntryType').value; 
-            
-            var lRaw = document.getElementById('mmL').value;
-            var bRaw = document.getElementById('mmB').value;
-            var dRaw = document.getElementById('mmD').value;
-
+            var desc = document.getElementById('mmDesc').value.trim() || "Item Description"; var unit = document.getElementById('mmUnit').value || "CUM";
+            var nos1 = parseFloat(document.getElementById('mmNos1').value) || 1; var nos2 = parseFloat(document.getElementById('mmNos2').value) || 1; var entryType = document.getElementById('mmEntryType').value; 
+            var lRaw = document.getElementById('mmL').value; var bRaw = document.getElementById('mmB').value; var dRaw = document.getElementById('mmD').value;
             var qty = nos1 * nos2;
             if (lRaw !== "" && !isNaN(parseFloat(lRaw))) qty *= parseFloat(lRaw);
             if (bRaw !== "" && !isNaN(parseFloat(bRaw))) qty *= parseFloat(bRaw);
             if (dRaw !== "" && !isNaN(parseFloat(dRaw))) qty *= parseFloat(dRaw);
+            if(entryType === 'DEDUCTION') qty = -Math.abs(qty);
 
-            if(entryType === 'DEDUCTION') {
-                qty = -Math.abs(qty);
-            }
-
-            masterMeasData.push({
-                desc: desc,
-                unit: unit,
-                nos1: nos1,
-                nos2: nos2,
-                l: lRaw !== "" ? parseFloat(lRaw).toFixed(3) : "",
-                b: bRaw !== "" ? parseFloat(bRaw).toFixed(3) : "",
-                d: dRaw !== "" ? parseFloat(dRaw).toFixed(3) : "",
-                qty: qty.toFixed(3),
-                type: entryType
-            });
-
-            document.getElementById('mmL').value = "";
-            document.getElementById('mmB').value = "";
-            document.getElementById('mmD').value = "";
-
-            executeMasterMeasAutoSave();
-            renderMasterMeasTable();
-            switchMasterMeasTab('mmTab3'); 
+            masterMeasData.push({ desc: desc, unit: unit, nos1: nos1, nos2: nos2, l: lRaw !== "" ? parseFloat(lRaw).toFixed(3) : "", b: bRaw !== "" ? parseFloat(bRaw).toFixed(3) : "", d: dRaw !== "" ? parseFloat(dRaw).toFixed(3) : "", qty: qty.toFixed(3), type: entryType });
+            document.getElementById('mmL').value = ""; document.getElementById('mmB').value = ""; document.getElementById('mmD').value = "";
+            executeMasterMeasAutoSave(); renderMasterMeasTable(); switchMasterMeasTab('mmTab3'); 
         }
 
         function updateMasterMeasInlineCell(index, field, valueText) {
-            if(!masterMeasData[index]) return;
-            var text = valueText.trim();
-            
-            if(field === 'desc' || field === 'unit') {
-                masterMeasData[index][field] = text;
-            } else {
-                masterMeasData[index][field] = text === "" ? "" : parseFloat(text) || 0;
-            }
-
-            var item = masterMeasData[index];
-            var n1 = parseFloat(item.nos1) || 1;
-            var n2 = parseFloat(item.nos2) || 1;
-            var calcQty = n1 * n2;
-            
+            if(!masterMeasData[index]) return; var text = valueText.trim();
+            if(field === 'desc' || field === 'unit') masterMeasData[index][field] = text; else masterMeasData[index][field] = text === "" ? "" : parseFloat(text) || 0;
+            var item = masterMeasData[index]; var n1 = parseFloat(item.nos1) || 1; var n2 = parseFloat(item.nos2) || 1; var calcQty = n1 * n2;
             if (item.l !== "" && !isNaN(parseFloat(item.l))) calcQty *= parseFloat(item.l);
             if (item.b !== "" && !isNaN(parseFloat(item.b))) calcQty *= parseFloat(item.b);
             if (item.d !== "" && !isNaN(parseFloat(item.d))) calcQty *= parseFloat(item.d);
-
-            if(item.type === 'DEDUCTION') {
-                calcQty = -Math.abs(calcQty);
-            }
+            if(item.type === 'DEDUCTION') calcQty = -Math.abs(calcQty);
             masterMeasData[index].qty = calcQty.toFixed(3);
             
-            var totalQty = 0;
-            for (var i = 0; i < masterMeasData.length; i++) {
-                totalQty += parseFloat(masterMeasData[i].qty);
-            }
+            var totalQty = 0; for (var i = 0; i < masterMeasData.length; i++) totalQty += parseFloat(masterMeasData[i].qty);
             document.getElementById('mmTotalQty').innerText = totalQty.toFixed(3);
-            
-            var qtyCell = document.getElementById('mmQtyCell_' + index);
-            if(qtyCell) {
-                qtyCell.innerText = masterMeasData[index].qty;
-                qtyCell.style.color = item.type === 'DEDUCTION' ? '#ef4444' : '#2563eb';
-            }
+            var qtyCell = document.getElementById('mmQtyCell_' + index); if(qtyCell) { qtyCell.innerText = masterMeasData[index].qty; qtyCell.style.color = item.type === 'DEDUCTION' ? '#ef4444' : '#2563eb'; }
             executeMasterMeasAutoSave();
         }
 
         function renderMasterMeasTable() {
-            var tbody = document.getElementById('mmTableBody'); if(!tbody) return;
-            tbody.innerHTML = "";
-            var totalQty = 0;
-
+            var tbody = document.getElementById('mmTableBody'); if(!tbody) return; tbody.innerHTML = ""; var totalQty = 0;
             for (var i = 0; i < masterMeasData.length; i++) {
-                var item = masterMeasData[i];
-                var currentQty = parseFloat(item.qty);
-                totalQty += currentQty;
-                
+                var item = masterMeasData[i]; var currentQty = parseFloat(item.qty); totalQty += currentQty;
                 var colorStyle = item.type === 'DEDUCTION' ? 'style="color:#ef4444; font-weight:bold;"' : 'style="color:#2563eb; font-weight:bold;"';
                 var rowLabel = item.type === 'DEDUCTION' ? '<span style="color:#ef4444;">[Ded]</span> ' : '';
-
-                tbody.innerHTML += '<tr>' +
-                    '<td>' + (i + 1) + '</td>' +
-                    '<td contenteditable="true" oninput="updateMasterMeasInlineCell(' + i + ', \'desc\', this.innerText)" style="text-align:left;">' + rowLabel + item.desc + '</td>' +
-                    '<td contenteditable="true" oninput="updateMasterMeasInlineCell(' + i + ', \'unit\', this.innerText)">' + item.unit + '</td>' +
-                    '<td contenteditable="true" oninput="updateMasterMeasInlineCell(' + i + ', \'nos1\', this.innerText)">' + item.nos1 + '</td>' +
-                    '<td contenteditable="true" oninput="updateMasterMeasInlineCell(' + i + ', \'nos2\', this.innerText)">' + item.nos2 + '</td>' +
-                    '<td contenteditable="true" oninput="updateMasterMeasInlineCell(' + i + ', \'l\', this.innerText)">' + item.l + '</td>' +
-                    '<td contenteditable="true" oninput="updateMasterMeasInlineCell(' + i + ', \'b\', this.innerText)">' + item.b + '</td>' +
-                    '<td contenteditable="true" oninput="updateMasterMeasInlineCell(' + i + ', \'d\', this.innerText)">' + item.d + '</td>' +
-                    '<td id="mmQtyCell_' + i + '" ' + colorStyle + '>' + item.qty + '</td>' +
-                    '<td><button class="del-btn" onclick="deleteMasterMeasEntry(' + i + ')">X</button></td>' +
-                    '</tr>';
+                tbody.innerHTML += '<tr><td>' + (i + 1) + '</td><td contenteditable="true" oninput="updateMasterMeasInlineCell(' + i + ', \'desc\', this.innerText)" style="text-align:left;">' + rowLabel + item.desc + '</td><td contenteditable="true" oninput="updateMasterMeasInlineCell(' + i + ', \'unit\', this.innerText)">' + item.unit + '</td><td contenteditable="true" oninput="updateMasterMeasInlineCell(' + i + ', \'nos1\', this.innerText)">' + item.nos1 + '</td><td contenteditable="true" oninput="updateMasterMeasInlineCell(' + i + ', \'nos2\', this.innerText)">' + item.nos2 + '</td><td contenteditable="true" oninput="updateMasterMeasInlineCell(' + i + ', \'l\', this.innerText)">' + item.l + '</td><td contenteditable="true" oninput="updateMasterMeasInlineCell(' + i + ', \'b\', this.innerText)">' + item.b + '</td><td contenteditable="true" oninput="updateMasterMeasInlineCell(' + i + ', \'d\', this.innerText)">' + item.d + '</td><td id="mmQtyCell_' + i + '" ' + colorStyle + '>' + item.qty + '</td><td><button class="del-btn" onclick="deleteMasterMeasEntry(' + i + ')">X</button></td></tr>';
             }
             var mmTotalQtyNode = document.getElementById('mmTotalQty'); if(mmTotalQtyNode) mmTotalQtyNode.innerText = totalQty.toFixed(3);
         }
 
-        function deleteMasterMeasEntry(index) {
-            masterMeasData.splice(index, 1);
-            executeMasterMeasAutoSave();
-            renderMasterMeasTable();
-        }
-
-        function clearMasterMeasAll() {
-            if(confirm("Clear entire measurement table?")) {
-                masterMeasData = [];
-                executeMasterMeasAutoSave();
-                renderMasterMeasTable();
-                switchMasterMeasTab('mmTab1'); 
-            }
-        }
+        function deleteMasterMeasEntry(index) { masterMeasData.splice(index, 1); executeMasterMeasAutoSave(); renderMasterMeasTable(); }
+        function clearMasterMeasAll() { if(confirm("Clear entire measurement table?")) { masterMeasData = []; executeMasterMeasAutoSave(); renderMasterMeasTable(); switchMasterMeasTab('mmTab1'); } }
 
         function copyMasterMeasClipboard() {
             if (masterMeasData.length === 0) return triggerToastNotification("Table is empty.");
             var title = document.getElementById('mmSheetTitle').value || "MEASUREMENT SHEET";
             var pName = document.getElementById('mmProjectName').value || "N/A";
             var date = document.getElementById('mmPeriodDate').value || "N/A";
-            
             var text = "📊 " + title + "\nProject Name: " + pName + "\nBilling Date: " + date + "\n---------------------\n";
             for (var i = 0; i < masterMeasData.length; i++) {
-                var m = masterMeasData[i];
-                var typeMark = m.type === 'DEDUCTION' ? "[-] " : "[+] ";
+                var m = masterMeasData[i]; var typeMark = m.type === 'DEDUCTION' ? "[-] " : "[+] ";
                 text += (i+1) + ". " + typeMark + m.desc + " | Unit: " + m.unit + " | L:" + m.l + " B:" + m.b + " D:" + m.d + " | Qty: " + m.qty + "\n";
             }
             text += "---------------------\nTotal Net Qty = " + document.getElementById('mmTotalQty').innerText;
-            
-            if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(text).then(function() {
-                    triggerToastNotification("Measurement records copied successfully!");
-                }).catch(function() {
-                    triggerToastNotification("Clipboard operation rejected.");
-                });
-            } else {
-                triggerToastNotification("Secure workspace permission mapping lost.");
-            }
+            if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(text).then(function() { triggerToastNotification("Records copied successfully!"); }).catch(function() { triggerToastNotification("Clipboard operation rejected."); }); } 
+            else { triggerToastNotification("Secure workspace permission mapping lost."); }
         }
 
-        function saveMasterMeasLocalStorage() {
-            executeMasterMeasAutoSave();
-            loadMasterMeasHistoryList();
-            triggerToastNotification("Measurement sheet recorded successfully!");
-        }
-
+        function saveMasterMeasLocalStorage() { executeMasterMeasAutoSave(); loadMasterMeasHistoryList(); triggerToastNotification("Measurement sheet recorded successfully!"); }
+        
         function updateHistoryDropdownOptions() {
-            var selectNode = document.getElementById('mmLoadHistorySelect');
-            if(!selectNode) return;
+            var selectNode = document.getElementById('mmLoadHistorySelect'); if(!selectNode) return;
             selectNode.innerHTML = '<option value="" selected disabled>📂 -- Load Saved Measurement Sheets History --</option>';
-            
-            var historyLog = [];
-            var raw = localStorage.getItem('master_measurement_history_records_db');
-            if(raw) {
-                try { historyLog = JSON.parse(atob(raw)); } catch(e){}
-            }
-            
+            var historyLog = []; var raw = localStorage.getItem('master_measurement_history_records_db'); if(raw) { try { historyLog = JSON.parse(atob(raw)); } catch(e){} }
             historyLog.forEach(function(record) {
-                var opt = document.createElement('option');
-                opt.value = record.id;
-                opt.innerText = record.projectName + " - " + record.title + " (" + record.data.length + " rows)";
-                selectNode.appendChild(opt);
+                var opt = document.createElement('option'); opt.value = record.id; opt.innerText = record.projectName + " - " + record.title + " (" + record.data.length + " rows)"; selectNode.appendChild(opt);
             });
         }
 
         function triggerMasterMeasOpen(recordId) {
-            if(!recordId) return;
-            var historyLog = [];
-            var raw = localStorage.getItem('master_measurement_history_records_db');
-            if(raw) {
-                try { historyLog = JSON.parse(atob(raw)); } catch(e){}
-            }
-            
+            if(!recordId) return; var historyLog = []; var raw = localStorage.getItem('master_measurement_history_records_db'); if(raw) { try { historyLog = JSON.parse(atob(raw)); } catch(e){} }
             var selectedSheet = historyLog.find(function(x) { return x.id === recordId; });
             if(selectedSheet) {
-                document.getElementById('mmProjectName').value = selectedSheet.projectName;
-                document.getElementById('mmSheetTitle').value = selectedSheet.title;
-                document.getElementById('mmPeriodDate').value = selectedSheet.periodDate || "";
-                masterMeasData = JSON.parse(JSON.stringify(selectedSheet.data));
-                renderMasterMeasTable();
-                triggerToastNotification("Measurement record loaded successfully!");
-                switchMasterMeasTab('mmTab3'); 
+                document.getElementById('mmProjectName').value = selectedSheet.projectName; document.getElementById('mmSheetTitle').value = selectedSheet.title; document.getElementById('mmPeriodDate').value = selectedSheet.periodDate || "";
+                masterMeasData = JSON.parse(JSON.stringify(selectedSheet.data)); renderMasterMeasTable(); triggerToastNotification("Record loaded successfully!"); switchMasterMeasTab('mmTab3'); 
             }
         }
 
         function toggleMmHistoryPanel(mode) {
             var panel = document.getElementById('mmConditionalHistoryPanel');
-            if (mode === "OLD") {
-                panel.style.display = "block";
-            } else {
-                panel.style.display = "none";
-                masterMeasData = [];
-                renderMasterMeasTable();
-                document.getElementById('mmProjectName').value = "NEW STRUCTURAL SITE";
-                document.getElementById('mmSheetTitle').value = "Excavation MEASUREMENT SHEET";
-                document.getElementById('mmPeriodDate').value = "";
-            }
+            if (mode === "OLD") { panel.style.display = "block"; } 
+            else { panel.style.display = "none"; masterMeasData = []; renderMasterMeasTable(); document.getElementById('mmProjectName').value = "NEW STRUCTURAL SITE"; document.getElementById('mmSheetTitle').value = "Excavation MEASUREMENT SHEET"; document.getElementById('mmPeriodDate').value = ""; }
         }
 
         function triggerMasterMeasRename(recordId) {
-            mmRenameTargetEncoded = recordId;
-            var historyLog = [];
-            var raw = localStorage.getItem('master_measurement_history_records_db');
-            if(raw) {
-                try { historyLog = JSON.parse(atob(raw)); } catch(e){}
-            }
-            var target = historyLog.find(x => x.id === recordId);
-            if(target) {
-                document.getElementById('newMmProjectNameInput').value = target.projectName;
-                safeModalToggle('mmRenameModal', 'flex');
-            }
+            mmRenameTargetEncoded = recordId; var historyLog = []; var raw = localStorage.getItem('master_measurement_history_records_db'); if(raw) { try { historyLog = JSON.parse(atob(raw)); } catch(e){} }
+            var target = historyLog.find(x => x.id === recordId); if(target) { document.getElementById('newMmProjectNameInput').value = target.projectName; safeModalToggle('mmRenameModal', 'flex'); }
         }
 
         function submitMmProjectRename() {
-            var newName = document.getElementById('newMmProjectNameInput').value;
-            if(!newName || newName.trim() === "") return alert("Please type a valid project layout reference.");
-            newName = newName.trim().toUpperCase();
-            
-            var historyLog = [];
-            var raw = localStorage.getItem('master_measurement_history_records_db');
-            if(raw) {
-                try { historyLog = JSON.parse(atob(raw)); } catch(e){}
-            }
-            
+            var newName = document.getElementById('newMmProjectNameInput').value; if(!newName || newName.trim() === "") return alert("Please type a valid project reference.");
+            newName = newName.trim().toUpperCase(); var historyLog = []; var raw = localStorage.getItem('master_measurement_history_records_db'); if(raw) { try { historyLog = JSON.parse(atob(raw)); } catch(e){} }
             var index = historyLog.findIndex(x => x.id === mmRenameTargetEncoded);
             if(index !== -1) {
-                historyLog[index].projectName = newName;
-                historyLog[index].id = btoa(newName + "_" + historyLog[index].title);
-                localStorage.setItem('master_measurement_history_records_db', btoa(JSON.stringify(historyLog)));
-                safeModalToggle('mmRenameModal', 'none');
-                updateHistoryDropdownOptions();
-                loadMasterMeasHistoryList();
-                triggerToastNotification("Project Renamed Successfully!");
+                historyLog[index].projectName = newName; historyLog[index].id = btoa(newName + "_" + historyLog[index].title);
+                localStorage.setItem('master_measurement_history_records_db', btoa(JSON.stringify(historyLog))); safeModalToggle('mmRenameModal', 'none'); updateHistoryDropdownOptions(); loadMasterMeasHistoryList(); triggerToastNotification("Project Renamed Successfully!");
             }
         }
 
         function triggerMasterMeasDelete(recordId) {
-            if(!confirm("Are you sure you want to delete this measurement sheet permanently?")) return;
-            var historyLog = [];
-            var raw = localStorage.getItem('master_measurement_history_records_db');
-            if(raw) {
-                try { historyLog = JSON.parse(atob(raw)); } catch(e){}
-            }
-            historyLog = historyLog.filter(x => x.id !== recordId);
-            localStorage.setItem('master_measurement_history_records_db', btoa(JSON.stringify(historyLog)));
-            updateHistoryDropdownOptions();
-            loadMasterMeasHistoryList();
-            triggerToastNotification("Sheet deleted permanently!");
+            if(!confirm("Are you sure you want to delete this sheet permanently?")) return;
+            var historyLog = []; var raw = localStorage.getItem('master_measurement_history_records_db'); if(raw) { try { historyLog = JSON.parse(atob(raw)); } catch(e){} }
+            historyLog = historyLog.filter(x => x.id !== recordId); localStorage.setItem('master_measurement_history_records_db', btoa(JSON.stringify(historyLog)));
+            updateHistoryDropdownOptions(); loadMasterMeasHistoryList(); triggerToastNotification("Sheet deleted permanently!");
         }
 
-        function handleMasterMeasSearch(val) {
-            mmSearchQuery = val.toLowerCase().trim();
-            loadMasterMeasHistoryList();
-        }
+        function handleMasterMeasSearch(val) { mmSearchQuery = val.toLowerCase().trim(); loadMasterMeasHistoryList(); }
 
         function loadMasterMeasHistoryList() {
-            var container = document.getElementById('mmHistorySandboxContainer');
-            if(!container) return;
-            container.innerHTML = "";
-            
-            var historyLog = [];
-            var raw = localStorage.getItem('master_measurement_history_records_db');
-            if(raw) {
-                try { historyLog = JSON.parse(atob(raw)); } catch(e){}
-            }
-            
+            var container = document.getElementById('mmHistorySandboxContainer'); if(!container) return; container.innerHTML = "";
+            var historyLog = []; var raw = localStorage.getItem('master_measurement_history_records_db'); if(raw) { try { historyLog = JSON.parse(atob(raw)); } catch(e){} }
             var matchCount = 0;
             historyLog.forEach(function(item) {
                 if(mmSearchQuery !== "" && !item.projectName.toLowerCase().includes(mmSearchQuery)) return;
-                matchCount++;
-                
-                var row = document.createElement('div');
-                row.className = 'history-row-item';
-                row.style.background = 'var(--table-bg)';
-                row.style.margin = '4px 0';
-                row.style.padding = '8px 10px';
-                row.style.borderRadius = '6px';
-                row.style.border = '1px solid var(--border-color)';
-                
+                matchCount++; var row = document.createElement('div'); row.className = 'history-row-item'; row.style.background = 'var(--table-bg)'; row.style.margin = '4px 0'; row.style.padding = '8px 10px'; row.style.borderRadius = '6px'; row.style.border = '1px solid var(--border-color)';
                 row.innerHTML = '<div class="history-file-meta" style="font-size:13px; font-weight:700; color:var(--text-main);">📁 ' + item.projectName + ' <span style="font-weight:500; font-size:11px; color:var(--text-muted);">(' + item.title + ')</span></div>' +
                                 '<div class="history-actions-wrap">' +
                                     '<button class="h-btn h-open" style="background:#2563eb; color:#fff;" onclick="triggerMasterMeasOpen(\''+item.id+'\')">Open</button>' +
@@ -1219,10 +1074,7 @@
                                 '</div>';
                 container.appendChild(row);
             });
-
-            if(matchCount === 0) {
-                container.innerHTML = "<div style='font-size:12px; color:var(--text-muted); text-align:center; padding:15px;'>No matching records found.</div>";
-            }
+            if(matchCount === 0) container.innerHTML = "<div style='font-size:12px; color:var(--text-muted); text-align:center; padding:15px;'>No matching records found.</div>";
         }
     </script>
 </head>
@@ -1231,19 +1083,18 @@
 <div id="toastNoticeDock" class="toast-notification-box"></div>
 
 <div class="container">
-    <div class="admob-banner-placeholder">⚡ BBS Pro Framework Active Optimization Engine Module ⚡</div>
+    <div class="admob-banner-placeholder">⚡ BBS Framework Active Optimization Engine Module ⚡</div>
 
     <div class="header-section">
         <div class="header-title-container">
             <button id="hamburgerTrigger" class="menu-hamburger-btn" tabindex="1" onclick="toggleMainMenu(event)">☰</button>
-            <h2 id="appMainHeadingTitle">BBS Pro Engine Premium</h2>
+            <h2 id="appMainHeadingTitle">BBS Structural Engine</h2>
         </div>
-        
-        <!-- SIDE BY SIDE ALIGNED CONFIGURATION PANEL CONTROLS -->
         <div class="header-controls">
-            <select id="langSelect" onchange="switchApplicationLanguage(this.value)" class="lang-dropdown-custom">
-                <option value="en">English</option>
-                <option value="hi">हिंदी (Hindi)</option>
+            <!-- PURE LOCAL NATIVE 100% LANGUAGE SELECTION DROPDOWN -->
+            <select class="custom-lang-selector" id="nativeLangSelector" onchange="switchApplicationLanguage(this.value)">
+                <option value="en" selected>🇬🇧 English</option>
+                <option value="hi">🇮🇳 हिंदी (Hindi)</option>
             </select>
             <button class="theme-toggle-btn" id="themeTogglerNode" tabindex="2" onclick="toggleTheme()"><span id="themeBtnText">🌙 Dark</span></button>
         </div>
@@ -1260,26 +1111,26 @@
             </button>
             
             <div id="calculatorsMenuFolder" class="menu-folder-container">
-                <button id="menuBtnSteelUnitText" tabindex="5" onclick="openModal('civilCalcModal')">🎨 Steel Unit Calculator</button>
-                <button id="menuBtnConcreteText" tabindex="6" onclick="openModal('concreteCalcModal')">🧱 Concrete Layout Engine</button>
-                <button id="menuBtnBrickText" tabindex="7" onclick="openModal('brickCalcModal')">🔴 Brickwork Material Model</button>
+                <button id="menuBtnSteelUnitText" tabindex="5" onclick="openModal('civilCalcModal')">🎨 Steel Unit Weight Solver</button>
+                <button id="menuBtnConcreteText" tabindex="6" onclick="openModal('concreteCalcModal')">🧱 Concrete Layout Estimator</button>
+                <button id="menuBtnBrickText" tabindex="7" onclick="openModal('brickCalcModal')">🔴 Brickwork Structural Solver</button>
                 <button id="menuBtnBlockText" tabindex="8" onclick="openModal('blockCalcModal')">🔲 AAC Blockwork Custom Solver</button>
-                <button id="menuBtnPlasterText" tabindex="9" onclick="openModal('plasterCalcModal')">⏳ Plaster Estimator</button>
-                <button id="menuBtnTileText" tabindex="10" onclick="openModal('tileCalcModal')">🧱 Tile & Flooring Dock</button>
-                <button id="menuBtnShutterText" tabindex="11" onclick="openModal('shutteringCalcModal')">🪵 Shuttering Frame Solver</button>
-                <button id="menuBtnQcText" tabindex="12" onclick="openModal('qualityCalcModal')">🏆 Quality Control Expert Mode</button>
+                <button id="menuBtnPlasterText" tabindex="9" onclick="openModal('plasterCalcModal')">⏳ Plaster Material Model</button>
+                <button id="menuBtnTileText" tabindex="10" onclick="openModal('tileCalcModal')">🧱 Tile & Flooring Solver</button>
+                <button id="menuBtnShutterText" tabindex="11" onclick="openModal('shutteringCalcModal')">🪵 Formwork Area Solver</button>
+                <button id="menuBtnQcText" tabindex="12" onclick="openModal('qualityCalcModal')">🏆 Quality Control Dashboard</button>
             </div>
 
             <button id="menuBtnShareText" class="menu-premium-btn btn-gradient-green" tabindex="13" onclick="triggerApkShare()">
-                🤝 Share a Friend
+                🤝 Share App Framework
             </button>
             
             <button class="menu-premium-btn btn-gradient-disabled" disabled>
-                🚀 New Feature Coming Soon
+                🚀 Additional Features Docked
             </button>
             
             <button id="menuBtnInfoText" class="menu-premium-btn btn-gradient-gray" tabindex="14" onclick="openModal('infoModal')">
-                👑 About App Info
+                ℹ️ About App Information
             </button>
         </div>
     </div>
@@ -1335,19 +1186,19 @@
         <div class="custom-dim-panel" style="background:#f8fafc; border-left:4px solid #2563eb; margin-bottom:15px; padding:10px;">
             <label data-lang-key="lbl_shape_gen" style="color:#2563eb; font-weight:bold; font-size:11px;">🏢 Column / Footing Shape Generator</label>
             <div class="form-row-three-boxes" style="margin-top:5px;">
-                <div class="form-group"><label id="lbl_straigt_len" style="color:#1e293b;">Straight Length (m)</label><input type="number" tabindex="25" id="colMainLength" placeholder=".e.g. 3.25" step="any" oninput="triggerColumnFootingMath()"></div>
-                <div class="form-group"><label id="lbl_left_hook" style="color:#1e293b;">Left L-Hook (mm)</label><input type="number" tabindex="26" id="colLeftHook" placeholder=".e.g. 300" step="any" oninput="triggerColumnFootingMath()"></div>
-                <div class="form-group"><label id="lbl_right_hook" style="color:#1e293b;">Right L-Hook (mm)</label><input type="number" tabindex="27" id="colRightHook" placeholder=".e.g. 300" step="any" oninput="triggerColumnFootingMath()"></div>
+                <div class="form-group"><label data-lang-key="lbl_straight_len" style="color:#1e293b;">Straight Length (m)</label><input type="number" tabindex="25" id="colMainLength" placeholder=".e.g. 3.25" step="any" oninput="triggerColumnFootingMath()"></div>
+                <div class="form-group"><label data-lang-key="lbl_left_hook" style="color:#1e293b;">Left L-Hook (mm)</label><input type="number" tabindex="26" id="colLeftHook" placeholder=".e.g. 300" step="any" oninput="triggerColumnFootingMath()"></div>
+                <div class="form-group"><label data-lang-key="lbl_right_hook" style="color:#1e293b;">Right L-Hook (mm)</label><input type="number" tabindex="27" id="colRightHook" placeholder=".e.g. 300" step="any" oninput="triggerColumnFootingMath()"></div>
             </div>
         </div>
 
         <div class="form-row">
             <div class="form-group">
-                <label id="lbl_bar_name">Bar Name</label>
+                <label data-lang-key="lbl_bar_name">Bar Name</label>
                 <input type="text" id="desc" tabindex="28" placeholder=".e.g. Main Bottom bar">
             </div>
             <div class="form-group">
-                <label id="lbl_dia">Diameter (mm)</label>
+                <label data-lang-key="lbl_dia">Diameter (mm)</label>
                 <select id="dia" tabindex="29">
                     <option value="8">8 mm</option><option value="10">10 mm</option>
                     <option value="12">12 mm</option><option value="16" selected>16 mm</option>
@@ -1356,23 +1207,23 @@
                 </select>
             </div>
             <div class="form-group">
-                <label id="lbl_clear_span">Clear Span Record (Meter)</label>
+                <label data-lang-key="lbl_clear_span">Clear Span Record (Meter)</label>
                 <input type="text" id="clearSpanInput" placeholder=".e.g. 5.450" readonly style="background:#e2e8f0; color:#64748b;">
             </div>
             <div class="form-group">
-                <label id="lbl_spacing_rec">Spacing Record (mm)</label>
+                <label data-lang-key="lbl_spacing_rec">Spacing Record (mm)</label>
                 <input type="text" id="spacingInput" placeholder=".e.g. 150" readonly style="background:#e2e8f0; color:#64748b;">
             </div>
             <div class="form-group">
-                <label id="lbl_members_cnt">Members Count</label>
+                <label data-lang-key="lbl_members_cnt">Members Count</label>
                 <input type="number" id="noMembers" tabindex="30" placeholder=".e.g. 2" step="any">
             </div>
             <div class="form-group">
-                <label id="lbl_bars_member">Bars per Member (Nos)</label>
+                <label data-lang-key="lbl_bars_member">Bars per Member (Nos)</label>
                 <input type="number" id="noBars" tabindex="31" placeholder=".e.g. 12" step="any">
             </div>
             <div class="form-group">
-                <label id="lbl_total_cut">Total Cut Length (m)</label>
+                <label data-lang-key="lbl_total_cut">Total Cut Length (m)</label>
                 <input type="number" id="cutLength" tabindex="32" placeholder=".e.g. 6.25" step="any">
             </div>
             <div class="form-group">
@@ -1384,13 +1235,13 @@
     <!-- TAB 3 -->
     <div id="tab3" class="tab-content">
         <div class="stats-dashboard">
-            <div class="stat-card"><div id="dash_entered_lbl">Total Bars Entered</div><div id="dashTotalEntries">0 Items</div></div>
-            <div class="stat-card"><div id="dash_weight_lbl">Net Project Weight</div><div id="dashTotalWeight">0.00 Kg</div></div>
+            <div class="stat-card"><div id="statTotalBarsLabel" data-lang-key="lbl_total_entered">Total Bars Entered</div><div id="dashTotalEntries">0 Items</div></div>
+            <div class="stat-card"><div id="statNetWeightLabel" data-lang-key="lbl_net_weight">Net Project Weight</div><div id="dashTotalWeight">0.00 Kg</div></div>
         </div>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:10px; margin-bottom: 12px;">
-            <div class="form-group" style="margin-bottom:0;"><label>🔍 Live Grid Search Filter</label><input type="text" tabindex="34" id="gridSearchBox" placeholder="Search..." oninput="filterBbsGrid()"></div>
-            <div class="form-group" style="margin-bottom:0;"><label>💰 Steel Rate (Per Kg)</label><input type="number" tabindex="35" id="steelRatePerKg" placeholder=".e.g. 65" oninput="renderTable()"></div>
+            <div class="form-group" style="margin-bottom:0;"><label data-lang-key="lbl_search_filter">🔍 Live Grid Search Filter</label><input type="text" tabindex="34" id="gridSearchBox" placeholder="Search..." oninput="filterBbsGrid()"></div>
+            <div class="form-group" style="margin-bottom:0;"><label data-lang-key="lbl_steel_rate">💰 Steel Rate (Per Kg)</label><input type="number" tabindex="35" id="steelRatePerKg" placeholder=".e.g. 65" oninput="renderTable()"></div>
         </div>
 
         <h3 id="liveProjectHeaderName" style="margin: 15px 0 5px 0; font-size:14px; font-weight:bold; color:#2563eb; text-transform:uppercase;">📁 CURRENT SHEET LOG: NEW PROJECT</h3>
@@ -1512,7 +1363,7 @@
                         <label style="color:#ea580c; font-weight:bold;">Entry Calculation Type</label>
                         <select id="mmEntryType" style="border: 2px solid #ea580c;">
                             <option value="ADDITION" selected>➕ Addition Row (+)</option>
-                            <option value="DEDUCTION">➖ Deduction (Door/Window) (-)</option>
+                            <option value="DEDUCTION">➖ Deduction (-)</option>
                         </select>
                     </div>
                 </div>
@@ -1666,7 +1517,7 @@
 <div id="historyModal" class="modal-overlay" onclick="if(event.target == this) closeAllModals()">
     <div class="modal-box">
         <button class="modal-close-btn" onclick="closeAllModals()">X</button>
-        <h3>📜 BBS Saved Sheets Log</h3>
+        <h3>📜 Saved Sheets Log</h3>
         <div class="form-group" style="margin-top: 10px; margin-bottom: 15px;">
             <label style="font-size: 10px; color: #2563eb;">🔍 Search Saved Sheet Reference</label>
             <input type="text" placeholder="Type name to search sheet..." oninput="handleHistorySearch(this.value)">
@@ -1950,7 +1801,7 @@
 <div id="qualityCalcModal" class="modal-overlay" onclick="if(event.target == this) closeAllModals()">
     <div class="modal-box">
         <button class="modal-close-btn" tabindex="55" onclick="closeAllModals()">X</button>
-        <h3>🏆 Quality Control Expert Mode</h3>
+        <h3>🏆 Quality Control Dashboard</h3>
         
         <div class="form-group">
             <label>Target Design Concrete Grade</label>
@@ -1990,13 +1841,13 @@
 <div id="infoModal" class="modal-overlay" onclick="if(event.target == this) closeAllModals()">
     <div class="modal-box" style="max-width: 480px;">
         <button class="modal-close-btn" tabindex="56" onclick="closeAllModals()">X</button>
-        <h3 style="color:#2563eb; border-bottom: 2px solid var(--border-color); padding-bottom: 8px; margin-top: 5px;">👑 About BBS Pro Engine Workspace</h3>
+        <h3 style="color:#2563eb; border-bottom: 2px solid var(--border-color); padding-bottom: 8px; margin-top: 5px;">ℹ️ About BBS Structural Engine</h3>
         <div style="font-size:13px; line-height:1.6; color:var(--text-main);">
-            <p><strong>System Version:</strong> 2.0.0 (Premium Workspace Release Build)</p>
-            <p><strong>Description:</strong> BBS Pro Engine is an advanced, offline-first structural management framework engineered for field survey estimation assistants, structural draftsmen, and material quantity coordinators. It simplifies deep calculations for Bar Bending Schedules, volumetric layouts formulas tracking, and concrete compressive limits compliance verification without real-time external network overhead dependencies.</p>
+            <p><strong>System Version:</strong> 2.0.0</p>
+            <p>BBS Structural Engine is an offline structural management framework engineered for surveyors and quantity estimators. It facilitates calculations for Bar Bending Schedules, volumetric layouts formulas tracking, and concrete limits compliance verification without real-time external network dependencies.</p>
             <div style="background:var(--bg-container); border-radius:6px; padding:10px; margin-top:10px; border:1px solid var(--border-color);">
-                <span style="font-weight:bold; display:block; margin-bottom:4px; font-size:11px; color:var(--text-muted);">🔒 APP CONTENT PRIVACY & POLICY SAFEGUARDS</span>
-                All processing engines execute completely inside the client-side environment context. System structural records are safely bound natively via the localized storage device sandbox allocation limits.
+                <span style="font-weight:bold; display:block; margin-bottom:4px; font-size:11px; color:var(--text-muted);">🔒 CONTENT PRIVACY & POLICY SAFEGUARDS</span>
+                All processing engines execute completely inside the client-side context. Structural data records are safely saved locally using the system's sandbox data structures.
             </div>
             <p style="text-align:center; margin-top:15px; font-size:11px; color:var(--text-muted);">© 2026 BBS Structural Workspace App Ecosystem. All rights reserved.</p>
         </div>
