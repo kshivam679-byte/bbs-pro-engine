@@ -32,7 +32,7 @@
         .menu-hamburger-btn { font-size: 24px; background: none; border: none; color: white; cursor: pointer; padding: 5px 10px; order: -1; margin-right: 10px; outline: none; }
         .header-title-container { display: flex; align-items: center; flex-grow: 1; }
         
-        /* SIDE-BY-SIDE CONTROLS LAYOUT ALIGNMENT */
+        /* SIDE-BY-SIDE CONTROLS ALIGNMENT UPGRADED */
         .header-controls { display: flex; align-items: center; gap: 12px; }
         .lang-dropdown-custom { background: #2563eb; border: 2px solid #3b82f6; color: white; padding: 6px 12px; border-radius: 20px; font-weight: bold; font-size: 12px; outline: none; cursor: pointer; height: 32px; box-sizing: border-box; }
         .theme-toggle-btn { background: #3b82f6; border: none; color: white; padding: 6px 12px; border-radius: 20px; font-weight: bold; cursor: pointer; font-size: 12px; white-space: nowrap; height: 32px; display: flex; align-items: center; justify-content: center; box-sizing: border-box; }
@@ -226,7 +226,20 @@
                 lbl_record_date: "Billing Record Date",
                 lbl_sec_heading: "Create Section Heading",
                 btn_add_heading: "Add Heading",
-                btn_clear_all: "Clear All"
+                btn_clear_all: "Clear All",
+                lbl_straigt_len: "Straight Length (m)",
+                lbl_left_hook: "Left L-Hook (mm)",
+                lbl_right_hook: "Right L-Hook (mm)",
+                lbl_bar_name: "Bar Name",
+                lbl_dia: "Diameter (mm)",
+                lbl_clear_span: "Clear Span Record (Meter)",
+                lbl_spacing_rec: "Spacing Record (mm)",
+                lbl_members_cnt: "Members Count",
+                lbl_bars_member: "Bars per Member (Nos)",
+                lbl_total_cut: "Total Cut Length (m)",
+                btn_insert_bar: "Insert Bar",
+                dash_entered: "Total Bars Entered",
+                dash_weight: "Net Project Weight"
             },
             hi: {
                 app_title: "बीबीएस प्रो इंजन प्रीमियम",
@@ -238,7 +251,20 @@
                 lbl_record_date: "बिलिंग रिकॉर्ड तिथि",
                 lbl_sec_heading: "सेक्शन हेडिंग बनाएं",
                 btn_add_heading: "हेडिंग जोड़ें",
-                btn_clear_all: "सब साफ करें"
+                btn_clear_all: "सब साफ करें",
+                lbl_straigt_len: "सीधी लंबाई (m)",
+                lbl_left_hook: "बायां L-हुक (mm)",
+                lbl_right_hook: "दायां L-हुक (mm)",
+                lbl_bar_name: "सरिया का नाम",
+                lbl_dia: "व्यास (Diameter) (mm)",
+                lbl_clear_span: "क्लियर स्पैन रिकॉर्ड (Meter)",
+                lbl_spacing_rec: "स्पेसिंग रिकॉर्ड (mm)",
+                lbl_members_cnt: "मेम्बर्स की संख्या (Count)",
+                lbl_bars_member: "प्रति मेम्बर सरिया (Nos)",
+                lbl_total_cut: "कुल कटिंग लंबाई (m)",
+                btn_insert_bar: "सरिया दर्ज करें",
+                dash_entered: "कुल दर्ज सरिया",
+                dash_weight: "कुल प्रोजेक्ट वजन"
             }
         };
 
@@ -258,6 +284,23 @@
             
             document.getElementById('addHeadingBtnText').innerText = textSet.btn_add_heading;
             document.getElementById('clearAllBtnText').innerText = textSet.btn_clear_all;
+
+            // Upgraded Input Labels Translators Block
+            document.getElementById('lbl_straigt_len').innerText = textSet.lbl_straigt_len;
+            document.getElementById('lbl_left_hook').innerText = textSet.lbl_left_hook;
+            document.getElementById('lbl_right_hook').innerText = textSet.lbl_right_hook;
+            document.getElementById('lbl_bar_name').innerText = textSet.lbl_bar_name;
+            document.getElementById('lbl_dia').innerText = textSet.lbl_dia;
+            document.getElementById('lbl_clear_span').innerText = textSet.lbl_clear_span;
+            document.getElementById('lbl_spacing_rec').innerText = textSet.lbl_spacing_rec;
+            document.getElementById('lbl_members_cnt').innerText = textSet.lbl_members_cnt;
+            document.getElementById('lbl_bars_member').innerText = textSet.lbl_bars_member;
+            document.getElementById('lbl_total_cut').innerText = textSet.lbl_total_cut;
+            document.getElementById('insertBarBtnNode').innerText = textSet.btn_insert_bar;
+            
+            document.getElementById('dash_entered_lbl').innerText = textSet.dash_entered;
+            document.getElementById('dash_weight_lbl').innerText = textSet.dash_weight;
+
             triggerToastNotification(langKey === 'hi' ? "भाषा बदली गई: हिंदी" : "Language changed to English");
         }
 
@@ -471,11 +514,18 @@
             document.getElementById('cutLength').value = netCutLen.toFixed(3); 
         }
         
+        // HARDENED ABSOLUTE MATH VALIDATION INJECTION (Zero NaN Exposure)
         function addBarEntry() { 
             var desc = document.getElementById('desc').value.trim() || "Main Bar";
             var dia = parseInt(document.getElementById('dia').value) || 16;
-            var noMembers = parseFloat(document.getElementById('noMembers').value) || 0;
-            var noBars = parseFloat(document.getElementById('noBars').value) || 0;
+            
+            // NaN Fallback Guard: empty input fields handle safely
+            var noMembers = parseFloat(document.getElementById('noMembers').value);
+            if(isNaN(noMembers) || noMembers <= 0) noMembers = 1;
+
+            var noBars = parseFloat(document.getElementById('noBars').value);
+            if(isNaN(noBars) || noBars <= 0) noBars = 1;
+
             var cutLen = parseFloat(document.getElementById('cutLength').value) || 0;
             var clearSpan = document.getElementById('clearSpanInput').value || "";
             var spacing = document.getElementById('spacingInput').value || "";
@@ -584,7 +634,6 @@
             if(matchCount === 0) { listContainer.innerHTML = "<div style='padding:15px; font-size:12px; color:var(--text-muted); text-align:center;'>No matching backup records found.</div>"; }
         }
 
-        // ABSOLUTE CRITICAL NAN SAFETY ALIGNMENT ENGINE FIX
         function updateInlineValue(index, field, valueText) {
             if(!bbsData[index]) return; var text = valueText.trim();
             if(field === 'dia' || field === 'noMembers' || field === 'noBars' || field === 'cutLength' || field === 'clearSpan' || field === 'spacing' || field === 'text') {
@@ -622,7 +671,6 @@
             executeSilentAutoSave(); renderTable();
         }
 
-        // PERFECT DATA SAFE RENDER MATRIX LOOP (Zero NaN Exposure)
         function renderTable() {
             var tbody = document.getElementById('bbsTableBody'); if(!tbody) return; tbody.innerHTML = "";
             var slNo = 1; var diaTotals = {8:0, 10:0, 12:0, 16:0, 20:0, 25:0, 32:0, 40:0}; var containsData = false; var finalHTML = ""; var dataCount = 0;
@@ -646,6 +694,18 @@
                 finalHTML += (r1 + r3 + r4 + costRow); var dashWeightNode = document.getElementById('dashTotalWeight'); if(dashWeightNode) dashWeightNode.innerText = (grandTotalKg || 0).toFixed(2) + " Kg";
             } else { var dashWeightNode = document.getElementById('dashTotalWeight'); if(dashWeightNode) dashWeightNode.innerText = "0.00 Kg"; }
             tbody.innerHTML = finalHTML;
+        }
+
+        function exportToCleanFormatedExcel() {
+            var projName = document.getElementById('projectName') ? document.getElementById('projectName').value.toUpperCase() : "NEW_PROJECT";
+            var htmlData = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><meta charset="UTF-8"></head><body><table border="1"><thead><tr><th colspan="17" style="font-size:14pt;font-weight:bold;">' + projName + ' - STEEL REPORT</th></tr><tr><th>Sl No</th><th>Description</th><th>Dia</th><th>Clear Span (m)</th><th>Spacing (mm)</th><th>Members</th><th>Bars</th><th>Cut Length</th><th>Total Length</th><th>8mm</th><th>10mm</th><th>12mm</th><th>16mm</th><th>20mm</th><th>25mm</th><th>32mm</th><th>40mm</th></tr></thead><tbody>';
+            var weights = {8:0.395, 10:0.617, 12:0.890, 16:1.580, 20:2.470, 25:3.850, 32:6.310, 40:9.860}, diaTotals = {8:0, 10:0, 12:0, 16:0, 20:0, 25:0, 32:0, 40:0}, grandTotalKg = 0;
+            for (var i = 0; i < bbsData.length; i++) {
+                var item = bbsData[i]; if(item.type === 'HEADING') { htmlData += '<tr><td colspan="17" style="background:#cbd5e1;font-weight:bold;">' + item.text + '</td></tr>'; } 
+                else { var cols = ""; for(var d=0; d<activeDias.length; d++) { var cd = activeDias[d]; if(item.dia === cd) { cols += '<td>' + (parseFloat(item.totalLength) || 0) + '</td>'; diaTotals[cd] += (parseFloat(item.totalLength) || 0); grandTotalKg += ((parseFloat(item.totalLength) || 0) * weights[cd]); } else cols += '<td>0</td>'; } htmlData += '<tr><td>' + (i+1) + '</td><td>' + item.desc + '</td><td>' + item.dia + '</td><td>' + item.clearSpan + '</td><td>' + item.spacing + '</td><td>' + item.noMembers + '</td><td>' + Math.ceil(parseFloat(item.noBars) || 0) + '</td><td>' + item.cutLength + '</td><td>' + (parseFloat(item.totalLength) || 0) + '</td>' + cols + '</tr>'; }
+            }
+            htmlData += '<tr><td colspan="9" style="font-weight:bold; text-align:right;">Total Length (m)</td>'; for(var d=0; d<activeDias.length; d++) htmlData += '<td>' + (diaTotals[activeDias[d]] || 0).toFixed(2) + '</td>'; htmlData += '</tr><tr><td colspan="9" style="font-weight:bold; text-align:right;">Weight (Kg)</td>'; for(var d=0; d<activeDias.length; d++) htmlData += '<td>' + ((diaTotals[activeDias[d]] || 0) * weights[activeDias[d]]).toFixed(2) + '</td>'; htmlData += '</tr><tr style="background:#dcfce7; font-weight:bold;"><td colspan="5">Net Project Summary:</td><td colspan="4">' + (grandTotalKg || 0).toFixed(2) + ' Kg</td><td colspan="8">' + (grandTotalKg/1000).toFixed(4) + ' M.T.</td></tr></tbody></table></body></html>';
+            var base64 = btoa(unescape(encodeURIComponent(htmlData))), a = document.createElement("a"); a.href = "data:application/vnd.ms-excel;base64," + base64; a.download = projName.replace(/\s+/g, '_') + "_Report.xls"; document.body.appendChild(a); a.click(); document.body.removeChild(a);
         }
 
         function exportMasterMeasExcel() {
@@ -1268,19 +1328,19 @@
         <div class="custom-dim-panel" style="background:#f8fafc; border-left:4px solid #2563eb; margin-bottom:15px; padding:10px;">
             <label data-lang-key="lbl_shape_gen" style="color:#2563eb; font-weight:bold; font-size:11px;">🏢 Column / Footing Shape Generator</label>
             <div class="form-row-three-boxes" style="margin-top:5px;">
-                <div class="form-group"><label style="color:#1e293b;">Straight Length (m)</label><input type="number" tabindex="25" id="colMainLength" placeholder=".e.g. 3.25" step="any" oninput="triggerColumnFootingMath()"></div>
-                <div class="form-group"><label style="color:#1e293b;">Left L-Hook (mm)</label><input type="number" tabindex="26" id="colLeftHook" placeholder=".e.g. 300" step="any" oninput="triggerColumnFootingMath()"></div>
-                <div class="form-group"><label style="color:#1e293b;">Right L-Hook (mm)</label><input type="number" tabindex="27" id="colRightHook" placeholder=".e.g. 300" step="any" oninput="triggerColumnFootingMath()"></div>
+                <div class="form-group"><label id="lbl_straigt_len" style="color:#1e293b;">Straight Length (m)</label><input type="number" tabindex="25" id="colMainLength" placeholder=".e.g. 3.25" step="any" oninput="triggerColumnFootingMath()"></div>
+                <div class="form-group"><label id="lbl_left_hook" style="color:#1e293b;">Left L-Hook (mm)</label><input type="number" tabindex="26" id="colLeftHook" placeholder=".e.g. 300" step="any" oninput="triggerColumnFootingMath()"></div>
+                <div class="form-group"><label id="lbl_right_hook" style="color:#1e293b;">Right L-Hook (mm)</label><input type="number" tabindex="27" id="colRightHook" placeholder=".e.g. 300" step="any" oninput="triggerColumnFootingMath()"></div>
             </div>
         </div>
 
         <div class="form-row">
             <div class="form-group">
-                <label>Bar Name</label>
+                <label id="lbl_bar_name">Bar Name</label>
                 <input type="text" id="desc" tabindex="28" placeholder=".e.g. Main Bottom bar">
             </div>
             <div class="form-group">
-                <label>Diameter (mm)</label>
+                <label id="lbl_dia">Diameter (mm)</label>
                 <select id="dia" tabindex="29">
                     <option value="8">8 mm</option><option value="10">10 mm</option>
                     <option value="12">12 mm</option><option value="16" selected>16 mm</option>
@@ -1289,23 +1349,23 @@
                 </select>
             </div>
             <div class="form-group">
-                <label>Clear Span Record (Meter)</label>
+                <label id="lbl_clear_span">Clear Span Record (Meter)</label>
                 <input type="text" id="clearSpanInput" placeholder=".e.g. 5.450" readonly style="background:#e2e8f0; color:#64748b;">
             </div>
             <div class="form-group">
-                <label>Spacing Record (mm)</label>
+                <label id="lbl_spacing_rec">Spacing Record (mm)</label>
                 <input type="text" id="spacingInput" placeholder=".e.g. 150" readonly style="background:#e2e8f0; color:#64748b;">
             </div>
             <div class="form-group">
-                <label>Members Count</label>
+                <label id="lbl_members_cnt">Members Count</label>
                 <input type="number" id="noMembers" tabindex="30" placeholder=".e.g. 2" step="any">
             </div>
             <div class="form-group">
-                <label>Bars per Member (Nos)</label>
+                <label id="lbl_bars_member">Bars per Member (Nos)</label>
                 <input type="number" id="noBars" tabindex="31" placeholder=".e.g. 12" step="any">
             </div>
             <div class="form-group">
-                <label>Total Cut Length (m)</label>
+                <label id="lbl_total_cut">Total Cut Length (m)</label>
                 <input type="number" id="cutLength" tabindex="32" placeholder=".e.g. 6.25" step="any">
             </div>
             <div class="form-group">
@@ -1317,8 +1377,8 @@
     <!-- TAB 3 -->
     <div id="tab3" class="tab-content">
         <div class="stats-dashboard">
-            <div>Total Bars Entered<div id="dashTotalEntries">0 Items</div></div>
-            <div>Net Project Weight<div id="dashTotalWeight">0.00 Kg</div></div>
+            <div class="stat-card"><div id="dash_entered_lbl">Total Bars Entered</div><div id="dashTotalEntries">0 Items</div></div>
+            <div class="stat-card"><div id="dash_weight_lbl">Net Project Weight</div><div id="dashTotalWeight">0.00 Kg</div></div>
         </div>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:10px; margin-bottom: 12px;">
