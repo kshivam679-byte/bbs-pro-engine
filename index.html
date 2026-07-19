@@ -373,6 +373,13 @@
                 btn_delete: "हटाएं"
             }
         };
+            // Exit verification warning interceptor logic
+            window.addEventListener('beforeunload', function (e) {
+                var message = "Are you sure you want to exit? Your unsaved data may be lost.";
+                e.preventDefault();
+                e.returnValue = message;
+                return message;
+            });
 
         function switchApplicationLanguage(lang) {
             currentLang = lang;
