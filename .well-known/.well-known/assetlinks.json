@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.webtoapk.BBSProEngine",
+      "sha256_cert_fingerprints": [
+        "14:6D:7F:4E:94:05:43:CF:85:2B:65:21:40:41:41:1A:F5:2A:9C:16:34:E3:64:33:3A:82:1C:18:2C:42:F0:4A"
+      ]
+    }
+  }
+]
