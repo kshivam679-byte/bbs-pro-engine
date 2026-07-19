@@ -2079,6 +2079,26 @@
         </div>
     </div>
 </div>
+<script>
+    // Hardware Back Button ko handle karne ke liye logic
+    document.addEventListener("DOMContentLoaded", function() {
+        // Browser history me ek fake state add karna taaki back button capture ho sake
+        window.history.pushState({ page: 1 }, "", window.location.href);
+
+        window.onpopstate = function(event) {
+            // Jab user back button dabaye, toh ek confirmation pop-up dikhao
+            var exitApp = confirm("Kya aap sach me bahar nikalna chahte hain? Aapka unsaved data delete ho sakta hai.");
+            
+            if (exitApp) {
+                // Agar user 'OK' dabaye, toh app band karne ki permission do
+                navigator.app ? navigator.app.exitApp() : window.close();
+            } else {
+                // Agar user 'Cancel' dabaye, toh use usi page par rok kar rakho
+                window.history.pushState({ page: 1 }, "", window.location.href);
+            }
+        };
+    });
+</script>
 
 </body>
 </html>
