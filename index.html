@@ -623,21 +623,21 @@
             closeAllModals();
         }
 
-        function triggerApkShare() {
-            if (navigator.share) {
-                navigator.share({
-                    title: 'BBS Engine',
-                    text: 'Check out this civil calculation tool!',
-                    url: window.location.href
-                }).then(() => {
-                    triggerToastNotification("Shared successfully!");
-                }).catch(() => {
-                    triggerToastNotification("Share panel dismissed.");
-                });
-            } else {
-                triggerToastNotification("Web Share module execution blocked.");
-            }
-        }
+function triggerApkShare() {
+    if (navigator.share) {
+        navigator.share({
+            title: 'BBS Engine: Civil Calculator',
+            text: 'Civil Engineering ke liye sabse best Bar Bending Schedule aur Material Estimator App download karein!',
+            url: 'https://play.google.com/store/apps/details?id=com.webtoapk.BBSProEngine'
+        }).then(() => {
+            triggerToastNotification("Shared successfully!");
+        }).catch(() => {
+            triggerToastNotification("Share panel dismissed.");
+        });
+    } else {
+        triggerToastNotification("Web Share module execution blocked.");
+    }
+}
 
         function openModal(mId) { document.getElementById('mainMenuDropdown').style.display = 'none'; closeAllModals(); safeModalToggle(mId, 'flex'); if(mId === 'historyModal') loadHistoryList(); if(mId === 'masterMeasurementModal') { document.getElementById('mmOperationsModeSelect').value = "NEW"; toggleMmHistoryPanel("NEW"); loadMasterMeasHistoryList(); } }
         
