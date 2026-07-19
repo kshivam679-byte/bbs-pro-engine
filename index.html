@@ -665,7 +665,7 @@ function triggerApkShare() {
         function addComponentHeading() { 
             var comp = document.getElementById('compTitle'); 
             var title = comp ? comp.value.trim() : ""; 
-            if(title === "") return alert("Please enter a Section Name."); 
+            if(title === "") { triggerToastNotification("Please enter a Section Name."); return; }
             
             bbsData.push({ type: 'HEADING', text: title.toUpperCase(), dateAdded: new Date().toISOString() }); 
             comp.value = ""; 
