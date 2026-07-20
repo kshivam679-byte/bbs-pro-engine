@@ -2120,6 +2120,9 @@ function triggerApkShare() {
                 // Agar user 'OK' dabaye, toh app band karne ki permission do
                 navigator.app ? navigator.app.exitApp() : window.close();
             } else {
+                            if (!navigator.onLine) {
+                console.log("BBS Engine is running in 100% Offline Mode.");
+            }
                 // Agar user 'Cancel' dabaye, toh use usi page par rok kar rakho
                 window.history.pushState({ page: 1 }, "", window.location.href);
             }
