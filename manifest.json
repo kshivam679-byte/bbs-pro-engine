@@ -1,6 +1,6 @@
 {
-  "name": "BBS Pro Engine",
-  "short_name": "BBS Engine",
+  "name": "Civil Engine BBS Calc",
+  "short_name": "BBS Calc",
   "description": "Premium Bar Bending Schedule (BBS) and Civil Engineering Material Calculator.",
   "start_url": "/",
   "scope": "/",
@@ -29,18 +29,18 @@
   ],
   "screenshots": [
     {
-      "src": "Icon/screen1.png",
-      "sizes": "1080x2400",
+      "src": "Icon/icon-512.png",
+      "sizes": "512x512",
       "type": "image/png",
       "form_factor": "narrow",
-      "label": "BBS Engine Mobile View"
+      "label": "BBS Engine Mobile"
     },
     {
-      "src": "Icon/screen2.png",
-      "sizes": "1920x1080",
+      "src": "Icon/icon-512.png",
+      "sizes": "512x512",
       "type": "image/png",
       "form_factor": "wide",
-      "label": "BBS Engine Desktop View"
+      "label": "BBS Engine Desktop"
     }
   ],
   "id": "BBSProEngine",
