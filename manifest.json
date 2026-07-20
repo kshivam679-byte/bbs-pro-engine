@@ -29,18 +29,18 @@
   ],
   "screenshots": [
     {
-      "src": "Icon/icon-512.png",
-      "sizes": "512x512",
+      "src": "Icon/screen1.png",
+      "sizes": "1080x2400",
       "type": "image/png",
       "form_factor": "narrow",
-      "label": "BBS Engine Mobile"
+      "label": "BBS Engine Mobile View"
     },
     {
-      "src": "Icon/icon-512.png",
-      "sizes": "512x512",
+      "src": "Icon/screen2.png",
+      "sizes": "1920x1080",
       "type": "image/png",
       "form_factor": "wide",
-      "label": "BBS Engine Desktop"
+      "label": "BBS Engine Desktop View"
     }
   ],
   "id": "BBSProEngine",
