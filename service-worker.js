@@ -1,5 +1,6 @@
-const CACHE_NAME = 'bbs-engine-cache-v1';
+const CACHE_NAME = 'bbs-engine-cache-v2';
 const urlsToCache = [
+  './',
   'index.html',
   'privacy.html',
   'manifest.json'
@@ -7,11 +8,27 @@ const urlsToCache = [
 
 // Service Worker Install karna aur files ko cache me save karna
 self.addEventListener('install', event => {
+  self.skipWaiting(); // Naye Service Worker ko turant activate karega
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => {
         return cache.addAll(urlsToCache);
       })
+  );
+});
+
+// Purane Cache ko Delete karna
+self.addEventListener('activate', event => {
+  event.waitUntil(
+    caches.keys().then(cacheNames => {
+      return Promise.all(
+        cacheNames.map(cache => {
+          if (cache !== CACHE_NAME) {
+            return caches.delete(cache);
+          }
+        })
+      );
+    }).then(() => self.clients.claim())
   );
 });
 
