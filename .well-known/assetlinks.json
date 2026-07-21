@@ -1,7 +1,8 @@
-<html>
-    <body>
-        <script>
-            window.location = "https://docs.pwabuilder.com/#/builder/android?id=publish";
-        </script>
-    </body>
-</html>
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "com.Shiv.bbscalc",
+        "sha256_cert_fingerprints": ["76:AD:CF:BE:12:F0:6C:46:2F:22:7E:D7:54:A5:13:49:38:51:42:6A:37:37:75:73:B7:0D:A8:57:74:CD:19:A3"]
+      }
+    }]
