@@ -1,6 +1,6 @@
 {
-  "name": "Civil Engine BBS Calc",
-  "short_name": "BBS Calc",
+    "start_url": "/bbs-pro-engine/",
+  "scope": "/bbs-pro-engine/",
   "description": "Premium Bar Bending Schedule (BBS) and Civil Engineering Material Calculator.",
   "start_url": "/",
   "scope": "/",
